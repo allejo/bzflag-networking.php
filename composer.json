@@ -1,0 +1,33 @@
+{
+    "name": "allejo/bzflag-networking.php",
+    "description": "A library for unpacking BZFlag network packets",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": ">=7.1",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "allejo\\bzflag\\networking\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "allejo\\bzflag\\networking\\test\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Vladimir \"allejo\" Jimenez",
+            "email": "me@allejo.io"
+        }
+    ],
+    "minimum-stability": "stable",
+    "config": {
+        "sort-packages": true
+    }
+}
