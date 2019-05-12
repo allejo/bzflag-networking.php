@@ -18,7 +18,7 @@ class MsgTeamUpdate extends GamePacket
     /** @var TeamData[] */
     private $teams;
 
-    protected function unpack()
+    protected function unpack(): void
     {
         $count = NetworkPacket::unpackUInt8($this->buffer);
 

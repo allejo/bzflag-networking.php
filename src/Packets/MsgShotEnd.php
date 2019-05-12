@@ -22,7 +22,7 @@ class MsgShotEnd extends GamePacket
     /** @var int */
     private $reason;
 
-    protected function unpack()
+    protected function unpack(): void
     {
         $this->playerId = NetworkPacket::unpackUInt8($this->buffer);
         $this->shotId = NetworkPacket::unpackUInt16($this->buffer);

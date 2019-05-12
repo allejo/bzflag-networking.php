@@ -33,7 +33,7 @@ class MsgKilled extends GamePacket
     /** @var int */
     private $physicsDriverId = -1;
 
-    protected function unpack()
+    protected function unpack(): void
     {
         $this->victimId = NetworkPacket::unpackUInt8($this->buffer);
         $this->killerId = NetworkPacket::unpackUInt8($this->buffer);

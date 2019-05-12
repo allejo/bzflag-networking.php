@@ -14,15 +14,21 @@ use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\networking\Packets\PacketInvalidException;
 use allejo\bzflag\networking\Packets\UnsupportedPacketException;
 
-/**
- * @api
- */
 class Replay implements \JsonSerializable
 {
+    /** @var ReplayHeader */
     private $header;
+
+    /** @var GamePacket[] */
     private $packets;
+
+    /** @var string[] */
     private $errors;
+
+    /** @var \DateTime */
     private $startTime;
+
+    /** @var \DateTime */
     private $endTime;
 
     /**

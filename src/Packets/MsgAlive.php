@@ -22,12 +22,12 @@ class MsgAlive extends GamePacket
     /** @var float */
     private $azimuth;
 
-    protected function defaultComplexVariables()
+    protected function defaultComplexVariables(): void
     {
         $this->position = [0, 0, 0];
     }
 
-    protected function unpack()
+    protected function unpack(): void
     {
         $this->playerId = NetworkPacket::unpackUInt8($this->buffer);
         $this->position = NetworkPacket::unpackVector($this->buffer);

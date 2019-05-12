@@ -19,7 +19,7 @@ class MsgPause extends GamePacket
     /** @var int */
     private $paused;
 
-    protected function unpack()
+    protected function unpack(): void
     {
         $this->playerId = NetworkPacket::unpackUInt8($this->buffer);
         $this->paused = NetworkPacket::unpackUInt8($this->buffer);

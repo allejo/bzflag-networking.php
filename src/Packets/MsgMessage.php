@@ -22,7 +22,7 @@ class MsgMessage extends GamePacket
     /** @var string */
     private $message;
 
-    protected function unpack()
+    protected function unpack(): void
     {
         $this->playerFromId = NetworkPacket::unpackUInt8($this->buffer);
         $this->playerToId = NetworkPacket::unpackUInt8($this->buffer);

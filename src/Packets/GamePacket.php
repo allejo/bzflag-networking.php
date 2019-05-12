@@ -68,7 +68,7 @@ abstract class GamePacket implements \JsonSerializable
      *
      * @throws PacketNotSetException
      */
-    public function __construct(NetworkPacket $packet)
+    final public function __construct(NetworkPacket $packet)
     {
         if ($packet === null)
         {
@@ -83,13 +83,24 @@ abstract class GamePacket implements \JsonSerializable
         $this->unpack();
     }
 
-    protected function defaultComplexVariables()
+    /**
+     * Initialize special instance variables without having to override the
+     * constructor.
+     */
+    protected function defaultComplexVariables(): void
     {
     }
 
-    abstract protected function unpack();
+    /**
+     * Unpack the NetworkPacket buffer into a GamePacket's instance variables.
+     *
+     * @return mixed
+     */
+    abstract protected function unpack(): void;
 
     /**
+     * Create a GamePacket equivalent from a PHP resource.
+     *
      * @param resource $resource
      *
      * @throws PacketInvalidException

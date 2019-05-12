@@ -18,7 +18,7 @@ class MsgScore extends GamePacket
     /** @var array ScoreData[] */
     private $scores = [];
 
-    protected function unpack()
+    protected function unpack(): void
     {
         $count = NetworkPacket::unpackUInt8($this->buffer);
 

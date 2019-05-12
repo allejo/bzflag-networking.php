@@ -24,7 +24,7 @@ class MsgTransferFlag extends GamePacket
     /** @var FlagData */
     private $flag;
 
-    protected function unpack()
+    protected function unpack(): void
     {
         $this->from = NetworkPacket::unpackUInt8($this->buffer);
         $this->to = NetworkPacket::unpackUInt8($this->buffer);

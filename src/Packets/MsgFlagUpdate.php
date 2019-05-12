@@ -18,7 +18,7 @@ class MsgFlagUpdate extends GamePacket
     /** @var FlagData[] */
     private $flags;
 
-    protected function unpack()
+    protected function unpack(): void
     {
         $count = NetworkPacket::unpackUInt16($this->buffer);
 

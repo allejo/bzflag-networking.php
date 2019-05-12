@@ -21,7 +21,7 @@ class MsgGMUpdate extends GamePacket
     /** @var ShotData */
     private $shot;
 
-    protected function unpack()
+    protected function unpack(): void
     {
         $this->target = NetworkPacket::unpackUInt8($this->buffer);
         $this->shot = NetworkPacket::unpackShot($this->buffer);

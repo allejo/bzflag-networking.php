@@ -22,12 +22,12 @@ class MsgAddPlayer extends GamePacket
     private $motto;
     private $score;
 
-    protected function defaultComplexVariables()
+    protected function defaultComplexVariables(): void
     {
         $this->score = new PlayerScore();
     }
 
-    protected function unpack()
+    protected function unpack(): void
     {
         $this->playerIndex = NetworkPacket::unpackUInt8($this->buffer);
         $this->playerType = NetworkPacket::unpackUInt16($this->buffer);

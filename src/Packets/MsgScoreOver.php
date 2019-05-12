@@ -19,7 +19,7 @@ class MsgScoreOver extends GamePacket
     /** @var int */
     private $team;
 
-    protected function unpack()
+    protected function unpack(): void
     {
         $this->playerId = NetworkPacket::unpackUInt8($this->buffer);
         $this->team = NetworkPacket::unpackUInt16($this->buffer);

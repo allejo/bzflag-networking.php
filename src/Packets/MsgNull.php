@@ -13,7 +13,7 @@ class MsgNull extends GamePacket
 {
     const PACKET_TYPE = 'MsgNull';
 
-    protected function unpack()
+    protected function unpack(): void
     {
     }
 }

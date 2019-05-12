@@ -21,7 +21,7 @@ class MsgPlayerUpdate extends GamePacket
     /** @var PlayerState */
     private $state;
 
-    protected function unpack()
+    protected function unpack(): void
     {
         // Discard this value; I'm not sure why this value comes out to a weird
         // float. We have the timestamp of the raw packet, so just that instead
