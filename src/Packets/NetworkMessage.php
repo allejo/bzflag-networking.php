@@ -9,6 +9,9 @@
 
 namespace allejo\bzflag\networking\Packets;
 
+/**
+ * @see https://github.com/BZFlag-Dev/bzflag/blob/2.4/include/Protocol.h
+ */
 abstract class NetworkMessage
 {
     const NULL = 0x0000;

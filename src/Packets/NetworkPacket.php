@@ -16,6 +16,8 @@ use allejo\bzflag\networking\GameData\ShotData;
 
 /**
  * A raw network packet that was sent and contains data for game packets.
+ *
+ * @see https://www.php.net/manual/en/function.pack.php
  */
 class NetworkPacket implements Unpackable
 {
