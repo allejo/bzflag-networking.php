@@ -103,9 +103,9 @@ class NetworkPacket implements Unpackable
     }
 
     /**
-     * @return \DateTime|null
+     * @return \DateTime
      */
-    public function getTimestamp(): ?\DateTime
+    public function getTimestamp(): \DateTime
     {
         return clone $this->timestamp;
     }
@@ -177,7 +177,7 @@ class NetworkPacket implements Unpackable
         return $data;
     }
 
-    public static function unpackFlag(&$buffer): ?FlagData
+    public static function unpackFlag(&$buffer): FlagData
     {
         $flag = new FlagData();
 
