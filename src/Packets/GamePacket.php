@@ -84,11 +84,19 @@ abstract class GamePacket implements \JsonSerializable
     }
 
     /**
-     * @return \DateTime
+     * @return string
      */
-    public function getTimestamp(): \DateTime
+    public function getPacketType(): string
     {
-        return $this->timestamp;
+        return static::PACKET_TYPE;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTimestamp(): string
+    {
+        return $this->timestamp->format(DATE_ATOM);
     }
 
     /**

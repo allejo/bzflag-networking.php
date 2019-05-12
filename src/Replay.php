@@ -55,12 +55,10 @@ class Replay implements \JsonSerializable
      */
     public function jsonSerialize()
     {
-        $dateFormat = 'Y-m-d\TH:i:sP';
-
         return [
             'header' => $this->header,
-            'startTime' => $this->startTime->format($dateFormat),
-            'endTime' => $this->endTime->format($dateFormat),
+            'startTime' => $this->startTime->format(DATE_ATOM),
+            'endTime' => $this->endTime->format(DATE_ATOM),
             'packets' => $this->packets,
         ];
     }
