@@ -45,17 +45,18 @@ class Replay implements \JsonSerializable
     }
 
     /**
-     * Specify data which should be serialized to JSON.
-     *
-     * @see https://php.net/manual/en/jsonserializable.jsonserialize.php
-     * @since 5.4.0
-     *
-     * @return mixed data which can be serialized by <b>json_encode</b>,
-     *               which is a value of any type other than a resource
+     * {@inheritdoc}
      */
     public function jsonSerialize()
     {
-        // TODO: Implement jsonSerialize() method.
+        $dateFormat = \DateTimeInterface::ATOM;
+
+        return [
+            'header' => $this->header,
+            'startTime' => $this->startTime->format($dateFormat),
+            'endTime' => $this->endTime->format($dateFormat),
+            'packets' => $this->packets,
+        ];
     }
 
     /**

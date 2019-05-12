@@ -9,12 +9,16 @@
 
 namespace allejo\bzflag\networking\Packets;
 
+use allejo\bzflag\networking\JsonSerializePrivateVars;
+
 /**
  * An abstraction on top of a NetworkPacket that contains actual data of packets
  * that occur in a game.
  */
-abstract class GamePacket
+abstract class GamePacket implements \JsonSerializable
 {
+    use JsonSerializePrivateVars;
+
     const PACKET_TYPE = '';
 
     /** @var NetworkPacket */
