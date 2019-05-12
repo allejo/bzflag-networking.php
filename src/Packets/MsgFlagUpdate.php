@@ -18,6 +18,14 @@ class MsgFlagUpdate extends GamePacket
     /** @var FlagData[] */
     private $flags;
 
+    /**
+     * @return FlagData[]
+     */
+    public function getFlags(): array
+    {
+        return $this->flags;
+    }
+
     protected function unpack(): void
     {
         $count = NetworkPacket::unpackUInt16($this->buffer);

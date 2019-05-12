@@ -18,6 +18,14 @@ class MsgSetVar extends GamePacket
     /** @var BZDBSetting[] */
     private $settings = [];
 
+    /**
+     * @return BZDBSetting[]
+     */
+    public function getSettings(): array
+    {
+        return $this->settings;
+    }
+
     protected function unpack(): void
     {
         $count = NetworkPacket::unpackUInt16($this->buffer);

@@ -15,12 +15,71 @@ class MsgAddPlayer extends GamePacket
 {
     const PACKET_TYPE = 'MsgAddPlayer';
 
+    /** @var int */
     private $playerIndex;
+
+    /** @var int */
     private $playerType;
+
+    /** @var int */
     private $teamValue;
+
+    /** @var string */
     private $callsign;
+
+    /** @var string */
     private $motto;
+
+    /** @var PlayerScore */
     private $score;
+
+    /**
+     * @return int
+     */
+    public function getPlayerIndex(): int
+    {
+        return $this->playerIndex;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPlayerType(): int
+    {
+        return $this->playerType;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTeamValue(): int
+    {
+        return $this->teamValue;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCallsign(): string
+    {
+        return $this->callsign;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMotto(): string
+    {
+        return $this->motto;
+    }
+
+    /**
+     * @return PlayerScore
+     */
+    public function getScore(): PlayerScore
+    {
+        return $this->score;
+    }
 
     protected function defaultComplexVariables(): void
     {

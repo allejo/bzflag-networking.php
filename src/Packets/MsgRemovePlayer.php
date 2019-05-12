@@ -16,6 +16,14 @@ class MsgRemovePlayer extends GamePacket
     /** @var int */
     private $playerId;
 
+    /**
+     * @return int
+     */
+    public function getPlayerId(): int
+    {
+        return $this->playerId;
+    }
+
     protected function unpack(): void
     {
         $this->playerId = NetworkPacket::unpackUInt8($this->buffer);

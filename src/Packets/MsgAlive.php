@@ -22,6 +22,30 @@ class MsgAlive extends GamePacket
     /** @var float */
     private $azimuth;
 
+    /**
+     * @return int
+     */
+    public function getPlayerId(): int
+    {
+        return $this->playerId;
+    }
+
+    /**
+     * @return float[]
+     */
+    public function getPosition(): array
+    {
+        return $this->position;
+    }
+
+    /**
+     * @return float
+     */
+    public function getAzimuth(): float
+    {
+        return $this->azimuth;
+    }
+
     protected function defaultComplexVariables(): void
     {
         $this->position = [0, 0, 0];

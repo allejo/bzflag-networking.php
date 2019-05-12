@@ -21,6 +21,22 @@ class MsgPlayerUpdate extends GamePacket
     /** @var PlayerState */
     private $state;
 
+    /**
+     * @return int
+     */
+    public function getPlayerId(): int
+    {
+        return $this->playerId;
+    }
+
+    /**
+     * @return PlayerState
+     */
+    public function getState(): PlayerState
+    {
+        return $this->state;
+    }
+
     protected function unpack(): void
     {
         // Discard this value; I'm not sure why this value comes out to a weird

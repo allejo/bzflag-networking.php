@@ -9,30 +9,35 @@
 
 namespace allejo\bzflag\networking;
 
-trait JsonSerializePrivateVars
+trait JsonSerializePublicGetters
 {
     public function jsonSerialize(): array
     {
         $output = [];
-        $keys = $this->getPrivateVariables();
+        $fxns = $this->getExports();
 
-        foreach ($keys as $key)
+        foreach ($fxns as $fxn)
         {
-            $output[$key] = $this->{$key};
+            $key = lcfirst(substr($fxn, 3));
+
+            $output[$key] = $this->{$fxn}();
         }
 
         return $output;
     }
 
-    private function getPrivateVariables(): array
+    private function getExports(): array
     {
         $keys = [];
         $reflect = new \ReflectionClass($this);
-        $props = $reflect->getProperties(\ReflectionProperty::IS_PRIVATE);
+        $fxns = $reflect->getMethods(\ReflectionProperty::IS_PUBLIC);
 
-        foreach ($props as $prop)
+        foreach ($fxns as $fxn)
         {
-            $keys[] = $prop->getName();
+            if (substr($fxn->getName(), 0, 3) === 'get')
+            {
+                $keys[] = $fxn->getName();
+            }
         }
 
         return $keys;

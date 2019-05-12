@@ -15,7 +15,7 @@ use allejo\bzflag\networking\Packets\Unpackable;
 
 class ReplayHeader implements Unpackable, \JsonSerializable
 {
-    use JsonSerializePrivateVars;
+    use JsonSerializePublicGetters;
 
     /** @var int */
     private $magicNumber = -1;

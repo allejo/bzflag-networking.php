@@ -21,6 +21,22 @@ class MsgFlagGrab extends GamePacket
     /** @var FlagData */
     private $flag;
 
+    /**
+     * @return int
+     */
+    public function getPlayerId(): int
+    {
+        return $this->playerId;
+    }
+
+    /**
+     * @return FlagData
+     */
+    public function getFlag(): FlagData
+    {
+        return $this->flag;
+    }
+
     protected function unpack(): void
     {
         $this->playerId = NetworkPacket::unpackUInt8($this->buffer);

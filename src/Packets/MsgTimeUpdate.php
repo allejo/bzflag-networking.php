@@ -16,6 +16,14 @@ class MsgTimeUpdate extends GamePacket
     /** @var int */
     private $timeLeft;
 
+    /**
+     * @return int
+     */
+    public function getTimeLeft(): int
+    {
+        return $this->timeLeft;
+    }
+
     protected function unpack(): void
     {
         $this->timeLeft = NetworkPacket::unpackInt32($this->buffer);

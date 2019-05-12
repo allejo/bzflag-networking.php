@@ -55,7 +55,7 @@ class Replay implements \JsonSerializable
      */
     public function jsonSerialize()
     {
-        $dateFormat = \DateTimeInterface::ATOM;
+        $dateFormat = 'Y-m-d\TH:i:sP';
 
         return [
             'header' => $this->header,

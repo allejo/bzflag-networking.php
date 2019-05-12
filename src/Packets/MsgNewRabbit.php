@@ -19,6 +19,22 @@ class MsgNewRabbit extends GamePacket
     /** @var int */
     private $paused;
 
+    /**
+     * @return int
+     */
+    public function getPlayerId(): int
+    {
+        return $this->playerId;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPaused(): int
+    {
+        return $this->paused;
+    }
+
     protected function unpack(): void
     {
         $this->playerId = NetworkPacket::unpackUInt8($this->buffer);

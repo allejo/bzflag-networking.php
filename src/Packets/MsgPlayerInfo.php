@@ -18,6 +18,14 @@ class MsgPlayerInfo extends GamePacket
     /** @var PlayerData[] */
     private $players;
 
+    /**
+     * @return PlayerData[]
+     */
+    public function getPlayers(): array
+    {
+        return $this->players;
+    }
+
     protected function unpack(): void
     {
         $count = NetworkPacket::unpackUInt8($this->buffer);

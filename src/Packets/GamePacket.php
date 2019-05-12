@@ -9,7 +9,7 @@
 
 namespace allejo\bzflag\networking\Packets;
 
-use allejo\bzflag\networking\JsonSerializePrivateVars;
+use allejo\bzflag\networking\JsonSerializePublicGetters;
 
 /**
  * An abstraction on top of a NetworkPacket that contains actual data of packets
@@ -17,7 +17,7 @@ use allejo\bzflag\networking\JsonSerializePrivateVars;
  */
 abstract class GamePacket implements \JsonSerializable
 {
-    use JsonSerializePrivateVars;
+    use JsonSerializePublicGetters;
 
     const PACKET_TYPE = '';
 
@@ -81,6 +81,14 @@ abstract class GamePacket implements \JsonSerializable
 
         $this->defaultComplexVariables();
         $this->unpack();
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getTimestamp(): \DateTime
+    {
+        return $this->timestamp;
     }
 
     /**

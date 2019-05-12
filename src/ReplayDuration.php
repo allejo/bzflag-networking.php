@@ -11,7 +11,7 @@ namespace allejo\bzflag\networking;
 
 class ReplayDuration implements \JsonSerializable
 {
-    use JsonSerializePrivateVars;
+    use JsonSerializePublicGetters;
 
     /** @var int */
     private $asSeconds;

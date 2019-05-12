@@ -18,6 +18,14 @@ class MsgShotBegin extends GamePacket
     /** @var FiringIntoData */
     private $firingInfo;
 
+    /**
+     * @return FiringIntoData
+     */
+    public function getFiringInfo(): FiringIntoData
+    {
+        return $this->firingInfo;
+    }
+
     protected function unpack(): void
     {
         $this->firingInfo = NetworkPacket::unpackFiringInfo($this->buffer);

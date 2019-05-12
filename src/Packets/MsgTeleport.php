@@ -22,6 +22,30 @@ class MsgTeleport extends GamePacket
     /** @var int */
     private $to;
 
+    /**
+     * @return int
+     */
+    public function getPlayerId(): int
+    {
+        return $this->playerId;
+    }
+
+    /**
+     * @return int
+     */
+    public function getFrom(): int
+    {
+        return $this->from;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTo(): int
+    {
+        return $this->to;
+    }
+
     protected function unpack(): void
     {
         $this->playerId = NetworkPacket::unpackUInt8($this->buffer);

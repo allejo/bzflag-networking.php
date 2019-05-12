@@ -19,6 +19,22 @@ class MsgGameTime extends GamePacket
     /** @var int */
     private $lsb;
 
+    /**
+     * @return int
+     */
+    public function getMsb(): int
+    {
+        return $this->msb;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLsb(): int
+    {
+        return $this->lsb;
+    }
+
     protected function unpack(): void
     {
         $this->msb = NetworkPacket::unpackUInt32($this->buffer);
