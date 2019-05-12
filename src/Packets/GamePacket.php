@@ -42,6 +42,17 @@ abstract class GamePacket
         NetworkMessage::Pause => MsgPause::class,
         NetworkMessage::PlayerInfo => MsgPlayerInfo::class,
         NetworkMessage::PlayerUpdate => MsgPlayerUpdate::class,
+        NetworkMessage::PlayerUpdateSmall => MsgPlayerUpdate::class,
+        NetworkMessage::RemovePlayer => MsgRemovePlayer::class,
+        NetworkMessage::Score => MsgScore::class,
+        NetworkMessage::ScoreOver => MsgScoreOver::class,
+        NetworkMessage::SetVar => MsgSetVar::class,
+        NetworkMessage::ShotBegin => MsgShotBegin::class,
+        NetworkMessage::ShotEnd => MsgShotEnd::class,
+        NetworkMessage::TeamUpdate => MsgTeamUpdate::class,
+        NetworkMessage::Teleport => MsgTeleport::class,
+        NetworkMessage::TimeUpdate => MsgTimeUpdate::class,
+        NetworkMessage::TransferFlag => MsgTransferFlag::class,
     ];
 
     /**

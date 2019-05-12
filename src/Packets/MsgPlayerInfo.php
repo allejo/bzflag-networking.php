@@ -9,11 +9,13 @@
 
 namespace allejo\bzflag\networking\Packets;
 
+use allejo\bzflag\networking\GameData\PlayerData;
+
 class MsgPlayerInfo extends GamePacket
 {
     const PACKET_TYPE = 'MsgPlayerInfo';
 
-    /** @var GameDataPlayerData[] */
+    /** @var PlayerData[] */
     private $players;
 
     protected function unpack()
@@ -22,13 +24,13 @@ class MsgPlayerInfo extends GamePacket
 
         for ($i = 0; $i < $count; ++$i)
         {
-            $player = new GameDataPlayerData();
+            $player = new PlayerData();
             $player->playerId = Packet::unpackUInt8($this->buffer);
 
             $properties = Packet::unpackUInt8($this->buffer);
-            $player->isRegistered = (bool)($properties & GameDataPlayerData::IsRegistered);
-            $player->isVerified = (bool)($properties & GameDataPlayerData::IsVerified);
-            $player->isAdmin = (bool)($properties & GameDataPlayerData::IsAdmin);
+            $player->isRegistered = (bool)($properties & PlayerData::IsRegistered);
+            $player->isVerified = (bool)($properties & PlayerData::IsVerified);
+            $player->isAdmin = (bool)($properties & PlayerData::IsAdmin);
 
             $this->players[] = $player;
         }

@@ -1,10 +1,15 @@
 <?php declare(strict_types=1);
 
+/*
+ * (c) Vladimir "allejo" Jimenez <me@allejo.io>
+ *
+ * For the full copyright and license information, please view the
+ * LICENSE.md file that was distributed with this source code.
+ */
 
-namespace allejo\bzflag\networking\Packets;
+namespace allejo\bzflag\networking\GameData;
 
-
-class GameDataPlayerState implements \JsonSerializable
+class PlayerState implements \JsonSerializable
 {
     const DeadStatus = 0;        // not live, not paused, etc.
     const Alive = 1 << 0;        // player is alive
@@ -25,7 +30,7 @@ class GameDataPlayerState implements \JsonSerializable
     public $angularVelocity;
     public $physicsDriver;
     public $userSpeed;
-    public $userAng_Vel;
+    public $userAngVel;
     public $jumpJetsScale;
     public $sounds;
 
@@ -38,7 +43,7 @@ class GameDataPlayerState implements \JsonSerializable
             'angularVelocity' => $this->angularVelocity,
             'physicsDriver' => $this->physicsDriver,
             'userSpeed' => $this->userSpeed,
-            'userAng_Vel' => $this->userAng_Vel,
+            'userAng_Vel' => $this->userAngVel,
             'jumpJetsScale' => $this->jumpJetsScale,
             'sounds' => $this->sounds,
         ];

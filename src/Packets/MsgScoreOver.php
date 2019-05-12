@@ -9,23 +9,19 @@
 
 namespace allejo\bzflag\networking\Packets;
 
-class GameDataPlayerScore implements \JsonSerializable
+class MsgScoreOver extends GamePacket
 {
-    /** @var int */
-    public $wins;
+    public const PACKET_TYPE = 'MsgScoreOver';
 
     /** @var int */
-    public $losses;
+    private $playerId;
 
     /** @var int */
-    public $teamKills;
+    private $team;
 
-    public function jsonSerialize()
+    protected function unpack()
     {
-        return [
-            'wins' => $this->wins,
-            'losses' => $this->losses,
-            'teamKills' => $this->teamKills,
-        ];
+        $this->playerId = Packet::unpackUInt8($this->buffer);
+        $this->team = Packet::unpackUInt16($this->buffer);
     }
 }

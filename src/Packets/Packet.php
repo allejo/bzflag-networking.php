@@ -9,8 +9,18 @@
 
 namespace allejo\bzflag\networking\Packets;
 
+use allejo\bzflag\networking\GameData\FiringIntoData;
+use allejo\bzflag\networking\GameData\FlagData;
+use allejo\bzflag\networking\GameData\PlayerState;
+use allejo\bzflag\networking\GameData\ShotData;
+
 class Packet implements IUnpackable
 {
+    const SmallScale = 32766.0;
+    const SmallMaxDist = 0.02 * Packet::SmallScale;
+    const SmallMaxVel = 0.01 * Packet::SmallScale;
+    const SmallMaxAngVel = 0.001 * Packet::SmallScale;
+
     private $mode = -1;
     private $code = -1;
     private $length = -1;
@@ -149,9 +159,21 @@ class Packet implements IUnpackable
         return unpack($symbol, $binary)[1];
     }
 
-    public static function unpackFlag(&$buffer): ?GameDataFlagData
+    public static function unpackFiringInfo(&$buffer): FiringIntoData
     {
-        $flag = new GameDataFlagData();
+        $data = new FiringIntoData();
+
+        $data->timeSent = Packet::unpackFloat($buffer);
+        $data->shot = Packet::unpackShot($buffer);
+        $data->flag = Packet::unpackString($buffer, 2);
+        $data->lifetime = Packet::unpackFloat($buffer);
+
+        return $data;
+    }
+
+    public static function unpackFlag(&$buffer): ?FlagData
+    {
+        $flag = new FlagData();
 
         $flag->index = Packet::unpackUInt16($buffer);
         $flag->abbv = Packet::unpackString($buffer, 2);
@@ -201,21 +223,84 @@ class Packet implements IUnpackable
         return long2ip($ipAsInt);
     }
 
-    public static function unpackPlayerState(&$buffer, int $code): GameDataPlayerState
+    public static function unpackPlayerState(&$buffer, int $code): PlayerState
     {
+        // @TODO see if `in_order` is necessary of if it can be removed safely
         $inOrder = Packet::unpackUInt32($buffer);
         $inStatus = Packet::unpackUInt16($buffer);
 
-        $state = new GameDataPlayerState();
+        $state = new PlayerState();
 
-        // @todo
+        if ($code === NetworkMessage::PlayerUpdate)
+        {
+            $state->position = Packet::unpackVector($buffer);
+            $state->velocity = Packet::unpackVector($buffer);
+            $state->azimuth = Packet::unpackFloat($buffer);
+            $state->angularVelocity = Packet::unpackFloat($buffer);
+        }
+        else
+        {
+            $pos = [
+                Packet::unpackInt16($buffer),
+                Packet::unpackInt16($buffer),
+                Packet::unpackInt16($buffer),
+            ];
+            $vel = [
+                Packet::unpackInt16($buffer),
+                Packet::unpackInt16($buffer),
+                Packet::unpackInt16($buffer),
+            ];
+            $azi = Packet::unpackInt16($buffer);
+            $angVel = Packet::unpackInt16($buffer);
+
+            $position = [0, 0, 0];
+            $velocity = [0, 0, 0];
+
+            for ($i = 0; $i < 3; ++$i)
+            {
+                $position[$i] = ((float)$pos[$i] * Packet::SmallMaxDist) / Packet::SmallScale;
+                $velocity[$i] = ((float)$vel[$i] * Packet::SmallMaxVel) / Packet::SmallScale;
+            }
+
+            $state->position = $position;
+            $state->velocity = $velocity;
+            $state->azimuth = ((float)$azi * M_PI) / Packet::SmallScale;
+            $state->angularVelocity = ((float)$angVel * Packet::SmallMaxAngVel) / Packet::SmallScale;
+        }
+
+        if (($inStatus & PlayerState::JumpJets) !== 0)
+        {
+            $jumpJets = Packet::unpackUInt16($buffer);
+            $state->jumpJetsScale = (float)$jumpJets / Packet::SmallScale;
+        }
+
+        if (($inStatus & PlayerState::OnDriver) !== 0)
+        {
+            // @TODO this value is being read in as unsigned, but needs to be converted to signed...?
+            // @TODO fix this...
+            $state->physicsDriver = Packet::unpackUInt32($buffer);
+        }
+
+        if (($inStatus & PlayerState::UserInputs) !== 0)
+        {
+            $speed = Packet::unpackUInt16($buffer);
+            $angVel = Packet::unpackUInt16($buffer);
+
+            $state->userSpeed = ((float)$speed * Packet::SmallMaxVel) / Packet::SmallScale;
+            $state->userAngVel = ((float)$angVel * Packet::SmallMaxAngVel) / Packet::SmallScale;
+        }
+
+        if (($inStatus & PlayerState::PlaySound) !== 0)
+        {
+            $state->sounds = Packet::unpackUInt8($buffer);
+        }
 
         return $state;
     }
 
-    public static function unpackShot(&$buffer): GameDataShotData
+    public static function unpackShot(&$buffer): ShotData
     {
-        $shot = new GameDataShotData();
+        $shot = new ShotData();
 
         $shot->playerId = Packet::unpackUInt8($buffer);
         $shot->shotId = Packet::unpackUInt16($buffer);

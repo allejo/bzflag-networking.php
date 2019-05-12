@@ -7,9 +7,9 @@
  * LICENSE.md file that was distributed with this source code.
  */
 
-namespace allejo\bzflag\networking\Packets;
+namespace allejo\bzflag\networking\GameData;
 
-class GameDataPlayerInfo implements \JsonSerializable
+class PlayerInfo implements \JsonSerializable
 {
     /** @var int */
     public $playerIndex;

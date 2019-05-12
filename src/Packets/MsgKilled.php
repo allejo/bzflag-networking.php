@@ -9,6 +9,8 @@
 
 namespace allejo\bzflag\networking\Packets;
 
+use allejo\bzflag\networking\GameData\FlagData;
+
 class MsgKilled extends GamePacket
 {
     const PACKET_TYPE = 'MsgKilled';
@@ -25,7 +27,7 @@ class MsgKilled extends GamePacket
     /** @var int */
     private $shotId = -1;
 
-    /** @var GameDataFlagData */
+    /** @var FlagData */
     private $flag;
 
     /** @var int */

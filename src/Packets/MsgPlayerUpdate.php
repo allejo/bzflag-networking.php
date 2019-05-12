@@ -1,8 +1,15 @@
 <?php declare(strict_types=1);
 
+/*
+ * (c) Vladimir "allejo" Jimenez <me@allejo.io>
+ *
+ * For the full copyright and license information, please view the
+ * LICENSE.md file that was distributed with this source code.
+ */
 
 namespace allejo\bzflag\networking\Packets;
 
+use allejo\bzflag\networking\GameData\PlayerState;
 
 class MsgPlayerUpdate extends GamePacket
 {
@@ -11,7 +18,7 @@ class MsgPlayerUpdate extends GamePacket
     /** @var int */
     private $playerId;
 
-    /** @var GameDataPlayerState */
+    /** @var PlayerState */
     private $state;
 
     protected function unpack()

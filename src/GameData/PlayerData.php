@@ -7,9 +7,9 @@
  * LICENSE.md file that was distributed with this source code.
  */
 
-namespace allejo\bzflag\networking\Packets;
+namespace allejo\bzflag\networking\GameData;
 
-class GameDataPlayerData implements \JsonSerializable
+class PlayerData implements \JsonSerializable
 {
     const IsRegistered = 1 << 0;
     const IsVerified = 1 << 1;

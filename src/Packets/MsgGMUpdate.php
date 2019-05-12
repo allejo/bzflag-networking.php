@@ -9,6 +9,8 @@
 
 namespace allejo\bzflag\networking\Packets;
 
+use allejo\bzflag\networking\GameData\ShotData;
+
 class MsgGMUpdate extends GamePacket
 {
     const PACKET_TYPE = 'MsgGMUpdate';
@@ -16,7 +18,7 @@ class MsgGMUpdate extends GamePacket
     /** @var int */
     private $target;
 
-    /** @var GameDataShotData */
+    /** @var ShotData */
     private $shot;
 
     protected function unpack()

@@ -9,6 +9,8 @@
 
 namespace allejo\bzflag\networking\Packets;
 
+use allejo\bzflag\networking\GameData\FlagData;
+
 class MsgFlagDrop extends GamePacket
 {
     const PACKET_TYPE = 'MsgDropFlag';
@@ -16,7 +18,7 @@ class MsgFlagDrop extends GamePacket
     /** @var int */
     private $playerId;
 
-    /** @var GameDataFlagData */
+    /** @var FlagData */
     private $flag;
 
     protected function unpack()

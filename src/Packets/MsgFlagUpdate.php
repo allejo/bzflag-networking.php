@@ -9,11 +9,13 @@
 
 namespace allejo\bzflag\networking\Packets;
 
+use allejo\bzflag\networking\GameData\FlagData;
+
 class MsgFlagUpdate extends GamePacket
 {
     const PACKET_TYPE = 'MsgFlagUpdate';
 
-    /** @var GameDataFlagData[] */
+    /** @var FlagData[] */
     private $flags;
 
     protected function unpack()

@@ -9,6 +9,8 @@
 
 namespace allejo\bzflag\networking\Packets;
 
+use allejo\bzflag\networking\GameData\PlayerScore;
+
 class MsgAddPlayer extends GamePacket
 {
     const PACKET_TYPE = 'MsgAddPlayer';
@@ -22,7 +24,7 @@ class MsgAddPlayer extends GamePacket
 
     protected function defaultComplexVariables()
     {
-        $this->score = new GameDataPlayerScore();
+        $this->score = new PlayerScore();
     }
 
     protected function unpack()

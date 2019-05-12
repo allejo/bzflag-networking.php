@@ -9,21 +9,15 @@
 
 namespace allejo\bzflag\networking\Packets;
 
-use allejo\bzflag\networking\GameData\FlagData;
-
-class MsgFlagGrab extends GamePacket
+class MsgRemovePlayer extends GamePacket
 {
-    const PACKET_TYPE = 'MsgFlagGrab';
+    public const PACKET_TYPE = 'MsgRemovePlayer';
 
     /** @var int */
     private $playerId;
 
-    /** @var FlagData */
-    private $flag;
-
     protected function unpack()
     {
         $this->playerId = Packet::unpackUInt8($this->buffer);
-        $this->flag = Packet::unpackFlag($this->buffer);
     }
 }
