@@ -1,0 +1,31 @@
+<?php declare(strict_types=1);
+
+/*
+ * (c) Vladimir "allejo" Jimenez <me@allejo.io>
+ *
+ * For the full copyright and license information, please view the
+ * LICENSE.md file that was distributed with this source code.
+ */
+
+namespace allejo\bzflag\networking\Packets;
+
+class MsgMessage extends GamePacket
+{
+    const PACKET_TYPE = 'MsgMessage';
+
+    /** @var int */
+    private $playerFromId;
+
+    /** @var int */
+    private $playerToId;
+
+    /** @var string */
+    private $message;
+
+    protected function unpack()
+    {
+        $this->playerFromId = Packet::unpackUInt8($this->buffer);
+        $this->playerToId = Packet::unpackUInt8($this->buffer);
+        $this->message = Packet::unpackString($this->buffer, -1);
+    }
+}

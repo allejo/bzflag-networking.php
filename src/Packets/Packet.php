@@ -149,7 +149,7 @@ class Packet implements IUnpackable
         return unpack($symbol, $binary)[1];
     }
 
-    public static function unpackFlag(&$buffer): GameDataFlagData
+    public static function unpackFlag(&$buffer): ?GameDataFlagData
     {
         $flag = new GameDataFlagData();
 
@@ -201,6 +201,18 @@ class Packet implements IUnpackable
         return long2ip($ipAsInt);
     }
 
+    public static function unpackPlayerState(&$buffer, int $code): GameDataPlayerState
+    {
+        $inOrder = Packet::unpackUInt32($buffer);
+        $inStatus = Packet::unpackUInt16($buffer);
+
+        $state = new GameDataPlayerState();
+
+        // @todo
+
+        return $state;
+    }
+
     public static function unpackShot(&$buffer): GameDataShotData
     {
         $shot = new GameDataShotData();
@@ -219,7 +231,7 @@ class Packet implements IUnpackable
     {
         $binary = self::safeReadResource($buffer, $size);
 
-        return unpack('A*', $binary)[1];
+        return trim(unpack('A*', $binary)[1]);
     }
 
     /**
@@ -269,7 +281,21 @@ class Packet implements IUnpackable
     {
         if (is_resource($buffer))
         {
+            if ($size < 0)
+            {
+                $stats = fstat($buffer);
+                $size = $stats['size'];
+            }
+
             return fread($buffer, $size);
+        }
+
+        if ($size < 0)
+        {
+            $binary = $buffer;
+            $buffer = '';
+
+            return $binary;
         }
 
         $binary = substr($buffer, 0, $size);

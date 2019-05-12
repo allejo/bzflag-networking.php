@@ -34,6 +34,14 @@ abstract class GamePacket
         NetworkMessage::GrabFlag => MsgFlagGrab::class,
         NetworkMessage::FlagUpdate => MsgFlagUpdate::class,
         NetworkMessage::GameTime => MsgGameTime::class,
+        NetworkMessage::GMUpdate => MsgGMUpdate::class,
+        NetworkMessage::Killed => MsgKilled::class,
+        NetworkMessage::Message => MsgMessage::class,
+        NetworkMessage::NewRabbit => MsgNewRabbit::class,
+        NetworkMessage::Null => MsgNull::class,
+        NetworkMessage::Pause => MsgPause::class,
+        NetworkMessage::PlayerInfo => MsgPlayerInfo::class,
+        NetworkMessage::PlayerUpdate => MsgPlayerUpdate::class,
     ];
 
     /**

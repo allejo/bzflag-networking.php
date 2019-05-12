@@ -1,0 +1,47 @@
+<?php declare(strict_types=1);
+
+/*
+ * (c) Vladimir "allejo" Jimenez <me@allejo.io>
+ *
+ * For the full copyright and license information, please view the
+ * LICENSE.md file that was distributed with this source code.
+ */
+
+namespace allejo\bzflag\networking\Packets;
+
+class MsgKilled extends GamePacket
+{
+    const PACKET_TYPE = 'MsgKilled';
+
+    /** @var int */
+    private $victimId = -1;
+
+    /** @var int */
+    private $killerId = -1;
+
+    /** @var int */
+    private $reason = -1;
+
+    /** @var int */
+    private $shotId = -1;
+
+    /** @var GameDataFlagData */
+    private $flag;
+
+    /** @var int */
+    private $physicsDriverId = -1;
+
+    protected function unpack()
+    {
+        $this->victimId = Packet::unpackUInt8($this->buffer);
+        $this->killerId = Packet::unpackUInt8($this->buffer);
+        $this->reason = Packet::unpackUInt16($this->buffer);
+        $this->shotId = Packet::unpackUInt16($this->buffer);
+        $this->flag = Packet::unpackString($this->buffer, 3);
+
+        if ($this->reason === NetworkMessage::codeFromChars('pd'))
+        {
+            $this->physicsDriverId = Packet::unpackUInt32($this->buffer);
+        }
+    }
+}
