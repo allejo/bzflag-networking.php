@@ -27,6 +27,13 @@ abstract class GamePacket
 
     private static $mapping = [
         NetworkMessage::AddPlayer => MsgAddPlayer::class,
+        NetworkMessage::AdminInfo => MsgAdminInfo::class,
+        NetworkMessage::Alive => MsgAlive::class,
+        NetworkMessage::CaptureFlag => MsgCaptureFlag::class,
+        NetworkMessage::DropFlag => MsgFlagDrop::class,
+        NetworkMessage::GrabFlag => MsgFlagGrab::class,
+        NetworkMessage::FlagUpdate => MsgFlagUpdate::class,
+        NetworkMessage::GameTime => MsgGameTime::class,
     ];
 
     /**

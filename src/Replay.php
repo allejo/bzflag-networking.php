@@ -80,12 +80,10 @@ class Replay implements \JsonSerializable
 
     /**
      * @param resource $resource
-     *
-     * @throws PacketInvalidException
      */
     private function loadPackets($resource): void
     {
-        while (!feof($resource))
+        while (true)
         {
             try
             {
@@ -94,6 +92,10 @@ class Replay implements \JsonSerializable
             catch (UnsupportedPacket $e)
             {
                 $this->errors = $e->getMessage();
+            }
+            catch (PacketInvalidException $e)
+            {
+                break;
             }
         }
     }

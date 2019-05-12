@@ -28,7 +28,7 @@ class Packet implements IUnpackable
     {
         $buffer = fread($resource, 32);
 
-        if ($buffer === false)
+        if (feof($resource) || $buffer === false)
         {
             throw new PacketInvalidException('The given resource can no longer be read.');
         }
@@ -149,6 +149,72 @@ class Packet implements IUnpackable
         return unpack($symbol, $binary)[1];
     }
 
+    public static function unpackFlag(&$buffer): GameDataFlagData
+    {
+        $flag = new GameDataFlagData();
+
+        $flag->index = Packet::unpackUInt16($buffer);
+        $flag->abbv = Packet::unpackString($buffer, 2);
+        $flag->status = Packet::unpackUInt16($buffer);
+        $flag->endurance = Packet::unpackUInt16($buffer);
+        $flag->owner = Packet::unpackUInt8($buffer);
+        $flag->position = Packet::unpackVector($buffer);
+        $flag->launchPos = Packet::unpackVector($buffer);
+        $flag->landingPos = Packet::unpackVector($buffer);
+        $flag->flightTime = Packet::unpackFloat($buffer);
+        $flag->flightEnd = Packet::unpackFloat($buffer);
+        $flag->initialVelocity = Packet::unpackFloat($buffer);
+
+        return $flag;
+    }
+
+    public static function unpackFloat(&$buffer): float
+    {
+        $binary = self::safeReadResource($buffer, 4);
+
+        return (float)unpack('G', $binary)[1];
+    }
+
+    /**
+     * @param resource|string $buffer
+     *
+     * @return float[]
+     */
+    public static function unpackVector(&$buffer): array
+    {
+        return [
+            self::unpackFloat($buffer),
+            self::unpackFloat($buffer),
+            self::unpackFloat($buffer),
+        ];
+    }
+
+    public static function unpackIpAddress(&$buffer): string
+    {
+        // This byte was reserved for differentiating between IPv4 and IPv6
+        // addresses. However, since BZFlag only supports IPv4, this byte is
+        // skipped.
+        self::safeReadResource($buffer, 1);
+
+        $ipAsInt = Packet::unpackUInt32($buffer);
+
+        return long2ip($ipAsInt);
+    }
+
+    public static function unpackShot(&$buffer): GameDataShotData
+    {
+        $shot = new GameDataShotData();
+
+        $shot->playerId = Packet::unpackUInt8($buffer);
+        $shot->shotId = Packet::unpackUInt16($buffer);
+        $shot->position = Packet::unpackVector($buffer);
+        $shot->velocity = Packet::unpackVector($buffer);
+        $shot->deltaTime = Packet::unpackFloat($buffer);
+        $shot->team = Packet::unpackUInt16($buffer);
+
+        return $shot;
+    }
+
     public static function unpackString(&$buffer, int $size): string
     {
         $binary = self::safeReadResource($buffer, $size);
@@ -156,6 +222,13 @@ class Packet implements IUnpackable
         return unpack('A*', $binary)[1];
     }
 
+    /**
+     * @param resource|string $buffer
+     *
+     * @throws \Exception
+     *
+     * @return \DateTime
+     */
     public static function unpackTimestamp(&$buffer): \DateTime
     {
         $msb = Packet::unpackUInt32($buffer);
@@ -164,11 +237,23 @@ class Packet implements IUnpackable
         $tsRaw = ($msb << 32) + $lsb;
         $tsFloat = (float)($tsRaw / 1000000);
 
-        return \DateTime::createFromFormat(
-            'U.u',
-            "$tsFloat",
-            new \DateTimeZone('UTC')
-        );
+        $formats = ['U.u', 'U'];
+
+        foreach ($formats as $format)
+        {
+            $timestamp = \DateTime::createFromFormat(
+                $format,
+                "$tsFloat",
+                new \DateTimeZone('UTC')
+            );
+
+            if ($timestamp !== false)
+            {
+                return $timestamp;
+            }
+        }
+
+        throw new \Exception('No format valid format was found for this timestamp');
     }
 
     /**
