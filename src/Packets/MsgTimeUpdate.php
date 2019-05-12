@@ -18,6 +18,6 @@ class MsgTimeUpdate extends GamePacket
 
     protected function unpack()
     {
-        $this->timeLeft = Packet::unpackInt32($this->buffer);
+        $this->timeLeft = NetworkPacket::unpackInt32($this->buffer);
     }
 }

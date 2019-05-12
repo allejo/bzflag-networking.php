@@ -29,13 +29,13 @@ class MsgAddPlayer extends GamePacket
 
     protected function unpack()
     {
-        $this->playerIndex = Packet::unpackUInt8($this->buffer);
-        $this->playerType = Packet::unpackUInt16($this->buffer);
-        $this->teamValue = Packet::unpackUInt16($this->buffer);
-        $this->score->wins = Packet::unpackUInt16($this->buffer);
-        $this->score->losses = Packet::unpackUInt16($this->buffer);
-        $this->score->teamKills = Packet::unpackUInt16($this->buffer);
-        $this->callsign = Packet::unpackString($this->buffer, NetworkProtocol::CALLSIGN_LEN);
-        $this->motto = Packet::unpackString($this->buffer, NetworkProtocol::MOTTO_LEN);
+        $this->playerIndex = NetworkPacket::unpackUInt8($this->buffer);
+        $this->playerType = NetworkPacket::unpackUInt16($this->buffer);
+        $this->teamValue = NetworkPacket::unpackUInt16($this->buffer);
+        $this->score->wins = NetworkPacket::unpackUInt16($this->buffer);
+        $this->score->losses = NetworkPacket::unpackUInt16($this->buffer);
+        $this->score->teamKills = NetworkPacket::unpackUInt16($this->buffer);
+        $this->callsign = NetworkPacket::unpackString($this->buffer, NetworkProtocol::CALLSIGN_LEN);
+        $this->motto = NetworkPacket::unpackString($this->buffer, NetworkProtocol::MOTTO_LEN);
     }
 }

@@ -9,6 +9,6 @@
 
 namespace allejo\bzflag\networking\Packets;
 
-class UnsupportedPacket extends \Exception
+class UnsupportedPacketException extends \Exception
 {
 }

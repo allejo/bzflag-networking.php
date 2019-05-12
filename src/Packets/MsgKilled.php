@@ -35,15 +35,15 @@ class MsgKilled extends GamePacket
 
     protected function unpack()
     {
-        $this->victimId = Packet::unpackUInt8($this->buffer);
-        $this->killerId = Packet::unpackUInt8($this->buffer);
-        $this->reason = Packet::unpackUInt16($this->buffer);
-        $this->shotId = Packet::unpackUInt16($this->buffer);
-        $this->flag = Packet::unpackString($this->buffer, 3);
+        $this->victimId = NetworkPacket::unpackUInt8($this->buffer);
+        $this->killerId = NetworkPacket::unpackUInt8($this->buffer);
+        $this->reason = NetworkPacket::unpackUInt16($this->buffer);
+        $this->shotId = NetworkPacket::unpackUInt16($this->buffer);
+        $this->flag = NetworkPacket::unpackString($this->buffer, 3);
 
         if ($this->reason === NetworkMessage::codeFromChars('pd'))
         {
-            $this->physicsDriverId = Packet::unpackUInt32($this->buffer);
+            $this->physicsDriverId = NetworkPacket::unpackUInt32($this->buffer);
         }
     }
 }

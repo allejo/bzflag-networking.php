@@ -20,6 +20,6 @@ class MsgShotBegin extends GamePacket
 
     protected function unpack()
     {
-        $this->firingInfo = Packet::unpackFiringInfo($this->buffer);
+        $this->firingInfo = NetworkPacket::unpackFiringInfo($this->buffer);
     }
 }

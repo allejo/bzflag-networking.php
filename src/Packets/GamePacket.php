@@ -9,11 +9,15 @@
 
 namespace allejo\bzflag\networking\Packets;
 
+/**
+ * An abstraction on top of a NetworkPacket that contains actual data of packets
+ * that occur in a game.
+ */
 abstract class GamePacket
 {
     const PACKET_TYPE = '';
 
-    /** @var Packet */
+    /** @var NetworkPacket */
     protected $packet;
 
     /** @var string */
@@ -26,41 +30,41 @@ abstract class GamePacket
     protected $timestampOffset;
 
     private static $mapping = [
-        NetworkMessage::AddPlayer => MsgAddPlayer::class,
-        NetworkMessage::AdminInfo => MsgAdminInfo::class,
-        NetworkMessage::Alive => MsgAlive::class,
-        NetworkMessage::CaptureFlag => MsgCaptureFlag::class,
-        NetworkMessage::DropFlag => MsgFlagDrop::class,
-        NetworkMessage::GrabFlag => MsgFlagGrab::class,
-        NetworkMessage::FlagUpdate => MsgFlagUpdate::class,
-        NetworkMessage::GameTime => MsgGameTime::class,
-        NetworkMessage::GMUpdate => MsgGMUpdate::class,
-        NetworkMessage::Killed => MsgKilled::class,
-        NetworkMessage::Message => MsgMessage::class,
-        NetworkMessage::NewRabbit => MsgNewRabbit::class,
-        NetworkMessage::Null => MsgNull::class,
-        NetworkMessage::Pause => MsgPause::class,
-        NetworkMessage::PlayerInfo => MsgPlayerInfo::class,
-        NetworkMessage::PlayerUpdate => MsgPlayerUpdate::class,
-        NetworkMessage::PlayerUpdateSmall => MsgPlayerUpdate::class,
-        NetworkMessage::RemovePlayer => MsgRemovePlayer::class,
-        NetworkMessage::Score => MsgScore::class,
-        NetworkMessage::ScoreOver => MsgScoreOver::class,
-        NetworkMessage::SetVar => MsgSetVar::class,
-        NetworkMessage::ShotBegin => MsgShotBegin::class,
-        NetworkMessage::ShotEnd => MsgShotEnd::class,
-        NetworkMessage::TeamUpdate => MsgTeamUpdate::class,
-        NetworkMessage::Teleport => MsgTeleport::class,
-        NetworkMessage::TimeUpdate => MsgTimeUpdate::class,
-        NetworkMessage::TransferFlag => MsgTransferFlag::class,
+        NetworkMessage::ADD_PLAYER => MsgAddPlayer::class,
+        NetworkMessage::ADMIN_INFO => MsgAdminInfo::class,
+        NetworkMessage::ALIVE => MsgAlive::class,
+        NetworkMessage::CAPTURE_FLAG => MsgCaptureFlag::class,
+        NetworkMessage::DROP_FLAG => MsgFlagDrop::class,
+        NetworkMessage::GRAB_FLAG => MsgFlagGrab::class,
+        NetworkMessage::FLAG_UPDATE => MsgFlagUpdate::class,
+        NetworkMessage::GAME_TIME => MsgGameTime::class,
+        NetworkMessage::GM_UPDATE => MsgGMUpdate::class,
+        NetworkMessage::KILLED => MsgKilled::class,
+        NetworkMessage::MESSAGE => MsgMessage::class,
+        NetworkMessage::NEW_RABBIT => MsgNewRabbit::class,
+        NetworkMessage::NULL => MsgNull::class,
+        NetworkMessage::PAUSE => MsgPause::class,
+        NetworkMessage::PLAYER_INFO => MsgPlayerInfo::class,
+        NetworkMessage::PLAYER_UPDATE => MsgPlayerUpdate::class,
+        NetworkMessage::PLAYER_UPDATE_SMALL => MsgPlayerUpdate::class,
+        NetworkMessage::REMOVE_PLAYER => MsgRemovePlayer::class,
+        NetworkMessage::SCORE => MsgScore::class,
+        NetworkMessage::SCORE_OVER => MsgScoreOver::class,
+        NetworkMessage::SET_VAR => MsgSetVar::class,
+        NetworkMessage::SHOT_BEGIN => MsgShotBegin::class,
+        NetworkMessage::SHOT_END => MsgShotEnd::class,
+        NetworkMessage::TEAM_UPDATE => MsgTeamUpdate::class,
+        NetworkMessage::TELEPORT => MsgTeleport::class,
+        NetworkMessage::TIME_UPDATE => MsgTimeUpdate::class,
+        NetworkMessage::TRANSFER_FLAG => MsgTransferFlag::class,
     ];
 
     /**
-     * @param Packet $packet
+     * @param NetworkPacket $packet
      *
      * @throws PacketNotSetException
      */
-    public function __construct(Packet $packet)
+    public function __construct(NetworkPacket $packet)
     {
         if ($packet === null)
         {
@@ -84,19 +88,19 @@ abstract class GamePacket
     /**
      * @param resource $resource
      *
-     * @throws UnsupportedPacket
      * @throws PacketInvalidException
+     * @throws UnsupportedPacketException
      *
      * @return GamePacket
      */
     public static function fromResource($resource)
     {
-        $packet = new Packet($resource);
+        $packet = new NetworkPacket($resource);
         $msgCode = $packet->getCode();
 
         if (!isset(self::$mapping[$msgCode]))
         {
-            throw new UnsupportedPacket(
+            throw new UnsupportedPacketException(
                 sprintf('Unsupported game packet code: %s', NetworkMessage::charsFromCode($msgCode))
             );
         }

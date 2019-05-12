@@ -18,6 +18,6 @@ class MsgRemovePlayer extends GamePacket
 
     protected function unpack()
     {
-        $this->playerId = Packet::unpackUInt8($this->buffer);
+        $this->playerId = NetworkPacket::unpackUInt8($this->buffer);
     }
 }

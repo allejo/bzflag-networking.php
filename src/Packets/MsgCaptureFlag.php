@@ -24,8 +24,8 @@ class MsgCaptureFlag extends GamePacket
 
     protected function unpack()
     {
-        $this->playerId = Packet::unpackUInt8($this->buffer);
-        $this->flagId = Packet::unpackUInt16($this->buffer);
-        $this->team = Packet::unpackUInt16($this->buffer);
+        $this->playerId = NetworkPacket::unpackUInt8($this->buffer);
+        $this->flagId = NetworkPacket::unpackUInt16($this->buffer);
+        $this->team = NetworkPacket::unpackUInt16($this->buffer);
     }
 }

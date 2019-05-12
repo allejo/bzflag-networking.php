@@ -21,7 +21,7 @@ class MsgGameTime extends GamePacket
 
     protected function unpack()
     {
-        $this->msb = Packet::unpackUInt32($this->buffer);
-        $this->lsb = Packet::unpackUInt32($this->buffer);
+        $this->msb = NetworkPacket::unpackUInt32($this->buffer);
+        $this->lsb = NetworkPacket::unpackUInt32($this->buffer);
     }
 }

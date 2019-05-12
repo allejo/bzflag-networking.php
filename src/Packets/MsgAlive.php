@@ -29,8 +29,8 @@ class MsgAlive extends GamePacket
 
     protected function unpack()
     {
-        $this->playerId = Packet::unpackUInt8($this->buffer);
-        $this->position = Packet::unpackVector($this->buffer);
-        $this->azimuth = Packet::unpackFloat($this->buffer);
+        $this->playerId = NetworkPacket::unpackUInt8($this->buffer);
+        $this->position = NetworkPacket::unpackVector($this->buffer);
+        $this->azimuth = NetworkPacket::unpackFloat($this->buffer);
     }
 }

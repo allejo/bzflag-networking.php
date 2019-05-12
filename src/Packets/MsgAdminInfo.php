@@ -20,15 +20,15 @@ class MsgAdminInfo extends GamePacket
 
     protected function unpack()
     {
-        $count = Packet::unpackUInt8($this->buffer);
+        $count = NetworkPacket::unpackUInt8($this->buffer);
 
         for ($i = 0; $i < $count; ++$i)
         {
-            Packet::unpackUInt8($this->buffer);
+            NetworkPacket::unpackUInt8($this->buffer);
 
             $playerInfo = new PlayerInfo();
-            $playerInfo->playerIndex = Packet::unpackUInt8($this->buffer);
-            $playerInfo->ipAddress = Packet::unpackIpAddress($this->buffer);
+            $playerInfo->playerIndex = NetworkPacket::unpackUInt8($this->buffer);
+            $playerInfo->ipAddress = NetworkPacket::unpackIpAddress($this->buffer);
 
             $this->players[] = $playerInfo;
         }

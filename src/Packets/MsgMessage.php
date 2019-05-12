@@ -24,8 +24,8 @@ class MsgMessage extends GamePacket
 
     protected function unpack()
     {
-        $this->playerFromId = Packet::unpackUInt8($this->buffer);
-        $this->playerToId = Packet::unpackUInt8($this->buffer);
-        $this->message = Packet::unpackString($this->buffer, -1);
+        $this->playerFromId = NetworkPacket::unpackUInt8($this->buffer);
+        $this->playerToId = NetworkPacket::unpackUInt8($this->buffer);
+        $this->message = NetworkPacket::unpackString($this->buffer, -1);
     }
 }

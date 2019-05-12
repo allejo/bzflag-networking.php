@@ -23,7 +23,7 @@ class MsgFlagGrab extends GamePacket
 
     protected function unpack()
     {
-        $this->playerId = Packet::unpackUInt8($this->buffer);
-        $this->flag = Packet::unpackFlag($this->buffer);
+        $this->playerId = NetworkPacket::unpackUInt8($this->buffer);
+        $this->flag = NetworkPacket::unpackFlag($this->buffer);
     }
 }

@@ -20,17 +20,17 @@ class MsgSetVar extends GamePacket
 
     protected function unpack()
     {
-        $count = Packet::unpackUInt16($this->buffer);
+        $count = NetworkPacket::unpackUInt16($this->buffer);
 
         for ($i = 0; $i < $count; ++$i)
         {
             $setting = new BZDBSetting();
 
-            $nameLength = Packet::unpackUInt8($this->buffer);
-            $setting->name = Packet::unpackString($this->buffer, $nameLength);
+            $nameLength = NetworkPacket::unpackUInt8($this->buffer);
+            $setting->name = NetworkPacket::unpackString($this->buffer, $nameLength);
 
-            $valueLength = Packet::unpackUInt8($this->buffer);
-            $setting->value = Packet::unpackString($this->buffer, $valueLength);
+            $valueLength = NetworkPacket::unpackUInt8($this->buffer);
+            $setting->value = NetworkPacket::unpackString($this->buffer, $valueLength);
 
             $this->settings[] = $setting;
         }

@@ -9,7 +9,7 @@
 
 namespace allejo\bzflag\networking\Packets;
 
-interface IUnpackable
+interface Unpackable
 {
     public function __construct($resource);
 }

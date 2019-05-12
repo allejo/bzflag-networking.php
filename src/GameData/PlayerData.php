@@ -11,13 +11,20 @@ namespace allejo\bzflag\networking\GameData;
 
 class PlayerData implements \JsonSerializable
 {
-    const IsRegistered = 1 << 0;
-    const IsVerified = 1 << 1;
-    const IsAdmin = 1 << 2;
+    const IS_REGISTERED = 1 << 0;
+    const IS_VERIFIED = 1 << 1;
+    const IS_ADMIN = 1 << 2;
 
+    /** @var int */
     public $playerId;
+
+    /** @var bool */
     public $isRegistered;
+
+    /** @var bool */
     public $isVerified;
+
+    /** @var bool */
     public $isAdmin;
 
     public function jsonSerialize()

@@ -10,9 +10,9 @@
 namespace allejo\bzflag\networking;
 
 use allejo\bzflag\networking\Packets\GamePacket;
-use allejo\bzflag\networking\Packets\Packet;
+use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\networking\Packets\PacketInvalidException;
-use allejo\bzflag\networking\Packets\UnsupportedPacket;
+use allejo\bzflag\networking\Packets\UnsupportedPacketException;
 
 /**
  * @api
@@ -65,7 +65,7 @@ class Replay implements \JsonSerializable
      */
     private function calculateTimestamps($resource): void
     {
-        $packet = new Packet($resource);
+        $packet = new NetworkPacket($resource);
 
         if ($packet->getTimestamp() === null)
         {
@@ -89,7 +89,7 @@ class Replay implements \JsonSerializable
             {
                 $this->packets[] = GamePacket::fromResource($resource);
             }
-            catch (UnsupportedPacket $e)
+            catch (UnsupportedPacketException $e)
             {
                 $this->errors = $e->getMessage();
             }

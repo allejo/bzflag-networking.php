@@ -20,16 +20,16 @@ class MsgScore extends GamePacket
 
     protected function unpack()
     {
-        $count = Packet::unpackUInt8($this->buffer);
+        $count = NetworkPacket::unpackUInt8($this->buffer);
 
         for ($i = 0; $i < $count; ++$i)
         {
             $score = new ScoreData();
 
-            $score->playerId = Packet::unpackUInt8($this->buffer);
-            $score->wins = Packet::unpackUInt16($this->buffer);
-            $score->losses = Packet::unpackUInt16($this->buffer);
-            $score->teamKills = Packet::unpackUInt16($this->buffer);
+            $score->playerId = NetworkPacket::unpackUInt8($this->buffer);
+            $score->wins = NetworkPacket::unpackUInt16($this->buffer);
+            $score->losses = NetworkPacket::unpackUInt16($this->buffer);
+            $score->teamKills = NetworkPacket::unpackUInt16($this->buffer);
 
             $this->scores[] = $score;
         }

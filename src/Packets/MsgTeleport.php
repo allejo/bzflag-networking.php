@@ -24,8 +24,8 @@ class MsgTeleport extends GamePacket
 
     protected function unpack()
     {
-        $this->playerId = Packet::unpackUInt8($this->buffer);
-        $this->from = Packet::unpackUInt16($this->buffer);
-        $this->to = Packet::unpackUInt16($this->buffer);
+        $this->playerId = NetworkPacket::unpackUInt8($this->buffer);
+        $this->from = NetworkPacket::unpackUInt16($this->buffer);
+        $this->to = NetworkPacket::unpackUInt16($this->buffer);
     }
 }

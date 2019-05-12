@@ -11,9 +11,16 @@ namespace allejo\bzflag\networking\GameData;
 
 class ScoreData implements \JsonSerializable
 {
+    /** @var int */
     public $playerId;
+
+    /** @var int */
     public $wins;
+
+    /** @var int */
     public $losses;
+
+    /** @var int */
     public $teamKills;
 
     public function jsonSerialize()

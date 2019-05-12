@@ -14,12 +14,15 @@ use allejo\bzflag\networking\GameData\FlagData;
 use allejo\bzflag\networking\GameData\PlayerState;
 use allejo\bzflag\networking\GameData\ShotData;
 
-class Packet implements IUnpackable
+/**
+ * A raw network packet that was sent and contains data for game packets.
+ */
+class NetworkPacket implements Unpackable
 {
-    const SmallScale = 32766.0;
-    const SmallMaxDist = 0.02 * Packet::SmallScale;
-    const SmallMaxVel = 0.01 * Packet::SmallScale;
-    const SmallMaxAngVel = 0.001 * Packet::SmallScale;
+    const SMALL_SCALE = 32766.0;
+    const SMALL_MAX_DIST = 0.02 * NetworkPacket::SMALL_SCALE;
+    const SMALL_MAX_VEL = 0.01 * NetworkPacket::SMALL_SCALE;
+    const SMALL_MAX_ANG_VEL = 0.001 * NetworkPacket::SMALL_SCALE;
 
     private $mode = -1;
     private $code = -1;
@@ -33,6 +36,7 @@ class Packet implements IUnpackable
      * @param resource $resource
      *
      * @throws PacketInvalidException
+     * @throws \UnexpectedValueException
      */
     public function __construct($resource)
     {
@@ -43,12 +47,12 @@ class Packet implements IUnpackable
             throw new PacketInvalidException('The given resource can no longer be read.');
         }
 
-        $this->mode = Packet::unpackUInt16($buffer);
-        $this->code = Packet::unpackUInt16($buffer);
-        $this->length = Packet::unpackUInt32($buffer);
-        $this->nextFilePos = Packet::unpackUInt32($buffer);
-        $this->prevFilePos = Packet::unpackUInt32($buffer);
-        $this->timestamp = Packet::unpackTimestamp($buffer);
+        $this->mode = NetworkPacket::unpackUInt16($buffer);
+        $this->code = NetworkPacket::unpackUInt16($buffer);
+        $this->length = NetworkPacket::unpackUInt32($buffer);
+        $this->nextFilePos = NetworkPacket::unpackUInt32($buffer);
+        $this->prevFilePos = NetworkPacket::unpackUInt32($buffer);
+        $this->timestamp = NetworkPacket::unpackTimestamp($buffer);
 
         if ($this->length > 0)
         {
@@ -163,10 +167,10 @@ class Packet implements IUnpackable
     {
         $data = new FiringIntoData();
 
-        $data->timeSent = Packet::unpackFloat($buffer);
-        $data->shot = Packet::unpackShot($buffer);
-        $data->flag = Packet::unpackString($buffer, 2);
-        $data->lifetime = Packet::unpackFloat($buffer);
+        $data->timeSent = NetworkPacket::unpackFloat($buffer);
+        $data->shot = NetworkPacket::unpackShot($buffer);
+        $data->flag = NetworkPacket::unpackString($buffer, 2);
+        $data->lifetime = NetworkPacket::unpackFloat($buffer);
 
         return $data;
     }
@@ -175,17 +179,17 @@ class Packet implements IUnpackable
     {
         $flag = new FlagData();
 
-        $flag->index = Packet::unpackUInt16($buffer);
-        $flag->abbv = Packet::unpackString($buffer, 2);
-        $flag->status = Packet::unpackUInt16($buffer);
-        $flag->endurance = Packet::unpackUInt16($buffer);
-        $flag->owner = Packet::unpackUInt8($buffer);
-        $flag->position = Packet::unpackVector($buffer);
-        $flag->launchPos = Packet::unpackVector($buffer);
-        $flag->landingPos = Packet::unpackVector($buffer);
-        $flag->flightTime = Packet::unpackFloat($buffer);
-        $flag->flightEnd = Packet::unpackFloat($buffer);
-        $flag->initialVelocity = Packet::unpackFloat($buffer);
+        $flag->index = NetworkPacket::unpackUInt16($buffer);
+        $flag->abbv = NetworkPacket::unpackString($buffer, 2);
+        $flag->status = NetworkPacket::unpackUInt16($buffer);
+        $flag->endurance = NetworkPacket::unpackUInt16($buffer);
+        $flag->owner = NetworkPacket::unpackUInt8($buffer);
+        $flag->position = NetworkPacket::unpackVector($buffer);
+        $flag->launchPos = NetworkPacket::unpackVector($buffer);
+        $flag->landingPos = NetworkPacket::unpackVector($buffer);
+        $flag->flightTime = NetworkPacket::unpackFloat($buffer);
+        $flag->flightEnd = NetworkPacket::unpackFloat($buffer);
+        $flag->initialVelocity = NetworkPacket::unpackFloat($buffer);
 
         return $flag;
     }
@@ -218,7 +222,7 @@ class Packet implements IUnpackable
         // skipped.
         self::safeReadResource($buffer, 1);
 
-        $ipAsInt = Packet::unpackUInt32($buffer);
+        $ipAsInt = NetworkPacket::unpackUInt32($buffer);
 
         return long2ip($ipAsInt);
     }
@@ -226,73 +230,73 @@ class Packet implements IUnpackable
     public static function unpackPlayerState(&$buffer, int $code): PlayerState
     {
         // @TODO see if `in_order` is necessary of if it can be removed safely
-        $inOrder = Packet::unpackUInt32($buffer);
-        $inStatus = Packet::unpackUInt16($buffer);
+        $inOrder = NetworkPacket::unpackUInt32($buffer);
+        $inStatus = NetworkPacket::unpackUInt16($buffer);
 
         $state = new PlayerState();
 
-        if ($code === NetworkMessage::PlayerUpdate)
+        if ($code === NetworkMessage::PLAYER_UPDATE)
         {
-            $state->position = Packet::unpackVector($buffer);
-            $state->velocity = Packet::unpackVector($buffer);
-            $state->azimuth = Packet::unpackFloat($buffer);
-            $state->angularVelocity = Packet::unpackFloat($buffer);
+            $state->position = NetworkPacket::unpackVector($buffer);
+            $state->velocity = NetworkPacket::unpackVector($buffer);
+            $state->azimuth = NetworkPacket::unpackFloat($buffer);
+            $state->angularVelocity = NetworkPacket::unpackFloat($buffer);
         }
         else
         {
             $pos = [
-                Packet::unpackInt16($buffer),
-                Packet::unpackInt16($buffer),
-                Packet::unpackInt16($buffer),
+                NetworkPacket::unpackInt16($buffer),
+                NetworkPacket::unpackInt16($buffer),
+                NetworkPacket::unpackInt16($buffer),
             ];
             $vel = [
-                Packet::unpackInt16($buffer),
-                Packet::unpackInt16($buffer),
-                Packet::unpackInt16($buffer),
+                NetworkPacket::unpackInt16($buffer),
+                NetworkPacket::unpackInt16($buffer),
+                NetworkPacket::unpackInt16($buffer),
             ];
-            $azi = Packet::unpackInt16($buffer);
-            $angVel = Packet::unpackInt16($buffer);
+            $azi = NetworkPacket::unpackInt16($buffer);
+            $angVel = NetworkPacket::unpackInt16($buffer);
 
             $position = [0, 0, 0];
             $velocity = [0, 0, 0];
 
             for ($i = 0; $i < 3; ++$i)
             {
-                $position[$i] = ((float)$pos[$i] * Packet::SmallMaxDist) / Packet::SmallScale;
-                $velocity[$i] = ((float)$vel[$i] * Packet::SmallMaxVel) / Packet::SmallScale;
+                $position[$i] = ((float)$pos[$i] * NetworkPacket::SMALL_MAX_DIST) / NetworkPacket::SMALL_SCALE;
+                $velocity[$i] = ((float)$vel[$i] * NetworkPacket::SMALL_MAX_VEL) / NetworkPacket::SMALL_SCALE;
             }
 
             $state->position = $position;
             $state->velocity = $velocity;
-            $state->azimuth = ((float)$azi * M_PI) / Packet::SmallScale;
-            $state->angularVelocity = ((float)$angVel * Packet::SmallMaxAngVel) / Packet::SmallScale;
+            $state->azimuth = ((float)$azi * M_PI) / NetworkPacket::SMALL_SCALE;
+            $state->angularVelocity = ((float)$angVel * NetworkPacket::SMALL_MAX_ANG_VEL) / NetworkPacket::SMALL_SCALE;
         }
 
-        if (($inStatus & PlayerState::JumpJets) !== 0)
+        if (($inStatus & PlayerState::JUMP_JETS) !== 0)
         {
-            $jumpJets = Packet::unpackUInt16($buffer);
-            $state->jumpJetsScale = (float)$jumpJets / Packet::SmallScale;
+            $jumpJets = NetworkPacket::unpackUInt16($buffer);
+            $state->jumpJetsScale = (float)$jumpJets / NetworkPacket::SMALL_SCALE;
         }
 
-        if (($inStatus & PlayerState::OnDriver) !== 0)
+        if (($inStatus & PlayerState::ON_DRIVER) !== 0)
         {
             // @TODO this value is being read in as unsigned, but needs to be converted to signed...?
             // @TODO fix this...
-            $state->physicsDriver = Packet::unpackUInt32($buffer);
+            $state->physicsDriver = NetworkPacket::unpackUInt32($buffer);
         }
 
-        if (($inStatus & PlayerState::UserInputs) !== 0)
+        if (($inStatus & PlayerState::USER_INPUTS) !== 0)
         {
-            $speed = Packet::unpackUInt16($buffer);
-            $angVel = Packet::unpackUInt16($buffer);
+            $speed = NetworkPacket::unpackUInt16($buffer);
+            $angVel = NetworkPacket::unpackUInt16($buffer);
 
-            $state->userSpeed = ((float)$speed * Packet::SmallMaxVel) / Packet::SmallScale;
-            $state->userAngVel = ((float)$angVel * Packet::SmallMaxAngVel) / Packet::SmallScale;
+            $state->userSpeed = ((float)$speed * NetworkPacket::SMALL_MAX_VEL) / NetworkPacket::SMALL_SCALE;
+            $state->userAngVel = ((float)$angVel * NetworkPacket::SMALL_MAX_ANG_VEL) / NetworkPacket::SMALL_SCALE;
         }
 
-        if (($inStatus & PlayerState::PlaySound) !== 0)
+        if (($inStatus & PlayerState::PLAY_SOUND) !== 0)
         {
-            $state->sounds = Packet::unpackUInt8($buffer);
+            $state->sounds = NetworkPacket::unpackUInt8($buffer);
         }
 
         return $state;
@@ -302,12 +306,12 @@ class Packet implements IUnpackable
     {
         $shot = new ShotData();
 
-        $shot->playerId = Packet::unpackUInt8($buffer);
-        $shot->shotId = Packet::unpackUInt16($buffer);
-        $shot->position = Packet::unpackVector($buffer);
-        $shot->velocity = Packet::unpackVector($buffer);
-        $shot->deltaTime = Packet::unpackFloat($buffer);
-        $shot->team = Packet::unpackUInt16($buffer);
+        $shot->playerId = NetworkPacket::unpackUInt8($buffer);
+        $shot->shotId = NetworkPacket::unpackUInt16($buffer);
+        $shot->position = NetworkPacket::unpackVector($buffer);
+        $shot->velocity = NetworkPacket::unpackVector($buffer);
+        $shot->deltaTime = NetworkPacket::unpackFloat($buffer);
+        $shot->team = NetworkPacket::unpackUInt16($buffer);
 
         return $shot;
     }
@@ -322,14 +326,14 @@ class Packet implements IUnpackable
     /**
      * @param resource|string $buffer
      *
-     * @throws \Exception
+     * @throws \UnexpectedValueException
      *
      * @return \DateTime
      */
     public static function unpackTimestamp(&$buffer): \DateTime
     {
-        $msb = Packet::unpackUInt32($buffer);
-        $lsb = Packet::unpackUInt32($buffer);
+        $msb = NetworkPacket::unpackUInt32($buffer);
+        $lsb = NetworkPacket::unpackUInt32($buffer);
 
         $tsRaw = ($msb << 32) + $lsb;
         $tsFloat = (float)($tsRaw / 1000000);
@@ -350,7 +354,7 @@ class Packet implements IUnpackable
             }
         }
 
-        throw new \Exception('No format valid format was found for this timestamp');
+        throw new \UnexpectedValueException('No format valid format was found for this timestamp');
     }
 
     /**

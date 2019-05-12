@@ -25,9 +25,9 @@ class MsgPlayerUpdate extends GamePacket
     {
         // Discard this value; I'm not sure why this value comes out to a weird
         // float. We have the timestamp of the raw packet, so just that instead
-        $_ = Packet::unpackFloat($this->buffer);
+        $_ = NetworkPacket::unpackFloat($this->buffer);
 
-        $this->playerId = Packet::unpackUInt8($this->buffer);
-        $this->state = Packet::unpackPlayerState($this->buffer, $this->packet->getCode());
+        $this->playerId = NetworkPacket::unpackUInt8($this->buffer);
+        $this->state = NetworkPacket::unpackPlayerState($this->buffer, $this->packet->getCode());
     }
 }

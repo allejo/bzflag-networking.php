@@ -24,8 +24,8 @@ class MsgShotEnd extends GamePacket
 
     protected function unpack()
     {
-        $this->playerId = Packet::unpackUInt8($this->buffer);
-        $this->shotId = Packet::unpackUInt16($this->buffer);
-        $this->reason = Packet::unpackInt16($this->buffer);
+        $this->playerId = NetworkPacket::unpackUInt8($this->buffer);
+        $this->shotId = NetworkPacket::unpackUInt16($this->buffer);
+        $this->reason = NetworkPacket::unpackInt16($this->buffer);
     }
 }

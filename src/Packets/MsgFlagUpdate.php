@@ -20,11 +20,11 @@ class MsgFlagUpdate extends GamePacket
 
     protected function unpack()
     {
-        $count = Packet::unpackUInt16($this->buffer);
+        $count = NetworkPacket::unpackUInt16($this->buffer);
 
         for ($i = 0; $i < $count; ++$i)
         {
-            $this->flags[] = Packet::unpackFlag($this->buffer);
+            $this->flags[] = NetworkPacket::unpackFlag($this->buffer);
         }
     }
 }

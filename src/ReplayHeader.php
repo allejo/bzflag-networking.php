@@ -9,14 +9,11 @@
 
 namespace allejo\bzflag\networking;
 
-use allejo\bzflag\networking\Packets\IUnpackable;
+use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\networking\Packets\NetworkProtocol;
-use allejo\bzflag\networking\Packets\Packet;
+use allejo\bzflag\networking\Packets\Unpackable;
 
-/**
- * @internal
- */
-class ReplayHeader implements IUnpackable
+class ReplayHeader implements Unpackable
 {
     /** @var int */
     private $magicNumber = -1;
@@ -62,18 +59,18 @@ class ReplayHeader implements IUnpackable
      */
     public function __construct($resource)
     {
-        $this->magicNumber = Packet::unpackUInt32($resource);
-        $this->version = Packet::unpackUInt32($resource);
-        $this->offset = Packet::unpackUInt32($resource);
-        $this->fileTime = Packet::unpackInt64($resource);
-        $this->player = Packet::unpackUInt32($resource);
-        $this->flagsSize = Packet::unpackUInt32($resource);
-        $this->worldSize = Packet::unpackUInt32($resource);
-        $this->callsign = Packet::unpackString($resource, NetworkProtocol::CALLSIGN_LEN);
-        $this->motto = Packet::unpackString($resource, NetworkProtocol::MOTTO_LEN);
-        $this->serverVersion = Packet::unpackString($resource, NetworkProtocol::SERVER_LEN);
-        $this->appVersion = Packet::unpackString($resource, NetworkProtocol::MESSAGE_LEN);
-        $this->realHash = Packet::unpackString($resource, NetworkProtocol::HASH_LEN);
+        $this->magicNumber = NetworkPacket::unpackUInt32($resource);
+        $this->version = NetworkPacket::unpackUInt32($resource);
+        $this->offset = NetworkPacket::unpackUInt32($resource);
+        $this->fileTime = NetworkPacket::unpackInt64($resource);
+        $this->player = NetworkPacket::unpackUInt32($resource);
+        $this->flagsSize = NetworkPacket::unpackUInt32($resource);
+        $this->worldSize = NetworkPacket::unpackUInt32($resource);
+        $this->callsign = NetworkPacket::unpackString($resource, NetworkProtocol::CALLSIGN_LEN);
+        $this->motto = NetworkPacket::unpackString($resource, NetworkProtocol::MOTTO_LEN);
+        $this->serverVersion = NetworkPacket::unpackString($resource, NetworkProtocol::SERVER_LEN);
+        $this->appVersion = NetworkPacket::unpackString($resource, NetworkProtocol::MESSAGE_LEN);
+        $this->realHash = NetworkPacket::unpackString($resource, NetworkProtocol::HASH_LEN);
 
         $this->length = new ReplayDuration($this->fileTime);
 

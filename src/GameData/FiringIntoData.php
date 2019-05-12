@@ -11,9 +11,16 @@ namespace allejo\bzflag\networking\GameData;
 
 class FiringIntoData implements \JsonSerializable
 {
+    /** @var float */
     public $timeSent;
+
+    /** @var ShotData */
     public $shot;
+
+    /** @var string */
     public $flag;
+
+    /** @var float */
     public $lifetime;
 
     public function jsonSerialize()

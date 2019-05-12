@@ -20,17 +20,17 @@ class MsgPlayerInfo extends GamePacket
 
     protected function unpack()
     {
-        $count = Packet::unpackUInt8($this->buffer);
+        $count = NetworkPacket::unpackUInt8($this->buffer);
 
         for ($i = 0; $i < $count; ++$i)
         {
             $player = new PlayerData();
-            $player->playerId = Packet::unpackUInt8($this->buffer);
+            $player->playerId = NetworkPacket::unpackUInt8($this->buffer);
 
-            $properties = Packet::unpackUInt8($this->buffer);
-            $player->isRegistered = (bool)($properties & PlayerData::IsRegistered);
-            $player->isVerified = (bool)($properties & PlayerData::IsVerified);
-            $player->isAdmin = (bool)($properties & PlayerData::IsAdmin);
+            $properties = NetworkPacket::unpackUInt8($this->buffer);
+            $player->isRegistered = (bool)($properties & PlayerData::IS_REGISTERED);
+            $player->isVerified = (bool)($properties & PlayerData::IS_VERIFIED);
+            $player->isAdmin = (bool)($properties & PlayerData::IS_ADMIN);
 
             $this->players[] = $player;
         }

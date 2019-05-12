@@ -20,16 +20,16 @@ class MsgTeamUpdate extends GamePacket
 
     protected function unpack()
     {
-        $count = Packet::unpackUInt8($this->buffer);
+        $count = NetworkPacket::unpackUInt8($this->buffer);
 
         for ($i = 0; $i < $count; ++$i)
         {
             $data = new TeamData();
 
-            $data->team = Packet::unpackUInt16($this->buffer);
-            $data->size = Packet::unpackUInt16($this->buffer);
-            $data->wins = Packet::unpackUInt16($this->buffer);
-            $data->losses = Packet::unpackUInt16($this->buffer);
+            $data->team = NetworkPacket::unpackUInt16($this->buffer);
+            $data->size = NetworkPacket::unpackUInt16($this->buffer);
+            $data->wins = NetworkPacket::unpackUInt16($this->buffer);
+            $data->losses = NetworkPacket::unpackUInt16($this->buffer);
 
             $this->teams[] = $data;
         }
