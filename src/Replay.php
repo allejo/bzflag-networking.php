@@ -64,6 +64,46 @@ class Replay implements \JsonSerializable
     }
 
     /**
+     * @return ReplayHeader
+     */
+    public function getHeader(): ReplayHeader
+    {
+        return $this->header;
+    }
+
+    /**
+     * @return GamePacket[]
+     */
+    public function getPackets(): array
+    {
+        return $this->packets;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getErrors(): array
+    {
+        return $this->errors;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getStartTime(): \DateTime
+    {
+        return $this->startTime;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getEndTime(): \DateTime
+    {
+        return $this->endTime;
+    }
+
+    /**
      * @param resource $resource
      *
      * @throws PacketInvalidException
