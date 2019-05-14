@@ -100,6 +100,14 @@ abstract class GamePacket implements \JsonSerializable
     }
 
     /**
+     * @return \DateTime
+     */
+    public function getTimestampAsDateTime(): \DateTime
+    {
+        return $this->timestamp;
+    }
+
+    /**
      * Initialize special instance variables without having to override the
      * constructor.
      */
