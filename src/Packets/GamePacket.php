@@ -108,6 +108,16 @@ abstract class GamePacket implements \JsonSerializable
     }
 
     /**
+     * @return array
+     */
+    protected function getJsonEncodeBlacklist(): array
+    {
+        return [
+            'timestampAsDateTime'
+        ];
+    }
+
+    /**
      * Initialize special instance variables without having to override the
      * constructor.
      */
