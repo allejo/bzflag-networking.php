@@ -1,0 +1,44 @@
+#!/usr/bin/env php
+<?php declare(strict_types=1);
+
+$autoloaderPath = __DIR__ . '/../vendor/autoload.php';
+
+if (!file_exists($autoloaderPath)) {
+    echo "No autoloader has been built or configured. Please run composer.\n";
+    echo "\n";
+    echo "  composer install\n";
+
+    die(1);
+}
+
+require $autoloaderPath;
+
+use allejo\bzflag\networking\Packets\PacketInvalidException;
+use allejo\bzflag\networking\Replay;
+
+if (count($argv) !== 2) {
+    echo "Usage:\n";
+    echo sprintf("  %s <path to replay>\n", basename(__FILE__));
+
+    die(1);
+}
+
+$replayFile = $argv[1];
+
+if (!file_exists($replayFile)) {
+    echo sprintf("File not found: %s\n", $replayFile);
+
+    die(1);
+}
+
+try {
+    $replay = new Replay($replayFile);
+} catch (PacketInvalidException $e) {
+    echo "An invalid or corrupted replay file was given.\n";
+    die(1);
+} finally {
+    $json = json_encode($replay, JSON_PRETTY_PRINT);
+    file_put_contents($replayFile . '.json', $json);
+}
+
+echo "Done!\n";
