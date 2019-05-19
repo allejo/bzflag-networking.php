@@ -113,7 +113,7 @@ abstract class GamePacket implements \JsonSerializable
     protected function getJsonEncodeBlacklist(): array
     {
         return [
-            'timestampAsDateTime'
+            'timestampAsDateTime',
         ];
     }
 
