@@ -1,6 +1,7 @@
 <?php
 
 $finder = PhpCsFixer\Finder::create()
+    ->in('bin')
     ->in('src')
     ->in('tests')
 ;
@@ -13,6 +14,7 @@ LICENSE.md file that was distributed with this source code.
 HEADER;
 
 return PhpCsFixer\Config::create()
+    ->setRiskyAllowed(true)
     ->setRules([
         '@Symfony' => true,
         'array_syntax' => ['syntax' => 'short'],
