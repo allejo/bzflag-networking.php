@@ -7,6 +7,10 @@ A PHP 7.1+ library for reading and handling BZFlag network packets.
 
 BZFlag Replay files are simply the raw packets stored in a file together, so this library will let you read replay files and unpack them into PHP classes that can be serialized into JSON.
 
+> :warning: Memory Usage
+>  
+> The built-in `json_encode` function PHP will not be able to handle writing large JSON files from replays. At this point, it's necessary to stream your JSON using something like [`streaming-json-encoder`](https://github.com/violet-php/streaming-json-encoder). See our built-in [`bin/rrlog`](./bin/rrlog) script for sample usage.
+
 ```php
 use allejo\bzflag\networking\Replay;
 
