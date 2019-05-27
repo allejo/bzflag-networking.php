@@ -31,6 +31,15 @@ class Replay implements \JsonSerializable
     /** @var \DateTime */
     private $endTime;
 
+    /** @var bool|resource */
+    private $resource;
+
+    /** @var bool Whether or not we've reached the end of this resource. */
+    private $resourceClosed;
+
+    /** @var int The location of where in the buffer game packets start */
+    private $packetLocationStart;
+
     /**
      * Replay constructor.
      *
@@ -40,14 +49,18 @@ class Replay implements \JsonSerializable
      */
     public function __construct(string $file)
     {
-        $resource = fopen($file, 'rb');
+        $this->resource = fopen($file, 'rb');
+        $this->resourceClosed = false;
+        $this->header = new ReplayHeader($this->resource);
 
-        $this->header = new ReplayHeader($resource);
+        $this->calculateTimestamps($this->resource);
 
-        $this->calculateTimestamps($resource);
-        $this->loadPackets($resource);
+        $this->packetLocationStart = ftell($this->resource);
+    }
 
-        fclose($resource);
+    public function __destruct()
+    {
+        fclose($this->resource);
     }
 
     /**
@@ -59,7 +72,7 @@ class Replay implements \JsonSerializable
             'header' => $this->header,
             'startTime' => $this->startTime->format(DATE_ATOM),
             'endTime' => $this->endTime->format(DATE_ATOM),
-            'packets' => $this->packets,
+            'packets' => $this->getPackets(),
         ];
     }
 
@@ -72,11 +85,74 @@ class Replay implements \JsonSerializable
     }
 
     /**
+     * Get all of the packets in this Replay as an array.
+     *
+     * @return GamePacket[]
+     */
+    public function getPacketsAsArray(): array
+    {
+        if (count($this->packets) > 0)
+        {
+            return $this->packets;
+        }
+
+        $this->packets = [];
+
+        foreach ($this->getPacketsIterable() as $packet)
+        {
+            if ($packet === null)
+            {
+                continue;
+            }
+
+            $this->packets[] = $packet;
+        }
+
+        return $this->packets;
+    }
+
+    /**
+     * Get all of the packets in this Replay as an array.
+     *
+     * @deprecated use `Replay::getPacketsAsArray()` instead
+     *
      * @return GamePacket[]
      */
     public function getPackets(): array
     {
-        return $this->packets;
+        return $this->getPacketsAsArray();
+    }
+
+    /**
+     * Iterate through all of the packets in this Replay one at a time without
+     * saving everything in memory.
+     *
+     * @return iterable
+     */
+    public function getPacketsIterable(): iterable
+    {
+        if ($this->resourceClosed)
+        {
+            fseek($this->resource, $this->packetLocationStart);
+        }
+
+        while (true)
+        {
+            try
+            {
+                yield GamePacket::fromResource($this->resource);
+            }
+            catch (UnsupportedPacketException $e)
+            {
+                $this->errors = $e->getMessage();
+            }
+            catch (PacketInvalidException $e)
+            {
+                $this->resourceClosed = true;
+
+                break;
+            }
+        }
     }
 
     /**
@@ -121,27 +197,5 @@ class Replay implements \JsonSerializable
 
         $replayDuration = sprintf('+%d seconds', $this->header->getFileTimeAsSeconds());
         $this->endTime = $packet->getTimestamp()->modify($replayDuration);
-    }
-
-    /**
-     * @param resource $resource
-     */
-    private function loadPackets($resource): void
-    {
-        while (true)
-        {
-            try
-            {
-                $this->packets[] = GamePacket::fromResource($resource);
-            }
-            catch (UnsupportedPacketException $e)
-            {
-                $this->errors = $e->getMessage();
-            }
-            catch (PacketInvalidException $e)
-            {
-                break;
-            }
-        }
     }
 }
