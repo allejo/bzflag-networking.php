@@ -87,6 +87,9 @@ class Replay implements \JsonSerializable
     /**
      * Get all of the packets in this Replay as an array.
      *
+     * **Warning:** This requires a higher amount of memory since all of these
+     * packets will be stored in an array.
+     *
      * @return GamePacket[]
      */
     public function getPacketsAsArray(): array
