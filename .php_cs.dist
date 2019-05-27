@@ -4,6 +4,9 @@ $finder = PhpCsFixer\Finder::create()
     ->in('bin')
     ->in('src')
     ->in('tests')
+    ->append([
+        'bin/rrlog',
+    ])
 ;
 
 $license = <<<HEADER

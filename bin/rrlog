@@ -3,7 +3,8 @@
 
 $autoloaderPath = __DIR__ . '/../vendor/autoload.php';
 
-if (!file_exists($autoloaderPath)) {
+if (!file_exists($autoloaderPath))
+{
     echo "No autoloader has been built or configured. Please run composer.\n";
     echo "\n";
     echo "  composer install\n";
@@ -17,7 +18,8 @@ use allejo\bzflag\networking\Packets\PacketInvalidException;
 use allejo\bzflag\networking\Replay;
 use Violet\StreamingJsonEncoder\StreamJsonEncoder;
 
-if (count($argv) !== 2) {
+if (count($argv) !== 2)
+{
     echo "Usage:\n";
     echo sprintf("  %s <path to replay>\n", basename(__FILE__));
 
@@ -26,18 +28,24 @@ if (count($argv) !== 2) {
 
 $replayFile = $argv[1];
 
-if (!file_exists($replayFile)) {
+if (!file_exists($replayFile))
+{
     echo sprintf("File not found: %s\n", $replayFile);
 
     die(1);
 }
 
-try {
+try
+{
     $replay = new Replay($replayFile);
-} catch (PacketInvalidException $e) {
+}
+catch (PacketInvalidException $e)
+{
     echo "An invalid or corrupted replay file was given.\n";
     die(1);
-} finally {
+}
+finally
+{
     $fileHandler = fopen($replayFile . '.json', 'wb');
     $encoder = new StreamJsonEncoder(
         $replay,
