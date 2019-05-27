@@ -40,8 +40,11 @@ class MsgTimeUpdate extends GamePacket
         // advantage to see which one is more realistic. This is only accurate
         // because BZFS should never have such an extreme value for this packet.
 
-        $int = NetworkPacket::unpackUInt32($this->packet->getData());
-        $uint = NetworkPacket::unpackInt32($this->packet->getData());
+        $buf1 = $this->buffer;
+        $buf2 = $this->buffer;
+
+        $int = NetworkPacket::unpackUInt32($buf1);
+        $uint = NetworkPacket::unpackInt32($buf2);
 
         $this->timeLeft = abs($int) < abs($uint) ? $int : $uint;
     }
