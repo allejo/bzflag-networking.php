@@ -19,7 +19,13 @@ class MsgGameTime extends GamePacket
     /** @var int */
     private $lsb;
 
+    /** @var \DateTime */
+    private $value;
+
     /**
+     * @todo Remove in 2.0.0
+     * @deprecated This value is only significant for calculating a timestamp. Use `getValue()` instead.
+     *
      * @return int
      */
     public function getMsb(): int
@@ -28,6 +34,9 @@ class MsgGameTime extends GamePacket
     }
 
     /**
+     * @todo Remove in 2.0.0
+     * @deprecated This value is only significant for calculating a timestamp. Use `getValue()` instead.
+     *
      * @return int
      */
     public function getLsb(): int
@@ -35,9 +44,23 @@ class MsgGameTime extends GamePacket
         return $this->lsb;
     }
 
+    /**
+     * @return \DateTime
+     */
+    public function getValue(): \DateTime
+    {
+        return $this->value;
+    }
+
     protected function unpack(): void
     {
-        $this->msb = NetworkPacket::unpackUInt32($this->buffer);
-        $this->lsb = NetworkPacket::unpackUInt32($this->buffer);
+        // @TODO In 2.0.0, remove the BC code
+
+        // Get these values and store them for backward compatibility
+        $buffer = $this->buffer;
+        $this->msb = NetworkPacket::unpackUInt32($buffer);
+        $this->lsb = NetworkPacket::unpackUInt32($buffer);
+
+        $this->value = NetworkPacket::unpackTimestamp($this->buffer);
     }
 }
