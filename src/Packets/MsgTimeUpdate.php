@@ -26,10 +26,23 @@ class MsgTimeUpdate extends GamePacket
 
     protected function unpack(): void
     {
-        // @TODO Figure out if I can unpack this correctly. BZFS packs this as a
-        //   signed 32-bit int (https://git.io/fjRnG). However, PHP doesn't have
-        //   a symbol to unpack this without being machine-dependent for byte
-        //   order and size.
-        $this->timeLeft = NetworkPacket::unpackUInt32($this->buffer);
+        // FIXME: Is there a more robust solution to this?
+
+        // BZFS packs this as a signed 32-bit int (https://git.io/fjRnG).
+        // However, PHP doesn't have a symbol to unpack this without being
+        // machine-dependent for byte order and size.
+        //
+        // See: https://www.php.net/manual/en/function.pack.php
+
+        // This hack unpacks the data as both uint_32 and int_32 and then checks
+        // which value is closest to 0. If the number is unpacked incorrectly,
+        // it'll have a ridiculously high or low value. So we use that to our
+        // advantage to see which one is more realistic. This is only accurate
+        // because BZFS should never have such an extreme value for this packet.
+
+        $int = NetworkPacket::unpackUInt32($this->packet->getData());
+        $uint = NetworkPacket::unpackInt32($this->packet->getData());
+
+        $this->timeLeft = abs($int) < abs($uint) ? $int : $uint;
     }
 }
