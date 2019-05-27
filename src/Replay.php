@@ -72,7 +72,7 @@ class Replay implements \JsonSerializable
             'header' => $this->header,
             'startTime' => $this->startTime->format(DATE_ATOM),
             'endTime' => $this->endTime->format(DATE_ATOM),
-            'packets' => $this->getPackets(),
+            'packets' => $this->getPacketsAsArray(),
         ];
     }
 
