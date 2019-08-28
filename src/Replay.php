@@ -52,6 +52,7 @@ class Replay implements \JsonSerializable
         $this->resource = fopen($file, 'rb');
         $this->resourceClosed = false;
         $this->header = new ReplayHeader($this->resource);
+        $this->packets = [];
 
         $this->calculateTimestamps($this->resource);
 
