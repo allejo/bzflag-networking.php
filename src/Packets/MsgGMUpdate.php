@@ -39,7 +39,7 @@ class MsgGMUpdate extends GamePacket
 
     protected function unpack(): void
     {
-        $this->target = NetworkPacket::unpackUInt8($this->buffer);
         $this->shot = NetworkPacket::unpackShot($this->buffer);
+        $this->target = NetworkPacket::unpackUInt8($this->buffer);
     }
 }
