@@ -130,7 +130,19 @@ class NetworkPacket implements Unpackable
 
     public static function unpackInt16(&$buffer): int
     {
-        return self::unpackInt($buffer, 2, 's');
+        // A signed 16-bit integer can go from -32,768 to 32,768. An unsigned
+        // 16-bit integer can go from 0 to 65,536. Due to limited PHP unpacking
+        // abilities, we have to unpack signed integers as unsigned and then
+        // mathematically convert them to signed.
+
+        $unsigned = self::unpackUInt16($buffer);
+
+        if ($unsigned >= 32768)
+        {
+            return (65536 - $unsigned) * -1;
+        }
+
+        return $unsigned;
     }
 
     public static function unpackUInt16(&$buffer): int
@@ -140,7 +152,17 @@ class NetworkPacket implements Unpackable
 
     public static function unpackInt32(&$buffer): int
     {
-        return self::unpackInt($buffer, 4, 'l');
+        // See NetworkPacket::unpackInt16() for explanation as to why the manual
+        // unsigned to signed conversion.
+
+        $unsigned = self::unpackUInt32($buffer);
+
+        if ($unsigned >= 2147483647)
+        {
+            return (4294967294 - $unsigned) * -1;
+        }
+
+        return $unsigned;
     }
 
     public static function unpackUInt32(&$buffer): int
