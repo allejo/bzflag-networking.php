@@ -24,6 +24,11 @@ class PlayerState implements \JsonSerializable
     const JUMP_JETS = 1 << 9;     // tank has jump jets on
     const PLAY_SOUND = 1 << 10;   // play one or more sounds
 
+    const NO_SOUNDS = 0;
+    const JUMP_SOUNDS = 1 << 0;
+    const WINGS_SOUND = 1 << 1;
+    const BOUNCE_SOUND = 1 << 2;
+
     /** @var float[] */
     public $position;
 
