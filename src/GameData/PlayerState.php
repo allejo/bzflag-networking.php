@@ -29,6 +29,12 @@ class PlayerState implements \JsonSerializable
     const WINGS_SOUND = 1 << 1;
     const BOUNCE_SOUND = 1 << 2;
 
+    /** @var int */
+    public $status;
+
+    /** @var int */
+    public $order;
+
     /** @var float[] */
     public $position;
 
@@ -59,6 +65,8 @@ class PlayerState implements \JsonSerializable
     public function jsonSerialize()
     {
         return [
+            'order' => $this->order,
+            'status' => $this->status,
             'position' => $this->position,
             'velocity' => $this->velocity,
             'azimuth' => $this->azimuth,

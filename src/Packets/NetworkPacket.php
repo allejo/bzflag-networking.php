@@ -253,11 +253,9 @@ class NetworkPacket implements Unpackable
 
     public static function unpackPlayerState(&$buffer, int $code): PlayerState
     {
-        // @TODO see if `in_order` is necessary of if it can be removed safely
-        $inOrder = NetworkPacket::unpackUInt32($buffer);
-        $inStatus = NetworkPacket::unpackUInt16($buffer);
-
         $state = new PlayerState();
+        $state->order = NetworkPacket::unpackInt32($buffer);
+        $state->status = NetworkPacket::unpackInt16($buffer);
 
         if ($code === NetworkMessage::PLAYER_UPDATE)
         {
@@ -296,20 +294,26 @@ class NetworkPacket implements Unpackable
             $state->angularVelocity = ((float)$angVel * NetworkPacket::SMALL_MAX_ANG_VEL) / NetworkPacket::SMALL_SCALE;
         }
 
-        if (($inStatus & PlayerState::JUMP_JETS) !== 0)
+        if (($state->status & PlayerState::JUMP_JETS) !== 0)
         {
             $jumpJets = NetworkPacket::unpackUInt16($buffer);
             $state->jumpJetsScale = (float)$jumpJets / NetworkPacket::SMALL_SCALE;
         }
-
-        if (($inStatus & PlayerState::ON_DRIVER) !== 0)
+        else
         {
-            // @TODO this value is being read in as unsigned, but needs to be converted to signed...?
-            // @TODO fix this...
-            $state->physicsDriver = NetworkPacket::unpackUInt32($buffer);
+            $state->jumpJetsScale = 0.0;
         }
 
-        if (($inStatus & PlayerState::USER_INPUTS) !== 0)
+        if (($state->status & PlayerState::ON_DRIVER) !== 0)
+        {
+            $state->physicsDriver = NetworkPacket::unpackInt32($buffer);
+        }
+        else
+        {
+            $state->physicsDriver = -1;
+        }
+
+        if (($state->status & PlayerState::USER_INPUTS) !== 0)
         {
             $speed = NetworkPacket::unpackUInt16($buffer);
             $angVel = NetworkPacket::unpackUInt16($buffer);
@@ -317,10 +321,19 @@ class NetworkPacket implements Unpackable
             $state->userSpeed = ((float)$speed * NetworkPacket::SMALL_MAX_VEL) / NetworkPacket::SMALL_SCALE;
             $state->userAngVel = ((float)$angVel * NetworkPacket::SMALL_MAX_ANG_VEL) / NetworkPacket::SMALL_SCALE;
         }
+        else
+        {
+            $state->userSpeed = 0.0;
+            $state->userAngVel = 0.0;
+        }
 
-        if (($inStatus & PlayerState::PLAY_SOUND) !== 0)
+        if (($state->status & PlayerState::PLAY_SOUND) !== 0)
         {
             $state->sounds = NetworkPacket::unpackUInt8($buffer);
+        }
+        else
+        {
+            $state->sounds = PlayerState::NO_SOUNDS;
         }
 
         return $state;
