@@ -75,12 +75,26 @@ abstract class GamePacket implements \JsonSerializable
             throw new PacketNotSetException('');
         }
 
-        $this->packet = $packet;
-        $this->buffer = $this->packet->getData();
-        $this->timestamp = $this->packet->getTimestamp();
+        $this->packet = clone $packet;
+        $this->buffer = $packet->getData();
+        $this->timestamp = $packet->getTimestamp();
 
         $this->defaultComplexVariables();
         $this->unpack();
+    }
+
+    /**
+     * Get a clone of the original NetworkPacket used to create this GamePacket.
+     *
+     * @api
+     *
+     * @since 1.0.7
+     *
+     * @return NetworkPacket
+     */
+    public function getRawPacket(): NetworkPacket
+    {
+        return clone $this->packet;
     }
 
     /**
@@ -113,6 +127,7 @@ abstract class GamePacket implements \JsonSerializable
     protected function getJsonEncodeBlacklist(): array
     {
         return [
+            'rawPacket',
             'timestampAsDateTime',
         ];
     }
