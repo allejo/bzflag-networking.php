@@ -24,6 +24,7 @@ class MsgGameTime extends GamePacket
 
     /**
      * @todo Remove in 2.0.0
+     *
      * @deprecated This value is only significant for calculating a timestamp. Use `getValue()` instead.
      *
      * @return int
@@ -35,6 +36,7 @@ class MsgGameTime extends GamePacket
 
     /**
      * @todo Remove in 2.0.0
+     *
      * @deprecated This value is only significant for calculating a timestamp. Use `getValue()` instead.
      *
      * @return int

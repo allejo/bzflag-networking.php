@@ -34,7 +34,7 @@ $packets = $replay->getPacketsAsArray();
 
 > :warning: **High Memory Usage**
 >
-> The built-in `json_encode` function PHP will not be able to handle writing large JSON files from replays. At this point, it's necessary to stream your JSON using something like [`streaming-json-encoder`](https://github.com/violet-php/streaming-json-encoder). See our built-in [`bin/rrlog`](./bin/rrlog) script for sample usage.
+> The built-in `json_encode` function PHP will not be able to handle writing large JSON files from replays. At this point, it's necessary to stream your JSON using something like [`streaming-json-encoder`](https://github.com/violet-php/streaming-json-encoder). See the [PHP port of `rrlog`](https://github.com/allejo/rrlog/blob/master/src/allejo/rrlog/Writer/JsonWriter.php) for sample usage.
 
 ```php
 use allejo\bzflag\networking\Replay;
