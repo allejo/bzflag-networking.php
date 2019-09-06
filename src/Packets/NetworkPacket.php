@@ -137,9 +137,9 @@ class NetworkPacket implements Unpackable
 
         $unsigned = self::unpackUInt16($buffer);
 
-        if ($unsigned >= 32768)
+        if ($unsigned >= (2 ** 15))
         {
-            return (65536 - $unsigned) * -1;
+            return ((2 ** 16) - $unsigned) * -1;
         }
 
         return $unsigned;
@@ -157,9 +157,9 @@ class NetworkPacket implements Unpackable
 
         $unsigned = self::unpackUInt32($buffer);
 
-        if ($unsigned >= 2147483647)
+        if ($unsigned >= (2 ** 31))
         {
-            return (4294967294 - $unsigned) * -1;
+            return ((2 ** 32) - $unsigned) * -1;
         }
 
         return $unsigned;
