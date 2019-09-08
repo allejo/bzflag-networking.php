@@ -356,8 +356,10 @@ class NetworkPacket implements Unpackable
     public static function unpackString(&$buffer, int $size): string
     {
         $binary = self::safeReadResource($buffer, $size);
+        $unpacked = unpack('A*', $binary);
+        $string = $unpacked[1] ?? '';
 
-        return trim(unpack('A*', $binary)[1]);
+        return trim(preg_replace('/[[:^print:]]/', '', $string));
     }
 
     /**
