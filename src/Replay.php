@@ -45,11 +45,19 @@ class Replay implements \JsonSerializable
      *
      * @param string $file
      *
+     * @throws InvalidReplayException
      * @throws PacketInvalidException
      */
     public function __construct(string $file)
     {
         $this->resource = fopen($file, 'rb');
+        $stats = fstat($this->resource);
+
+        if ($stats['size'] == 0)
+        {
+            throw new InvalidReplayException("The replay file has a length of 0 ($file)");
+        }
+
         $this->resourceClosed = false;
         $this->header = new ReplayHeader($this->resource);
         $this->packets = [];
