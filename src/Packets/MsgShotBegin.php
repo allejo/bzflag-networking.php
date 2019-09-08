@@ -9,17 +9,18 @@
 
 namespace allejo\bzflag\networking\Packets;
 
+use allejo\bzflag\networking\GameData\FiringInfoData;
 use allejo\bzflag\networking\GameData\FiringIntoData;
 
 class MsgShotBegin extends GamePacket
 {
     public const PACKET_TYPE = 'MsgShotBegin';
 
-    /** @var FiringIntoData */
+    /** @var FiringInfoData */
     private $firingInfo;
 
     /**
-     * @return FiringIntoData
+     * @return FiringInfoData
      */
     public function getFiringInfo(): FiringIntoData
     {

@@ -9,6 +9,7 @@
 
 namespace allejo\bzflag\networking\Packets;
 
+use allejo\bzflag\networking\GameData\FiringInfoData;
 use allejo\bzflag\networking\GameData\FiringIntoData;
 use allejo\bzflag\networking\GameData\FlagData;
 use allejo\bzflag\networking\GameData\PlayerState;
@@ -189,7 +190,7 @@ class NetworkPacket implements Unpackable
 
     public static function unpackFiringInfo(&$buffer): FiringIntoData
     {
-        $data = new FiringIntoData();
+        $data = new FiringInfoData();
 
         $data->timeSent = NetworkPacket::unpackFloat($buffer);
         $data->shot = NetworkPacket::unpackShot($buffer);
