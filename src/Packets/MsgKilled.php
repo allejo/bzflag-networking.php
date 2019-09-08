@@ -83,13 +83,13 @@ class MsgKilled extends GamePacket
     {
         $this->victimId = NetworkPacket::unpackUInt8($this->buffer);
         $this->killerId = NetworkPacket::unpackUInt8($this->buffer);
-        $this->reason = NetworkPacket::unpackUInt16($this->buffer);
-        $this->shotId = NetworkPacket::unpackUInt16($this->buffer);
-        $this->flag = NetworkPacket::unpackString($this->buffer, 3);
+        $this->reason = NetworkPacket::unpackInt16($this->buffer);
+        $this->shotId = NetworkPacket::unpackInt16($this->buffer);
+        $this->flag = NetworkPacket::unpackString($this->buffer, 2);
 
         if ($this->reason === NetworkMessage::codeFromChars('pd'))
         {
-            $this->physicsDriverId = NetworkPacket::unpackUInt32($this->buffer);
+            $this->physicsDriverId = NetworkPacket::unpackInt32($this->buffer);
         }
     }
 }
