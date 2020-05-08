@@ -1,0 +1,24 @@
+{
+    "magicNumber": 1920090714,
+    "version": 1,
+    "offset": 1048,
+    "fileTimeAsMicroseconds": 18353641,
+    "fileTimeAsSeconds": 18,
+    "fileTimeAsMinutes": 0,
+    "player": 0,
+    "flagsSize": 0,
+    "worldSize": 622,
+    "callsign": "012345678901234567890123456789#",
+    "motto": "",
+    "serverVersion": "BZFS0221",
+    "appVersion": "2.4.19.20200425-DEVEL-linux-gnu-SDL2",
+    "realHash": "t9098b6ba526db1c345d5c627044ccc68",
+    "length": {
+        "asSeconds": 18,
+        "days": 0,
+        "hours": 0,
+        "minutes": 0,
+        "seconds": 18,
+        "usecs": 353641
+    }
+}
