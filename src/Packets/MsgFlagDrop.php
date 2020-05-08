@@ -21,17 +21,11 @@ class MsgFlagDrop extends GamePacket
     /** @var FlagData */
     private $flag;
 
-    /**
-     * @return int
-     */
     public function getPlayerId(): int
     {
         return $this->playerId;
     }
 
-    /**
-     * @return FlagData
-     */
     public function getFlag(): FlagData
     {
         return $this->flag;

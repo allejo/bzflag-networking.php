@@ -18,9 +18,6 @@ class MsgScore extends GamePacket
     /** @var array ScoreData[] */
     private $scores = [];
 
-    /**
-     * @return array
-     */
     public function getScores(): array
     {
         return $this->scores;

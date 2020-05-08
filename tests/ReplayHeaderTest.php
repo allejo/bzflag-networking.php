@@ -12,6 +12,10 @@ namespace allejo\bzflag\networking\test;
 use allejo\bzflag\networking\Replay;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @internal
+ * @covers \allejo\bzflag\networking\ReplayHeader
+ */
 class ReplayHeaderTest extends TestCase
 {
     use ReplayTestTrait;

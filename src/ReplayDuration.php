@@ -59,49 +59,31 @@ class ReplayDuration implements \JsonSerializable
         ;
     }
 
-    /**
-     * @return int
-     */
     public function getAsSeconds(): int
     {
         return (int)$this->asSeconds;
     }
 
-    /**
-     * @return int
-     */
     public function getDays(): int
     {
         return $this->days;
     }
 
-    /**
-     * @return int
-     */
     public function getHours(): int
     {
         return $this->hours;
     }
 
-    /**
-     * @return int
-     */
     public function getMinutes(): int
     {
         return $this->minutes;
     }
 
-    /**
-     * @return int
-     */
     public function getSeconds(): int
     {
         return $this->seconds;
     }
 
-    /**
-     * @return int
-     */
     public function getUsecs(): int
     {
         return $this->usecs;

@@ -36,6 +36,14 @@ trait JsonSerializePublicGetters
     }
 
     /**
+     * An array of keys not to include in the jsonSerialize() return value.
+     */
+    protected function getJsonEncodeBlacklist(): array
+    {
+        return [];
+    }
+
+    /**
      * Get an array of getter class methods that should be called in the
      * `jsonSerialize()` process.
      *
@@ -58,15 +66,5 @@ trait JsonSerializePublicGetters
         }
 
         return $keys;
-    }
-
-    /**
-     * An array of keys not to include in the jsonSerialize() return value.
-     *
-     * @return array
-     */
-    protected function getJsonEncodeBlacklist(): array
-    {
-        return [];
     }
 }

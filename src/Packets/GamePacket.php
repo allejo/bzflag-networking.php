@@ -64,8 +64,6 @@ abstract class GamePacket implements \JsonSerializable
     ];
 
     /**
-     * @param NetworkPacket $packet
-     *
      * @throws PacketNotSetException
      */
     final public function __construct(NetworkPacket $packet)
@@ -89,63 +87,26 @@ abstract class GamePacket implements \JsonSerializable
      * @api
      *
      * @since 1.0.7
-     *
-     * @return NetworkPacket
      */
     public function getRawPacket(): NetworkPacket
     {
         return clone $this->packet;
     }
 
-    /**
-     * @return string
-     */
     public function getPacketType(): string
     {
         return static::PACKET_TYPE;
     }
 
-    /**
-     * @return string
-     */
     public function getTimestamp(): string
     {
         return $this->timestamp->format(DATE_ATOM);
     }
 
-    /**
-     * @return \DateTime
-     */
     public function getTimestampAsDateTime(): \DateTime
     {
         return $this->timestamp;
     }
-
-    /**
-     * @return array
-     */
-    protected function getJsonEncodeBlacklist(): array
-    {
-        return [
-            'rawPacket',
-            'timestampAsDateTime',
-        ];
-    }
-
-    /**
-     * Initialize special instance variables without having to override the
-     * constructor.
-     */
-    protected function defaultComplexVariables(): void
-    {
-    }
-
-    /**
-     * Unpack the NetworkPacket buffer into a GamePacket's instance variables.
-     *
-     * @return mixed
-     */
-    abstract protected function unpack(): void;
 
     /**
      * Create a GamePacket equivalent from a PHP resource.
@@ -173,4 +134,27 @@ abstract class GamePacket implements \JsonSerializable
 
         return new $gamePacket($packet);
     }
+
+    protected function getJsonEncodeBlacklist(): array
+    {
+        return [
+            'rawPacket',
+            'timestampAsDateTime',
+        ];
+    }
+
+    /**
+     * Initialize special instance variables without having to override the
+     * constructor.
+     */
+    protected function defaultComplexVariables(): void
+    {
+    }
+
+    /**
+     * Unpack the NetworkPacket buffer into a GamePacket's instance variables.
+     *
+     * @return mixed
+     */
+    abstract protected function unpack(): void;
 }

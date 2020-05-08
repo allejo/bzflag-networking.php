@@ -19,17 +19,11 @@ class MsgScoreOver extends GamePacket
     /** @var int */
     private $team;
 
-    /**
-     * @return int
-     */
     public function getPlayerId(): int
     {
         return $this->playerId;
     }
 
-    /**
-     * @return int
-     */
     public function getTeam(): int
     {
         return $this->team;

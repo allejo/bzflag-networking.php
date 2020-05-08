@@ -19,17 +19,11 @@ class MsgPause extends GamePacket
     /** @var int */
     private $paused;
 
-    /**
-     * @return int
-     */
     public function getPlayerId(): int
     {
         return $this->playerId;
     }
 
-    /**
-     * @return int
-     */
     public function getPaused(): int
     {
         return $this->paused;

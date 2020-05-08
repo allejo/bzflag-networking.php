@@ -16,9 +16,6 @@ class MsgTimeUpdate extends GamePacket
     /** @var int */
     private $timeLeft;
 
-    /**
-     * @return int
-     */
     public function getTimeLeft(): int
     {
         return $this->timeLeft;

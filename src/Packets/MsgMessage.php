@@ -22,25 +22,16 @@ class MsgMessage extends GamePacket
     /** @var string */
     private $message;
 
-    /**
-     * @return int
-     */
     public function getPlayerFromId(): int
     {
         return $this->playerFromId;
     }
 
-    /**
-     * @return int
-     */
     public function getPlayerToId(): int
     {
         return $this->playerToId;
     }
 
-    /**
-     * @return string
-     */
     public function getMessage(): string
     {
         return $this->message;

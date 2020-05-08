@@ -54,11 +54,11 @@ class ReplayHeader implements Unpackable, \JsonSerializable
     /** @var string */
     private $realHash = '';
 
-    /** @var ReplayDuration|null */
-    private $length = null;
+    /** @var null|ReplayDuration */
+    private $length;
 
-    /** @var WorldDatabase|null */
-    private $worldDatabase = null;
+    /** @var null|WorldDatabase */
+    private $worldDatabase;
 
     /**
      * @param resource $resource
@@ -93,25 +93,16 @@ class ReplayHeader implements Unpackable, \JsonSerializable
         $this->worldDatabase = new WorldDatabase($resource);
     }
 
-    /**
-     * @return int
-     */
     public function getMagicNumber(): int
     {
         return $this->magicNumber;
     }
 
-    /**
-     * @return int
-     */
     public function getVersion(): int
     {
         return $this->version;
     }
 
-    /**
-     * @return int
-     */
     public function getOffset(): int
     {
         return $this->offset;
@@ -125,9 +116,6 @@ class ReplayHeader implements Unpackable, \JsonSerializable
         return $this->fileTime;
     }
 
-    /**
-     * @return int
-     */
     public function getFileTimeAsSeconds(): int
     {
         return (int)round($this->fileTime / 1000000);
@@ -135,81 +123,52 @@ class ReplayHeader implements Unpackable, \JsonSerializable
 
     /**
      * @param bool $round
-     *
-     * @return int
      */
     public function getFileTimeAsMinutes(): int
     {
         return (int)round($this->getFileTimeAsSeconds() / 60);
     }
 
-    /**
-     * @return int
-     */
     public function getPlayer(): int
     {
         return $this->player;
     }
 
-    /**
-     * @return int
-     */
     public function getFlagsSize(): int
     {
         return $this->flagsSize;
     }
 
-    /**
-     * @return int
-     */
     public function getWorldSize(): int
     {
         return $this->worldSize;
     }
 
-    /**
-     * @return string
-     */
     public function getCallsign(): string
     {
         return $this->callsign;
     }
 
-    /**
-     * @return string
-     */
     public function getMotto(): string
     {
         return $this->motto;
     }
 
-    /**
-     * @return string
-     */
     public function getServerVersion(): string
     {
         return $this->serverVersion;
     }
 
-    /**
-     * @return string
-     */
     public function getAppVersion(): string
     {
         return $this->appVersion;
     }
 
-    /**
-     * @return string
-     */
     public function getRealHash(): string
     {
         return $this->realHash;
     }
 
-    /**
-     * @return ReplayDuration|null
-     */
     public function getLength(): ?ReplayDuration
     {
         return $this->length;

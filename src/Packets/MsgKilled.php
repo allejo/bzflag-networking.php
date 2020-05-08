@@ -31,49 +31,31 @@ class MsgKilled extends GamePacket
     /** @var int */
     private $physicsDriverId = -1;
 
-    /**
-     * @return int
-     */
     public function getVictimId(): int
     {
         return $this->victimId;
     }
 
-    /**
-     * @return int
-     */
     public function getKillerId(): int
     {
         return $this->killerId;
     }
 
-    /**
-     * @return int
-     */
     public function getReason(): int
     {
         return $this->reason;
     }
 
-    /**
-     * @return int
-     */
     public function getShotId(): int
     {
         return $this->shotId;
     }
 
-    /**
-     * @return string
-     */
     public function getFlag(): string
     {
         return $this->flag;
     }
 
-    /**
-     * @return int
-     */
     public function getPhysicsDriverId(): int
     {
         return $this->physicsDriverId;

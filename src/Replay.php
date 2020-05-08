@@ -43,8 +43,6 @@ class Replay implements \JsonSerializable
     /**
      * Replay constructor.
      *
-     * @param string $file
-     *
      * @throws InvalidReplayException
      * @throws PacketInvalidException
      */
@@ -55,7 +53,7 @@ class Replay implements \JsonSerializable
 
         if ($stats['size'] == 0)
         {
-            throw new InvalidReplayException("The replay file has a length of 0 ($file)");
+            throw new InvalidReplayException("The replay file has a length of 0 ({$file})");
         }
 
         $this->resourceClosed = false;
@@ -85,9 +83,6 @@ class Replay implements \JsonSerializable
         ];
     }
 
-    /**
-     * @return ReplayHeader
-     */
     public function getHeader(): ReplayHeader
     {
         return $this->header;
@@ -138,8 +133,6 @@ class Replay implements \JsonSerializable
     /**
      * Iterate through all of the packets in this Replay one at a time without
      * saving everything in memory.
-     *
-     * @return iterable
      */
     public function getPacketsIterable(): iterable
     {
@@ -175,17 +168,11 @@ class Replay implements \JsonSerializable
         return $this->errors;
     }
 
-    /**
-     * @return \DateTime
-     */
     public function getStartTime(): \DateTime
     {
         return $this->startTime;
     }
 
-    /**
-     * @return \DateTime
-     */
     public function getEndTime(): \DateTime
     {
         return $this->endTime;

@@ -21,17 +21,11 @@ class MsgGMUpdate extends GamePacket
     /** @var ShotData */
     private $shot;
 
-    /**
-     * @return int
-     */
     public function getTarget(): int
     {
         return $this->target;
     }
 
-    /**
-     * @return ShotData
-     */
     public function getShot(): ShotData
     {
         return $this->shot;

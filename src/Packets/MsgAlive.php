@@ -22,9 +22,6 @@ class MsgAlive extends GamePacket
     /** @var float */
     private $azimuth;
 
-    /**
-     * @return int
-     */
     public function getPlayerId(): int
     {
         return $this->playerId;
@@ -38,9 +35,6 @@ class MsgAlive extends GamePacket
         return $this->position;
     }
 
-    /**
-     * @return float
-     */
     public function getAzimuth(): float
     {
         return $this->azimuth;

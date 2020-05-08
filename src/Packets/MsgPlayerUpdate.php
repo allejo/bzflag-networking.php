@@ -21,17 +21,11 @@ class MsgPlayerUpdate extends GamePacket
     /** @var PlayerState */
     private $state;
 
-    /**
-     * @return int
-     */
     public function getPlayerId(): int
     {
         return $this->playerId;
     }
 
-    /**
-     * @return PlayerState
-     */
     public function getState(): PlayerState
     {
         return $this->state;

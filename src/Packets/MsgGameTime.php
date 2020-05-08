@@ -26,8 +26,6 @@ class MsgGameTime extends GamePacket
      * @todo Remove in 2.0.0
      *
      * @deprecated This value is only significant for calculating a timestamp. Use `getValue()` instead.
-     *
-     * @return int
      */
     public function getMsb(): int
     {
@@ -38,17 +36,12 @@ class MsgGameTime extends GamePacket
      * @todo Remove in 2.0.0
      *
      * @deprecated This value is only significant for calculating a timestamp. Use `getValue()` instead.
-     *
-     * @return int
      */
     public function getLsb(): int
     {
         return $this->lsb;
     }
 
-    /**
-     * @return \DateTime
-     */
     public function getValue(): \DateTime
     {
         return $this->value;

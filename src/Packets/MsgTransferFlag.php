@@ -24,25 +24,16 @@ class MsgTransferFlag extends GamePacket
     /** @var FlagData */
     private $flag;
 
-    /**
-     * @return int
-     */
     public function getFrom(): int
     {
         return $this->from;
     }
 
-    /**
-     * @return int
-     */
     public function getTo(): int
     {
         return $this->to;
     }
 
-    /**
-     * @return FlagData
-     */
     public function getFlag(): FlagData
     {
         return $this->flag;

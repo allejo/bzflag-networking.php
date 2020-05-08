@@ -32,8 +32,8 @@ class NetworkPacket implements Unpackable
     private $length = -1;
     private $nextFilePos = -1;
     private $prevFilePos = -1;
-    private $timestamp = null;
-    private $data = null;
+    private $timestamp;
+    private $data;
 
     /**
      * @param resource $resource
@@ -63,57 +63,36 @@ class NetworkPacket implements Unpackable
         }
     }
 
-    /**
-     * @return int
-     */
     public function getMode(): int
     {
         return $this->mode;
     }
 
-    /**
-     * @return int
-     */
     public function getCode(): int
     {
         return $this->code;
     }
 
-    /**
-     * @return int
-     */
     public function getLength(): int
     {
         return $this->length;
     }
 
-    /**
-     * @return int
-     */
     public function getNextFilePos(): int
     {
         return $this->nextFilePos;
     }
 
-    /**
-     * @return int
-     */
     public function getPrevFilePos(): int
     {
         return $this->prevFilePos;
     }
 
-    /**
-     * @return \DateTime
-     */
     public function getTimestamp(): \DateTime
     {
         return clone $this->timestamp;
     }
 
-    /**
-     * @return string|null
-     */
     public function getData(): ?string
     {
         return $this->data;
@@ -179,13 +158,6 @@ class NetworkPacket implements Unpackable
     public static function unpackUInt64(&$buffer): int
     {
         return self::unpackInt($buffer, 8, 'q');
-    }
-
-    private static function unpackInt(&$buffer, int $size, string $symbol): int
-    {
-        $binary = self::safeReadResource($buffer, $size);
-
-        return unpack($symbol, $binary)[1];
     }
 
     public static function unpackFiringInfo(&$buffer): FiringIntoData
@@ -367,8 +339,6 @@ class NetworkPacket implements Unpackable
      * @param resource|string $buffer
      *
      * @throws \UnexpectedValueException
-     *
-     * @return \DateTime
      */
     public static function unpackTimestamp(&$buffer): \DateTime
     {
@@ -384,7 +354,7 @@ class NetworkPacket implements Unpackable
         {
             $timestamp = \DateTime::createFromFormat(
                 $format,
-                "$tsFloat",
+                "{$tsFloat}",
                 new \DateTimeZone('UTC')
             );
 
@@ -397,14 +367,18 @@ class NetworkPacket implements Unpackable
         throw new \UnexpectedValueException('No format valid format was found for this timestamp');
     }
 
+    private static function unpackInt(&$buffer, int $size, string $symbol): int
+    {
+        $binary = self::safeReadResource($buffer, $size);
+
+        return unpack($symbol, $binary)[1];
+    }
+
     /**
      * Safely read a resource or string buffer and return a string that can be
      * passed to `unpack()`.
      *
      * @param resource|string $buffer
-     * @param int             $size
-     *
-     * @return string
      */
     private static function safeReadResource(&$buffer, int $size): string
     {
