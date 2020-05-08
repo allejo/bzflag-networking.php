@@ -12,6 +12,7 @@ namespace allejo\bzflag\networking;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\networking\Packets\NetworkProtocol;
 use allejo\bzflag\networking\Packets\Unpackable;
+use allejo\bzflag\networking\World\WorldDatabase;
 
 class ReplayHeader implements Unpackable, \JsonSerializable
 {
@@ -56,6 +57,9 @@ class ReplayHeader implements Unpackable, \JsonSerializable
     /** @var ReplayDuration|null */
     private $length = null;
 
+    /** @var WorldDatabase|null */
+    private $worldDatabase = null;
+
     /**
      * @param resource $resource
      */
@@ -86,7 +90,7 @@ class ReplayHeader implements Unpackable, \JsonSerializable
             fread($resource, $this->flagsSize);
         }
 
-        fread($resource, $this->worldSize);
+        $this->worldDatabase = new WorldDatabase($resource);
     }
 
     /**
