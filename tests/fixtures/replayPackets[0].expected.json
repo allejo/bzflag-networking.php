@@ -1,0 +1,226 @@
+{
+    "settings": [
+        {
+            "name": "_HTTPIndexResourceDir",
+            "value": ""
+        },
+        {
+            "name": "_agilityAdVel",
+            "value": "2.25"
+        },
+        {
+            "name": "_agilityTimeWindow",
+            "value": "1.0"
+        },
+        {
+            "name": "_agilityVelDelta",
+            "value": "0.3"
+        },
+        {
+            "name": "_ambientLight",
+            "value": "none"
+        },
+        {
+            "name": "_angleTolerance",
+            "value": "0.05"
+        },
+        {
+            "name": "_angularAd",
+            "value": "1.5"
+        },
+        {
+            "name": "_avenueSize",
+            "value": "2.0*_boxBase"
+        },
+        {
+            "name": "_baseSize",
+            "value": "60.0"
+        },
+        {
+            "name": "_boxBase",
+            "value": "30.0"
+        },
+        {
+            "name": "_boxHeight",
+            "value": "6.0*_muzzleHeight"
+        },
+        {
+            "name": "_burrowAngularAd",
+            "value": "0.55"
+        },
+        {
+            "name": "_burrowDepth",
+            "value": "-1.32"
+        },
+        {
+            "name": "_burrowSpeedAd",
+            "value": "0.80"
+        },
+        {
+            "name": "_coldetDepth",
+            "value": "6"
+        },
+        {
+            "name": "_coldetElements",
+            "value": "4"
+        },
+        {
+            "name": "_countdownResumeDelay",
+            "value": "5"
+        },
+        {
+            "name": "_cullDepth",
+            "value": "6"
+        },
+        {
+            "name": "_cullDist",
+            "value": "fog"
+        },
+        {
+            "name": "_cullElements",
+            "value": "16"
+        },
+        {
+            "name": "_cullOccluders",
+            "value": "0"
+        },
+        {
+            "name": "_disableBots",
+            "value": "0"
+        },
+        {
+            "name": "_disableHeightChecks",
+            "value": "0"
+        },
+        {
+            "name": "_disableSpeedChecks",
+            "value": "0"
+        },
+        {
+            "name": "_drawCelestial",
+            "value": "1"
+        },
+        {
+            "name": "_drawClouds",
+            "value": "1"
+        },
+        {
+            "name": "_drawGround",
+            "value": "1"
+        },
+        {
+            "name": "_drawGroundLights",
+            "value": "1"
+        },
+        {
+            "name": "_drawMountains",
+            "value": "1"
+        },
+        {
+            "name": "_drawSky",
+            "value": "1"
+        },
+        {
+            "name": "_enableDistanceCheck",
+            "value": "0"
+        },
+        {
+            "name": "_endShotDetection",
+            "value": "5"
+        },
+        {
+            "name": "_explodeTime",
+            "value": "5.0"
+        },
+        {
+            "name": "_flagAltitude",
+            "value": "11.0"
+        },
+        {
+            "name": "_flagEffectTime",
+            "value": "0.64"
+        },
+        {
+            "name": "_flagHeight",
+            "value": "10.0"
+        },
+        {
+            "name": "_flagPoleSize",
+            "value": "0.8"
+        },
+        {
+            "name": "_flagPoleWidth",
+            "value": "0.025"
+        },
+        {
+            "name": "_flagRadius",
+            "value": "2.5"
+        },
+        {
+            "name": "_fogColor",
+            "value": "0.25 0.25 0.25"
+        },
+        {
+            "name": "_fogDensity",
+            "value": "0.001"
+        },
+        {
+            "name": "_fogEnd",
+            "value": "_worldSize"
+        },
+        {
+            "name": "_fogMode",
+            "value": "none"
+        },
+        {
+            "name": "_fogNoSky",
+            "value": "0"
+        },
+        {
+            "name": "_fogStart",
+            "value": "0.5*_worldSize"
+        },
+        {
+            "name": "_forbidHunting",
+            "value": "0"
+        },
+        {
+            "name": "_forbidIdentify",
+            "value": "0"
+        },
+        {
+            "name": "_forbidMarkers",
+            "value": "0"
+        },
+        {
+            "name": "_friction",
+            "value": "0"
+        },
+        {
+            "name": "_gmActivationTime",
+            "value": "0.5"
+        },
+        {
+            "name": "_gmAdLife",
+            "value": "0.95"
+        },
+        {
+            "name": "_gmSize",
+            "value": "1.5"
+        },
+        {
+            "name": "_gmTurnAngle",
+            "value": "0.628319"
+        },
+        {
+            "name": "_gravity",
+            "value": "-9.8"
+        },
+        {
+            "name": "_handicapAngAd",
+            "value": "1.5"
+        }
+    ],
+    "packetType": "MsgSetVar",
+    "timestamp": "2020-04-25T02:51:19+00:00"
+}

@@ -15,14 +15,14 @@ use PHPUnit\Framework\TestCase;
  * @internal
  * @covers \allejo\bzflag\networking\ReplayHeader
  */
-class ReplayHeaderTest extends TestCase
+class ReplayPacketsTest extends TestCase
 {
     use ReplayTestTrait;
 
-    public function testHeader()
+    public function testPacketIndex0()
     {
-        $header = $this->replay->getHeader();
+        $packet = \__::first($this->replay->getPacketsIterable());
 
-        self::assertJsonFixtureEqualsSerializable('replayHeader.expected.json', $header);
+        self::assertJsonFixtureEqualsSerializable('replayPackets[0].expected.json', $packet);
     }
 }

@@ -9,8 +9,18 @@
 
 namespace allejo\bzflag\networking\test;
 
+use allejo\bzflag\networking\Replay;
+
 trait ReplayTestTrait
 {
+    /** @var Replay */
+    protected $replay;
+
+    protected function setUp()
+    {
+        $this->replay = new Replay(__DIR__ . '/fixtures/replay.rec');
+    }
+
     public static function getJsonFixture(string $filename): string
     {
         return file_get_contents(__DIR__ . '/fixtures/' . $filename);
