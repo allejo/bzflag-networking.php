@@ -335,7 +335,7 @@ class NetworkPacket implements Unpackable
         return trim(preg_replace('/[[:^print:]]/', '', $string));
     }
 
-    public static function unpackStdString(&$buffer)
+    public static function unpackStdString(&$buffer): string
     {
         $strSize = self::unpackUInt32($buffer);
 
