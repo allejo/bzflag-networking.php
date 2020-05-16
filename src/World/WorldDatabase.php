@@ -37,6 +37,9 @@ class WorldDatabase
     /** @var int */
     private $worldCodeEnd;
 
+    /** @var DynamicColorManager */
+    private $dynamicColorManager;
+
     public function __construct($resource)
     {
         $this->headerSize = NetworkPacket::unpackUInt16($resource);
@@ -44,8 +47,11 @@ class WorldDatabase
         $this->mapVersion = NetworkPacket::unpackUInt16($resource);
         $this->uncompressedSize = NetworkPacket::unpackUInt32($resource);
         $this->databaseSize = NetworkPacket::unpackUInt32($resource);
-        $this->database = NetworkPacket::unpackString($resource, $this->databaseSize);
+        $this->database = zlib_decode(fread($resource, $this->databaseSize), $this->uncompressedSize);
         $this->worldCodeEndSize = NetworkPacket::unpackUInt16($resource);
         $this->worldCodeEnd = NetworkPacket::unpackUInt16($resource);
+
+        $this->dynamicColorManager = new DynamicColorManager();
+        $this->dynamicColorManager->unpack($resource);
     }
 }
