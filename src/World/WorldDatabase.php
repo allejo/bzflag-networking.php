@@ -52,6 +52,6 @@ class WorldDatabase
         $this->worldCodeEnd = NetworkPacket::unpackUInt16($resource);
 
         $this->dynamicColorManager = new DynamicColorManager();
-        $this->dynamicColorManager->unpack($resource);
+        $this->dynamicColorManager->unpack($this->database);
     }
 }
