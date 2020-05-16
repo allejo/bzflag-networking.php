@@ -13,6 +13,7 @@ use allejo\bzflag\networking\Packets\NetworkPacket;
 
 class DynamicColorManager
 {
+    /** @var array<int, DynamicColor> */
     private $colors;
 
     public function __construct()
@@ -20,7 +21,7 @@ class DynamicColorManager
         $this->colors = [];
     }
 
-    public function unpack($resource)
+    public function unpack($resource): void
     {
         $count = NetworkPacket::unpackUInt32($resource);
 

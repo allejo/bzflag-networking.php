@@ -17,7 +17,7 @@ class DynamicColor
     private $name;
 
     /** @var array<int, ChannelParams> */
-    private $channels;
+    private $channels = [];
 
     public function getName(): string
     {
