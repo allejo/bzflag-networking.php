@@ -198,6 +198,16 @@ class NetworkPacket implements Unpackable
         return (float)unpack('G', $binary)[1];
     }
 
+    public static function unpack4Float(&$buffer): array
+    {
+        return [
+            self::unpackFloat($buffer),
+            self::unpackFloat($buffer),
+            self::unpackFloat($buffer),
+            self::unpackFloat($buffer),
+        ];
+    }
+
     /**
      * @param resource|string $buffer
      *

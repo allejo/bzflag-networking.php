@@ -11,22 +11,19 @@ namespace allejo\bzflag\networking\World;
 
 use allejo\bzflag\networking\Packets\NetworkPacket;
 
-class DynamicColorManager
+class MaterialManager
 {
-    /** @var array<int, DynamicColor> */
-    private $colors;
+    /** @var array<int, Material> */
+    private $materials;
 
     public function __construct()
     {
-        $this->colors = [];
+        $this->materials = [];
     }
 
-    /**
-     * @return array<int, DynamicColor>
-     */
-    public function getColors(): array
+    public function getMaterials(): array
     {
-        return $this->colors;
+        return $this->materials;
     }
 
     public function unpack($resource): void
@@ -35,10 +32,10 @@ class DynamicColorManager
 
         for ($i = 0; $i < $count; ++$i)
         {
-            $color = new DynamicColor();
-            $color->unpack($resource);
+            $material = new Material();
+            $material->unpack($resource);
 
-            $this->colors[] = $color;
+            $this->materials[] = $material;
         }
     }
 }

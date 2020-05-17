@@ -11,22 +11,22 @@ namespace allejo\bzflag\networking\World;
 
 use allejo\bzflag\networking\Packets\NetworkPacket;
 
-class DynamicColorManager
+class TextureMatrixManager
 {
-    /** @var array<int, DynamicColor> */
-    private $colors;
+    /** @var array<int, TextureMatrix> */
+    private $textures;
 
     public function __construct()
     {
-        $this->colors = [];
+        $this->textures = [];
     }
 
     /**
-     * @return array<int, DynamicColor>
+     * @return array<int, TextureMatrix>
      */
-    public function getColors(): array
+    public function getTextures(): array
     {
-        return $this->colors;
+        return $this->textures;
     }
 
     public function unpack($resource): void
@@ -35,10 +35,10 @@ class DynamicColorManager
 
         for ($i = 0; $i < $count; ++$i)
         {
-            $color = new DynamicColor();
-            $color->unpack($resource);
+            $textureMatrix = new TextureMatrix();
+            $textureMatrix->unpack($resource);
 
-            $this->colors[] = $color;
+            $this->textures[] = $textureMatrix;
         }
     }
 }

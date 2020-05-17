@@ -40,6 +40,12 @@ class WorldDatabase
     /** @var DynamicColorManager */
     private $dynamicColorManager;
 
+    /** @var TextureMatrixManager */
+    private $textureMatrixManager;
+
+    /** @var MaterialManager */
+    private $materialManager;
+
     public function __construct($resource)
     {
         $this->headerSize = NetworkPacket::unpackUInt16($resource);
@@ -53,5 +59,11 @@ class WorldDatabase
 
         $this->dynamicColorManager = new DynamicColorManager();
         $this->dynamicColorManager->unpack($this->database);
+
+        $this->textureMatrixManager = new TextureMatrixManager();
+        $this->textureMatrixManager->unpack($this->database);
+
+        $this->materialManager = new MaterialManager();
+        $this->materialManager->unpack($this->database);
     }
 }
