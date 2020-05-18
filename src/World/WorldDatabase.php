@@ -52,7 +52,10 @@ class WorldDatabase
     /** @var TransformManager */
     private $transformManager;
 
-    public function __construct($resource)
+    /** @var ObstacleManager */
+    private $obstacleManager;
+
+    public function __construct(&$resource)
     {
         $this->headerSize = NetworkPacket::unpackUInt16($resource);
         $this->worldCode = NetworkPacket::unpackUInt16($resource);
@@ -77,5 +80,8 @@ class WorldDatabase
 
         $this->transformManager = new TransformManager();
         $this->transformManager->unpack($this->database);
+
+        $this->obstacleManager = new ObstacleManager();
+        $this->obstacleManager->unpack($this->database);
     }
 }
