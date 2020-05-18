@@ -41,7 +41,7 @@ class GroupDefinition
 
             for ($i = 0; $i < $count; ++$i)
             {
-                $obstacle = ObjectFactory::new($type);
+                $obstacle = Obstacle::new($type);
                 $obstacle->unpack($resource);
 
                 if ($obstacle->isValid())
