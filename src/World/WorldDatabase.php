@@ -49,6 +49,9 @@ class WorldDatabase
     /** @var PhysicsDriverManager */
     private $physicsDriverManager;
 
+    /** @var TransformManager */
+    private $transformManager;
+
     public function __construct($resource)
     {
         $this->headerSize = NetworkPacket::unpackUInt16($resource);
@@ -71,5 +74,8 @@ class WorldDatabase
 
         $this->physicsDriverManager = new PhysicsDriverManager();
         $this->physicsDriverManager->unpack($this->database);
+
+        $this->transformManager = new TransformManager();
+        $this->transformManager->unpack($this->database);
     }
 }
