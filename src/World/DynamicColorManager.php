@@ -29,7 +29,7 @@ class DynamicColorManager
         return $this->colors;
     }
 
-    public function unpack($resource): void
+    public function unpack(&$resource): void
     {
         $count = NetworkPacket::unpackUInt32($resource);
 

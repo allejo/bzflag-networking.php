@@ -26,7 +26,7 @@ class MaterialManager
         return $this->materials;
     }
 
-    public function unpack($resource): void
+    public function unpack(&$resource): void
     {
         $count = NetworkPacket::unpackUInt32($resource);
 

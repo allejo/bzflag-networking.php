@@ -43,7 +43,7 @@ class PhysicsDriver
         $this->radialPos = [];
     }
 
-    public function unpack($resource): void
+    public function unpack(&$resource): void
     {
         $this->name = NetworkPacket::unpackStdString($resource);
 
