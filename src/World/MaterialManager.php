@@ -21,6 +21,11 @@ class MaterialManager
         $this->materials = [];
     }
 
+    public function getMaterial(int $index): Material
+    {
+        return $this->materials[$index];
+    }
+
     public function getMaterials(): array
     {
         return $this->materials;

@@ -38,22 +38,22 @@ class WorldDatabase
     private $worldCodeEnd;
 
     /** @var DynamicColorManager */
-    private $dynamicColorManager;
+    private static $dynamicColorManager;
 
     /** @var TextureMatrixManager */
-    private $textureMatrixManager;
+    private static $textureMatrixManager;
 
     /** @var MaterialManager */
-    private $materialManager;
+    private static $materialManager;
 
     /** @var PhysicsDriverManager */
-    private $physicsDriverManager;
+    private static $physicsDriverManager;
 
     /** @var TransformManager */
-    private $transformManager;
+    private static $transformManager;
 
     /** @var ObstacleManager */
-    private $obstacleManager;
+    private static $obstacleManager;
 
     public function __construct(&$resource)
     {
@@ -66,22 +66,52 @@ class WorldDatabase
         $this->worldCodeEndSize = NetworkPacket::unpackUInt16($resource);
         $this->worldCodeEnd = NetworkPacket::unpackUInt16($resource);
 
-        $this->dynamicColorManager = new DynamicColorManager();
-        $this->dynamicColorManager->unpack($this->database);
+        self::$dynamicColorManager = new DynamicColorManager();
+        self::$dynamicColorManager->unpack($this->database);
 
-        $this->textureMatrixManager = new TextureMatrixManager();
-        $this->textureMatrixManager->unpack($this->database);
+        self::$textureMatrixManager = new TextureMatrixManager();
+        self::$textureMatrixManager->unpack($this->database);
 
-        $this->materialManager = new MaterialManager();
-        $this->materialManager->unpack($this->database);
+        self::$materialManager = new MaterialManager();
+        self::$materialManager->unpack($this->database);
 
-        $this->physicsDriverManager = new PhysicsDriverManager();
-        $this->physicsDriverManager->unpack($this->database);
+        self::$physicsDriverManager = new PhysicsDriverManager();
+        self::$physicsDriverManager->unpack($this->database);
 
-        $this->transformManager = new TransformManager();
-        $this->transformManager->unpack($this->database);
+        self::$transformManager = new TransformManager();
+        self::$transformManager->unpack($this->database);
 
-        $this->obstacleManager = new ObstacleManager();
-        $this->obstacleManager->unpack($this->database);
+        self::$obstacleManager = new ObstacleManager();
+        self::$obstacleManager->unpack($this->database);
+    }
+
+    public static function getDynamicColorManager(): DynamicColorManager
+    {
+        return self::$dynamicColorManager;
+    }
+
+    public static function getTextureMatrixManager(): TextureMatrixManager
+    {
+        return self::$textureMatrixManager;
+    }
+
+    public static function getMaterialManager(): MaterialManager
+    {
+        return self::$materialManager;
+    }
+
+    public static function getPhysicsDriverManager(): PhysicsDriverManager
+    {
+        return self::$physicsDriverManager;
+    }
+
+    public static function getTransformManager(): TransformManager
+    {
+        return self::$transformManager;
+    }
+
+    public static function getObstacleManager(): ObstacleManager
+    {
+        return self::$obstacleManager;
     }
 }
