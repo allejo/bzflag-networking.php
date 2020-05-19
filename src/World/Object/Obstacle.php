@@ -121,7 +121,8 @@ abstract class Obstacle
 
     public static function new(int $type): Obstacle
     {
-        if (!isset(self::$mapping[$type])) {
+        if (!isset(self::$mapping[$type]))
+        {
             throw new \InvalidArgumentException("Unknown object type with type ID {$type}.");
         }
 
