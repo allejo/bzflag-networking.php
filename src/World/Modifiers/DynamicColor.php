@@ -24,11 +24,17 @@ class DynamicColor
         return $this->name;
     }
 
+    /**
+     * @return array<int, ChannelParams>
+     */
     public function getChannels(): array
     {
         return $this->channels;
     }
 
+    /**
+     * @param resource|string $resource
+     */
     public function unpack(&$resource): void
     {
         $this->name = NetworkPacket::unpackStdString($resource);

@@ -48,6 +48,9 @@ class PhysicsDriver
         return $this->name;
     }
 
+    /**
+     * @return array<int, float>
+     */
     public function getLinear(): array
     {
         return $this->linear;
@@ -58,6 +61,9 @@ class PhysicsDriver
         return $this->angularVel;
     }
 
+    /**
+     * @return array<int, float>
+     */
     public function getAngularPos(): array
     {
         return $this->angularPos;
@@ -68,6 +74,9 @@ class PhysicsDriver
         return $this->radialVel;
     }
 
+    /**
+     * @return array<int, float>
+     */
     public function getRadialPos(): array
     {
         return $this->radialPos;
@@ -83,6 +92,9 @@ class PhysicsDriver
         return $this->deathMessage;
     }
 
+    /**
+     * @param resource|string $resource
+     */
     public function unpack(&$resource): void
     {
         $this->name = NetworkPacket::unpackStdString($resource);

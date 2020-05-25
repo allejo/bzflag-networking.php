@@ -27,7 +27,10 @@ class PlayerData implements \JsonSerializable
     /** @var bool */
     public $isAdmin;
 
-    public function jsonSerialize()
+    /**
+     * @return array<string, mixed>
+     */
+    public function jsonSerialize(): array
     {
         return [
             'playerId' => $this->playerId,

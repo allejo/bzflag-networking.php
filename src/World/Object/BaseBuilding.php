@@ -21,6 +21,9 @@ class BaseBuilding extends Obstacle
         return $this->team;
     }
 
+    /**
+     * @param resource|string $resource
+     */
     public function unpack(&$resource): void
     {
         $shortTeam = NetworkPacket::unpackUInt16($resource);

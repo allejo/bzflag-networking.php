@@ -121,9 +121,6 @@ class ReplayHeader implements Unpackable, \JsonSerializable
         return (int)round($this->fileTime / 1000000);
     }
 
-    /**
-     * @param bool $round
-     */
     public function getFileTimeAsMinutes(): int
     {
         return (int)round($this->getFileTimeAsSeconds() / 60);

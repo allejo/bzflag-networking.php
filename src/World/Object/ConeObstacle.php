@@ -48,7 +48,7 @@ class ConeObstacle extends Obstacle
 
     public function __construct()
     {
-        $this->texSize = [];
+        $this->texSize = [0.0, 0.0];
         $this->materials = [];
     }
 
@@ -98,6 +98,9 @@ class ConeObstacle extends Obstacle
         return $this->materials;
     }
 
+    /**
+     * @param resource|string $resource
+     */
     public function unpack(&$resource): void
     {
         $this->transform = new MeshTransform();

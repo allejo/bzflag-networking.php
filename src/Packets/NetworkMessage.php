@@ -66,11 +66,17 @@ abstract class NetworkMessage
     const PORTAL_REMOVE = 0x5072;      // 'Pr'
     const PORTAL_UPDATE = 0x5075;      // 'Pu'
 
+    /**
+     * @return float|int
+     */
     public static function codeFromChars(string $code)
     {
         return hexdec(unpack('H*', $code)[1]);
     }
 
+    /**
+     * @return false|string
+     */
     public static function charsFromCode(int $chars)
     {
         return pack('H*', dechex($chars));

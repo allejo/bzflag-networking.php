@@ -15,11 +15,27 @@ use allejo\bzflag\networking\World\Object\GroupDefinition;
 class ObstacleManager
 {
     /** @var GroupDefinition */
-    public $world;
+    private $world;
 
     /** @var array<int, GroupDefinition> */
-    public $groupDefinitions;
+    private $groupDefinitions;
 
+    public function getWorld(): GroupDefinition
+    {
+        return $this->world;
+    }
+
+    /**
+     * @return array<int, GroupDefinition>
+     */
+    public function getGroupDefinitions(): array
+    {
+        return $this->groupDefinitions;
+    }
+
+    /**
+     * @param resource|string $resource
+     */
     public function unpack(&$resource): void
     {
         $this->world = new GroupDefinition('');

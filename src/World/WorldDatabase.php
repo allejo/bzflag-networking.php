@@ -9,6 +9,7 @@
 
 namespace allejo\bzflag\networking\World;
 
+use allejo\bzflag\networking\InvalidWorldDatabase;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\networking\World\Managers\DynamicColorManager;
 use allejo\bzflag\networking\World\Managers\MaterialManager;
@@ -61,6 +62,11 @@ class WorldDatabase
     /** @var ObstacleManager */
     private static $obstacleManager;
 
+    /**
+     * @param resource $resource
+     *
+     * @throws InvalidWorldDatabase
+     */
     public function __construct(&$resource)
     {
         $this->headerSize = NetworkPacket::unpackUInt16($resource);
@@ -68,7 +74,16 @@ class WorldDatabase
         $this->mapVersion = NetworkPacket::unpackUInt16($resource);
         $this->uncompressedSize = NetworkPacket::unpackUInt32($resource);
         $this->databaseSize = NetworkPacket::unpackUInt32($resource);
-        $this->database = zlib_decode(fread($resource, $this->databaseSize), $this->uncompressedSize);
+
+        $worldDatabase = fread($resource, $this->databaseSize);
+
+        if ($worldDatabase === false)
+        {
+            throw new InvalidWorldDatabase('The world database could not be read from this resource.');
+        }
+
+        $this->database = zlib_decode($worldDatabase, $this->uncompressedSize);
+
         $this->worldCodeEndSize = NetworkPacket::unpackUInt16($resource);
         $this->worldCodeEnd = NetworkPacket::unpackUInt16($resource);
 

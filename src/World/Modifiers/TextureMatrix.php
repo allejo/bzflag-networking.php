@@ -173,6 +173,9 @@ class TextureMatrix
         return $this->vCenter;
     }
 
+    /**
+     * @param resource|string $resource
+     */
     public function unpack(&$resource): void
     {
         $this->name = NetworkPacket::unpackStdString($resource);

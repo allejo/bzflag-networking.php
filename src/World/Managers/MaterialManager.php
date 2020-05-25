@@ -27,11 +27,17 @@ class MaterialManager
         return $this->materials[$index];
     }
 
+    /**
+     * @return array<int, Material>
+     */
     public function getMaterials(): array
     {
         return $this->materials;
     }
 
+    /**
+     * @param resource|string $resource
+     */
     public function unpack(&$resource): void
     {
         $count = NetworkPacket::unpackUInt32($resource);

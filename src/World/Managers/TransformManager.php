@@ -22,6 +22,9 @@ class TransformManager
         $this->meshTransforms = [];
     }
 
+    /**
+     * @param resource|string $resource
+     */
     public function unpack(&$resource): void
     {
         $count = NetworkPacket::unpackUInt32($resource);

@@ -19,7 +19,7 @@ class GroupDefinition
     /** @var bool */
     private $active;
 
-    /** @var array<int, Obstacle> */
+    /** @var array<int, array<int, Obstacle>> */
     private $lists;
 
     /** @var array<int, GroupInstance> */

@@ -62,7 +62,10 @@ class PlayerState implements \JsonSerializable
     /** @var int */
     public $sounds;
 
-    public function jsonSerialize()
+    /**
+     * @return array<string, mixed>
+     */
+    public function jsonSerialize(): array
     {
         return [
             'order' => $this->order,

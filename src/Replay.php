@@ -31,7 +31,7 @@ class Replay implements \JsonSerializable
     /** @var \DateTime */
     private $endTime;
 
-    /** @var bool|resource */
+    /** @var resource */
     private $resource;
 
     /** @var bool Whether or not we've reached the end of this resource. */
@@ -48,7 +48,14 @@ class Replay implements \JsonSerializable
      */
     public function __construct(string $file)
     {
-        $this->resource = fopen($file, 'rb');
+        $resource = fopen($file, 'rb');
+
+        if ($resource === false)
+        {
+            throw new \InvalidArgumentException("The replay file ({$file}) could not be read.");
+        }
+
+        $this->resource = $resource;
         $stats = fstat($this->resource);
 
         if ($stats['size'] == 0)
@@ -62,7 +69,14 @@ class Replay implements \JsonSerializable
 
         $this->calculateTimestamps($this->resource);
 
-        $this->packetLocationStart = ftell($this->resource);
+        $startLocation = ftell($this->resource);
+
+        if ($startLocation === false)
+        {
+            throw new InvalidReplayException('Could not determine the starting location of replay packets.');
+        }
+
+        $this->packetLocationStart = $startLocation;
     }
 
     public function __destruct()
@@ -71,9 +85,9 @@ class Replay implements \JsonSerializable
     }
 
     /**
-     * {@inheritdoc}
+     * @return array<string, mixed>
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'header' => $this->header,
@@ -107,11 +121,6 @@ class Replay implements \JsonSerializable
 
         foreach ($this->getPacketsIterable() as $packet)
         {
-            if ($packet === null)
-            {
-                continue;
-            }
-
             $this->packets[] = $packet;
         }
 
@@ -133,6 +142,8 @@ class Replay implements \JsonSerializable
     /**
      * Iterate through all of the packets in this Replay one at a time without
      * saving everything in memory.
+     *
+     * @return iterable<GamePacket>
      */
     public function getPacketsIterable(): iterable
     {
@@ -149,7 +160,7 @@ class Replay implements \JsonSerializable
             }
             catch (UnsupportedPacketException $e)
             {
-                $this->errors = $e->getMessage();
+                $this->errors[] = $e->getMessage();
             }
             catch (PacketInvalidException $e)
             {
@@ -186,11 +197,6 @@ class Replay implements \JsonSerializable
     private function calculateTimestamps($resource): void
     {
         $packet = new NetworkPacket($resource);
-
-        if ($packet->getTimestamp() === null)
-        {
-            throw new PacketInvalidException();
-        }
 
         $this->startTime = $packet->getTimestamp();
 

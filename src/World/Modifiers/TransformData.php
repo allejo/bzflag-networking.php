@@ -17,6 +17,6 @@ class TransformData
     /** @var int */
     public $index;
 
-    /** @var float[4] */
+    /** @var array{float, float, float, float} */
     public $data;
 }

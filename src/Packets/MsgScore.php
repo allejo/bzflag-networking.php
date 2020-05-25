@@ -15,9 +15,12 @@ class MsgScore extends GamePacket
 {
     public const PACKET_TYPE = 'MsgScore';
 
-    /** @var array ScoreData[] */
+    /** @var array<int, ScoreData> */
     private $scores = [];
 
+    /**
+     * @return array<int, ScoreData>
+     */
     public function getScores(): array
     {
         return $this->scores;

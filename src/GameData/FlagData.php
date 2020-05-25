@@ -44,7 +44,10 @@ class FlagData implements \JsonSerializable
     /** @var float */
     public $initialVelocity;
 
-    public function jsonSerialize()
+    /**
+     * @return array<string, mixed>
+     */
+    public function jsonSerialize(): array
     {
         return [
             'index' => $this->index,

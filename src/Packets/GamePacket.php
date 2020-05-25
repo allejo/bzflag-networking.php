@@ -24,7 +24,7 @@ abstract class GamePacket implements \JsonSerializable
     /** @var NetworkPacket */
     protected $packet;
 
-    /** @var string */
+    /** @var false|string */
     protected $buffer;
 
     /** @var \DateTime */
@@ -33,6 +33,7 @@ abstract class GamePacket implements \JsonSerializable
     /** @var \DateTime */
     protected $timestampOffset;
 
+    /** @var array<NetworkMessage::*, class-string> */
     private static $mapping = [
         NetworkMessage::ADD_PLAYER => MsgAddPlayer::class,
         NetworkMessage::ADMIN_INFO => MsgAdminInfo::class,
@@ -66,7 +67,7 @@ abstract class GamePacket implements \JsonSerializable
     /**
      * @throws PacketNotSetException
      */
-    final public function __construct(NetworkPacket $packet)
+    final public function __construct(?NetworkPacket $packet)
     {
         if ($packet === null)
         {
@@ -135,6 +136,9 @@ abstract class GamePacket implements \JsonSerializable
         return new $gamePacket($packet);
     }
 
+    /**
+     * @return array<int, string>
+     */
     protected function getJsonEncodeBlacklist(): array
     {
         return [
@@ -153,8 +157,6 @@ abstract class GamePacket implements \JsonSerializable
 
     /**
      * Unpack the NetworkPacket buffer into a GamePacket's instance variables.
-     *
-     * @return mixed
      */
     abstract protected function unpack(): void;
 }

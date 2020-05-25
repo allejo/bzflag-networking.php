@@ -23,7 +23,10 @@ class FiringInfoData implements \JsonSerializable
     /** @var float */
     public $lifetime;
 
-    public function jsonSerialize()
+    /**
+     * @return array<string, mixed>
+     */
+    public function jsonSerialize(): array
     {
         return [
             'timeSent' => $this->timeSent,

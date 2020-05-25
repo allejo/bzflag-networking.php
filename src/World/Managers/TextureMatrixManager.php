@@ -30,6 +30,9 @@ class TextureMatrixManager
         return $this->textures;
     }
 
+    /**
+     * @param resource|string $resource
+     */
     public function unpack(&$resource): void
     {
         $count = NetworkPacket::unpackUInt32($resource);

@@ -7,14 +7,8 @@
  * LICENSE.md file that was distributed with this source code.
  */
 
-namespace allejo\bzflag\networking\Packets;
+namespace allejo\bzflag\networking;
 
-interface Unpackable
+class InvalidWorldDatabase extends \Exception
 {
-    /**
-     * Unpackable constructor.
-     *
-     * @param resource|string $resource
-     */
-    public function __construct($resource);
 }

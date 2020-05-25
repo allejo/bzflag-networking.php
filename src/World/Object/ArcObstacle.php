@@ -102,6 +102,9 @@ class ArcObstacle extends Obstacle
         return $this->materials;
     }
 
+    /**
+     * @param resource|string $resource
+     */
     public function unpack(&$resource): void
     {
         $this->transform = new MeshTransform();

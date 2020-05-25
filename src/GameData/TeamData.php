@@ -23,7 +23,10 @@ class TeamData implements \JsonSerializable
     /** @var int */
     public $losses;
 
-    public function jsonSerialize()
+    /**
+     * @return array<string, mixed>
+     */
+    public function jsonSerialize(): array
     {
         return [
             'team' => $this->team,

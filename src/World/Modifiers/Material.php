@@ -40,16 +40,16 @@ class Material
     /** @var int */
     private $dynamicColor;
 
-    /** @var float[4] */
+    /** @var array{float, float, float, float} */
     private $ambient;
 
-    /** @var float[4] */
+    /** @var array{float, float, float, float} */
     private $diffuse;
 
-    /** @var float[4] */
+    /** @var array{float, float, float, float} */
     private $specular;
 
-    /** @var float[4] */
+    /** @var array{float, float, float, float} */
     private $emission;
 
     /** @var float */
@@ -121,22 +121,34 @@ class Material
         return $this->dynamicColor;
     }
 
-    public function getAmbient(): float
+    /**
+     * @return array{float, float, float, float}
+     */
+    public function getAmbient(): array
     {
         return $this->ambient;
     }
 
-    public function getDiffuse(): float
+    /**
+     * @return array{float, float, float, float}
+     */
+    public function getDiffuse(): array
     {
         return $this->diffuse;
     }
 
-    public function getSpecular(): float
+    /**
+     * @return array{float, float, float, float}
+     */
+    public function getSpecular(): array
     {
         return $this->specular;
     }
 
-    public function getEmission(): float
+    /**
+     * @return array{float, float, float, float}
+     */
+    public function getEmission(): array
     {
         return $this->emission;
     }
@@ -156,6 +168,9 @@ class Material
         return $this->textureCount;
     }
 
+    /**
+     * @return array<int, TextureInfo>
+     */
     public function getTextures(): array
     {
         return $this->textures;
@@ -166,11 +181,17 @@ class Material
         return $this->shaderCount;
     }
 
+    /**
+     * @return array<int, ShaderInfo>
+     */
     public function getShaders(): array
     {
         return $this->shaders;
     }
 
+    /**
+     * @param resource|string $resource
+     */
     public function unpack(&$resource): void
     {
         $this->name = NetworkPacket::unpackStdString($resource);

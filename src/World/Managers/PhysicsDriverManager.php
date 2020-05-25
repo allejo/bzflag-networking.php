@@ -30,6 +30,9 @@ class PhysicsDriverManager
         return $this->physicsDriver;
     }
 
+    /**
+     * @param resource|string $resource
+     */
     public function unpack(&$resource): void
     {
         $count = NetworkPacket::unpackUInt32($resource);

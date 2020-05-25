@@ -15,6 +15,11 @@ namespace allejo\bzflag\networking;
  */
 trait JsonSerializePublicGetters
 {
+    /**
+     * @throws \ReflectionException
+     *
+     * @return array<string, mixed>
+     */
     public function jsonSerialize(): array
     {
         $output = [];
@@ -37,6 +42,8 @@ trait JsonSerializePublicGetters
 
     /**
      * An array of keys not to include in the jsonSerialize() return value.
+     *
+     * @return array<int, string>
      */
     protected function getJsonEncodeBlacklist(): array
     {

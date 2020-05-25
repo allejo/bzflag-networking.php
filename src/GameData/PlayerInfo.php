@@ -17,7 +17,10 @@ class PlayerInfo implements \JsonSerializable
     /** @var string */
     public $ipAddress;
 
-    public function jsonSerialize()
+    /**
+     * @return array<string, mixed>
+     */
+    public function jsonSerialize(): array
     {
         return [
             'playerIndex' => $this->playerIndex,

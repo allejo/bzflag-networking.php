@@ -24,11 +24,17 @@ class MeshTransform
         return $this->name;
     }
 
+    /**
+     * @return array<int, TransformData>
+     */
     public function getTransforms(): array
     {
         return $this->transforms;
     }
 
+    /**
+     * @param resource|string $resource
+     */
     public function unpack(&$resource): void
     {
         $count = NetworkPacket::unpackUInt32($resource);
@@ -41,20 +47,23 @@ class MeshTransform
             if ($transform->type === TransformType::INDEX_TRANSFORM)
             {
                 $transform->index = (int)NetworkPacket::unpackInt32($resource);
-                $transform->data = [0, 0, 0, 0];
+                $transform->data = [0.0, 0.0, 0.0, 0.0];
             }
             else
             {
                 $transform->index = -1;
-                $transform->data = NetworkPacket::unpackVector($resource);
+
+                $vectorData = NetworkPacket::unpackVector($resource);
+                $transform->data = [
+                    $vectorData[0],
+                    $vectorData[1],
+                    $vectorData[2],
+                    0.0,
+                ];
 
                 if ($transform->type === TransformType::SPIN_TRANSFORM)
                 {
                     $transform->data[3] = NetworkPacket::unpackFloat($resource);
-                }
-                else
-                {
-                    $transform->data[3] = 0;
                 }
             }
 

@@ -17,7 +17,10 @@ class BZDBSetting implements \JsonSerializable
     /** @var string */
     public $value;
 
-    public function jsonSerialize()
+    /**
+     * @return array<string, mixed>
+     */
+    public function jsonSerialize(): array
     {
         return [
             'name' => $this->name,

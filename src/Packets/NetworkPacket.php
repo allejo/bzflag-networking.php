@@ -26,12 +26,19 @@ class NetworkPacket implements Unpackable
     const SMALL_MAX_VEL = 0.01 * NetworkPacket::SMALL_SCALE;
     const SMALL_MAX_ANG_VEL = 0.001 * NetworkPacket::SMALL_SCALE;
 
+    /** @var int */
     private $mode = -1;
+    /** @var int */
     private $code = -1;
+    /** @var int */
     private $length = -1;
+    /** @var int */
     private $nextFilePos = -1;
+    /** @var int */
     private $prevFilePos = -1;
+    /** @var \DateTime */
     private $timestamp;
+    /** @var false|string */
     private $data;
 
     /**
@@ -92,21 +99,33 @@ class NetworkPacket implements Unpackable
         return clone $this->timestamp;
     }
 
-    public function getData(): ?string
+    /**
+     * @return false|string
+     */
+    public function getData()
     {
         return $this->data;
     }
 
+    /**
+     * @param resource|string $buffer
+     */
     public static function unpackInt8(&$buffer): int
     {
         return self::unpackInt($buffer, 1, 'c');
     }
 
+    /**
+     * @param resource|string $buffer
+     */
     public static function unpackUInt8(&$buffer): int
     {
         return self::unpackInt($buffer, 1, 'C');
     }
 
+    /**
+     * @param resource|string $buffer
+     */
     public static function unpackInt16(&$buffer): int
     {
         // A signed 16-bit integer can go from -32,768 to 32,768. An unsigned
@@ -124,11 +143,17 @@ class NetworkPacket implements Unpackable
         return $unsigned;
     }
 
+    /**
+     * @param resource|string $buffer
+     */
     public static function unpackUInt16(&$buffer): int
     {
         return self::unpackInt($buffer, 2, 'n');
     }
 
+    /**
+     * @param resource|string $buffer
+     */
     public static function unpackInt32(&$buffer): int
     {
         // See NetworkPacket::unpackInt16() for explanation as to why the manual
@@ -144,21 +169,33 @@ class NetworkPacket implements Unpackable
         return $unsigned;
     }
 
+    /**
+     * @param resource|string $buffer
+     */
     public static function unpackUInt32(&$buffer): int
     {
         return self::unpackInt($buffer, 4, 'N');
     }
 
+    /**
+     * @param resource|string $buffer
+     */
     public static function unpackInt64(&$buffer): int
     {
         return self::unpackInt($buffer, 8, 'J');
     }
 
+    /**
+     * @param resource|string $buffer
+     */
     public static function unpackUInt64(&$buffer): int
     {
         return self::unpackInt($buffer, 8, 'q');
     }
 
+    /**
+     * @param resource|string $buffer
+     */
     public static function unpackFiringInfo(&$buffer): FiringInfoData
     {
         $data = new FiringInfoData();
@@ -171,6 +208,9 @@ class NetworkPacket implements Unpackable
         return $data;
     }
 
+    /**
+     * @param resource|string $buffer
+     */
     public static function unpackFlag(&$buffer): FlagData
     {
         $flag = new FlagData();
@@ -190,6 +230,9 @@ class NetworkPacket implements Unpackable
         return $flag;
     }
 
+    /**
+     * @param resource|string $buffer
+     */
     public static function unpackFloat(&$buffer): float
     {
         $binary = self::safeReadResource($buffer, 4);
@@ -197,6 +240,11 @@ class NetworkPacket implements Unpackable
         return (float)unpack('G', $binary)[1];
     }
 
+    /**
+     * @param resource|string $buffer
+     *
+     * @return array{float, float, float, float}
+     */
     public static function unpack4Float(&$buffer): array
     {
         return [
@@ -210,7 +258,7 @@ class NetworkPacket implements Unpackable
     /**
      * @param resource|string $buffer
      *
-     * @return float[]
+     * @return array{float, float, float}
      */
     public static function unpackVector(&$buffer): array
     {
@@ -221,6 +269,9 @@ class NetworkPacket implements Unpackable
         ];
     }
 
+    /**
+     * @param resource|string $buffer
+     */
     public static function unpackIpAddress(&$buffer): string
     {
         // This byte was reserved for differentiating between IPv4 and IPv6
@@ -233,6 +284,9 @@ class NetworkPacket implements Unpackable
         return long2ip($ipAsInt);
     }
 
+    /**
+     * @param resource|string $buffer
+     */
     public static function unpackPlayerState(&$buffer, int $code): PlayerState
     {
         $state = new PlayerState();
@@ -321,6 +375,9 @@ class NetworkPacket implements Unpackable
         return $state;
     }
 
+    /**
+     * @param resource|string $buffer
+     */
     public static function unpackShot(&$buffer): ShotData
     {
         $shot = new ShotData();
@@ -335,15 +392,22 @@ class NetworkPacket implements Unpackable
         return $shot;
     }
 
+    /**
+     * @param resource|string $buffer
+     */
     public static function unpackString(&$buffer, int $size): string
     {
         $binary = self::safeReadResource($buffer, $size);
         $unpacked = unpack('A*', $binary);
+        /** @var string $string */
         $string = $unpacked[1] ?? '';
 
-        return trim(preg_replace('/[[:^print:]]/', '', $string));
+        return trim(preg_replace('/[[:^print:]]/', '', $string) ?? '');
     }
 
+    /**
+     * @param resource|string $buffer
+     */
     public static function unpackStdString(&$buffer): string
     {
         $strSize = self::unpackUInt32($buffer);
@@ -383,6 +447,9 @@ class NetworkPacket implements Unpackable
         throw new \UnexpectedValueException('No format valid format was found for this timestamp');
     }
 
+    /**
+     * @param resource|string $buffer
+     */
     private static function unpackInt(&$buffer, int $size, string $symbol): int
     {
         $binary = self::safeReadResource($buffer, $size);
@@ -395,6 +462,8 @@ class NetworkPacket implements Unpackable
      * passed to `unpack()`.
      *
      * @param resource|string $buffer
+     *
+     * @throws \RuntimeException when buffer could not be read as a resource
      */
     private static function safeReadResource(&$buffer, int $size): string
     {
@@ -406,7 +475,14 @@ class NetworkPacket implements Unpackable
                 $size = $stats['size'];
             }
 
-            return fread($buffer, $size);
+            $readValue = fread($buffer, $size);
+
+            if ($readValue === false)
+            {
+                throw new \RuntimeException('Failure to read buffer as resource.');
+            }
+
+            return $readValue;
         }
 
         if ($size < 0)

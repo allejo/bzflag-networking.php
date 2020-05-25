@@ -13,6 +13,9 @@ use allejo\bzflag\networking\Packets\NetworkPacket;
 
 class BoxBuilding extends Obstacle
 {
+    /**
+     * @param resource|string $resource
+     */
     public function unpack(&$resource): void
     {
         $this->pos = NetworkPacket::unpackVector($resource);
