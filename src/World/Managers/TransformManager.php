@@ -7,26 +7,19 @@
  * LICENSE.md file that was distributed with this source code.
  */
 
-namespace allejo\bzflag\networking\World;
+namespace allejo\bzflag\networking\World\Managers;
 
 use allejo\bzflag\networking\Packets\NetworkPacket;
+use allejo\bzflag\networking\World\Modifiers\MeshTransform;
 
-class PhysicsDriverManager
+class TransformManager
 {
-    /** @var array<int, PhysicsDriver> */
-    private $physicsDriver;
+    /** @var array<int, MeshTransform> */
+    private $meshTransforms;
 
     public function __construct()
     {
-        $this->physicsDriver = [];
-    }
-
-    /**
-     * @return array<int, PhysicsDriver>
-     */
-    public function getPhysicsDriver(): array
-    {
-        return $this->physicsDriver;
+        $this->meshTransforms = [];
     }
 
     public function unpack(&$resource): void
@@ -35,10 +28,10 @@ class PhysicsDriverManager
 
         for ($i = 0; $i < $count; ++$i)
         {
-            $physicsDriver = new PhysicsDriver();
-            $physicsDriver->unpack($resource);
+            $meshTransform = new MeshTransform();
+            $meshTransform->unpack($resource);
 
-            $this->physicsDriver[] = $physicsDriver;
+            $this->meshTransforms[] = $meshTransform;
         }
     }
 }

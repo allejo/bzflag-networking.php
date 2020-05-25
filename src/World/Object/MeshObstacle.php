@@ -10,8 +10,6 @@
 namespace allejo\bzflag\networking\World\Object;
 
 use allejo\bzflag\networking\Packets\NetworkPacket;
-use allejo\bzflag\networking\World\Object\Mesh\MeshDrawInfo;
-use allejo\bzflag\networking\World\Object\Mesh\MeshFace;
 
 class MeshObstacle extends Obstacle
 {

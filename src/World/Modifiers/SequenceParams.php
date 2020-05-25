@@ -7,9 +7,9 @@
  * LICENSE.md file that was distributed with this source code.
  */
 
-namespace allejo\bzflag\networking\World;
+namespace allejo\bzflag\networking\World\Modifiers;
 
-class SinusoidParams
+class SequenceParams
 {
     /** @var float */
     public $period;
@@ -17,6 +17,9 @@ class SinusoidParams
     /** @var float */
     public $offset;
 
-    /** @var float */
-    public $weight;
+    /** @var null|int[] */
+    public $list;
+
+    /** @var int */
+    public $count;
 }

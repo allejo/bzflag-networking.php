@@ -9,9 +9,27 @@
 
 namespace allejo\bzflag\networking\GameData;
 
-/**
- * @todo Remove this class and rename the `FiringIntoData` class to `FiringInfoData`
- */
-class FiringInfoData extends FiringIntoData
+class FiringInfoData implements \JsonSerializable
 {
+    /** @var float */
+    public $timeSent;
+
+    /** @var ShotData */
+    public $shot;
+
+    /** @var string */
+    public $flag;
+
+    /** @var float */
+    public $lifetime;
+
+    public function jsonSerialize()
+    {
+        return [
+            'timeSent' => $this->timeSent,
+            'shot' => $this->shot,
+            'flag' => $this->flag,
+            'lifetime' => $this->lifetime,
+        ];
+    }
 }

@@ -7,7 +7,7 @@
  * LICENSE.md file that was distributed with this source code.
  */
 
-namespace allejo\bzflag\networking\World;
+namespace allejo\bzflag\networking\World\Managers;
 
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\networking\World\Object\GroupDefinition;

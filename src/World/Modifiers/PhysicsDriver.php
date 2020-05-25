@@ -7,40 +7,80 @@
  * LICENSE.md file that was distributed with this source code.
  */
 
-namespace allejo\bzflag\networking\World;
+namespace allejo\bzflag\networking\World\Modifiers;
 
 use allejo\bzflag\networking\Packets\NetworkPacket;
 
 class PhysicsDriver
 {
     /** @var string */
-    public $name;
+    private $name;
 
     /** @var array<int, float> */
-    public $linear;
+    private $linear;
 
     /** @var float */
-    public $angularVel;
+    private $angularVel;
 
     /** @var array<int, float> */
-    public $angularPos;
+    private $angularPos;
 
     /** @var float */
-    public $radialVel;
+    private $radialVel;
 
     /** @var array<int, float> */
-    public $radialPos;
+    private $radialPos;
 
     /** @var float */
-    public $slideTime;
+    private $slideTime;
 
     /** @var string */
-    public $deathMessage;
+    private $deathMessage;
 
     public function __construct()
     {
         $this->angularPos = [];
         $this->radialPos = [];
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getLinear(): array
+    {
+        return $this->linear;
+    }
+
+    public function getAngularVel(): float
+    {
+        return $this->angularVel;
+    }
+
+    public function getAngularPos(): array
+    {
+        return $this->angularPos;
+    }
+
+    public function getRadialVel(): float
+    {
+        return $this->radialVel;
+    }
+
+    public function getRadialPos(): array
+    {
+        return $this->radialPos;
+    }
+
+    public function getSlideTime(): float
+    {
+        return $this->slideTime;
+    }
+
+    public function getDeathMessage(): string
+    {
+        return $this->deathMessage;
     }
 
     public function unpack(&$resource): void

@@ -7,7 +7,7 @@
  * LICENSE.md file that was distributed with this source code.
  */
 
-namespace allejo\bzflag\networking\World;
+namespace allejo\bzflag\networking\World\Modifiers;
 
 class ChannelParams
 {

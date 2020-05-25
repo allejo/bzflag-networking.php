@@ -7,16 +7,16 @@
  * LICENSE.md file that was distributed with this source code.
  */
 
-namespace allejo\bzflag\networking\World;
+namespace allejo\bzflag\networking\World\Modifiers;
 
-class TransformData
+class SinusoidParams
 {
-    /** @var int */
-    public $type;
+    /** @var float */
+    public $period;
 
-    /** @var int */
-    public $index;
+    /** @var float */
+    public $offset;
 
-    /** @var float[4] */
-    public $data;
+    /** @var float */
+    public $weight;
 }

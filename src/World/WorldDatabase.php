@@ -10,6 +10,12 @@
 namespace allejo\bzflag\networking\World;
 
 use allejo\bzflag\networking\Packets\NetworkPacket;
+use allejo\bzflag\networking\World\Managers\DynamicColorManager;
+use allejo\bzflag\networking\World\Managers\MaterialManager;
+use allejo\bzflag\networking\World\Managers\ObstacleManager;
+use allejo\bzflag\networking\World\Managers\PhysicsDriverManager;
+use allejo\bzflag\networking\World\Managers\TextureMatrixManager;
+use allejo\bzflag\networking\World\Managers\TransformManager;
 
 class WorldDatabase
 {

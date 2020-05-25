@@ -7,18 +7,27 @@
  * LICENSE.md file that was distributed with this source code.
  */
 
-namespace allejo\bzflag\networking\World;
+namespace allejo\bzflag\networking\World\Managers;
 
 use allejo\bzflag\networking\Packets\NetworkPacket;
+use allejo\bzflag\networking\World\Modifiers\DynamicColor;
 
-class TransformManager
+class DynamicColorManager
 {
-    /** @var array<int, MeshTransform> */
-    private $meshTransforms;
+    /** @var array<int, DynamicColor> */
+    private $colors;
 
     public function __construct()
     {
-        $this->meshTransforms = [];
+        $this->colors = [];
+    }
+
+    /**
+     * @return array<int, DynamicColor>
+     */
+    public function getColors(): array
+    {
+        return $this->colors;
     }
 
     public function unpack(&$resource): void
@@ -27,10 +36,10 @@ class TransformManager
 
         for ($i = 0; $i < $count; ++$i)
         {
-            $meshTransform = new MeshTransform();
-            $meshTransform->unpack($resource);
+            $color = new DynamicColor();
+            $color->unpack($resource);
 
-            $this->meshTransforms[] = $meshTransform;
+            $this->colors[] = $color;
         }
     }
 }

@@ -10,8 +10,8 @@
 namespace allejo\bzflag\networking\World\Object;
 
 use allejo\bzflag\networking\Packets\NetworkPacket;
-use allejo\bzflag\networking\World\Material;
-use allejo\bzflag\networking\World\MeshTransform;
+use allejo\bzflag\networking\World\Modifiers\Material;
+use allejo\bzflag\networking\World\Modifiers\MeshTransform;
 use allejo\bzflag\networking\World\WorldDatabase;
 
 class ConeObstacle extends Obstacle

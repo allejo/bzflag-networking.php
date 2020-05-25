@@ -7,8 +7,16 @@
  * LICENSE.md file that was distributed with this source code.
  */
 
-namespace allejo\bzflag\networking\World\Object\Mesh;
+namespace allejo\bzflag\networking\World\Modifiers;
 
-class MeshDrawInfo
+class TransformData
 {
+    /** @var int */
+    public $type;
+
+    /** @var int */
+    public $index;
+
+    /** @var float[4] */
+    public $data;
 }

@@ -7,26 +7,27 @@
  * LICENSE.md file that was distributed with this source code.
  */
 
-namespace allejo\bzflag\networking\World;
+namespace allejo\bzflag\networking\World\Managers;
 
 use allejo\bzflag\networking\Packets\NetworkPacket;
+use allejo\bzflag\networking\World\Modifiers\PhysicsDriver;
 
-class DynamicColorManager
+class PhysicsDriverManager
 {
-    /** @var array<int, DynamicColor> */
-    private $colors;
+    /** @var array<int, PhysicsDriver> */
+    private $physicsDriver;
 
     public function __construct()
     {
-        $this->colors = [];
+        $this->physicsDriver = [];
     }
 
     /**
-     * @return array<int, DynamicColor>
+     * @return array<int, PhysicsDriver>
      */
-    public function getColors(): array
+    public function getPhysicsDriver(): array
     {
-        return $this->colors;
+        return $this->physicsDriver;
     }
 
     public function unpack(&$resource): void
@@ -35,10 +36,10 @@ class DynamicColorManager
 
         for ($i = 0; $i < $count; ++$i)
         {
-            $color = new DynamicColor();
-            $color->unpack($resource);
+            $physicsDriver = new PhysicsDriver();
+            $physicsDriver->unpack($resource);
 
-            $this->colors[] = $color;
+            $this->physicsDriver[] = $physicsDriver;
         }
     }
 }

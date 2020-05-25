@@ -14,27 +14,6 @@ namespace allejo\bzflag\networking\GameData;
  *
  * @deprecated Use the correctly spelled `FiringInfoData` class
  */
-class FiringIntoData implements \JsonSerializable
+class FiringIntoData extends FiringInfoData
 {
-    /** @var float */
-    public $timeSent;
-
-    /** @var ShotData */
-    public $shot;
-
-    /** @var string */
-    public $flag;
-
-    /** @var float */
-    public $lifetime;
-
-    public function jsonSerialize()
-    {
-        return [
-            'timeSent' => $this->timeSent,
-            'shot' => $this->shot,
-            'flag' => $this->flag,
-            'lifetime' => $this->lifetime,
-        ];
-    }
 }

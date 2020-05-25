@@ -7,28 +7,27 @@
  * LICENSE.md file that was distributed with this source code.
  */
 
-namespace allejo\bzflag\networking\World;
+namespace allejo\bzflag\networking\World\Managers;
 
 use allejo\bzflag\networking\Packets\NetworkPacket;
+use allejo\bzflag\networking\World\Modifiers\TextureMatrix;
 
-class MaterialManager
+class TextureMatrixManager
 {
-    /** @var array<int, Material> */
-    private $materials;
+    /** @var array<int, TextureMatrix> */
+    private $textures;
 
     public function __construct()
     {
-        $this->materials = [];
+        $this->textures = [];
     }
 
-    public function getMaterial(int $index): Material
+    /**
+     * @return array<int, TextureMatrix>
+     */
+    public function getTextures(): array
     {
-        return $this->materials[$index];
-    }
-
-    public function getMaterials(): array
-    {
-        return $this->materials;
+        return $this->textures;
     }
 
     public function unpack(&$resource): void
@@ -37,10 +36,10 @@ class MaterialManager
 
         for ($i = 0; $i < $count; ++$i)
         {
-            $material = new Material();
-            $material->unpack($resource);
+            $textureMatrix = new TextureMatrix();
+            $textureMatrix->unpack($resource);
 
-            $this->materials[] = $material;
+            $this->textures[] = $textureMatrix;
         }
     }
 }

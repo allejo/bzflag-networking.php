@@ -7,12 +7,10 @@
  * LICENSE.md file that was distributed with this source code.
  */
 
-namespace allejo\bzflag\networking\World\Object\Mesh;
+namespace allejo\bzflag\networking\World\Object;
 
 use allejo\bzflag\networking\Packets\NetworkPacket;
-use allejo\bzflag\networking\World\Material;
-use allejo\bzflag\networking\World\Object\MeshObstacle;
-use allejo\bzflag\networking\World\Object\Obstacle;
+use allejo\bzflag\networking\World\Modifiers\Material;
 use allejo\bzflag\networking\World\WorldDatabase;
 
 class MeshFace extends Obstacle

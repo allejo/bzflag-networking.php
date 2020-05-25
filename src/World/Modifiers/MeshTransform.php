@@ -7,17 +7,27 @@
  * LICENSE.md file that was distributed with this source code.
  */
 
-namespace allejo\bzflag\networking\World;
+namespace allejo\bzflag\networking\World\Modifiers;
 
 use allejo\bzflag\networking\Packets\NetworkPacket;
 
 class MeshTransform
 {
     /** @var string */
-    public $name;
+    private $name;
 
     /** @var array<int, TransformData> */
-    public $transforms;
+    private $transforms;
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getTransforms(): array
+    {
+        return $this->transforms;
+    }
 
     public function unpack(&$resource): void
     {
