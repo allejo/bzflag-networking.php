@@ -24,6 +24,6 @@ class WallObstacle extends Obstacle
         ];
 
         $stateByte = NetworkPacket::unpackUInt8($resource);
-        $this->ricochet = ($stateByte & self::RICOCHET) !== 0;
+        $this->ricochet = ($stateByte & (1 << 3)) !== 0;
     }
 }

@@ -11,11 +11,6 @@ namespace allejo\bzflag\networking\World\Object;
 
 abstract class Obstacle
 {
-    const DRIVE_THRU = (1 << 0);
-    const SHOOT_THRU = (1 << 1);
-    const FLIP_Z = (1 << 2);
-    const RICOCHET = (1 << 3);
-
     /** @var array{float, float, float} */
     protected $pos;
 

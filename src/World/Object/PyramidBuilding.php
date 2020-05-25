@@ -20,9 +20,9 @@ class PyramidBuilding extends Obstacle
         $this->size = NetworkPacket::unpackVector($resource);
 
         $stateByte = NetworkPacket::unpackUInt8($resource);
-        $this->driveThrough = ($stateByte & self::DRIVE_THRU) !== 0;
-        $this->shootThrough = ($stateByte & self::SHOOT_THRU) !== 0;
-        $this->ricochet = ($stateByte & self::RICOCHET) !== 0;
-        $this->zFlip = ($stateByte & self::FLIP_Z) !== 0;
+        $this->driveThrough = ($stateByte & (1 << 0)) !== 0;
+        $this->shootThrough = ($stateByte & (1 << 1)) !== 0;
+        $this->ricochet = ($stateByte & (1 << 3)) !== 0;
+        $this->zFlip = ($stateByte & (1 << 2)) !== 0;
     }
 }

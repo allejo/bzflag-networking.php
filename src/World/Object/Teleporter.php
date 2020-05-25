@@ -50,8 +50,8 @@ class Teleporter extends Obstacle
         $this->horizontal = $horizontalByte !== 0;
 
         $stateByte = NetworkPacket::unpackUInt8($resource);
-        $this->driveThrough = ($stateByte & self::DRIVE_THRU) !== 0;
-        $this->shootThrough = ($stateByte & self::SHOOT_THRU) !== 0;
-        $this->ricochet = ($stateByte & self::RICOCHET) !== 0;
+        $this->driveThrough = ($stateByte & (1 << 0)) !== 0;
+        $this->shootThrough = ($stateByte & (1 << 1)) !== 0;
+        $this->ricochet = ($stateByte & (1 << 3)) !== 0;
     }
 }
