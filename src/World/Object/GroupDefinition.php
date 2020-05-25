@@ -14,21 +14,41 @@ use allejo\bzflag\networking\Packets\NetworkPacket;
 class GroupDefinition
 {
     /** @var string */
-    public $name;
+    private $name;
 
     /** @var bool */
-    public $active;
+    private $active;
 
     /** @var array<int, Obstacle> */
-    public $lists;
+    private $lists;
 
     /** @var array<int, GroupInstance> */
-    public $groups;
+    private $groups;
 
     public function __construct(string $name)
     {
         $this->name = $name;
         $this->active = false;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function isActive(): bool
+    {
+        return $this->active;
+    }
+
+    public function getLists(): array
+    {
+        return $this->lists;
+    }
+
+    public function getGroups(): array
+    {
+        return $this->groups;
     }
 
     public function unpack(&$resource): void

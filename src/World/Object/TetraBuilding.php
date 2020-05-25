@@ -26,13 +26,13 @@ class TetraBuilding extends Obstacle
     private $normals;
 
     /** @var float[][][] */
-    private $texcoords;
+    private $texCoords;
 
     /** @var bool[] */
     private $useNormals;
 
     /** @var bool[] */
-    private $useTexcoords;
+    private $useTexCoords;
 
     /** @var Material[] */
     private $materials;
@@ -41,9 +41,9 @@ class TetraBuilding extends Obstacle
     {
         $this->vertices = [];
         $this->normals = [];
-        $this->texcoords = [];
+        $this->texCoords = [];
         $this->useNormals = [];
-        $this->useTexcoords = [];
+        $this->useTexCoords = [];
         $this->materials = [];
     }
 
@@ -71,9 +71,9 @@ class TetraBuilding extends Obstacle
     /**
      * @return float[][][]
      */
-    public function getTexcoords(): array
+    public function getTexCoords(): array
     {
-        return $this->texcoords;
+        return $this->texCoords;
     }
 
     /**
@@ -87,9 +87,9 @@ class TetraBuilding extends Obstacle
     /**
      * @return bool[]
      */
-    public function getUseTexcoords(): array
+    public function getUseTexCoords(): array
     {
-        return $this->useTexcoords;
+        return $this->useTexCoords;
     }
 
     /**
@@ -132,14 +132,14 @@ class TetraBuilding extends Obstacle
 
         // Unpack the texcoords
         $useTexcoordsByte = NetworkPacket::unpackUInt8($resource);
-        $this->useTexcoords = self::unpack4Bools($useTexcoordsByte);
+        $this->useTexCoords = self::unpack4Bools($useTexcoordsByte);
         for ($v = 0; $v < 4; ++$v)
         {
-            if ($this->useTexcoords[$v])
+            if ($this->useTexCoords[$v])
             {
                 for ($i = 0; $i < 3; ++$i)
                 {
-                    $this->texcoords[$v][$i] = [
+                    $this->texCoords[$v][$i] = [
                         NetworkPacket::unpackFloat($resource),
                         NetworkPacket::unpackFloat($resource),
                     ];
