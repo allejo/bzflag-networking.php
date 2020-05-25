@@ -14,69 +14,164 @@ use allejo\bzflag\networking\Packets\NetworkPacket;
 class TextureMatrix
 {
     /** @var string */
-    public $name;
+    private $name;
 
     /** @var bool */
-    public $useStatic;
+    private $useStatic;
 
     /** @var bool */
-    public $useDynamic;
+    private $useDynamic;
 
     //
     // Static Properties
     //
 
     /** @var float */
-    public $rotation;
+    private $rotation;
 
     /** @var float */
-    public $uFixedShift;
+    private $uFixedShift;
 
     /** @var float */
-    public $vFixedShift;
+    private $vFixedShift;
 
     /** @var float */
-    public $uFixedScale;
+    private $uFixedScale;
 
     /** @var float */
-    public $vFixedScale;
+    private $vFixedScale;
 
     /** @var float */
-    public $uFixedCenter;
+    private $uFixedCenter;
 
     /** @var float */
-    public $vFixedCenter;
+    private $vFixedCenter;
 
     //
     // Dynamic Properties
     //
 
     /** @var float */
-    public $spinFreq;
+    private $spinFreq;
 
     /** @var float */
-    public $uShiftFreq;
+    private $uShiftFreq;
 
     /** @var float */
-    public $vShiftFreq;
+    private $vShiftFreq;
 
     /** @var float */
-    public $uScaleFreq;
+    private $uScaleFreq;
 
     /** @var float */
-    public $vScaleFreq;
+    private $vScaleFreq;
 
     /** @var float */
-    public $uScale;
+    private $uScale;
 
     /** @var float */
-    public $vScale;
+    private $vScale;
 
     /** @var float */
-    public $uCenter;
+    private $uCenter;
 
     /** @var float */
-    public $vCenter;
+    private $vCenter;
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function isUseStatic(): bool
+    {
+        return $this->useStatic;
+    }
+
+    public function isUseDynamic(): bool
+    {
+        return $this->useDynamic;
+    }
+
+    public function getRotation(): float
+    {
+        return $this->rotation;
+    }
+
+    public function getUFixedShift(): float
+    {
+        return $this->uFixedShift;
+    }
+
+    public function getVFixedShift(): float
+    {
+        return $this->vFixedShift;
+    }
+
+    public function getUFixedScale(): float
+    {
+        return $this->uFixedScale;
+    }
+
+    public function getVFixedScale(): float
+    {
+        return $this->vFixedScale;
+    }
+
+    public function getUFixedCenter(): float
+    {
+        return $this->uFixedCenter;
+    }
+
+    public function getVFixedCenter(): float
+    {
+        return $this->vFixedCenter;
+    }
+
+    public function getSpinFreq(): float
+    {
+        return $this->spinFreq;
+    }
+
+    public function getUShiftFreq(): float
+    {
+        return $this->uShiftFreq;
+    }
+
+    public function getVShiftFreq(): float
+    {
+        return $this->vShiftFreq;
+    }
+
+    public function getUScaleFreq(): float
+    {
+        return $this->uScaleFreq;
+    }
+
+    public function getVScaleFreq(): float
+    {
+        return $this->vScaleFreq;
+    }
+
+    public function getUScale(): float
+    {
+        return $this->uScale;
+    }
+
+    public function getVScale(): float
+    {
+        return $this->vScale;
+    }
+
+    public function getUCenter(): float
+    {
+        return $this->uCenter;
+    }
+
+    public function getVCenter(): float
+    {
+        return $this->vCenter;
+    }
 
     public function unpack(&$resource): void
     {

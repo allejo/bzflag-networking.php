@@ -14,66 +14,161 @@ use allejo\bzflag\networking\Packets\NetworkPacket;
 class Material
 {
     /** @var string */
-    public $name;
+    private $name;
 
     /** @var bool */
-    public $noCulling;
+    private $noCulling;
 
     /** @var bool */
-    public $noSorting;
+    private $noSorting;
 
     /** @var bool */
-    public $noRadar;
+    private $noRadar;
 
     /** @var bool */
-    public $noShadow;
+    private $noShadow;
 
     /** @var bool */
-    public $occluder;
+    private $occluder;
 
     /** @var bool */
-    public $groupAlpha;
+    private $groupAlpha;
 
     /** @var bool */
-    public $noLighting;
+    private $noLighting;
 
     /** @var int */
-    public $dynamicColor;
+    private $dynamicColor;
 
     /** @var float[4] */
-    public $ambient;
+    private $ambient;
 
     /** @var float[4] */
-    public $diffuse;
+    private $diffuse;
 
     /** @var float[4] */
-    public $specular;
+    private $specular;
 
     /** @var float[4] */
-    public $emission;
+    private $emission;
 
     /** @var float */
-    public $shininess;
+    private $shininess;
 
     /** @var float */
-    public $alphaThreshold;
+    private $alphaThreshold;
 
     /** @var int */
-    public $textureCount;
+    private $textureCount;
 
     /** @var array<int, TextureInfo> */
-    public $textures;
+    private $textures;
 
     /** @var int */
-    public $shaderCount;
+    private $shaderCount;
 
     /** @var array<int, ShaderInfo> */
-    public $shaders;
+    private $shaders;
 
     public function __construct()
     {
         $this->textures = [];
         $this->shaders = [];
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function isNoCulling(): bool
+    {
+        return $this->noCulling;
+    }
+
+    public function isNoSorting(): bool
+    {
+        return $this->noSorting;
+    }
+
+    public function isNoRadar(): bool
+    {
+        return $this->noRadar;
+    }
+
+    public function isNoShadow(): bool
+    {
+        return $this->noShadow;
+    }
+
+    public function isOccluder(): bool
+    {
+        return $this->occluder;
+    }
+
+    public function isGroupAlpha(): bool
+    {
+        return $this->groupAlpha;
+    }
+
+    public function isNoLighting(): bool
+    {
+        return $this->noLighting;
+    }
+
+    public function getDynamicColor(): int
+    {
+        return $this->dynamicColor;
+    }
+
+    public function getAmbient(): float
+    {
+        return $this->ambient;
+    }
+
+    public function getDiffuse(): float
+    {
+        return $this->diffuse;
+    }
+
+    public function getSpecular(): float
+    {
+        return $this->specular;
+    }
+
+    public function getEmission(): float
+    {
+        return $this->emission;
+    }
+
+    public function getShininess(): float
+    {
+        return $this->shininess;
+    }
+
+    public function getAlphaThreshold(): float
+    {
+        return $this->alphaThreshold;
+    }
+
+    public function getTextureCount(): int
+    {
+        return $this->textureCount;
+    }
+
+    public function getTextures(): array
+    {
+        return $this->textures;
+    }
+
+    public function getShaderCount(): int
+    {
+        return $this->shaderCount;
+    }
+
+    public function getShaders(): array
+    {
+        return $this->shaders;
     }
 
     public function unpack(&$resource): void
