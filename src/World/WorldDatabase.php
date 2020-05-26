@@ -14,7 +14,7 @@ use allejo\bzflag\networking\InvalidWorldDatabase;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\networking\World\Managers\DynamicColorManager;
 use allejo\bzflag\networking\World\Managers\MaterialManager;
-use allejo\bzflag\networking\World\Managers\ObstacleManager;
+use allejo\bzflag\networking\World\Managers\GroupDefinitionManager;
 use allejo\bzflag\networking\World\Managers\PhysicsDriverManager;
 use allejo\bzflag\networking\World\Managers\TextureMatrixManager;
 use allejo\bzflag\networking\World\Managers\TransformManager;
@@ -60,7 +60,7 @@ class WorldDatabase implements \JsonSerializable
     /** @var TransformManager */
     private $transformManager;
 
-    /** @var ObstacleManager */
+    /** @var GroupDefinitionManager */
     private $obstacleManager;
 
     /**
@@ -109,7 +109,7 @@ class WorldDatabase implements \JsonSerializable
         $this->transformManager = new TransformManager($this);
         $this->transformManager->unpack($this->database);
 
-        $this->obstacleManager = new ObstacleManager($this);
+        $this->obstacleManager = new GroupDefinitionManager($this);
         $this->obstacleManager->unpack($this->database);
     }
 
@@ -154,7 +154,7 @@ class WorldDatabase implements \JsonSerializable
         return $this->transformManager;
     }
 
-    public function getObstacleManager(): ObstacleManager
+    public function getObstacleManager(): GroupDefinitionManager
     {
         return $this->obstacleManager;
     }

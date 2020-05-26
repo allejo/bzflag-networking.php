@@ -12,7 +12,7 @@ namespace allejo\bzflag\networking\World\Managers;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\networking\World\Object\GroupDefinition;
 
-class ObstacleManager extends BaseManager
+class GroupDefinitionManager extends BaseManager
 {
     /** @var GroupDefinition */
     private $world;
