@@ -11,14 +11,9 @@ namespace allejo\bzflag\networking\GameData;
 
 use allejo\bzflag\networking\GameData\FiringInfoData as Base;
 
-class_exists('allejo\bzflag\networking\GameData\FiringInfoData');
-
 @trigger_error('Using the "allejo\bzflag\networking\GameData\FiringIntoData" class is deprecated since version 1.0.9 and will be removed in version 2, use "allejo\bzflag\networking\GameData\FiringInfoData" instead.', E_USER_DEPRECATED);
 
-if (\false)
+/** @deprecated since 1.0.9, use "allejo\bzflag\networking\GameData\FiringInfoData" instead */
+class FiringIntoData extends Base
 {
-    /** @deprecated since 1.0.9, use "allejo\bzflag\networking\GameData\FiringInfoData" instead */
-    class FiringIntoData extends Base
-    {
-    }
 }

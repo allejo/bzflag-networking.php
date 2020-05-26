@@ -11,14 +11,9 @@ namespace allejo\bzflag\networking;
 
 use allejo\bzflag\replays\ReplayDuration as Base;
 
-class_exists('allejo\bzflag\replays\ReplayDuration');
-
 @trigger_error('Using the "allejo\bzflag\networking\ReplayDuration" class is deprecated since version 1.1 and will be removed in version 2, use "allejo\bzflag\replays\ReplayDuration" instead.', E_USER_DEPRECATED);
 
-if (\false)
+/** @deprecated since 1.1, use "allejo\bzflag\replays\ReplayDuration" instead */
+class ReplayDuration extends Base
 {
-    /** @deprecated since 1.1, use "allejo\bzflag\replays\ReplayDuration" instead */
-    class ReplayDuration extends Base
-    {
-    }
 }
