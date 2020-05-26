@@ -13,6 +13,14 @@ use allejo\bzflag\networking\Packets\NetworkPacket;
 
 class PyramidBuilding extends Obstacle
 {
+    /** @var bool */
+    private $zFlip;
+
+    public function getZFlip(): bool
+    {
+        return $this->zFlip;
+    }
+
     public function unpack(&$resource): void
     {
         $this->pos = NetworkPacket::unpackVector($resource);

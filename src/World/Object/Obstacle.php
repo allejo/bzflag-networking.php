@@ -37,9 +37,6 @@ abstract class Obstacle implements \JsonSerializable
     /** @var bool */
     protected $ricochet;
 
-    /** @var bool */
-    protected $zFlip;
-
     /** @var array<ObstacleType::*, class-string> */
     private static $mapping = [
         ObstacleType::WALL_TYPE => WallObstacle::class,
@@ -93,11 +90,6 @@ abstract class Obstacle implements \JsonSerializable
     public function getHeight(): float
     {
         return $this->size[2];
-    }
-
-    public function getZFlip(): bool
-    {
-        return $this->zFlip;
     }
 
     public function isDriveThrough(): bool
