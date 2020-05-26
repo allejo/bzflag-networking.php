@@ -32,7 +32,7 @@ abstract class Obstacle
     /** @var bool */
     protected $zFlip;
 
-    /** @var array<ObstacleType::*_TYPE, class-string> */
+    /** @var array<ObstacleType::*, class-string> */
     private static $mapping = [
         ObstacleType::WALL_TYPE => WallObstacle::class,
         ObstacleType::BOX_TYPE => BoxBuilding::class,
@@ -112,6 +112,9 @@ abstract class Obstacle
         return true;
     }
 
+    /**
+     * @param resource|string $resource
+     */
     abstract public function unpack(&$resource): void;
 
     public static function new(int $type): Obstacle

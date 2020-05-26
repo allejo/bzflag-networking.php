@@ -41,16 +41,25 @@ class GroupDefinition
         return $this->active;
     }
 
+    /**
+     * @return array<int, array<int, Obstacle>>
+     */
     public function getLists(): array
     {
         return $this->lists;
     }
 
+    /**
+     * @return array<int, GroupInstance>
+     */
     public function getGroups(): array
     {
         return $this->groups;
     }
 
+    /**
+     * @param resource|string $resource
+     */
     public function unpack(&$resource): void
     {
         $this->name = NetworkPacket::unpackStdString($resource);

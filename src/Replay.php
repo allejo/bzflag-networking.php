@@ -58,7 +58,12 @@ class Replay implements \JsonSerializable
         $this->resource = $resource;
         $stats = fstat($this->resource);
 
-        if ($stats['size'] == 0)
+        if ($stats === false)
+        {
+            throw new InvalidReplayException("Could not fstat() on this replay ({$file})");
+        }
+
+        if ($stats['size'] === 0)
         {
             throw new InvalidReplayException("The replay file has a length of 0 ({$file})");
         }

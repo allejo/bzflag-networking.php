@@ -66,22 +66,31 @@ class MeshFace extends Obstacle
         return $this->vertexCount;
     }
 
+    /**
+     * @return array<int, array<int, float>>
+     */
     public function getVertices(): array
     {
         return $this->vertices;
     }
 
+    /**
+     * @return array<int, array<int, float>>
+     */
     public function getNormals(): array
     {
         return $this->normals;
     }
 
+    /**
+     * @return array<int, array<int, float>>
+     */
     public function getTexCoords(): array
     {
         return $this->texCoords;
     }
 
-    public function getBzMaterial(): Material
+    public function getMaterial(): Material
     {
         return $this->bzMaterial;
     }
@@ -101,6 +110,9 @@ class MeshFace extends Obstacle
         return $this->phyDrv;
     }
 
+    /**
+     * @param resource|string $resource
+     */
     public function unpack(&$resource): void
     {
         $stateByte = NetworkPacket::unpackUInt8($resource);

@@ -9,6 +9,7 @@
 
 namespace allejo\bzflag\networking\World;
 
+use allejo\bzflag\networking\InvalidWorldCompression;
 use allejo\bzflag\networking\InvalidWorldDatabase;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\networking\World\Managers\DynamicColorManager;
@@ -65,6 +66,7 @@ class WorldDatabase
     /**
      * @param resource $resource
      *
+     * @throws InvalidWorldCompression
      * @throws InvalidWorldDatabase
      */
     public function __construct(&$resource)
@@ -76,13 +78,18 @@ class WorldDatabase
         $this->databaseSize = NetworkPacket::unpackUInt32($resource);
 
         $worldDatabase = fread($resource, $this->databaseSize);
-
         if ($worldDatabase === false)
         {
             throw new InvalidWorldDatabase('The world database could not be read from this resource.');
         }
 
-        $this->database = zlib_decode($worldDatabase, $this->uncompressedSize);
+        $uncompressedWorld = zlib_decode($worldDatabase, $this->uncompressedSize);
+        if ($uncompressedWorld === false)
+        {
+            throw new InvalidWorldCompression('The compressed world database could not be expanded.');
+        }
+
+        $this->database = $uncompressedWorld;
 
         $this->worldCodeEndSize = NetworkPacket::unpackUInt16($resource);
         $this->worldCodeEnd = NetworkPacket::unpackUInt16($resource);

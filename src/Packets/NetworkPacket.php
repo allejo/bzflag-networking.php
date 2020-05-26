@@ -472,6 +472,12 @@ class NetworkPacket implements Unpackable
             if ($size < 0)
             {
                 $stats = fstat($buffer);
+
+                if ($stats === false)
+                {
+                    throw new \RuntimeException('Could not fstat() this resource');
+                }
+
                 $size = $stats['size'];
             }
 

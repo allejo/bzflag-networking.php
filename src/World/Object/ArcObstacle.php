@@ -116,8 +116,11 @@ class ArcObstacle extends Obstacle
         $this->sweepAngle = NetworkPacket::unpackFloat($resource);
         $this->ratio = NetworkPacket::unpackFloat($resource);
 
-        $this->divisions = (int)NetworkPacket::unpackInt32($resource);
-        $this->phyDrv = (int)NetworkPacket::unpackInt32($resource);
+        $this->divisions = NetworkPacket::unpackInt32($resource);
+        $this->phyDrv = NetworkPacket::unpackInt32($resource);
+
+        /** @var array{bool, bool, bool} $tuple */
+        $tuple = [];
 
         for ($i = 0; $i < 4; ++$i)
         {
@@ -126,7 +129,7 @@ class ArcObstacle extends Obstacle
 
         for ($i = 0; $i < self::MATERIAL_COUNT; ++$i)
         {
-            $matIndex = (int)NetworkPacket::unpackInt32($resource);
+            $matIndex = NetworkPacket::unpackInt32($resource);
             $this->materials[$i] = WorldDatabase::getMaterialManager()->getMaterial($matIndex);
         }
 

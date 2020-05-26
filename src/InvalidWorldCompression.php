@@ -7,14 +7,8 @@
  * LICENSE.md file that was distributed with this source code.
  */
 
-namespace allejo\bzflag\networking\World\Object;
+namespace allejo\bzflag\networking;
 
-class GroupInstance
+class InvalidWorldCompression extends \Exception
 {
-    /**
-     * @param resource|string $resource
-     */
-    public function unpack(&$resource): void
-    {
-    }
 }

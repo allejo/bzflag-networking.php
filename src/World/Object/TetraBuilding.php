@@ -131,8 +131,8 @@ class TetraBuilding extends Obstacle
         }
 
         // Unpack the texcoords
-        $useTexcoordsByte = NetworkPacket::unpackUInt8($resource);
-        $this->useTexCoords = self::unpack4Bools($useTexcoordsByte);
+        $useTexCoordsByte = NetworkPacket::unpackUInt8($resource);
+        $this->useTexCoords = self::unpack4Bools($useTexCoordsByte);
         for ($v = 0; $v < 4; ++$v)
         {
             if ($this->useTexCoords[$v])
@@ -155,15 +155,16 @@ class TetraBuilding extends Obstacle
         }
     }
 
-    private static function unpack4Bools($byte): array
+    /**
+     * @return array{bool, bool, bool, bool}
+     */
+    private static function unpack4Bools(int $byte): array
     {
-        $bools = [];
-
-        for ($i = 0; $i < 4; ++$i)
-        {
-            $bools[$i] = (bool)($byte & (1 << $i));
-        }
-
-        return $bools;
+        return [
+            (bool)($byte & (1 << 0)),
+            (bool)($byte & (1 << 1)),
+            (bool)($byte & (1 << 2)),
+            (bool)($byte & (1 << 3)),
+        ];
     }
 }

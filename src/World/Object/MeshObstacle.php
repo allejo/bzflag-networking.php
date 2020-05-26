@@ -22,25 +22,25 @@ class MeshObstacle extends Obstacle
     /** @var string */
     private $checkTypes;
 
-    /** @var array{float, float, float} */
+    /** @var array<int, array{float, float, float}> */
     private $checkPoints;
 
     /** @var int */
     private $vertexCount;
 
-    /** @var array{float, float, float} */
+    /** @var array<int, array{float, float, float}> */
     private $vertices;
 
     /** @var int */
     private $normalCount;
 
-    /** @var array{float, float, floaat} */
+    /** @var array<int, array{float, float, float}> */
     private $normals;
 
     /** @var int */
     private $texCoordCount;
 
-    /** @var array{float, float} */
+    /** @var array<int, array{float, float}> */
     private $texCoords;
 
     /** @var int */
@@ -89,6 +89,9 @@ class MeshObstacle extends Obstacle
         return $this->checkTypes;
     }
 
+    /**
+     * @return array<int, array{float, float, float}>
+     */
     public function getCheckPoints(): array
     {
         return $this->checkPoints;
@@ -99,11 +102,22 @@ class MeshObstacle extends Obstacle
         return $this->vertexCount;
     }
 
+    /**
+     * @return array<int, array{float, float, float}>
+     */
+    public function getVertices(): array
+    {
+        return $this->vertices;
+    }
+
     public function getNormalCount(): int
     {
         return $this->normalCount;
     }
 
+    /**
+     * @return array<int, array{float, float, float}>
+     */
     public function getNormals(): array
     {
         return $this->normals;
@@ -114,6 +128,9 @@ class MeshObstacle extends Obstacle
         return $this->texCoordCount;
     }
 
+    /**
+     * @return array<int, array{float, float}>
+     */
     public function getTexCoords(): array
     {
         return $this->texCoords;
@@ -129,6 +146,9 @@ class MeshObstacle extends Obstacle
         return $this->faceSize;
     }
 
+    /**
+     * @return array<int, MeshFace>
+     */
     public function getFaces(): array
     {
         return $this->faces;
@@ -155,13 +175,8 @@ class MeshObstacle extends Obstacle
     }
 
     /**
-     * @return array{float, float, float}
+     * @param resource|string $resource
      */
-    public function getVertices(): array
-    {
-        return $this->vertices;
-    }
-
     public function unpack(&$resource): void
     {
         $this->checkCount = NetworkPacket::unpackInt32($resource);

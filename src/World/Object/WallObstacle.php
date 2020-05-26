@@ -18,7 +18,7 @@ class WallObstacle extends Obstacle
         $this->pos = NetworkPacket::unpackVector($resource);
         $this->angle = NetworkPacket::unpackFloat($resource);
         $this->size = [
-            null,
+            -1.0,
             NetworkPacket::unpackFloat($resource),
             NetworkPacket::unpackFloat($resource),
         ];
