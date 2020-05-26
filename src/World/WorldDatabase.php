@@ -119,12 +119,13 @@ class WorldDatabase implements \JsonSerializable
     public function jsonSerialize(): array
     {
         return [
-            'colors' => $this->dynamicColorManager,
-            'textures' => $this->textureMatrixManager,
-            'materials' => $this->materialManager,
-            'physicsDrivers' => $this->physicsDriverManager,
-            'transforms' => $this->transformManager,
-            'obstacles' => $this->obstacleManager,
+            'colors' => $this->dynamicColorManager->getColors(),
+            'textures' => $this->textureMatrixManager->getTextures(),
+            'materials' => $this->materialManager->getMaterials(),
+            'physicsDrivers' => $this->physicsDriverManager->getPhysicsDrivers(),
+            'transforms' => $this->transformManager->getMeshTransforms(),
+            'obstacles' => $this->obstacleManager->getWorld()->getLists(),
+            'groups' => $this->obstacleManager->getGroupDefinitions(),
         ];
     }
 

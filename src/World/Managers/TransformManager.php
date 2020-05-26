@@ -18,6 +18,14 @@ class TransformManager extends BaseManager
     private $meshTransforms = [];
 
     /**
+     * @return array<int, MeshTransform>
+     */
+    public function getMeshTransforms(): array
+    {
+        return $this->meshTransforms;
+    }
+
+    /**
      * @param resource|string $resource
      */
     public function unpack(&$resource): void

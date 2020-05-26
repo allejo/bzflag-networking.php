@@ -15,14 +15,14 @@ use allejo\bzflag\networking\World\Modifiers\PhysicsDriver;
 class PhysicsDriverManager extends BaseManager
 {
     /** @var array<int, PhysicsDriver> */
-    private $physicsDriver = [];
+    private $physicsDrivers = [];
 
     /**
      * @return array<int, PhysicsDriver>
      */
-    public function getPhysicsDriver(): array
+    public function getPhysicsDrivers(): array
     {
-        return $this->physicsDriver;
+        return $this->physicsDrivers;
     }
 
     /**
@@ -37,7 +37,7 @@ class PhysicsDriverManager extends BaseManager
             $physicsDriver = new PhysicsDriver();
             $physicsDriver->unpack($resource);
 
-            $this->physicsDriver[] = $physicsDriver;
+            $this->physicsDrivers[] = $physicsDriver;
         }
     }
 }
