@@ -13,6 +13,8 @@ use allejo\bzflag\generic\JsonSerializePublicGetters;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\networking\Packets\NetworkProtocol;
 use allejo\bzflag\networking\Packets\Unpackable;
+use allejo\bzflag\world\InvalidWorldCompression;
+use allejo\bzflag\world\InvalidWorldDatabase;
 use allejo\bzflag\world\WorldDatabase;
 
 class ReplayHeader implements Unpackable, \JsonSerializable

@@ -12,6 +12,8 @@ namespace allejo\bzflag\generic;
 /**
  * A trait to automatically allow a class to be JSON serialized by exporting all
  * of its getter methods as JSON keys.
+ *
+ * @internal
  */
 trait JsonSerializePublicGetters
 {

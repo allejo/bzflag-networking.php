@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- * @covers \allejo\bzflag\networking\ReplayHeader
+ * @covers \allejo\bzflag\replays\ReplayHeader
  */
 class ReplayPacketsTest extends TestCase
 {

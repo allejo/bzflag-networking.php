@@ -9,11 +9,16 @@
 
 namespace allejo\bzflag\networking\GameData;
 
-/**
- * @todo 2.0.0 Remove the `FiringInfoData` and then rename this class to `FiringInfoData`
- *
- * @deprecated Use the correctly spelled `FiringInfoData` class
- */
-class FiringIntoData extends FiringInfoData
+use allejo\bzflag\networking\GameData\FiringInfoData as Base;
+
+class_exists('allejo\bzflag\networking\GameData\FiringInfoData');
+
+@trigger_error('Using the "allejo\bzflag\networking\GameData\FiringIntoData" class is deprecated since version 1.0.9 and will be removed in version 2, use "allejo\bzflag\networking\GameData\FiringInfoData" instead.', E_USER_DEPRECATED);
+
+if (\false)
 {
+    /** @deprecated since 1.0.9, use "allejo\bzflag\networking\GameData\FiringInfoData" instead */
+    class FiringIntoData extends Base
+    {
+    }
 }
