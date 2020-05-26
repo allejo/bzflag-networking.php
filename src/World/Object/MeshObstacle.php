@@ -67,7 +67,7 @@ class MeshObstacle extends Obstacle
 
     public function __construct(WorldDatabase &$database)
     {
-        parent::__construct($database);
+        parent::__construct($database, ObstacleType::MESH_TYPE);
 
         $this->checkPoints = [];
         $this->vertices = [];

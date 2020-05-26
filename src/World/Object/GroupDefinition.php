@@ -9,11 +9,14 @@
 
 namespace allejo\bzflag\networking\World\Object;
 
+use allejo\bzflag\networking\JsonSerializePublicGetters;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\networking\World\WorldDatabase;
 
-class GroupDefinition
+class GroupDefinition implements \JsonSerializable
 {
+    use JsonSerializePublicGetters;
+
     /** @var WorldDatabase */
     private $worldDatabase;
 
@@ -31,9 +34,11 @@ class GroupDefinition
 
     public function __construct(string $name, WorldDatabase &$database)
     {
+        $this->worldDatabase = &$database;
         $this->name = $name;
         $this->active = false;
-        $this->worldDatabase = &$database;
+        $this->lists = [];
+        $this->groups = [];
     }
 
     public function getName(): string

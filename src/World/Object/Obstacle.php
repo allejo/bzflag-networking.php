@@ -16,6 +16,9 @@ abstract class Obstacle implements \JsonSerializable
 {
     use JsonSerializePublicGetters;
 
+    /** @var null|ObstacleType::* */
+    protected $objectType;
+
     /** @var WorldDatabase */
     protected $worldDatabase;
 
@@ -51,9 +54,15 @@ abstract class Obstacle implements \JsonSerializable
         ObstacleType::TETRA_TYPE => TetraBuilding::class,
     ];
 
-    public function __construct(WorldDatabase &$database)
+    public function __construct(WorldDatabase &$database, ?int $obstacleType)
     {
         $this->worldDatabase = &$database;
+        $this->objectType = $obstacleType;
+    }
+
+    public function getObjectType(): ?int
+    {
+        return $this->objectType;
     }
 
     /**
@@ -129,6 +138,6 @@ abstract class Obstacle implements \JsonSerializable
             throw new \InvalidArgumentException("Unknown object type with type ID {$type}.");
         }
 
-        return new self::$mapping[$type]($database);
+        return new self::$mapping[$type]($database, $type);
     }
 }

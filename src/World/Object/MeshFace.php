@@ -53,7 +53,7 @@ class MeshFace extends Obstacle
 
     public function __construct(MeshObstacle $mesh, WorldDatabase &$database)
     {
-        parent::__construct($database);
+        parent::__construct($database, null);
 
         $this->mesh = $mesh;
     }
