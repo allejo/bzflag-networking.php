@@ -66,7 +66,10 @@ trait JsonSerializePublicGetters
 
         foreach ($fxns as $fxn)
         {
-            if (substr($fxn->getName(), 0, 3) === 'get')
+            $isGetter = substr($fxn->getName(), 0, 3) === 'get';
+            $hasNoArgs = count($fxn->getParameters()) === 0;
+
+            if ($isGetter && $hasNoArgs)
             {
                 $keys[] = $fxn->getName();
             }
