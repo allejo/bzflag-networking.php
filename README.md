@@ -12,7 +12,7 @@ BZFlag Replay files are simply the raw packets stored in a file together, so thi
 The recommended use of this library is to "stream" the replays in your code with the `getPacketsIterable()` method, which reads and yields a packet at a time. This allows for you to iterate through a replay file once and not have to store the entire replay in memory as you're working with it.
 
 ```php
-use allejo\bzflag\networking\Replay;
+use allejo\bzflag\replays\Replay;
 
 $replay = new Replay(__DIR__ . '/my-bz-replay.rec');
 
@@ -37,7 +37,7 @@ $packets = $replay->getPacketsAsArray();
 > The built-in `json_encode` function PHP will not be able to handle writing large JSON files from replays. At this point, it's necessary to stream your JSON using something like [`streaming-json-encoder`](https://github.com/violet-php/streaming-json-encoder). See the [PHP port of `rrlog`](https://github.com/allejo/rrlog/blob/master/src/allejo/rrlog/Writer/JsonWriter.php) for sample usage.
 
 ```php
-use allejo\bzflag\networking\Replay;
+use allejo\bzflag\replays\Replay;
 
 $replay = new Replay(__DIR__ . '/my-bz-replay.rec');
 

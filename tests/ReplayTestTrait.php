@@ -9,7 +9,7 @@
 
 namespace allejo\bzflag\networking\test;
 
-use allejo\bzflag\networking\Replay;
+use allejo\bzflag\replays\Replay;
 
 trait ReplayTestTrait
 {

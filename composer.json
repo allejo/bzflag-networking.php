@@ -16,7 +16,7 @@
     },
     "autoload": {
         "psr-4": {
-            "allejo\\bzflag\\networking\\": "src/"
+            "allejo\\bzflag\\": "src/"
         }
     },
     "autoload-dev": {
