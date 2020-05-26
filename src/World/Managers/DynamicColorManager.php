@@ -12,15 +12,10 @@ namespace allejo\bzflag\networking\World\Managers;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\networking\World\Modifiers\DynamicColor;
 
-class DynamicColorManager
+class DynamicColorManager extends BaseManager
 {
     /** @var array<int, DynamicColor> */
-    private $colors;
-
-    public function __construct()
-    {
-        $this->colors = [];
-    }
+    private $colors = [];
 
     /**
      * @return array<int, DynamicColor>

@@ -9,8 +9,16 @@
 
 namespace allejo\bzflag\networking\World\Object;
 
-abstract class Obstacle
+use allejo\bzflag\networking\JsonSerializePublicGetters;
+use allejo\bzflag\networking\World\WorldDatabase;
+
+abstract class Obstacle implements \JsonSerializable
 {
+    use JsonSerializePublicGetters;
+
+    /** @var WorldDatabase */
+    protected $worldDatabase;
+
     /** @var array{float, float, float} */
     protected $pos;
 
@@ -45,6 +53,11 @@ abstract class Obstacle
         ObstacleType::SPHERE_TYPE => SphereObstacle::class,
         ObstacleType::TETRA_TYPE => TetraBuilding::class,
     ];
+
+    public function __construct(WorldDatabase &$database)
+    {
+        $this->worldDatabase = &$database;
+    }
 
     /**
      * @return array{float, float, float}
@@ -117,13 +130,13 @@ abstract class Obstacle
      */
     abstract public function unpack(&$resource): void;
 
-    public static function new(int $type): Obstacle
+    public static function new(int $type, WorldDatabase &$database): Obstacle
     {
         if (!isset(self::$mapping[$type]))
         {
             throw new \InvalidArgumentException("Unknown object type with type ID {$type}.");
         }
 
-        return new self::$mapping[$type]();
+        return new self::$mapping[$type]($database);
     }
 }

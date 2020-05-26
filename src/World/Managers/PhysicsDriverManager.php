@@ -12,15 +12,10 @@ namespace allejo\bzflag\networking\World\Managers;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\networking\World\Modifiers\PhysicsDriver;
 
-class PhysicsDriverManager
+class PhysicsDriverManager extends BaseManager
 {
     /** @var array<int, PhysicsDriver> */
-    private $physicsDriver;
-
-    public function __construct()
-    {
-        $this->physicsDriver = [];
-    }
+    private $physicsDriver = [];
 
     /**
      * @return array<int, PhysicsDriver>

@@ -39,16 +39,10 @@ class SphereObstacle extends Obstacle
     private $hemisphere;
 
     /** @var array{float, float} */
-    private $texSize;
+    private $texSize = [0.0, 0.0];
 
     /** @var array<int, Material> */
-    private $materials;
-
-    public function __construct()
-    {
-        $this->texSize = [0.0, 0.0];
-        $this->materials = [];
-    }
+    private $materials = [];
 
     public function getTransform(): MeshTransform
     {
@@ -118,7 +112,7 @@ class SphereObstacle extends Obstacle
         for ($i = 0; $i < self::MATERIAL_COUNT; ++$i)
         {
             $matIndex = NetworkPacket::unpackInt32($resource);
-            $this->materials[] = WorldDatabase::getMaterialManager()->getMaterial($matIndex);
+            $this->materials[] = $this->worldDatabase->getMaterialManager()->getMaterial($matIndex);
         }
 
         $stateByte = NetworkPacket::unpackUInt8($resource);

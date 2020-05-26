@@ -41,9 +41,11 @@ class Replay implements \JsonSerializable
     private $packetLocationStart;
 
     /**
-     * Replay constructor.
+     * @param string $file
      *
      * @throws InvalidReplayException
+     * @throws InvalidWorldCompression
+     * @throws InvalidWorldDatabase
      * @throws PacketInvalidException
      */
     public function __construct(string $file)

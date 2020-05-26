@@ -12,15 +12,10 @@ namespace allejo\bzflag\networking\World\Managers;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\networking\World\Modifiers\TextureMatrix;
 
-class TextureMatrixManager
+class TextureMatrixManager extends BaseManager
 {
     /** @var array<int, TextureMatrix> */
-    private $textures;
-
-    public function __construct()
-    {
-        $this->textures = [];
-    }
+    private $textures = [];
 
     /**
      * @return array<int, TextureMatrix>

@@ -57,11 +57,14 @@ class ReplayHeader implements Unpackable, \JsonSerializable
     /** @var null|ReplayDuration */
     private $length;
 
-    /** @var null|WorldDatabase */
+    /** @var WorldDatabase */
     private $worldDatabase;
 
     /**
      * @param resource $resource
+     *
+     * @throws InvalidWorldCompression
+     * @throws InvalidWorldDatabase
      */
     public function __construct($resource)
     {
@@ -139,6 +142,11 @@ class ReplayHeader implements Unpackable, \JsonSerializable
     public function getWorldSize(): int
     {
         return $this->worldSize;
+    }
+
+    public function getWorld(): WorldDatabase
+    {
+        return $this->worldDatabase;
     }
 
     public function getCallsign(): string

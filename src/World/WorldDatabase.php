@@ -19,7 +19,7 @@ use allejo\bzflag\networking\World\Managers\PhysicsDriverManager;
 use allejo\bzflag\networking\World\Managers\TextureMatrixManager;
 use allejo\bzflag\networking\World\Managers\TransformManager;
 
-class WorldDatabase
+class WorldDatabase implements \JsonSerializable
 {
     /** @var int */
     private $headerSize;
@@ -46,22 +46,22 @@ class WorldDatabase
     private $worldCodeEnd;
 
     /** @var DynamicColorManager */
-    private static $dynamicColorManager;
+    private $dynamicColorManager;
 
     /** @var TextureMatrixManager */
-    private static $textureMatrixManager;
+    private $textureMatrixManager;
 
     /** @var MaterialManager */
-    private static $materialManager;
+    private $materialManager;
 
     /** @var PhysicsDriverManager */
-    private static $physicsDriverManager;
+    private $physicsDriverManager;
 
     /** @var TransformManager */
-    private static $transformManager;
+    private $transformManager;
 
     /** @var ObstacleManager */
-    private static $obstacleManager;
+    private $obstacleManager;
 
     /**
      * @param resource $resource
@@ -94,52 +94,67 @@ class WorldDatabase
         $this->worldCodeEndSize = NetworkPacket::unpackUInt16($resource);
         $this->worldCodeEnd = NetworkPacket::unpackUInt16($resource);
 
-        self::$dynamicColorManager = new DynamicColorManager();
-        self::$dynamicColorManager->unpack($this->database);
+        $this->dynamicColorManager = new DynamicColorManager($this);
+        $this->dynamicColorManager->unpack($this->database);
 
-        self::$textureMatrixManager = new TextureMatrixManager();
-        self::$textureMatrixManager->unpack($this->database);
+        $this->textureMatrixManager = new TextureMatrixManager($this);
+        $this->textureMatrixManager->unpack($this->database);
 
-        self::$materialManager = new MaterialManager();
-        self::$materialManager->unpack($this->database);
+        $this->materialManager = new MaterialManager($this);
+        $this->materialManager->unpack($this->database);
 
-        self::$physicsDriverManager = new PhysicsDriverManager();
-        self::$physicsDriverManager->unpack($this->database);
+        $this->physicsDriverManager = new PhysicsDriverManager($this);
+        $this->physicsDriverManager->unpack($this->database);
 
-        self::$transformManager = new TransformManager();
-        self::$transformManager->unpack($this->database);
+        $this->transformManager = new TransformManager($this);
+        $this->transformManager->unpack($this->database);
 
-        self::$obstacleManager = new ObstacleManager();
-        self::$obstacleManager->unpack($this->database);
+        $this->obstacleManager = new ObstacleManager($this);
+        $this->obstacleManager->unpack($this->database);
     }
 
-    public static function getDynamicColorManager(): DynamicColorManager
+    /**
+     * @return array<string, mixed>
+     */
+    public function jsonSerialize(): array
     {
-        return self::$dynamicColorManager;
+        return [
+            'colors' => $this->dynamicColorManager,
+            'textures' => $this->textureMatrixManager,
+            'materials' => $this->materialManager,
+            'physicsDrivers' => $this->physicsDriverManager,
+            'transforms' => $this->transformManager,
+            'obstacles' => $this->obstacleManager,
+        ];
     }
 
-    public static function getTextureMatrixManager(): TextureMatrixManager
+    public function getDynamicColorManager(): DynamicColorManager
     {
-        return self::$textureMatrixManager;
+        return $this->dynamicColorManager;
     }
 
-    public static function getMaterialManager(): MaterialManager
+    public  function getTextureMatrixManager(): TextureMatrixManager
     {
-        return self::$materialManager;
+        return $this->textureMatrixManager;
     }
 
-    public static function getPhysicsDriverManager(): PhysicsDriverManager
+    public  function getMaterialManager(): MaterialManager
     {
-        return self::$physicsDriverManager;
+        return $this->materialManager;
     }
 
-    public static function getTransformManager(): TransformManager
+    public  function getPhysicsDriverManager(): PhysicsDriverManager
     {
-        return self::$transformManager;
+        return $this->physicsDriverManager;
     }
 
-    public static function getObstacleManager(): ObstacleManager
+    public  function getTransformManager(): TransformManager
     {
-        return self::$obstacleManager;
+        return $this->transformManager;
+    }
+
+    public  function getObstacleManager(): ObstacleManager
+    {
+        return $this->obstacleManager;
     }
 }

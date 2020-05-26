@@ -12,15 +12,10 @@ namespace allejo\bzflag\networking\World\Managers;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\networking\World\Modifiers\Material;
 
-class MaterialManager
+class MaterialManager extends BaseManager
 {
     /** @var array<int, Material> */
-    private $materials;
-
-    public function __construct()
-    {
-        $this->materials = [];
-    }
+    private $materials = [];
 
     public function getMaterial(int $index): Material
     {

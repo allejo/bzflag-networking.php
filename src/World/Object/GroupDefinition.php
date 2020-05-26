@@ -10,9 +10,13 @@
 namespace allejo\bzflag\networking\World\Object;
 
 use allejo\bzflag\networking\Packets\NetworkPacket;
+use allejo\bzflag\networking\World\WorldDatabase;
 
 class GroupDefinition
 {
+    /** @var WorldDatabase */
+    private $worldDatabase;
+
     /** @var string */
     private $name;
 
@@ -25,10 +29,11 @@ class GroupDefinition
     /** @var array<int, GroupInstance> */
     private $groups;
 
-    public function __construct(string $name)
+    public function __construct(string $name, WorldDatabase &$database)
     {
         $this->name = $name;
         $this->active = false;
+        $this->worldDatabase = &$database;
     }
 
     public function getName(): string
@@ -70,7 +75,7 @@ class GroupDefinition
 
             for ($i = 0; $i < $count; ++$i)
             {
-                $obstacle = Obstacle::new($type);
+                $obstacle = Obstacle::new($type, $this->worldDatabase);
                 $obstacle->unpack($resource);
 
                 if ($obstacle->isValid())

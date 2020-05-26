@@ -41,16 +41,10 @@ class ConeObstacle extends Obstacle
     private $useNormals;
 
     /** @var array{float, float} */
-    private $texSize;
+    private $texSize = [0.0, 0.0];
 
     /** @var array<int, Material> */
-    private $materials;
-
-    public function __construct()
-    {
-        $this->texSize = [0.0, 0.0];
-        $this->materials = [];
-    }
+    private $materials = [];
 
     public function getTransform(): MeshTransform
     {
@@ -121,7 +115,7 @@ class ConeObstacle extends Obstacle
         for ($i = 0; $i < self::MATERIAL_COUNT; ++$i)
         {
             $matIndex = NetworkPacket::unpackInt32($resource);
-            $this->materials[$i] = WorldDatabase::getMaterialManager()->getMaterial($matIndex);
+            $this->materials[$i] = $this->worldDatabase->getMaterialManager()->getMaterial($matIndex);
         }
 
         $stateByte = NetworkPacket::unpackUInt8($resource);

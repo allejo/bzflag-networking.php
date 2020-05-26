@@ -10,6 +10,7 @@
 namespace allejo\bzflag\networking\World\Object;
 
 use allejo\bzflag\networking\Packets\NetworkPacket;
+use allejo\bzflag\networking\World\WorldDatabase;
 
 class MeshObstacle extends Obstacle
 {
@@ -64,8 +65,10 @@ class MeshObstacle extends Obstacle
     /** @var MeshDrawInfo */
     private $drawInfo;
 
-    public function __construct()
+    public function __construct(WorldDatabase &$database)
     {
+        parent::__construct($database);
+
         $this->checkPoints = [];
         $this->vertices = [];
         $this->normals = [];
@@ -206,7 +209,7 @@ class MeshObstacle extends Obstacle
         $this->faceCount = 0;
         for ($i = 0; $i < $this->faceSize; ++$i)
         {
-            $this->faces[$this->faceCount] = new MeshFace($this);
+            $this->faces[$this->faceCount] = new MeshFace($this, $this->worldDatabase);
             $this->faces[$this->faceCount]->unpack($resource);
 
             if (!$this->faces[$this->faceCount]->isValid())

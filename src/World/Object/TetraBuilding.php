@@ -20,32 +20,22 @@ class TetraBuilding extends Obstacle
     private $transform;
 
     /** @var float[][] */
-    private $vertices;
+    private $vertices = [];
 
     /** @var float[][][] */
-    private $normals;
+    private $normals = [];
 
     /** @var float[][][] */
-    private $texCoords;
+    private $texCoords = [];
 
     /** @var bool[] */
-    private $useNormals;
+    private $useNormals = [];
 
     /** @var bool[] */
-    private $useTexCoords;
+    private $useTexCoords = [];
 
     /** @var Material[] */
-    private $materials;
-
-    public function __construct()
-    {
-        $this->vertices = [];
-        $this->normals = [];
-        $this->texCoords = [];
-        $this->useNormals = [];
-        $this->useTexCoords = [];
-        $this->materials = [];
-    }
+    private $materials = [];
 
     public function getTransform(): MeshTransform
     {
@@ -151,7 +141,7 @@ class TetraBuilding extends Obstacle
         for ($i = 0; $i < 4; ++$i)
         {
             $matIndex = NetworkPacket::unpackInt32($resource);
-            $this->materials[$i] = WorldDatabase::getMaterialManager()->getMaterial($matIndex);
+            $this->materials[$i] = $this->worldDatabase->getMaterialManager()->getMaterial($matIndex);
         }
     }
 

@@ -12,15 +12,10 @@ namespace allejo\bzflag\networking\World\Managers;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\networking\World\Modifiers\MeshTransform;
 
-class TransformManager
+class TransformManager extends BaseManager
 {
     /** @var array<int, MeshTransform> */
-    private $meshTransforms;
-
-    public function __construct()
-    {
-        $this->meshTransforms = [];
-    }
+    private $meshTransforms = [];
 
     /**
      * @param resource|string $resource

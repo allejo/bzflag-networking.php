@@ -51,8 +51,10 @@ class MeshFace extends Obstacle
     /** @var array<int, MeshFace> */
     private $edges;
 
-    public function __construct(MeshObstacle $mesh)
+    public function __construct(MeshObstacle $mesh, WorldDatabase &$database)
     {
+        parent::__construct($database);
+
         $this->mesh = $mesh;
     }
 
@@ -153,7 +155,7 @@ class MeshFace extends Obstacle
         }
 
         $matIndex = NetworkPacket::unpackInt32($resource);
-        $this->bzMaterial = WorldDatabase::getMaterialManager()->getMaterial($matIndex);
+        $this->bzMaterial = $this->worldDatabase->getMaterialManager()->getMaterial($matIndex);
 
         $this->phyDrv = NetworkPacket::unpackInt32($resource);
     }

@@ -12,13 +12,13 @@ namespace allejo\bzflag\networking\World\Managers;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\networking\World\Object\GroupDefinition;
 
-class ObstacleManager
+class ObstacleManager extends BaseManager
 {
     /** @var GroupDefinition */
     private $world;
 
     /** @var array<int, GroupDefinition> */
-    private $groupDefinitions;
+    private $groupDefinitions = [];
 
     public function getWorld(): GroupDefinition
     {
@@ -38,13 +38,13 @@ class ObstacleManager
      */
     public function unpack(&$resource): void
     {
-        $this->world = new GroupDefinition('');
+        $this->world = new GroupDefinition('', $this->worldDatabase);
         $this->world->unpack($resource);
 
         $count = NetworkPacket::unpackUInt32($resource);
         for ($i = 0; $i < $count; ++$i)
         {
-            $groupDef = new GroupDefinition('');
+            $groupDef = new GroupDefinition('', $this->worldDatabase);
             $groupDef->unpack($resource);
 
             $this->groupDefinitions[] = $groupDef;

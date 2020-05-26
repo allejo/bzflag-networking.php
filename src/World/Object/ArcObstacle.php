@@ -130,7 +130,7 @@ class ArcObstacle extends Obstacle
         for ($i = 0; $i < self::MATERIAL_COUNT; ++$i)
         {
             $matIndex = NetworkPacket::unpackInt32($resource);
-            $this->materials[$i] = WorldDatabase::getMaterialManager()->getMaterial($matIndex);
+            $this->materials[$i] = $this->worldDatabase->getMaterialManager()->getMaterial($matIndex);
         }
 
         $stateByte = NetworkPacket::unpackUInt8($resource);
