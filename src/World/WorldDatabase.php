@@ -134,27 +134,27 @@ class WorldDatabase implements \JsonSerializable
         return $this->dynamicColorManager;
     }
 
-    public  function getTextureMatrixManager(): TextureMatrixManager
+    public function getTextureMatrixManager(): TextureMatrixManager
     {
         return $this->textureMatrixManager;
     }
 
-    public  function getMaterialManager(): MaterialManager
+    public function getMaterialManager(): MaterialManager
     {
         return $this->materialManager;
     }
 
-    public  function getPhysicsDriverManager(): PhysicsDriverManager
+    public function getPhysicsDriverManager(): PhysicsDriverManager
     {
         return $this->physicsDriverManager;
     }
 
-    public  function getTransformManager(): TransformManager
+    public function getTransformManager(): TransformManager
     {
         return $this->transformManager;
     }
 
-    public  function getObstacleManager(): ObstacleManager
+    public function getObstacleManager(): ObstacleManager
     {
         return $this->obstacleManager;
     }
