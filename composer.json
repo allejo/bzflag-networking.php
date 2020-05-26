@@ -9,7 +9,9 @@
         "ext-zlib": "*"
     },
     "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.16",
         "maciejczyzewski/bottomline": "^0.2.0",
+        "phpstan/phpstan": "^0.12.25",
         "phpunit/phpunit": "^7.5"
     },
     "autoload": {
@@ -38,6 +40,8 @@
         }
     },
     "scripts": {
-        "test": "phpunit"
+        "prettify": "php-cs-fixer fix",
+        "test": "phpunit",
+        "typing": "phpstan analyse src --level 8"
     }
 }
