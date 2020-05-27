@@ -122,7 +122,7 @@ class WorldDatabase implements \JsonSerializable
             'materials' => $this->materialManager->getMaterials(),
             'physicsDrivers' => $this->physicsDriverManager->getPhysicsDrivers(),
             'transforms' => $this->transformManager->getMeshTransforms(),
-            'obstacles' => $this->obstacleManager->getWorld()->getLists(),
+            'obstacles' => $this->obstacleManager->getWorld()->getObstaclesByType(),
             'groups' => $this->obstacleManager->getGroupDefinitions(),
         ];
     }

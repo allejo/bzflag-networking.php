@@ -54,7 +54,7 @@ class GroupDefinition implements \JsonSerializable
     /**
      * @return array<int, array<int, Obstacle>>
      */
-    public function getLists(): array
+    public function getObstaclesByType(): array
     {
         return $this->lists;
     }
