@@ -81,9 +81,14 @@ abstract class Obstacle implements \JsonSerializable
         return $this->size;
     }
 
-    public function getRotation(): float
+    public function getAngle(): float
     {
         return $this->angle;
+    }
+
+    public function getRotation(): float
+    {
+        return ($this->angle * 180.0) / pi();
     }
 
     public function getWidth(): float
