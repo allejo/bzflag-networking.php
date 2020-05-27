@@ -52,11 +52,18 @@ class GroupDefinition implements \JsonSerializable
     }
 
     /**
-     * @return array<int, array<int, Obstacle>>
+     * @param null|ObstacleType::* $type
+     *
+     * @return array<int, array<int, Obstacle>>|array<int, Obstacle>
      */
-    public function getObstaclesByType(): array
+    public function getObstaclesByType(?int $type = null): array
     {
-        return $this->lists;
+        if ($type === null)
+        {
+            return $this->lists;
+        }
+
+        return $this->lists[$type];
     }
 
     /**
