@@ -21,7 +21,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "allejo\\bzflag\\networking\\test\\": "tests/"
+            "allejo\\bzflag\\test\\": "tests/"
         }
     },
     "authors": [

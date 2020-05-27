@@ -7,7 +7,7 @@
  * LICENSE.md file that was distributed with this source code.
  */
 
-namespace allejo\bzflag\networking\test;
+namespace allejo\bzflag\test\replays;
 
 use allejo\bzflag\replays\Replay;
 
