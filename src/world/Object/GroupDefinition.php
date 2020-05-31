@@ -9,12 +9,15 @@
 
 namespace allejo\bzflag\world\Object;
 
+use allejo\bzflag\generic\FreezableClass;
+use allejo\bzflag\generic\FrozenObstacleException;
 use allejo\bzflag\generic\JsonSerializePublicGetters;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\world\WorldDatabase;
 
 class GroupDefinition implements \JsonSerializable
 {
+    use FreezableClass;
     use JsonSerializePublicGetters;
 
     /** @var WorldDatabase */
@@ -32,9 +35,9 @@ class GroupDefinition implements \JsonSerializable
     /** @var array<int, GroupInstance> */
     private $groups;
 
-    public function __construct(string $name, WorldDatabase &$database)
+    public function __construct(string $name, WorldDatabase $database)
     {
-        $this->worldDatabase = &$database;
+        $this->worldDatabase = $database;
         $this->name = $name;
         $this->active = false;
         $this->lists = [];
@@ -46,9 +49,35 @@ class GroupDefinition implements \JsonSerializable
         return $this->name;
     }
 
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return $this
+     */
+    public function setName(string $name): self
+    {
+        $this->frozenObstacleCheck();
+        $this->name = $name;
+
+        return $this;
+    }
+
     public function isActive(): bool
     {
         return $this->active;
+    }
+
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return $this
+     */
+    public function setActive(bool $active): self
+    {
+        $this->frozenObstacleCheck();
+        $this->active = $active;
+
+        return $this;
     }
 
     /**
@@ -72,6 +101,21 @@ class GroupDefinition implements \JsonSerializable
     public function getGroups(): array
     {
         return $this->groups;
+    }
+
+    /**
+     * @param array<int, GroupInstance> $groups
+     *
+     * @throws FrozenObstacleException
+     *
+     * @return $this
+     */
+    public function setGroups(array $groups): self
+    {
+        $this->frozenObstacleCheck();
+        $this->groups = $groups;
+
+        return $this;
     }
 
     /**
@@ -105,5 +149,7 @@ class GroupDefinition implements \JsonSerializable
 
             $this->groups[] = $groupInstance;
         }
+
+        $this->freeze();
     }
 }

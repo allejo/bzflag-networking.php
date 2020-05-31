@@ -9,9 +9,11 @@
 
 namespace allejo\bzflag\world\Object;
 
+use allejo\bzflag\generic\FrozenObstacleException;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\world\Modifiers\Material;
 use allejo\bzflag\world\Modifiers\MeshTransform;
+use allejo\bzflag\world\WorldDatabase;
 
 class ArcObstacle extends Obstacle
 {
@@ -50,9 +52,27 @@ class ArcObstacle extends Obstacle
     /** @var array<int, Material> */
     private $materials;
 
+    public function __construct(WorldDatabase $database)
+    {
+        parent::__construct($database, ObstacleType::ARC_TYPE);
+    }
+
     public function getTransform(): MeshTransform
     {
-        return $this->transform;
+        return clone $this->transform;
+    }
+
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return $this
+     */
+    public function setTransform(MeshTransform $transform): self
+    {
+        $this->frozenObstacleCheck();
+        $this->transform = $transform;
+
+        return $this;
     }
 
     public function getSweepAngle(): float
@@ -60,9 +80,35 @@ class ArcObstacle extends Obstacle
         return $this->sweepAngle;
     }
 
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return $this
+     */
+    public function setSweepAngle(float $sweepAngle): self
+    {
+        $this->frozenObstacleCheck();
+        $this->sweepAngle = $sweepAngle;
+
+        return $this;
+    }
+
     public function getRatio(): float
     {
         return $this->ratio;
+    }
+
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return $this
+     */
+    public function setRatio(float $ratio): self
+    {
+        $this->frozenObstacleCheck();
+        $this->ratio = $ratio;
+
+        return $this;
     }
 
     public function getDivisions(): float
@@ -70,9 +116,35 @@ class ArcObstacle extends Obstacle
         return $this->divisions;
     }
 
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return $this
+     */
+    public function setDivisions(float $divisions): self
+    {
+        $this->frozenObstacleCheck();
+        $this->divisions = $divisions;
+
+        return $this;
+    }
+
     public function getPhyDrv(): int
     {
         return $this->phyDrv;
+    }
+
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return $this
+     */
+    public function setPhyDrv(int $phyDrv): self
+    {
+        $this->frozenObstacleCheck();
+        $this->phyDrv = $phyDrv;
+
+        return $this;
     }
 
     public function isSmoothBounce(): bool
@@ -80,9 +152,35 @@ class ArcObstacle extends Obstacle
         return $this->smoothBounce;
     }
 
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return $this
+     */
+    public function setSmoothBounce(bool $smoothBounce): self
+    {
+        $this->frozenObstacleCheck();
+        $this->smoothBounce = $smoothBounce;
+
+        return $this;
+    }
+
     public function isUseNormals(): bool
     {
         return $this->useNormals;
+    }
+
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return $this
+     */
+    public function setUseNormals(bool $useNormals): self
+    {
+        $this->frozenObstacleCheck();
+        $this->useNormals = $useNormals;
+
+        return $this;
     }
 
     /**
@@ -94,11 +192,41 @@ class ArcObstacle extends Obstacle
     }
 
     /**
+     * @param array{float, float, float, float} $texSize
+     *
+     * @throws FrozenObstacleException
+     *
+     * @return $this
+     */
+    public function setTexSize(array $texSize): self
+    {
+        $this->frozenObstacleCheck();
+        $this->texSize = $texSize;
+
+        return $this;
+    }
+
+    /**
      * @return array<int, Material>
      */
     public function getMaterials(): array
     {
         return $this->materials;
+    }
+
+    /**
+     * @param array<int, Material> $materials
+     *
+     * @throws FrozenObstacleException
+     *
+     * @return $this
+     */
+    public function setMaterials(array $materials): self
+    {
+        $this->frozenObstacleCheck();
+        $this->materials = $materials;
+
+        return $this;
     }
 
     /**
@@ -118,9 +246,6 @@ class ArcObstacle extends Obstacle
         $this->divisions = NetworkPacket::unpackInt32($resource);
         $this->phyDrv = NetworkPacket::unpackInt32($resource);
 
-        /** @var array{bool, bool, bool} $tuple */
-        $tuple = [];
-
         for ($i = 0; $i < 4; ++$i)
         {
             $this->texSize[$i] = NetworkPacket::unpackFloat($resource);
@@ -138,5 +263,7 @@ class ArcObstacle extends Obstacle
         $this->smoothBounce = ($stateByte & (1 << 2)) !== 0;
         $this->useNormals = ($stateByte & (1 << 3)) !== 0;
         $this->ricochet = ($stateByte & (1 << 4)) !== 0;
+
+        $this->freeze();
     }
 }

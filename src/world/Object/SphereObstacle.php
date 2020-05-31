@@ -9,9 +9,11 @@
 
 namespace allejo\bzflag\world\Object;
 
+use allejo\bzflag\generic\FrozenObstacleException;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\world\Modifiers\Material;
 use allejo\bzflag\world\Modifiers\MeshTransform;
+use allejo\bzflag\world\WorldDatabase;
 
 class SphereObstacle extends Obstacle
 {
@@ -43,9 +45,27 @@ class SphereObstacle extends Obstacle
     /** @var array<int, Material> */
     private $materials = [];
 
+    public function __construct(WorldDatabase $database)
+    {
+        parent::__construct($database, ObstacleType::SPHERE_TYPE);
+    }
+
     public function getTransform(): MeshTransform
     {
-        return $this->transform;
+        return clone $this->transform;
+    }
+
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return SphereObstacle
+     */
+    public function setTransform(MeshTransform $transform): self
+    {
+        $this->frozenObstacleCheck();
+        $this->transform = $transform;
+
+        return $this;
     }
 
     public function getDivisions(): int
@@ -53,9 +73,35 @@ class SphereObstacle extends Obstacle
         return $this->divisions;
     }
 
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return SphereObstacle
+     */
+    public function setDivisions(int $divisions): self
+    {
+        $this->frozenObstacleCheck();
+        $this->divisions = $divisions;
+
+        return $this;
+    }
+
     public function getPhyDrv(): int
     {
         return $this->phyDrv;
+    }
+
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return SphereObstacle
+     */
+    public function setPhyDrv(int $phyDrv): self
+    {
+        $this->frozenObstacleCheck();
+        $this->phyDrv = $phyDrv;
+
+        return $this;
     }
 
     public function isSmoothBounce(): bool
@@ -63,14 +109,53 @@ class SphereObstacle extends Obstacle
         return $this->smoothBounce;
     }
 
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return SphereObstacle
+     */
+    public function setSmoothBounce(bool $smoothBounce): self
+    {
+        $this->frozenObstacleCheck();
+        $this->smoothBounce = $smoothBounce;
+
+        return $this;
+    }
+
     public function isUseNormals(): bool
     {
         return $this->useNormals;
     }
 
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return SphereObstacle
+     */
+    public function setUseNormals(bool $useNormals): self
+    {
+        $this->frozenObstacleCheck();
+        $this->useNormals = $useNormals;
+
+        return $this;
+    }
+
     public function isHemisphere(): bool
     {
         return $this->hemisphere;
+    }
+
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return SphereObstacle
+     */
+    public function setHemisphere(bool $hemisphere): self
+    {
+        $this->frozenObstacleCheck();
+        $this->hemisphere = $hemisphere;
+
+        return $this;
     }
 
     /**
@@ -82,11 +167,41 @@ class SphereObstacle extends Obstacle
     }
 
     /**
+     * @param array{float, float} $texSize
+     *
+     * @throws FrozenObstacleException
+     *
+     * @return SphereObstacle
+     */
+    public function setTexSize(array $texSize): self
+    {
+        $this->frozenObstacleCheck();
+        $this->texSize = $texSize;
+
+        return $this;
+    }
+
+    /**
      * @return array<int, Material>
      */
     public function getMaterials(): array
     {
         return $this->materials;
+    }
+
+    /**
+     * @param array<int, Material> $materials
+     *
+     * @throws FrozenObstacleException
+     *
+     * @return SphereObstacle
+     */
+    public function setMaterials(array $materials): self
+    {
+        $this->frozenObstacleCheck();
+        $this->materials = $materials;
+
+        return $this;
     }
 
     /**
@@ -100,14 +215,13 @@ class SphereObstacle extends Obstacle
         $this->pos = NetworkPacket::unpackVector($resource);
         $this->size = NetworkPacket::unpackVector($resource);
         $this->angle = NetworkPacket::unpackFloat($resource);
-        $this->divisions = (int)NetworkPacket::unpackInt32($resource);
-        $this->phyDrv = (int)NetworkPacket::unpackInt32($resource);
+        $this->divisions = NetworkPacket::unpackInt32($resource);
+        $this->phyDrv = NetworkPacket::unpackInt32($resource);
 
         for ($i = 0; $i < 2; ++$i)
         {
             $this->texSize[$i] = NetworkPacket::unpackFloat($resource);
         }
-
         for ($i = 0; $i < self::MATERIAL_COUNT; ++$i)
         {
             $matIndex = NetworkPacket::unpackInt32($resource);
@@ -121,5 +235,7 @@ class SphereObstacle extends Obstacle
         $this->useNormals = ($stateByte & (1 << 3)) !== 0;
         $this->hemisphere = ($stateByte & (1 << 4)) !== 0;
         $this->ricochet = ($stateByte & (1 << 5)) !== 0;
+
+        $this->freeze();
     }
 }

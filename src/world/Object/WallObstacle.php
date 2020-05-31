@@ -10,9 +10,15 @@
 namespace allejo\bzflag\world\Object;
 
 use allejo\bzflag\networking\Packets\NetworkPacket;
+use allejo\bzflag\world\WorldDatabase;
 
 class WallObstacle extends Obstacle
 {
+    public function __construct(WorldDatabase $database)
+    {
+        parent::__construct($database, ObstacleType::WALL_TYPE);
+    }
+
     public function unpack(&$resource): void
     {
         $this->pos = NetworkPacket::unpackVector($resource);
@@ -25,5 +31,7 @@ class WallObstacle extends Obstacle
 
         $stateByte = NetworkPacket::unpackUInt8($resource);
         $this->ricochet = ($stateByte & (1 << 3)) !== 0;
+
+        $this->freeze();
     }
 }

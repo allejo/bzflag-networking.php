@@ -9,7 +9,9 @@
 
 namespace allejo\bzflag\world\Object;
 
+use allejo\bzflag\generic\FrozenObstacleException;
 use allejo\bzflag\networking\Packets\NetworkPacket;
+use allejo\bzflag\world\WorldDatabase;
 
 class Teleporter extends Obstacle
 {
@@ -21,6 +23,11 @@ class Teleporter extends Obstacle
 
     /** @var bool */
     private $horizontal;
+
+    public function __construct(WorldDatabase $database)
+    {
+        parent::__construct($database, ObstacleType::TELE_TYPE);
+    }
 
     public function getName(): string
     {
@@ -35,6 +42,45 @@ class Teleporter extends Obstacle
     public function isHorizontal(): bool
     {
         return $this->horizontal;
+    }
+
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return Teleporter
+     */
+    public function setName(string $name): self
+    {
+        $this->frozenObstacleCheck();
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return Teleporter
+     */
+    public function setBorder(float $border): self
+    {
+        $this->frozenObstacleCheck();
+        $this->border = $border;
+
+        return $this;
+    }
+
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return Teleporter
+     */
+    public function setHorizontal(bool $horizontal): self
+    {
+        $this->frozenObstacleCheck();
+        $this->horizontal = $horizontal;
+
+        return $this;
     }
 
     public function unpack(&$resource): void
@@ -53,5 +99,7 @@ class Teleporter extends Obstacle
         $this->driveThrough = ($stateByte & (1 << 0)) !== 0;
         $this->shootThrough = ($stateByte & (1 << 1)) !== 0;
         $this->ricochet = ($stateByte & (1 << 3)) !== 0;
+
+        $this->freeze();
     }
 }

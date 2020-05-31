@@ -65,7 +65,7 @@ class MeshObstacle extends Obstacle
     /** @var MeshDrawInfo */
     private $drawInfo;
 
-    public function __construct(WorldDatabase &$database)
+    public function __construct(WorldDatabase $database)
     {
         parent::__construct($database, ObstacleType::MESH_TYPE);
 
@@ -239,5 +239,7 @@ class MeshObstacle extends Obstacle
         {
             // @TODO Unpack drawinfo
         }
+
+        $this->freeze();
     }
 }

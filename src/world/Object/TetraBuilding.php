@@ -9,9 +9,11 @@
 
 namespace allejo\bzflag\world\Object;
 
+use allejo\bzflag\generic\FrozenObstacleException;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\world\Modifiers\Material;
 use allejo\bzflag\world\Modifiers\MeshTransform;
+use allejo\bzflag\world\WorldDatabase;
 
 class TetraBuilding extends Obstacle
 {
@@ -36,9 +38,27 @@ class TetraBuilding extends Obstacle
     /** @var Material[] */
     private $materials = [];
 
+    public function __construct(WorldDatabase $database)
+    {
+        parent::__construct($database, ObstacleType::TETRA_TYPE);
+    }
+
     public function getTransform(): MeshTransform
     {
         return $this->transform;
+    }
+
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return TetraBuilding
+     */
+    public function setTransform(MeshTransform $transform): self
+    {
+        $this->frozenObstacleCheck();
+        $this->transform = $transform;
+
+        return $this;
     }
 
     /**
@@ -50,11 +70,41 @@ class TetraBuilding extends Obstacle
     }
 
     /**
+     * @param float[][] $vertices
+     *
+     * @throws FrozenObstacleException
+     *
+     * @return TetraBuilding
+     */
+    public function setVertices(array $vertices): self
+    {
+        $this->frozenObstacleCheck();
+        $this->vertices = $vertices;
+
+        return $this;
+    }
+
+    /**
      * @return float[][][]
      */
     public function getNormals(): array
     {
         return $this->normals;
+    }
+
+    /**
+     * @param float[][][] $normals
+     *
+     * @throws FrozenObstacleException
+     *
+     * @return TetraBuilding
+     */
+    public function setNormals(array $normals): self
+    {
+        $this->frozenObstacleCheck();
+        $this->normals = $normals;
+
+        return $this;
     }
 
     /**
@@ -66,11 +116,41 @@ class TetraBuilding extends Obstacle
     }
 
     /**
+     * @param float[][][] $texCoords
+     *
+     * @throws FrozenObstacleException
+     *
+     * @return TetraBuilding
+     */
+    public function setTexCoords(array $texCoords): self
+    {
+        $this->frozenObstacleCheck();
+        $this->texCoords = $texCoords;
+
+        return $this;
+    }
+
+    /**
      * @return bool[]
      */
     public function getUseNormals(): array
     {
         return $this->useNormals;
+    }
+
+    /**
+     * @param bool[] $useNormals
+     *
+     * @throws FrozenObstacleException
+     *
+     * @return TetraBuilding
+     */
+    public function setUseNormals(array $useNormals): self
+    {
+        $this->frozenObstacleCheck();
+        $this->useNormals = $useNormals;
+
+        return $this;
     }
 
     /**
@@ -82,11 +162,41 @@ class TetraBuilding extends Obstacle
     }
 
     /**
+     * @param bool[] $useTexCoords
+     *
+     * @throws FrozenObstacleException
+     *
+     * @return TetraBuilding
+     */
+    public function setUseTexCoords(array $useTexCoords): self
+    {
+        $this->frozenObstacleCheck();
+        $this->useTexCoords = $useTexCoords;
+
+        return $this;
+    }
+
+    /**
      * @return Material[]
      */
     public function getMaterials(): array
     {
         return $this->materials;
+    }
+
+    /**
+     * @param Material[] $materials
+     *
+     * @throws FrozenObstacleException
+     *
+     * @return TetraBuilding
+     */
+    public function setMaterials(array $materials): self
+    {
+        $this->frozenObstacleCheck();
+        $this->materials = $materials;
+
+        return $this;
     }
 
     public function unpack(&$resource): void
@@ -112,9 +222,9 @@ class TetraBuilding extends Obstacle
         {
             if ($this->useNormals[$v])
             {
-                for ($v = 0; $v < 3; ++$v)
+                for ($i = 0; $i < 3; ++$i)
                 {
-                    $this->normals[$v][$v] = NetworkPacket::unpackVector($resource);
+                    $this->normals[$v][$i] = NetworkPacket::unpackVector($resource);
                 }
             }
         }
@@ -142,6 +252,8 @@ class TetraBuilding extends Obstacle
             $matIndex = NetworkPacket::unpackInt32($resource);
             $this->materials[$i] = $this->worldDatabase->getMaterialManager()->getMaterial($matIndex);
         }
+
+        $this->freeze();
     }
 
     /**

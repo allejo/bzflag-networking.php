@@ -51,7 +51,7 @@ class MeshFace extends Obstacle
     /** @var array<int, MeshFace> */
     private $edges;
 
-    public function __construct(MeshObstacle $mesh, WorldDatabase &$database)
+    public function __construct(MeshObstacle $mesh, WorldDatabase $database)
     {
         parent::__construct($database, null);
 

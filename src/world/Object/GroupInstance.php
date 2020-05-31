@@ -16,5 +16,6 @@ class GroupInstance
      */
     public function unpack(&$resource): void
     {
+        // @TODO Implement this functionality
     }
 }
