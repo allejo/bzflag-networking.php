@@ -9,12 +9,14 @@
 
 namespace allejo\bzflag\world\Object;
 
+use allejo\bzflag\generic\FreezableClass;
+use allejo\bzflag\generic\FrozenObstacleException;
 use allejo\bzflag\generic\JsonSerializePublicGetters;
-use allejo\bzflag\world\FrozenObstacleException;
 use allejo\bzflag\world\WorldDatabase;
 
 abstract class Obstacle implements \JsonSerializable
 {
+    use FreezableClass;
     use JsonSerializePublicGetters;
 
     /** @var null|ObstacleType::* */
@@ -55,18 +57,10 @@ abstract class Obstacle implements \JsonSerializable
         ObstacleType::TETRA_TYPE => TetraBuilding::class,
     ];
 
-    /** @var bool */
-    private $frozen;
-
     protected function __construct(WorldDatabase $database, ?int $obstacleType)
     {
         $this->worldDatabase = $database;
         $this->objectType = $obstacleType;
-    }
-
-    public function __clone()
-    {
-        $this->unfreeze();
     }
 
     public static function new(int $type, WorldDatabase $database): Obstacle
@@ -306,37 +300,8 @@ abstract class Obstacle implements \JsonSerializable
         return true;
     }
 
-    public function isFrozen(): bool
-    {
-        return $this->frozen;
-    }
-
-    /**
-     * Freeze this obstacle so no further modifications can be made to it.
-     */
-    public function freeze(): void
-    {
-        $this->frozen = true;
-    }
-
     /**
      * @param resource|string $resource
      */
     abstract public function unpack(&$resource): void;
-
-    /**
-     * @throws FrozenObstacleException
-     */
-    protected function frozenObstacleCheck(): void
-    {
-        if ($this->frozen)
-        {
-            throw new FrozenObstacleException('Cannot modify a obstacle that has been frozen.');
-        }
-    }
-
-    private function unfreeze(): void
-    {
-        $this->frozen = false;
-    }
 }

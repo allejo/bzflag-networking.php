@@ -7,7 +7,7 @@
  * LICENSE.md file that was distributed with this source code.
  */
 
-namespace allejo\bzflag\world;
+namespace allejo\bzflag\generic;
 
 class FrozenObstacleException extends \Exception
 {
