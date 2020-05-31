@@ -40,8 +40,8 @@
         }
     },
     "scripts": {
-        "prettify": "php-cs-fixer fix",
-        "test": "phpunit",
-        "typing": "phpstan analyse src --level 8"
+        "fix": "php-cs-fixer fix",
+        "stan": "phpstan analyse src --level 8",
+        "test": "phpunit"
     }
 }
