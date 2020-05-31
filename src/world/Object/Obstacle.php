@@ -10,6 +10,7 @@
 namespace allejo\bzflag\world\Object;
 
 use allejo\bzflag\generic\JsonSerializePublicGetters;
+use allejo\bzflag\world\FrozenObstacleException;
 use allejo\bzflag\world\WorldDatabase;
 
 abstract class Obstacle implements \JsonSerializable
@@ -54,12 +55,48 @@ abstract class Obstacle implements \JsonSerializable
         ObstacleType::TETRA_TYPE => TetraBuilding::class,
     ];
 
-    public function __construct(WorldDatabase &$database, ?int $obstacleType)
+    /** @var bool */
+    private $frozen;
+
+    protected function __construct(WorldDatabase $database, ?int $obstacleType)
     {
-        $this->worldDatabase = &$database;
+        $this->worldDatabase = $database;
         $this->objectType = $obstacleType;
     }
 
+    public function __clone()
+    {
+        $this->unfreeze();
+    }
+
+    public static function new(int $type, WorldDatabase $database): Obstacle
+    {
+        if (!isset(self::$mapping[$type]))
+        {
+            throw new \InvalidArgumentException("Unknown object type with type ID {$type}.");
+        }
+
+        return new self::$mapping[$type]($database);
+    }
+
+    /**
+     * @param array{float, float, float} $pos
+     *
+     * @throws FrozenObstacleException
+     *
+     * @return $this
+     */
+    public function setPosition(array $pos)
+    {
+        $this->frozenObstacleCheck();
+        $this->pos = $pos;
+
+        return $this;
+    }
+
+    /**
+     * @return null|ObstacleType::*
+     */
     public function getObjectType(): ?int
     {
         return $this->objectType;
@@ -81,14 +118,60 @@ abstract class Obstacle implements \JsonSerializable
         return $this->size;
     }
 
+    /**
+     * @param array{float, float, float} $size
+     *
+     * @throws FrozenObstacleException
+     *
+     * @return $this
+     */
+    public function setSize(array $size)
+    {
+        $this->frozenObstacleCheck();
+        $this->size = $size;
+
+        return $this;
+    }
+
+    /**
+     * Get the angle (in radians) at which this obstacle is rotated.
+     */
     public function getAngle(): float
     {
         return $this->angle;
     }
 
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return $this
+     */
+    public function setAngle(float $angle)
+    {
+        $this->frozenObstacleCheck();
+        $this->angle = $angle;
+
+        return $this;
+    }
+
+    /**
+     * Get the angle (in degrees) at which this obstacle is rotated.
+     */
     public function getRotation(): float
     {
-        return ($this->angle * 180.0) / pi();
+        return rad2deg($this->angle);
+    }
+
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return $this
+     */
+    public function setRotation(float $rotation)
+    {
+        $this->setAngle(deg2rad($rotation));
+
+        return $this;
     }
 
     public function getWidth(): float
@@ -96,9 +179,35 @@ abstract class Obstacle implements \JsonSerializable
         return $this->size[0];
     }
 
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return $this
+     */
+    public function setWidth(float $width)
+    {
+        $this->frozenObstacleCheck();
+        $this->size[0] = $width;
+
+        return $this;
+    }
+
     public function getBreadth(): float
     {
         return $this->size[1];
+    }
+
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return $this
+     */
+    public function setBreadth(float $breath)
+    {
+        $this->frozenObstacleCheck();
+        $this->size[1] = $breath;
+
+        return $this;
     }
 
     public function getHeight(): float
@@ -106,9 +215,35 @@ abstract class Obstacle implements \JsonSerializable
         return $this->size[2];
     }
 
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return $this
+     */
+    public function setHeight(float $height)
+    {
+        $this->frozenObstacleCheck();
+        $this->size[2] = $height;
+
+        return $this;
+    }
+
     public function isDriveThrough(): bool
     {
         return $this->driveThrough;
+    }
+
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return $this
+     */
+    public function setDriveThrough(bool $driveThrough)
+    {
+        $this->frozenObstacleCheck();
+        $this->driveThrough = $driveThrough;
+
+        return $this;
     }
 
     public function isShootThrough(): bool
@@ -116,9 +251,36 @@ abstract class Obstacle implements \JsonSerializable
         return $this->shootThrough;
     }
 
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return $this
+     */
+    public function setShootThrough(bool $shootThrough)
+    {
+        $this->frozenObstacleCheck();
+        $this->shootThrough = $shootThrough;
+
+        return $this;
+    }
+
     public function isPassable(): bool
     {
         return $this->driveThrough && $this->shootThrough;
+    }
+
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return $this
+     */
+    public function setPassable()
+    {
+        $this->frozenObstacleCheck();
+        $this->driveThrough = true;
+        $this->shootThrough = true;
+
+        return $this;
     }
 
     public function canRicochet(): bool
@@ -126,9 +288,35 @@ abstract class Obstacle implements \JsonSerializable
         return $this->ricochet;
     }
 
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return $this
+     */
+    public function setRicochet(bool $ricochet)
+    {
+        $this->frozenObstacleCheck();
+        $this->ricochet = $ricochet;
+
+        return $this;
+    }
+
     public function isValid(): bool
     {
         return true;
+    }
+
+    public function isFrozen(): bool
+    {
+        return $this->frozen;
+    }
+
+    /**
+     * Freeze this obstacle so no further modifications can be made to it.
+     */
+    public function freeze(): void
+    {
+        $this->frozen = true;
     }
 
     /**
@@ -136,13 +324,19 @@ abstract class Obstacle implements \JsonSerializable
      */
     abstract public function unpack(&$resource): void;
 
-    public static function new(int $type, WorldDatabase &$database): Obstacle
+    /**
+     * @throws FrozenObstacleException
+     */
+    protected function frozenObstacleCheck(): void
     {
-        if (!isset(self::$mapping[$type]))
+        if ($this->frozen)
         {
-            throw new \InvalidArgumentException("Unknown object type with type ID {$type}.");
+            throw new FrozenObstacleException('Cannot modify a obstacle that has been frozen.');
         }
+    }
 
-        return new self::$mapping[$type]($database, $type);
+    private function unfreeze(): void
+    {
+        $this->frozen = false;
     }
 }
