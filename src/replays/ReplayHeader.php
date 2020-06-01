@@ -10,6 +10,7 @@
 namespace allejo\bzflag\replays;
 
 use allejo\bzflag\generic\JsonSerializePublicGetters;
+use allejo\bzflag\networking\InaccessibleResourceException;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\networking\Packets\NetworkProtocol;
 use allejo\bzflag\networking\Packets\Unpackable;
@@ -68,6 +69,7 @@ class ReplayHeader implements Unpackable, \JsonSerializable
      *
      * @throws InvalidWorldCompression
      * @throws InvalidWorldDatabase
+     * @throws InaccessibleResourceException
      */
     public function __construct($resource)
     {

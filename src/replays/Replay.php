@@ -9,6 +9,8 @@
 
 namespace allejo\bzflag\replays;
 
+use allejo\bzflag\networking\InaccessibleResourceException;
+use allejo\bzflag\networking\InvalidTimestampFormatException;
 use allejo\bzflag\networking\Packets\GamePacket;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\networking\Packets\PacketInvalidException;
@@ -43,7 +45,9 @@ class Replay implements \JsonSerializable
     private $packetLocationStart;
 
     /**
+     * @throws InaccessibleResourceException
      * @throws InvalidReplayException
+     * @throws InvalidTimestampFormatException
      * @throws InvalidWorldCompression
      * @throws InvalidWorldDatabase
      * @throws PacketInvalidException
@@ -92,6 +96,9 @@ class Replay implements \JsonSerializable
     }
 
     /**
+     * @throws InaccessibleResourceException
+     * @throws InvalidTimestampFormatException
+     *
      * @return array<string, mixed>
      */
     public function jsonSerialize(): array
@@ -100,7 +107,7 @@ class Replay implements \JsonSerializable
             'header' => $this->header,
             'startTime' => $this->startTime->format(DATE_ATOM),
             'endTime' => $this->endTime->format(DATE_ATOM),
-            'packets' => $this->getPacketsAsArray(),
+            'packets' => $this->getPacketsIterable(),
         ];
     }
 
@@ -114,6 +121,9 @@ class Replay implements \JsonSerializable
      *
      * **Warning:** This requires a higher amount of memory since all of these
      * packets will be stored in an array.
+     *
+     * @throws InaccessibleResourceException
+     * @throws InvalidTimestampFormatException
      *
      * @return GamePacket[]
      */
@@ -139,6 +149,9 @@ class Replay implements \JsonSerializable
      *
      * @deprecated use `Replay::getPacketsAsArray()` instead
      *
+     * @throws InaccessibleResourceException
+     * @throws InvalidTimestampFormatException
+     *
      * @return GamePacket[]
      */
     public function getPackets(): array
@@ -149,6 +162,9 @@ class Replay implements \JsonSerializable
     /**
      * Iterate through all of the packets in this Replay one at a time without
      * saving everything in memory.
+     *
+     * @throws InaccessibleResourceException
+     * @throws InvalidTimestampFormatException
      *
      * @return iterable<GamePacket>
      */
@@ -199,6 +215,8 @@ class Replay implements \JsonSerializable
     /**
      * @param resource $resource
      *
+     * @throws InaccessibleResourceException
+     * @throws InvalidTimestampFormatException
      * @throws PacketInvalidException
      */
     private function calculateTimestamps($resource): void

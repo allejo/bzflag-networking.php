@@ -31,7 +31,7 @@ trait JsonSerializePublicGetters
         {
             $key = lcfirst(substr($fxn, 3));
 
-            if (in_array($key, $this->getJsonEncodeBlacklist()))
+            if (in_array($key, $this->getJsonEncodeBlacklist(), true))
             {
                 continue;
             }
@@ -68,7 +68,7 @@ trait JsonSerializePublicGetters
 
         foreach ($fxns as $fxn)
         {
-            $isGetter = substr($fxn->getName(), 0, 3) === 'get';
+            $isGetter = strpos($fxn->getName(), 'get') === 0;
             $hasNoArgs = count($fxn->getParameters()) === 0;
 
             if ($isGetter && $hasNoArgs)

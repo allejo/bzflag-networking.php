@@ -9,6 +9,7 @@
 
 namespace allejo\bzflag\world\Modifiers;
 
+use allejo\bzflag\networking\InaccessibleResourceException;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 
 class Material
@@ -191,6 +192,8 @@ class Material
 
     /**
      * @param resource|string $resource
+     *
+     * @throws InaccessibleResourceException
      */
     public function unpack(&$resource): void
     {
@@ -206,7 +209,7 @@ class Material
         $this->noLighting = ($modeByte & (1 << 6)) !== 0;
 
         $inTmp = NetworkPacket::unpackInt32($resource);
-        $this->dynamicColor = (int)$inTmp;
+        $this->dynamicColor = $inTmp;
         $this->ambient = NetworkPacket::unpack4Float($resource);
         $this->diffuse = NetworkPacket::unpack4Float($resource);
         $this->specular = NetworkPacket::unpack4Float($resource);
@@ -219,8 +222,8 @@ class Material
         {
             $textureInfo = new TextureInfo();
             $textureInfo->name = $textureInfo->localName = NetworkPacket::unpackStdString($resource);
-            $textureInfo->matrix = (int)NetworkPacket::unpackInt32($resource);
-            $textureInfo->combineMode = (int)NetworkPacket::unpackInt32($resource);
+            $textureInfo->matrix = NetworkPacket::unpackInt32($resource);
+            $textureInfo->combineMode = NetworkPacket::unpackInt32($resource);
             $textureInfo->useAlpha = false;
             $textureInfo->useColor = false;
             $textureInfo->useSphereMap = false;

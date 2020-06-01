@@ -9,6 +9,7 @@
 
 namespace allejo\bzflag\world;
 
+use allejo\bzflag\networking\InaccessibleResourceException;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\world\Managers\DynamicColorManager;
 use allejo\bzflag\world\Managers\GroupDefinitionManager;
@@ -66,6 +67,7 @@ class WorldDatabase implements \JsonSerializable
      *
      * @throws InvalidWorldCompression
      * @throws InvalidWorldDatabase
+     * @throws InaccessibleResourceException
      */
     public function __construct(&$resource)
     {

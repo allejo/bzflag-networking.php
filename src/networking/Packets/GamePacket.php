@@ -10,6 +10,8 @@
 namespace allejo\bzflag\networking\Packets;
 
 use allejo\bzflag\generic\JsonSerializePublicGetters;
+use allejo\bzflag\networking\InaccessibleResourceException;
+use allejo\bzflag\networking\InvalidTimestampFormatException;
 
 /**
  * An abstraction on top of a NetworkPacket that contains actual data of packets
@@ -19,7 +21,7 @@ abstract class GamePacket implements \JsonSerializable
 {
     use JsonSerializePublicGetters;
 
-    const PACKET_TYPE = '';
+    public const PACKET_TYPE = '';
 
     /** @var NetworkPacket */
     protected $packet;
@@ -65,6 +67,7 @@ abstract class GamePacket implements \JsonSerializable
     ];
 
     /**
+     * @throws InaccessibleResourceException
      * @throws PacketNotSetException
      */
     final public function __construct(?NetworkPacket $packet)
@@ -114,6 +117,8 @@ abstract class GamePacket implements \JsonSerializable
      *
      * @param resource $resource
      *
+     * @throws InaccessibleResourceException
+     * @throws InvalidTimestampFormatException
      * @throws PacketInvalidException
      * @throws UnsupportedPacketException
      *

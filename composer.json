@@ -11,6 +11,7 @@
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16",
         "maciejczyzewski/bottomline": "^0.2.0",
+        "pepakriz/phpstan-exception-rules": "^0.11.0",
         "phpstan/phpstan": "^0.12.25",
         "phpunit/phpunit": "^7.5"
     },
@@ -41,7 +42,7 @@
     },
     "scripts": {
         "fix": "php-cs-fixer fix",
-        "stan": "phpstan analyse src --level 8",
+        "stan": "phpstan analyse -c phpstan.neon.dist",
         "test": "phpunit"
     }
 }

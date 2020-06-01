@@ -7,16 +7,8 @@
  * LICENSE.md file that was distributed with this source code.
  */
 
-namespace allejo\bzflag\networking\Packets;
+namespace allejo\bzflag\networking;
 
-class MsgNull extends GamePacket
+class InvalidTimestampFormatException extends \UnexpectedValueException
 {
-    public const PACKET_TYPE = 'MsgNull';
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function unpack(): void
-    {
-    }
 }

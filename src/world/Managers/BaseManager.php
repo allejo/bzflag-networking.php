@@ -19,8 +19,8 @@ abstract class BaseManager implements \JsonSerializable
     /** @var WorldDatabase */
     protected $worldDatabase;
 
-    public function __construct(WorldDatabase &$worldDatabase)
+    public function __construct(WorldDatabase $worldDatabase)
     {
-        $this->worldDatabase = &$worldDatabase;
+        $this->worldDatabase = $worldDatabase;
     }
 }

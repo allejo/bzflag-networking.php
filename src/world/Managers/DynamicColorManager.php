@@ -9,6 +9,7 @@
 
 namespace allejo\bzflag\world\Managers;
 
+use allejo\bzflag\networking\InaccessibleResourceException;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\world\Modifiers\DynamicColor;
 
@@ -27,6 +28,8 @@ class DynamicColorManager extends BaseManager
 
     /**
      * @param resource|string $resource
+     *
+     * @throws InaccessibleResourceException
      */
     public function unpack(&$resource): void
     {

@@ -10,10 +10,11 @@
 namespace allejo\bzflag\networking\Packets;
 
 use allejo\bzflag\networking\GameData\FlagData;
+use allejo\bzflag\networking\InaccessibleResourceException;
 
 class MsgFlagGrab extends GamePacket
 {
-    const PACKET_TYPE = 'MsgFlagGrab';
+    public const PACKET_TYPE = 'MsgFlagGrab';
 
     /** @var int */
     private $playerId;
@@ -31,6 +32,11 @@ class MsgFlagGrab extends GamePacket
         return $this->flag;
     }
 
+    /**
+     * {@inheritdoc}
+     *
+     * @throws InaccessibleResourceException
+     */
     protected function unpack(): void
     {
         $this->playerId = NetworkPacket::unpackUInt8($this->buffer);

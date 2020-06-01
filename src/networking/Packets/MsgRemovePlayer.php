@@ -9,6 +9,8 @@
 
 namespace allejo\bzflag\networking\Packets;
 
+use allejo\bzflag\networking\InaccessibleResourceException;
+
 class MsgRemovePlayer extends GamePacket
 {
     public const PACKET_TYPE = 'MsgRemovePlayer';
@@ -21,6 +23,11 @@ class MsgRemovePlayer extends GamePacket
         return $this->playerId;
     }
 
+    /**
+     * {@inheritdoc}
+     *
+     * @throws InaccessibleResourceException
+     */
     protected function unpack(): void
     {
         $this->playerId = NetworkPacket::unpackUInt8($this->buffer);

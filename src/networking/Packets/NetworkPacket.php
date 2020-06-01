@@ -13,6 +13,8 @@ use allejo\bzflag\networking\GameData\FiringInfoData;
 use allejo\bzflag\networking\GameData\FlagData;
 use allejo\bzflag\networking\GameData\PlayerState;
 use allejo\bzflag\networking\GameData\ShotData;
+use allejo\bzflag\networking\InaccessibleResourceException;
+use allejo\bzflag\networking\InvalidTimestampFormatException;
 
 /**
  * A raw network packet that was sent and contains data for game packets.
@@ -27,41 +29,48 @@ class NetworkPacket implements Unpackable
     const SMALL_MAX_ANG_VEL = 0.001 * NetworkPacket::SMALL_SCALE;
 
     /** @var int */
-    private $mode = -1;
+    private $mode;
+
     /** @var int */
-    private $code = -1;
+    private $code;
+
     /** @var int */
-    private $length = -1;
+    private $length;
+
     /** @var int */
-    private $nextFilePos = -1;
+    private $nextFilePos;
+
     /** @var int */
-    private $prevFilePos = -1;
+    private $prevFilePos;
+
     /** @var \DateTime */
     private $timestamp;
+
     /** @var false|string */
     private $data;
 
     /**
      * @param resource $resource
      *
+     * @throws InaccessibleResourceException
+     * @throws InvalidTimestampFormatException
      * @throws PacketInvalidException
-     * @throws \UnexpectedValueException
      */
     public function __construct($resource)
     {
         $buffer = fread($resource, 32);
 
-        if (feof($resource) || $buffer === false)
+        if ($buffer === false || feof($resource))
         {
             throw new PacketInvalidException('The given resource can no longer be read.');
         }
 
-        $this->mode = NetworkPacket::unpackUInt16($buffer);
-        $this->code = NetworkPacket::unpackUInt16($buffer);
-        $this->length = NetworkPacket::unpackUInt32($buffer);
-        $this->nextFilePos = NetworkPacket::unpackUInt32($buffer);
-        $this->prevFilePos = NetworkPacket::unpackUInt32($buffer);
-        $this->timestamp = NetworkPacket::unpackTimestamp($buffer);
+        $this->mode = self::unpackUInt16($buffer);
+        $this->code = self::unpackUInt16($buffer);
+        $this->length = self::unpackUInt32($buffer);
+        $this->nextFilePos = self::unpackUInt32($buffer);
+        $this->prevFilePos = self::unpackUInt32($buffer);
+        $this->timestamp = self::unpackTimestamp($buffer);
 
         if ($this->length > 0)
         {
@@ -109,6 +118,8 @@ class NetworkPacket implements Unpackable
 
     /**
      * @param resource|string $buffer
+     *
+     * @throws InaccessibleResourceException
      */
     public static function unpackInt8(&$buffer): int
     {
@@ -117,6 +128,8 @@ class NetworkPacket implements Unpackable
 
     /**
      * @param resource|string $buffer
+     *
+     * @throws InaccessibleResourceException
      */
     public static function unpackUInt8(&$buffer): int
     {
@@ -125,6 +138,8 @@ class NetworkPacket implements Unpackable
 
     /**
      * @param resource|string $buffer
+     *
+     * @throws InaccessibleResourceException
      */
     public static function unpackInt16(&$buffer): int
     {
@@ -145,6 +160,8 @@ class NetworkPacket implements Unpackable
 
     /**
      * @param resource|string $buffer
+     *
+     * @throws InaccessibleResourceException
      */
     public static function unpackUInt16(&$buffer): int
     {
@@ -153,6 +170,8 @@ class NetworkPacket implements Unpackable
 
     /**
      * @param resource|string $buffer
+     *
+     * @throws InaccessibleResourceException
      */
     public static function unpackInt32(&$buffer): int
     {
@@ -171,6 +190,8 @@ class NetworkPacket implements Unpackable
 
     /**
      * @param resource|string $buffer
+     *
+     * @throws InaccessibleResourceException
      */
     public static function unpackUInt32(&$buffer): int
     {
@@ -179,6 +200,8 @@ class NetworkPacket implements Unpackable
 
     /**
      * @param resource|string $buffer
+     *
+     * @throws InaccessibleResourceException
      */
     public static function unpackInt64(&$buffer): int
     {
@@ -187,6 +210,8 @@ class NetworkPacket implements Unpackable
 
     /**
      * @param resource|string $buffer
+     *
+     * @throws InaccessibleResourceException
      */
     public static function unpackUInt64(&$buffer): int
     {
@@ -195,6 +220,8 @@ class NetworkPacket implements Unpackable
 
     /**
      * @param resource|string $buffer
+     *
+     * @throws InaccessibleResourceException
      */
     public static function unpackFiringInfo(&$buffer): FiringInfoData
     {
@@ -210,6 +237,8 @@ class NetworkPacket implements Unpackable
 
     /**
      * @param resource|string $buffer
+     *
+     * @throws InaccessibleResourceException
      */
     public static function unpackFlag(&$buffer): FlagData
     {
@@ -232,6 +261,8 @@ class NetworkPacket implements Unpackable
 
     /**
      * @param resource|string $buffer
+     *
+     * @throws InaccessibleResourceException
      */
     public static function unpackFloat(&$buffer): float
     {
@@ -242,6 +273,8 @@ class NetworkPacket implements Unpackable
 
     /**
      * @param resource|string $buffer
+     *
+     * @throws InaccessibleResourceException
      *
      * @return array{float, float, float, float}
      */
@@ -258,6 +291,8 @@ class NetworkPacket implements Unpackable
     /**
      * @param resource|string $buffer
      *
+     * @throws InaccessibleResourceException
+     *
      * @return array{float, float, float}
      */
     public static function unpackVector(&$buffer): array
@@ -271,6 +306,8 @@ class NetworkPacket implements Unpackable
 
     /**
      * @param resource|string $buffer
+     *
+     * @throws InaccessibleResourceException
      */
     public static function unpackIpAddress(&$buffer): string
     {
@@ -286,6 +323,8 @@ class NetworkPacket implements Unpackable
 
     /**
      * @param resource|string $buffer
+     *
+     * @throws InaccessibleResourceException
      */
     public static function unpackPlayerState(&$buffer, int $code): PlayerState
     {
@@ -377,6 +416,8 @@ class NetworkPacket implements Unpackable
 
     /**
      * @param resource|string $buffer
+     *
+     * @throws InaccessibleResourceException
      */
     public static function unpackShot(&$buffer): ShotData
     {
@@ -394,6 +435,8 @@ class NetworkPacket implements Unpackable
 
     /**
      * @param resource|string $buffer
+     *
+     * @throws InaccessibleResourceException
      */
     public static function unpackString(&$buffer, int $size): string
     {
@@ -407,6 +450,8 @@ class NetworkPacket implements Unpackable
 
     /**
      * @param resource|string $buffer
+     *
+     * @throws InaccessibleResourceException
      */
     public static function unpackStdString(&$buffer): string
     {
@@ -418,7 +463,8 @@ class NetworkPacket implements Unpackable
     /**
      * @param resource|string $buffer
      *
-     * @throws \UnexpectedValueException
+     * @throws InaccessibleResourceException
+     * @throws InvalidTimestampFormatException
      */
     public static function unpackTimestamp(&$buffer): \DateTime
     {
@@ -444,11 +490,13 @@ class NetworkPacket implements Unpackable
             }
         }
 
-        throw new \UnexpectedValueException('No format valid format was found for this timestamp');
+        throw new InvalidTimestampFormatException('No format valid format was found for this timestamp');
     }
 
     /**
      * @param resource|string $buffer
+     *
+     * @throws InaccessibleResourceException
      */
     private static function unpackInt(&$buffer, int $size, string $symbol): int
     {
@@ -463,7 +511,7 @@ class NetworkPacket implements Unpackable
      *
      * @param resource|string $buffer
      *
-     * @throws \RuntimeException when buffer could not be read as a resource
+     * @throws InaccessibleResourceException when buffer could not be read as a resource
      */
     private static function safeReadResource(&$buffer, int $size): string
     {
@@ -475,7 +523,7 @@ class NetworkPacket implements Unpackable
 
                 if ($stats === false)
                 {
-                    throw new \RuntimeException('Could not fstat() this resource');
+                    throw new InaccessibleResourceException('Could not fstat() this resource');
                 }
 
                 $size = $stats['size'];
@@ -485,7 +533,7 @@ class NetworkPacket implements Unpackable
 
             if ($readValue === false)
             {
-                throw new \RuntimeException('Failure to read buffer as resource.');
+                throw new InaccessibleResourceException('Failure to read buffer as resource.');
             }
 
             return $readValue;

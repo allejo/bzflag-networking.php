@@ -9,6 +9,7 @@
 
 namespace allejo\bzflag\world\Modifiers;
 
+use allejo\bzflag\networking\InaccessibleResourceException;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 
 class PhysicsDriver
@@ -94,6 +95,8 @@ class PhysicsDriver
 
     /**
      * @param resource|string $resource
+     *
+     * @throws InaccessibleResourceException
      */
     public function unpack(&$resource): void
     {

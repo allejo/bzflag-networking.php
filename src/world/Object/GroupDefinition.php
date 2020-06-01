@@ -12,6 +12,7 @@ namespace allejo\bzflag\world\Object;
 use allejo\bzflag\generic\FreezableClass;
 use allejo\bzflag\generic\FrozenObstacleException;
 use allejo\bzflag\generic\JsonSerializePublicGetters;
+use allejo\bzflag\networking\InaccessibleResourceException;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\world\WorldDatabase;
 
@@ -120,6 +121,8 @@ class GroupDefinition implements \JsonSerializable
 
     /**
      * @param resource|string $resource
+     *
+     * @throws InaccessibleResourceException
      */
     public function unpack(&$resource): void
     {

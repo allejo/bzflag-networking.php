@@ -12,6 +12,7 @@ namespace allejo\bzflag\world\Object;
 use allejo\bzflag\generic\FreezableClass;
 use allejo\bzflag\generic\FrozenObstacleException;
 use allejo\bzflag\generic\JsonSerializePublicGetters;
+use allejo\bzflag\networking\InaccessibleResourceException;
 use allejo\bzflag\world\WorldDatabase;
 
 abstract class Obstacle implements \JsonSerializable
@@ -302,6 +303,8 @@ abstract class Obstacle implements \JsonSerializable
 
     /**
      * @param resource|string $resource
+     *
+     * @throws InaccessibleResourceException
      */
     abstract public function unpack(&$resource): void;
 }

@@ -10,10 +10,11 @@
 namespace allejo\bzflag\networking\Packets;
 
 use allejo\bzflag\networking\GameData\PlayerInfo;
+use allejo\bzflag\networking\InaccessibleResourceException;
 
 class MsgAdminInfo extends GamePacket
 {
-    const PACKET_TYPE = 'MsgAdminInfo';
+    public const PACKET_TYPE = 'MsgAdminInfo';
 
     /** @var PlayerInfo[] */
     private $players = [];
@@ -26,6 +27,11 @@ class MsgAdminInfo extends GamePacket
         return $this->players;
     }
 
+    /**
+     * {@inheritdoc}
+     *
+     * @throws InaccessibleResourceException
+     */
     protected function unpack(): void
     {
         $count = NetworkPacket::unpackUInt8($this->buffer);

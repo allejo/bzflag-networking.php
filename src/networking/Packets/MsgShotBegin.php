@@ -10,6 +10,7 @@
 namespace allejo\bzflag\networking\Packets;
 
 use allejo\bzflag\networking\GameData\FiringInfoData;
+use allejo\bzflag\networking\InaccessibleResourceException;
 
 class MsgShotBegin extends GamePacket
 {
@@ -23,6 +24,11 @@ class MsgShotBegin extends GamePacket
         return $this->firingInfo;
     }
 
+    /**
+     * {@inheritdoc}
+     *
+     * @throws InaccessibleResourceException
+     */
     protected function unpack(): void
     {
         $this->firingInfo = NetworkPacket::unpackFiringInfo($this->buffer);
