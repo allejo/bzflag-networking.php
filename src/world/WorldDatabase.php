@@ -129,6 +129,46 @@ class WorldDatabase implements \JsonSerializable
         ];
     }
 
+    public function getHeaderSize(): int
+    {
+        return $this->headerSize;
+    }
+
+    public function getWorldCode(): int
+    {
+        return $this->worldCode;
+    }
+
+    public function getMapVersion(): int
+    {
+        return $this->mapVersion;
+    }
+
+    public function getUncompressedSize(): int
+    {
+        return $this->uncompressedSize;
+    }
+
+    public function getDatabaseSize(): int
+    {
+        return $this->databaseSize;
+    }
+
+    public function getDatabase(): string
+    {
+        return $this->database;
+    }
+
+    public function getWorldCodeEndSize(): int
+    {
+        return $this->worldCodeEndSize;
+    }
+
+    public function getWorldCodeEnd(): int
+    {
+        return $this->worldCodeEnd;
+    }
+
     public function getDynamicColorManager(): DynamicColorManager
     {
         return $this->dynamicColorManager;
