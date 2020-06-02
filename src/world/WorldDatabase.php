@@ -38,6 +38,9 @@ class WorldDatabase implements \JsonSerializable
     /** @var string */
     private $database;
 
+    /** @var string */
+    private $worldHash;
+
     /** @var int */
     private $worldCodeEndSize;
 
@@ -90,6 +93,7 @@ class WorldDatabase implements \JsonSerializable
         }
 
         $this->database = $uncompressedWorld;
+        $this->worldHash = sha1($uncompressedWorld);
 
         $this->worldCodeEndSize = NetworkPacket::unpackUInt16($resource);
         $this->worldCodeEnd = NetworkPacket::unpackUInt16($resource);
@@ -119,6 +123,7 @@ class WorldDatabase implements \JsonSerializable
     public function jsonSerialize(): array
     {
         return [
+            'hash' => $this->getWorldHash(),
             'colors' => $this->dynamicColorManager->getColors(),
             'textures' => $this->textureMatrixManager->getTextures(),
             'materials' => $this->materialManager->getMaterials(),
@@ -157,6 +162,11 @@ class WorldDatabase implements \JsonSerializable
     public function getDatabase(): string
     {
         return $this->database;
+    }
+
+    public function getWorldHash(): string
+    {
+        return $this->worldHash;
     }
 
     public function getWorldCodeEndSize(): int
