@@ -159,11 +159,6 @@ class WorldDatabase implements \JsonSerializable
         return $this->databaseSize;
     }
 
-    public function getDatabase(): string
-    {
-        return $this->database;
-    }
-
     public function getWorldHash(): string
     {
         return $this->worldHash;
