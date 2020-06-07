@@ -147,7 +147,7 @@ class GroupDefinition implements \JsonSerializable
         $count = NetworkPacket::unpackUInt32($resource);
         for ($i = 0; $i < $count; ++$i)
         {
-            $groupInstance = new GroupInstance();
+            $groupInstance = new GroupInstance($this->worldDatabase);
             $groupInstance->unpack($resource);
 
             $this->groups[] = $groupInstance;

@@ -464,6 +464,16 @@ class NetworkPacket implements Unpackable
      * @param resource|string $buffer
      *
      * @throws InaccessibleResourceException
+     */
+    public static function unpackStdStringRaw(&$buffer): string
+    {
+        return self::unpackStdString($buffer);
+    }
+
+    /**
+     * @param resource|string $buffer
+     *
+     * @throws InaccessibleResourceException
      * @throws InvalidTimestampFormatException
      */
     public static function unpackTimestamp(&$buffer): \DateTime
