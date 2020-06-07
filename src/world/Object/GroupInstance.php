@@ -10,6 +10,7 @@
 namespace allejo\bzflag\world\Object;
 
 use allejo\bzflag\generic\FreezableClass;
+use allejo\bzflag\generic\FrozenObstacleException;
 use allejo\bzflag\networking\InaccessibleResourceException;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\world\Modifiers\Material;
@@ -68,6 +69,263 @@ class GroupInstance
     public function __construct(WorldDatabase $database)
     {
         $this->database = $database;
+    }
+
+    public function getGroupDef(): string
+    {
+        return $this->groupDef;
+    }
+
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return $this
+     */
+    public function setGroupDef(string $groupDef): self
+    {
+        $this->frozenObstacleCheck();
+        $this->groupDef = $groupDef;
+
+        return $this;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return $this
+     */
+    public function setName(string $name): self
+    {
+        $this->frozenObstacleCheck();
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getTransform(): MeshTransform
+    {
+        return clone $this->transform;
+    }
+
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return $this
+     */
+    public function setTransform(MeshTransform $transform): self
+    {
+        $this->frozenObstacleCheck();
+        $this->transform = $transform;
+
+        return $this;
+    }
+
+    public function isModifyTeam(): bool
+    {
+        return $this->modifyTeam;
+    }
+
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return $this
+     */
+    public function setModifyTeam(bool $modifyTeam): self
+    {
+        $this->frozenObstacleCheck();
+        $this->modifyTeam = $modifyTeam;
+
+        return $this;
+    }
+
+    public function isModifyColor(): bool
+    {
+        return $this->modifyColor;
+    }
+
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return $this
+     */
+    public function setModifyColor(bool $modifyColor): self
+    {
+        $this->frozenObstacleCheck();
+        $this->modifyColor = $modifyColor;
+
+        return $this;
+    }
+
+    public function isModifyPhysicsDriver(): bool
+    {
+        return $this->modifyPhysicsDriver;
+    }
+
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return $this
+     */
+    public function setModifyPhysicsDriver(bool $modifyPhysicsDriver): self
+    {
+        $this->frozenObstacleCheck();
+        $this->modifyPhysicsDriver = $modifyPhysicsDriver;
+
+        return $this;
+    }
+
+    public function isModifyMaterial(): bool
+    {
+        return $this->modifyMaterial;
+    }
+
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return $this
+     */
+    public function setModifyMaterial(bool $modifyMaterial): self
+    {
+        $this->frozenObstacleCheck();
+        $this->modifyMaterial = $modifyMaterial;
+
+        return $this;
+    }
+
+    public function isDriveThrough(): bool
+    {
+        return $this->driveThrough;
+    }
+
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return $this
+     */
+    public function setDriveThrough(bool $driveThrough): self
+    {
+        $this->frozenObstacleCheck();
+        $this->driveThrough = $driveThrough;
+
+        return $this;
+    }
+
+    public function isShootThrough(): bool
+    {
+        return $this->shootThrough;
+    }
+
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return $this
+     */
+    public function setShootThrough(bool $shootThrough): self
+    {
+        $this->frozenObstacleCheck();
+        $this->shootThrough = $shootThrough;
+
+        return $this;
+    }
+
+    public function isRicochet(): bool
+    {
+        return $this->ricochet;
+    }
+
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return $this
+     */
+    public function setRicochet(bool $ricochet): self
+    {
+        $this->frozenObstacleCheck();
+        $this->ricochet = $ricochet;
+
+        return $this;
+    }
+
+    public function getTeam(): int
+    {
+        return $this->team;
+    }
+
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return $this
+     */
+    public function setTeam(int $team): self
+    {
+        $this->frozenObstacleCheck();
+        $this->team = $team;
+
+        return $this;
+    }
+
+    /**
+     * @return array{float, float, float, float}
+     */
+    public function getTint(): array
+    {
+        return $this->tint;
+    }
+
+    /**
+     * @param array{float, float, float, float} $tint
+     *
+     * @throws FrozenObstacleException
+     *
+     * @return $this
+     */
+    public function setTint(array $tint): self
+    {
+        $this->frozenObstacleCheck();
+        $this->tint = $tint;
+
+        return $this;
+    }
+
+    public function getPhyDrv(): int
+    {
+        return $this->phyDrv;
+    }
+
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return $this
+     */
+    public function setPhyDrv(int $phyDrv): self
+    {
+        $this->frozenObstacleCheck();
+        $this->phyDrv = $phyDrv;
+
+        return $this;
+    }
+
+    public function getMaterial(): Material
+    {
+        return $this->material;
+    }
+
+    /**
+     * @throws FrozenObstacleException
+     *
+     * @return $this
+     */
+    public function setMaterial(Material $material): self
+    {
+        $this->frozenObstacleCheck();
+        $this->material = $material;
+
+        return $this;
     }
 
     /**
