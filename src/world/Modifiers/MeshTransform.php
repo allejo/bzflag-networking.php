@@ -40,6 +40,7 @@ class MeshTransform
      */
     public function unpack(&$resource): void
     {
+        $this->name = NetworkPacket::unpackStdString($resource);
         $count = NetworkPacket::unpackUInt32($resource);
 
         for ($i = 0; $i < $count; ++$i)
