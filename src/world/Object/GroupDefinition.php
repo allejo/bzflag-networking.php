@@ -16,7 +16,7 @@ use allejo\bzflag\networking\InaccessibleResourceException;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\world\WorldDatabase;
 
-class GroupDefinition implements \JsonSerializable
+class GroupDefinition implements \JsonSerializable, IWorldDatabaseAware
 {
     use FreezableClass;
     use JsonSerializePublicGetters;
@@ -43,6 +43,11 @@ class GroupDefinition implements \JsonSerializable
         $this->active = false;
         $this->lists = [];
         $this->groupInstances = [];
+    }
+
+    public function getWorldDatabase(): WorldDatabase
+    {
+        return $this->worldDatabase;
     }
 
     public function getName(): string
@@ -154,5 +159,13 @@ class GroupDefinition implements \JsonSerializable
         }
 
         $this->freeze();
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    protected function getJsonEncodeBlacklist(): array
+    {
+        return ['worldDatabase'];
     }
 }

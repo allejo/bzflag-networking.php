@@ -15,7 +15,7 @@ use allejo\bzflag\generic\JsonSerializePublicGetters;
 use allejo\bzflag\networking\InaccessibleResourceException;
 use allejo\bzflag\world\WorldDatabase;
 
-abstract class Obstacle implements \JsonSerializable
+abstract class Obstacle implements \JsonSerializable, IWorldDatabaseAware
 {
     use FreezableClass;
     use JsonSerializePublicGetters;
@@ -72,6 +72,11 @@ abstract class Obstacle implements \JsonSerializable
         }
 
         return new self::$mapping[$type]($database);
+    }
+
+    public function getWorldDatabase(): WorldDatabase
+    {
+        return $this->worldDatabase;
     }
 
     /**
@@ -307,4 +312,12 @@ abstract class Obstacle implements \JsonSerializable
      * @throws InaccessibleResourceException
      */
     abstract public function unpack(&$resource): void;
+
+    /**
+     * @return array<int, string>
+     */
+    protected function getJsonEncodeBlacklist(): array
+    {
+        return ['worldDatabase'];
+    }
 }

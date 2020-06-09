@@ -11,15 +11,17 @@ namespace allejo\bzflag\world\Object;
 
 use allejo\bzflag\generic\FreezableClass;
 use allejo\bzflag\generic\FrozenObstacleException;
+use allejo\bzflag\generic\JsonSerializePublicGetters;
 use allejo\bzflag\networking\InaccessibleResourceException;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\world\Modifiers\Material;
 use allejo\bzflag\world\Modifiers\MeshTransform;
 use allejo\bzflag\world\WorldDatabase;
 
-class GroupInstance
+class GroupInstance implements \JsonSerializable, IWorldDatabaseAware
 {
     use FreezableClass;
+    use JsonSerializePublicGetters;
 
     /** @var WorldDatabase */
     private $database;
@@ -69,6 +71,11 @@ class GroupInstance
     public function __construct(WorldDatabase $database)
     {
         $this->database = $database;
+    }
+
+    public function getWorldDatabase(): WorldDatabase
+    {
+        return $this->database;
     }
 
     public function getGroupDefinitionName(): string
@@ -376,5 +383,13 @@ class GroupInstance
         }
 
         $this->freeze();
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    protected function getJsonEncodeBlacklist(): array
+    {
+        return ['worldDatabase'];
     }
 }
