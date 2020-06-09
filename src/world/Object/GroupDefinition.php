@@ -34,7 +34,7 @@ class GroupDefinition implements \JsonSerializable
     private $lists;
 
     /** @var array<int, GroupInstance> */
-    private $groups;
+    private $groupInstances;
 
     public function __construct(string $name, WorldDatabase $database)
     {
@@ -42,7 +42,7 @@ class GroupDefinition implements \JsonSerializable
         $this->name = $name;
         $this->active = false;
         $this->lists = [];
-        $this->groups = [];
+        $this->groupInstances = [];
     }
 
     public function getName(): string
@@ -99,22 +99,22 @@ class GroupDefinition implements \JsonSerializable
     /**
      * @return array<int, GroupInstance>
      */
-    public function getGroups(): array
+    public function getGroupInstances(): array
     {
-        return $this->groups;
+        return $this->groupInstances;
     }
 
     /**
-     * @param array<int, GroupInstance> $groups
+     * @param array<int, GroupInstance> $groupInstances
      *
      * @throws FrozenObstacleException
      *
      * @return $this
      */
-    public function setGroups(array $groups): self
+    public function setGroupInstances(array $groupInstances): self
     {
         $this->frozenObstacleCheck();
-        $this->groups = $groups;
+        $this->groupInstances = $groupInstances;
 
         return $this;
     }
@@ -150,7 +150,7 @@ class GroupDefinition implements \JsonSerializable
             $groupInstance = new GroupInstance($this->worldDatabase);
             $groupInstance->unpack($resource);
 
-            $this->groups[] = $groupInstance;
+            $this->groupInstances[] = $groupInstance;
         }
 
         $this->freeze();
