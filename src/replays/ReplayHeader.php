@@ -149,7 +149,7 @@ class ReplayHeader implements Unpackable, \JsonSerializable
         return $this->worldSize;
     }
 
-    public function getWorld(): WorldDatabase
+    public function getWorldDatabase(): WorldDatabase
     {
         return $this->worldDatabase;
     }
