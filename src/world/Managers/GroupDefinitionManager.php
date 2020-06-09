@@ -11,6 +11,7 @@ namespace allejo\bzflag\world\Managers;
 
 use allejo\bzflag\networking\InaccessibleResourceException;
 use allejo\bzflag\networking\Packets\NetworkPacket;
+use allejo\bzflag\world\GroupDefinitionNotFoundException;
 use allejo\bzflag\world\Object\GroupDefinition;
 
 class GroupDefinitionManager extends BaseManager
@@ -18,7 +19,7 @@ class GroupDefinitionManager extends BaseManager
     /** @var GroupDefinition */
     private $world;
 
-    /** @var array<int, GroupDefinition> */
+    /** @var array<string, GroupDefinition> */
     private $groupDefinitions = [];
 
     public function getWorld(): GroupDefinition
@@ -27,7 +28,20 @@ class GroupDefinitionManager extends BaseManager
     }
 
     /**
-     * @return array<int, GroupDefinition>
+     * @throws GroupDefinitionNotFoundException when there's no group definition with the specified name
+     */
+    public function getGroupDefinition(string $name): GroupDefinition
+    {
+        if (isset($this->groupDefinitions[$name]))
+        {
+            return $this->groupDefinitions[$name];
+        }
+
+        throw new GroupDefinitionNotFoundException("No group definition with the name '{$name}' was found");
+    }
+
+    /**
+     * @return array<string, GroupDefinition>
      */
     public function getGroupDefinitions(): array
     {
@@ -50,7 +64,7 @@ class GroupDefinitionManager extends BaseManager
             $groupDef = new GroupDefinition('', $this->worldDatabase);
             $groupDef->unpack($resource);
 
-            $this->groupDefinitions[] = $groupDef;
+            $this->groupDefinitions[$groupDef->getName()] = $groupDef;
         }
     }
 }

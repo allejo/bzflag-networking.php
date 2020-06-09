@@ -71,7 +71,7 @@ class GroupInstance
         $this->database = $database;
     }
 
-    public function getGroupDef(): string
+    public function getGroupDefinitionName(): string
     {
         return $this->groupDef;
     }
@@ -81,7 +81,7 @@ class GroupInstance
      *
      * @return $this
      */
-    public function setGroupDef(string $groupDef): self
+    public function setGroupDefinitionName(string $groupDef): self
     {
         $this->frozenObstacleCheck();
         $this->groupDef = $groupDef;
