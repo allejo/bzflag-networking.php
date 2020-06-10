@@ -30,7 +30,7 @@ class GroupDefinition implements \JsonSerializable, IWorldDatabaseAware
     /** @var bool */
     private $active;
 
-    /** @var array<int, array<int, Obstacle>> */
+    /** @var array<ObstacleType::*, array<int, Obstacle>> */
     private $lists;
 
     /** @var array<int, GroupInstance> */
@@ -41,7 +41,18 @@ class GroupDefinition implements \JsonSerializable, IWorldDatabaseAware
         $this->worldDatabase = $database;
         $this->name = $name;
         $this->active = false;
-        $this->lists = [];
+        $this->lists = [
+            ObstacleType::WALL_TYPE => [],
+            ObstacleType::BOX_TYPE => [],
+            ObstacleType::PYR_TYPE => [],
+            ObstacleType::BASE_TYPE => [],
+            ObstacleType::TELE_TYPE => [],
+            ObstacleType::MESH_TYPE => [],
+            ObstacleType::ARC_TYPE => [],
+            ObstacleType::CONE_TYPE => [],
+            ObstacleType::SPHERE_TYPE => [],
+            ObstacleType::TETRA_TYPE => [],
+        ];
         $this->groupInstances = [];
     }
 
@@ -89,7 +100,7 @@ class GroupDefinition implements \JsonSerializable, IWorldDatabaseAware
     /**
      * @param null|ObstacleType::* $type
      *
-     * @return array<int, array<int, Obstacle>>|array<int, Obstacle>
+     * @return array<ObstacleType::*, array<int, Obstacle>>|array<int, Obstacle>
      */
     public function getObstaclesByType(?int $type = null): array
     {
@@ -99,6 +110,49 @@ class GroupDefinition implements \JsonSerializable, IWorldDatabaseAware
         }
 
         return $this->lists[$type];
+    }
+
+    /**
+     * @param ObstacleType[]|array<ObstacleType::*, ObstacleType[]> $obstacles
+     * @param null|ObstacleType::*                                  $type
+     *
+     * @throws \InvalidArgumentException
+     * @throws FrozenObstacleException
+     *
+     * @return $this
+     */
+    public function setObstaclesByType(array $obstacles, ?int $type = null): self
+    {
+        $this->frozenObstacleCheck();
+
+        if ($type === null)
+        {
+            if (count($obstacles) !== ObstacleType::OBSTACLE_TYPE_COUNT)
+            {
+                throw new \InvalidArgumentException('$obstacles does not match the expected structure.');
+            }
+
+            for ($i = 0; $i < ObstacleType::OBSTACLE_TYPE_COUNT; ++$i)
+            {
+                if (!isset($obstacles[$i]))
+                {
+                    throw new \InvalidArgumentException("No field for Obstacle Type {$i}.");
+                }
+            }
+
+            $this->lists = $obstacles;
+        }
+        else
+        {
+            if (!isset($this->lists[$type]))
+            {
+                throw new \InvalidArgumentException("Invalid Obstacle Type value: {$type}.");
+            }
+
+            $this->lists[$type] = $obstacles;
+        }
+
+        return $this;
     }
 
     /**
