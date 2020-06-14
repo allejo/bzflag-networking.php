@@ -113,8 +113,8 @@ class GroupDefinition implements \JsonSerializable, IWorldDatabaseAware
     }
 
     /**
-     * @param ObstacleType[]|array<ObstacleType::*, ObstacleType[]> $obstacles
-     * @param null|ObstacleType::*                                  $type
+     * @param Obstacle[]|array<ObstacleType::*, Obstacle[]> $obstacles
+     * @param null|ObstacleType::*                          $type
      *
      * @throws \InvalidArgumentException
      * @throws FrozenObstacleException
