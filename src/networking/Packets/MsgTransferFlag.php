@@ -10,7 +10,6 @@
 namespace allejo\bzflag\networking\Packets;
 
 use allejo\bzflag\networking\GameData\FlagData;
-use allejo\bzflag\networking\InaccessibleResourceException;
 
 class MsgTransferFlag extends GamePacket
 {
@@ -40,11 +39,6 @@ class MsgTransferFlag extends GamePacket
         return $this->flag;
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws InaccessibleResourceException
-     */
     protected function unpack(): void
     {
         $this->from = NetworkPacket::unpackUInt8($this->buffer);

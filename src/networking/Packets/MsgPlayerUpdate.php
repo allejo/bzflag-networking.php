@@ -10,7 +10,6 @@
 namespace allejo\bzflag\networking\Packets;
 
 use allejo\bzflag\networking\GameData\PlayerState;
-use allejo\bzflag\networking\InaccessibleResourceException;
 
 class MsgPlayerUpdate extends GamePacket
 {
@@ -32,11 +31,6 @@ class MsgPlayerUpdate extends GamePacket
         return $this->state;
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws InaccessibleResourceException
-     */
     protected function unpack(): void
     {
         // Discard this value; I'm not sure why this value comes out to a weird

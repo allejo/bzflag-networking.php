@@ -9,9 +9,6 @@
 
 namespace allejo\bzflag\networking\Packets;
 
-use allejo\bzflag\networking\InaccessibleResourceException;
-use allejo\bzflag\networking\InvalidTimestampFormatException;
-
 class MsgGameTime extends GamePacket
 {
     public const PACKET_TYPE = 'MsgGameTime';
@@ -50,12 +47,6 @@ class MsgGameTime extends GamePacket
         return $this->value;
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws InaccessibleResourceException
-     * @throws InvalidTimestampFormatException when a timestamp cannot be unpacked correctly from the buffer
-     */
     protected function unpack(): void
     {
         // @TODO In 2.0.0, remove the BC code

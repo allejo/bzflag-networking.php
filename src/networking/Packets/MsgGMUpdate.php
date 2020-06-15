@@ -10,7 +10,6 @@
 namespace allejo\bzflag\networking\Packets;
 
 use allejo\bzflag\networking\GameData\ShotData;
-use allejo\bzflag\networking\InaccessibleResourceException;
 
 class MsgGMUpdate extends GamePacket
 {
@@ -32,11 +31,6 @@ class MsgGMUpdate extends GamePacket
         return $this->shot;
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws InaccessibleResourceException
-     */
     protected function unpack(): void
     {
         $this->shot = NetworkPacket::unpackShot($this->buffer);

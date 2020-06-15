@@ -67,7 +67,9 @@ abstract class GamePacket implements \JsonSerializable
     ];
 
     /**
+     * @throws \InvalidArgumentException
      * @throws InaccessibleResourceException
+     * @throws InvalidTimestampFormatException
      * @throws PacketNotSetException
      */
     final public function __construct(?NetworkPacket $packet)
@@ -162,6 +164,10 @@ abstract class GamePacket implements \JsonSerializable
 
     /**
      * Unpack the NetworkPacket buffer into a GamePacket's instance variables.
+     *
+     * @throws \InvalidArgumentException
+     * @throws InaccessibleResourceException
+     * @throws InvalidTimestampFormatException when a timestamp cannot be unpacked correctly from the buffer
      */
     abstract protected function unpack(): void;
 }

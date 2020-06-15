@@ -9,8 +9,6 @@
 
 namespace allejo\bzflag\networking\Packets;
 
-use allejo\bzflag\networking\InaccessibleResourceException;
-
 class MsgKilled extends GamePacket
 {
     public const PACKET_TYPE = 'MsgKilled';
@@ -63,11 +61,6 @@ class MsgKilled extends GamePacket
         return $this->physicsDriverId;
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws InaccessibleResourceException
-     */
     protected function unpack(): void
     {
         $this->victimId = NetworkPacket::unpackUInt8($this->buffer);

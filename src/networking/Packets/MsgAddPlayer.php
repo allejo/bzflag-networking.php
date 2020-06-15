@@ -10,7 +10,6 @@
 namespace allejo\bzflag\networking\Packets;
 
 use allejo\bzflag\networking\GameData\PlayerScore;
-use allejo\bzflag\networking\InaccessibleResourceException;
 
 class MsgAddPlayer extends GamePacket
 {
@@ -69,11 +68,6 @@ class MsgAddPlayer extends GamePacket
         $this->score = new PlayerScore();
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws InaccessibleResourceException
-     */
     protected function unpack(): void
     {
         $this->playerIndex = NetworkPacket::unpackUInt8($this->buffer);

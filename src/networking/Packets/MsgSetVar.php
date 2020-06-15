@@ -10,7 +10,6 @@
 namespace allejo\bzflag\networking\Packets;
 
 use allejo\bzflag\networking\GameData\BZDBSetting;
-use allejo\bzflag\networking\InaccessibleResourceException;
 
 class MsgSetVar extends GamePacket
 {
@@ -27,11 +26,6 @@ class MsgSetVar extends GamePacket
         return $this->settings;
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws InaccessibleResourceException
-     */
     protected function unpack(): void
     {
         $count = NetworkPacket::unpackUInt16($this->buffer);

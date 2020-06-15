@@ -9,8 +9,6 @@
 
 namespace allejo\bzflag\networking\Packets;
 
-use allejo\bzflag\networking\InaccessibleResourceException;
-
 class MsgTimeUpdate extends GamePacket
 {
     public const PACKET_TYPE = 'MsgTimeUpdate';
@@ -23,11 +21,6 @@ class MsgTimeUpdate extends GamePacket
         return $this->timeLeft;
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws InaccessibleResourceException
-     */
     protected function unpack(): void
     {
         // FIXME: Is there a more robust solution to this?
