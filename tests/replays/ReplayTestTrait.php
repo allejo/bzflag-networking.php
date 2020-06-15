@@ -26,15 +26,22 @@ trait ReplayTestTrait
         return file_get_contents(__DIR__ . '/fixtures/' . $filename);
     }
 
-    public static function assertJsonStringEqualsSerializable(string $json, \JsonSerializable $object)
+    public static function assertJsonStringEqualsSerializable(string $json, \JsonSerializable $object): void
     {
         $expected = json_decode($json, true);
-        $actual = json_decode(json_encode($object), true);
+        $encoded = json_encode($object);
+
+        if (json_last_error() > 0)
+        {
+            throw new \JsonException(json_last_error_msg());
+        }
+
+        $actual = json_decode($encoded, true);
 
         static::assertEquals($expected, $actual);
     }
 
-    public static function assertJsonFixtureEqualsSerializable(string $filename, \JsonSerializable $object)
+    public static function assertJsonFixtureEqualsSerializable(string $filename, \JsonSerializable $object): void
     {
         self::assertJsonStringEqualsSerializable(self::getJsonFixture($filename), $object);
     }

@@ -19,7 +19,7 @@ class ReplayHeaderTest extends TestCase
 {
     use ReplayTestTrait;
 
-    public function testHeader()
+    public function testHeader(): void
     {
         $header = $this->replay->getHeader();
 
