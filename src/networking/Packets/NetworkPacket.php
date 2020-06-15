@@ -525,25 +525,12 @@ class NetworkPacket implements Unpackable
     }
 
     /**
-     * @param resource|string $buffer
-     *
-     * @throws \InvalidArgumentException
-     * @throws InaccessibleResourceException
-     */
-    private static function unpackInt(&$buffer, int $size, string $symbol): int
-    {
-        $binary = self::safeReadResource($buffer, $size);
-
-        return unpack($symbol, $binary)[1];
-    }
-
-    /**
      * Safely read a resource or string buffer and return a string that can be
      * passed to `unpack()`.
      *
      * @param resource|string $buffer
      *
-     * @throws \InvalidArgumentException when a non-string parameter is given
+     * @throws \InvalidArgumentException     when a non-string parameter is given
      * @throws InaccessibleResourceException when buffer could not be read as a resource
      *
      * @return string A string representation of the buffer that can be used in the
@@ -592,5 +579,18 @@ class NetworkPacket implements Unpackable
         $buffer = substr($buffer, $size);
 
         return $binary;
+    }
+
+    /**
+     * @param resource|string $buffer
+     *
+     * @throws \InvalidArgumentException
+     * @throws InaccessibleResourceException
+     */
+    private static function unpackInt(&$buffer, int $size, string $symbol): int
+    {
+        $binary = self::safeReadResource($buffer, $size);
+
+        return unpack($symbol, $binary)[1];
     }
 }
