@@ -62,6 +62,12 @@ abstract class Obstacle implements \JsonSerializable, IWorldDatabaseAware
     {
         $this->worldDatabase = $database;
         $this->objectType = $obstacleType;
+        $this->pos = [0, 0, 0];
+        $this->size = [0, 0, 0];
+        $this->angle = 0;
+        $this->driveThrough = false;
+        $this->shootThrough = false;
+        $this->ricochet = false;
     }
 
     public static function new(int $type, WorldDatabase $database): Obstacle

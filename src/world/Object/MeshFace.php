@@ -56,6 +56,9 @@ class MeshFace extends Obstacle
         parent::__construct($database, null);
 
         $this->mesh = $mesh;
+        $this->vertices = [];
+        $this->normals = [];
+        $this->texCoords = [];
     }
 
     public function getMesh(): MeshObstacle
@@ -126,7 +129,7 @@ class MeshFace extends Obstacle
         $this->noClusters = ($stateByte & (1 << 5)) !== 0;
         $this->ricochet = ($stateByte & (1 << 6)) !== 0;
 
-        $this->vertexCount = NetworkPacket::unpackInt8($resource);
+        $this->vertexCount = NetworkPacket::unpackInt32($resource);
         $this->vertices = [];
         for ($i = 0; $i < $this->vertexCount; ++$i)
         {
@@ -158,5 +161,12 @@ class MeshFace extends Obstacle
         $this->bzMaterial = $this->worldDatabase->getMaterialManager()->getMaterial($matIndex);
 
         $this->phyDrv = NetworkPacket::unpackInt32($resource);
+    }
+
+    protected function getJsonEncodeBlacklist(): array
+    {
+        return array_merge(parent::getJsonEncodeBlacklist(), [
+            'mesh',
+        ]);
     }
 }

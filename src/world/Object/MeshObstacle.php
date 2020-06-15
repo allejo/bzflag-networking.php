@@ -14,13 +14,10 @@ use allejo\bzflag\world\WorldDatabase;
 
 class MeshObstacle extends Obstacle
 {
-    /** @var string */
-    private $name;
-
     /** @var int */
     private $checkCount;
 
-    /** @var string */
+    /** @var string[] */
     private $checkTypes;
 
     /** @var array<int, array{float, float, float}> */
@@ -77,17 +74,12 @@ class MeshObstacle extends Obstacle
         $this->drawInfo = new MeshDrawInfo();
     }
 
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
     public function getCheckCount(): int
     {
         return $this->checkCount;
     }
 
-    public function getCheckTypes(): string
+    public function getCheckTypes(): array
     {
         return $this->checkTypes;
     }
@@ -195,14 +187,15 @@ class MeshObstacle extends Obstacle
             $this->vertices[$i] = NetworkPacket::unpackVector($resource);
         }
 
-        $this->normalCount = NetworkPacket::unpackInt8($resource);
+        $this->normalCount = NetworkPacket::unpackInt32($resource);
         for ($i = 0; $i < $this->normalCount; ++$i)
         {
             $this->normals[$i] = NetworkPacket::unpackVector($resource);
         }
 
-        $this->texCoordCount = NetworkPacket::unpackInt8($resource);
-        $texCoordBuf = fread($resource, 4 /* sizeof(float) */ * 2 * $this->texCoordCount);
+        $this->texCoordCount = NetworkPacket::unpackInt32($resource);
+        $this->texCoords = array_fill(0, $this->texCoordCount, [0, 0]);
+        $texCoordBuf = NetworkPacket::safeReadResource($resource, 4 /* sizeof(float) */ * 2 * $this->texCoordCount);
 
         $this->faceSize = NetworkPacket::unpackInt32($resource);
         $this->faces = [];

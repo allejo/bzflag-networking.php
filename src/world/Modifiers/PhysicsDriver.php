@@ -9,11 +9,14 @@
 
 namespace allejo\bzflag\world\Modifiers;
 
+use allejo\bzflag\generic\JsonSerializePublicGetters;
 use allejo\bzflag\networking\InaccessibleResourceException;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 
-class PhysicsDriver
+class PhysicsDriver implements \JsonSerializable
 {
+    use JsonSerializePublicGetters;
+
     /** @var string */
     private $name;
 
