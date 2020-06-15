@@ -79,6 +79,9 @@ class MeshObstacle extends Obstacle
         return $this->checkCount;
     }
 
+    /**
+     * @return string[]
+     */
     public function getCheckTypes(): array
     {
         return $this->checkTypes;

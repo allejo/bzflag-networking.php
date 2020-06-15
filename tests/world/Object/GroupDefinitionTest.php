@@ -9,10 +9,13 @@
 
 namespace allejo\bzflag\test\world\Object;
 
+use allejo\bzflag\generic\FrozenObstacleException;
 use allejo\bzflag\world\Object\BoxBuilding;
 use allejo\bzflag\world\Object\GroupDefinition;
 use allejo\bzflag\world\Object\ObstacleType;
 use allejo\bzflag\world\WorldDatabase;
+use PHPUnit\Framework\Exception;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -21,7 +24,7 @@ use PHPUnit\Framework\TestCase;
  */
 class GroupDefinitionTest extends TestCase
 {
-    public function testSetObstaclesByTypeFullReplace(): void
+    public function testSetObstacles(): void
     {
         $obstacles = [
             ObstacleType::WALL_TYPE => [],
@@ -38,19 +41,25 @@ class GroupDefinitionTest extends TestCase
             ObstacleType::TETRA_TYPE => [],
         ];
 
+        /** @var MockObject|WorldDatabase $worldDB */
         $worldDB = $this->createMock(WorldDatabase::class);
         $groupDef = new GroupDefinition('', $worldDB);
-        $groupDef->setObstaclesByType($obstacles);
+        $groupDef->setObstacles($obstacles);
 
-        self::assertEquals($groupDef->getObstaclesByType(), $obstacles);
+        self::assertEquals($groupDef->getObstacles(), $obstacles);
     }
 
+    /**
+     * @throws Exception
+     * @throws FrozenObstacleException
+     */
     public function testSetObstaclesByTypePartialReplace()
     {
+        /** @var MockObject|WorldDatabase $worldDB */
         $worldDB = $this->createMock(WorldDatabase::class);
         $groupDef = new GroupDefinition('', $worldDB);
 
-        $startingObstacles = $groupDef->getObstaclesByType();
+        $startingObstacles = $groupDef->getObstacles();
 
         foreach ($startingObstacles as $startingObstacle)
         {
@@ -67,13 +76,12 @@ class GroupDefinitionTest extends TestCase
         self::assertEquals($newBoxObstacles, $groupDef->getObstaclesByType(ObstacleType::BOX_TYPE));
     }
 
-    public static function dataProvider_testSetObstaclesByTypeExceptions(): array
+    public static function dataProvider_testSetObstaclesExceptions(): array
     {
         return [
             [
                 '$obstacles does not match the expected structure',
                 [],
-                null,
             ],
             [
                 'No field for Obstacle Type 9',
@@ -89,8 +97,27 @@ class GroupDefinitionTest extends TestCase
                     8 => [],
                     14 => [],
                 ],
-                null,
             ],
+        ];
+    }
+
+    /**
+     * @dataProvider dataProvider_testSetObstaclesExceptions
+     */
+    public function testSetObstaclesExceptions(string $exceptionMessage, array $obstacles): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage($exceptionMessage ?? '');
+
+        /** @var MockObject|WorldDatabase $worldDB */
+        $worldDB = $this->createMock(WorldDatabase::class);
+        $groupDef = new GroupDefinition('', $worldDB);
+        $groupDef->setObstacles($obstacles);
+    }
+
+    public static function dataProvider_testSetObstaclesByTypeExceptions(): array
+    {
+        return [
             [
                 'Invalid Obstacle Type value: 14',
                 [],
@@ -102,11 +129,12 @@ class GroupDefinitionTest extends TestCase
     /**
      * @dataProvider dataProvider_testSetObstaclesByTypeExceptions
      */
-    public function testSetObstaclesByTypeExceptions(?string $exceptionMessage, array $obstacles, ?int $type): void
+    public function testSetObstaclesByTypeExceptions(string $exceptionMessage, array $obstacles, int $type): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage($exceptionMessage ?? '');
 
+        /** @var MockObject|WorldDatabase $worldDB */
         $worldDB = $this->createMock(WorldDatabase::class);
         $groupDef = new GroupDefinition('', $worldDB);
         $groupDef->setObstaclesByType($obstacles, $type);
