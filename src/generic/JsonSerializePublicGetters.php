@@ -18,14 +18,24 @@ namespace allejo\bzflag\generic;
 trait JsonSerializePublicGetters
 {
     /**
-     * @throws \ReflectionException
-     *
      * @return array<string, mixed>
      */
     public function jsonSerialize(): array
     {
         $output = [];
-        $fxns = $this->getExports();
+
+        try
+        {
+            $fxns = $this->getExports();
+        }
+        catch (\ReflectionException $e)
+        {
+            return [
+                '_error' => [
+                    sprintf('JSON Serialization Error: Could not perform reflection of the %s class', __CLASS__),
+                ],
+            ];
+        }
 
         foreach ($fxns as $fxn)
         {

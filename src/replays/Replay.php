@@ -96,18 +96,29 @@ class Replay implements \JsonSerializable
     }
 
     /**
-     * @throws InaccessibleResourceException
-     * @throws InvalidTimestampFormatException
-     *
      * @return array<string, mixed>
      */
     public function jsonSerialize(): array
     {
+        try
+        {
+            $packets = $this->getPacketsIterable();
+        }
+        catch (InaccessibleResourceException | InvalidTimestampFormatException $e)
+        {
+            $packets = [
+                '_error' => [
+                    sprintf('Replay Unpacking Error: Could not unpack replay packet.'),
+                    sprintf('  %s', $e->getMessage()),
+                ],
+            ];
+        }
+
         return [
             'header' => $this->header,
             'startTime' => $this->startTime->format(DATE_ATOM),
             'endTime' => $this->endTime->format(DATE_ATOM),
-            'packets' => $this->getPacketsIterable(),
+            'packets' => $packets,
         ];
     }
 

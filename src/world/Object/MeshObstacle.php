@@ -180,7 +180,7 @@ class MeshObstacle extends Obstacle
         $this->checkCount = NetworkPacket::unpackInt32($resource);
         for ($i = 0; $i < $this->checkCount; ++$i)
         {
-            $this->checkTypes[$i] = NetworkPacket::unpackUInt8($resource);
+            $this->checkTypes[$i] = (string)NetworkPacket::unpackUInt8($resource);
             $this->checkPoints[$i] = NetworkPacket::unpackVector($resource);
         }
 
