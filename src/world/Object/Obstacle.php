@@ -324,6 +324,10 @@ abstract class Obstacle implements \JsonSerializable, IWorldDatabaseAware
      */
     protected function getJsonEncodeBlacklist(): array
     {
-        return ['worldDatabase'];
+        return [
+            'worldDatabase',
+            'frozen',
+            'valid',
+        ];
     }
 }

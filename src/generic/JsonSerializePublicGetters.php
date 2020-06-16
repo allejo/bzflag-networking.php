@@ -39,7 +39,7 @@ trait JsonSerializePublicGetters
 
         foreach ($fxns as $fxn)
         {
-            $key = lcfirst(substr($fxn, 3));
+            $key = lcfirst(preg_replace('/^(get|is)/', '', $fxn));
 
             if (in_array($key, $this->getJsonEncodeBlacklist(), true))
             {
@@ -78,10 +78,9 @@ trait JsonSerializePublicGetters
 
         foreach ($fxns as $fxn)
         {
-            $isGetter = strpos($fxn->getName(), 'get') === 0;
-            $hasNoArgs = count($fxn->getParameters()) === 0;
+            $isGetter = preg_match('/^(get|is)/', $fxn->getName());
 
-            if ($isGetter && $hasNoArgs)
+            if ($isGetter)
             {
                 $keys[] = $fxn->getName();
             }

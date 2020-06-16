@@ -9,6 +9,7 @@
     "flagsSize": 0,
     "worldSize": 622,
     "worldDatabase": {
+        "hash": "b75bb1ccd2532428d04f6dfb7afb6f4498096819",
         "colors": [],
         "textures": [],
         "materials": [],
@@ -32,7 +33,10 @@
                     "rotation": 270.00000068324533,
                     "width": -1,
                     "breadth": 400,
-                    "height": 6.149999618530273
+                    "height": 6.149999618530273,
+                    "driveThrough": false,
+                    "shootThrough": false,
+                    "passable": false
                 },
                 {
                     "objectType": 0,
@@ -50,7 +54,10 @@
                     "rotation": 180.00000500895632,
                     "width": -1,
                     "breadth": 400,
-                    "height": 6.149999618530273
+                    "height": 6.149999618530273,
+                    "driveThrough": false,
+                    "shootThrough": false,
+                    "passable": false
                 },
                 {
                     "objectType": 0,
@@ -68,7 +75,10 @@
                     "rotation": 90.00000250447816,
                     "width": -1,
                     "breadth": 400,
-                    "height": 6.149999618530273
+                    "height": 6.149999618530273,
+                    "driveThrough": false,
+                    "shootThrough": false,
+                    "passable": false
                 },
                 {
                     "objectType": 0,
@@ -86,7 +96,10 @@
                     "rotation": 0,
                     "width": -1,
                     "breadth": 400,
-                    "height": 6.149999618530273
+                    "height": 6.149999618530273,
+                    "driveThrough": false,
+                    "shootThrough": false,
+                    "passable": false
                 }
             ],
             [
@@ -103,10 +116,13 @@
                         9.420000076293945
                     ],
                     "angle": 1.7985963821411133,
-                    "rotation": 103.05198174418479,
+                    "rotation": 103.05198174418477,
                     "width": 30,
                     "breadth": 30,
-                    "height": 9.420000076293945
+                    "height": 9.420000076293945,
+                    "driveThrough": false,
+                    "shootThrough": false,
+                    "passable": false
                 },
                 {
                     "objectType": 1,
@@ -121,10 +137,13 @@
                         9.420000076293945
                     ],
                     "angle": 3.2145466804504395,
-                    "rotation": 184.1799578375991,
+                    "rotation": 184.17995783759906,
                     "width": 30,
                     "breadth": 30,
-                    "height": 9.420000076293945
+                    "height": 9.420000076293945,
+                    "driveThrough": false,
+                    "shootThrough": false,
+                    "passable": false
                 },
                 {
                     "objectType": 1,
@@ -142,7 +161,10 @@
                     "rotation": 278.88165083084976,
                     "width": 30,
                     "breadth": 30,
-                    "height": 9.420000076293945
+                    "height": 9.420000076293945,
+                    "driveThrough": false,
+                    "shootThrough": false,
+                    "passable": false
                 },
                 {
                     "objectType": 1,
@@ -157,10 +179,13 @@
                         9.420000076293945
                     ],
                     "angle": 3.718383550643921,
-                    "rotation": 213.04768406276628,
+                    "rotation": 213.04768406276625,
                     "width": 30,
                     "breadth": 30,
-                    "height": 9.420000076293945
+                    "height": 9.420000076293945,
+                    "driveThrough": false,
+                    "shootThrough": false,
+                    "passable": false
                 },
                 {
                     "objectType": 1,
@@ -175,10 +200,13 @@
                         9.420000076293945
                     ],
                     "angle": 0.5449414849281311,
-                    "rotation": 31.222847167973875,
+                    "rotation": 31.22284716797387,
                     "width": 30,
                     "breadth": 30,
-                    "height": 9.420000076293945
+                    "height": 9.420000076293945,
+                    "driveThrough": false,
+                    "shootThrough": false,
+                    "passable": false
                 },
                 {
                     "objectType": 1,
@@ -193,10 +221,13 @@
                         9.420000076293945
                     ],
                     "angle": 2.9503958225250244,
-                    "rotation": 169.04522852371295,
+                    "rotation": 169.04522852371298,
                     "width": 30,
                     "breadth": 30,
-                    "height": 9.420000076293945
+                    "height": 9.420000076293945,
+                    "driveThrough": false,
+                    "shootThrough": false,
+                    "passable": false
                 },
                 {
                     "objectType": 1,
@@ -211,10 +242,13 @@
                         9.420000076293945
                     ],
                     "angle": 4.631928443908691,
-                    "rotation": 265.38995084256686,
+                    "rotation": 265.3899508425669,
                     "width": 30,
                     "breadth": 30,
-                    "height": 9.420000076293945
+                    "height": 9.420000076293945,
+                    "driveThrough": false,
+                    "shootThrough": false,
+                    "passable": false
                 },
                 {
                     "objectType": 1,
@@ -229,10 +263,13 @@
                         9.420000076293945
                     ],
                     "angle": 2.213449716567993,
-                    "rotation": 126.8213269237743,
+                    "rotation": 126.82132692377431,
                     "width": 30,
                     "breadth": 30,
-                    "height": 9.420000076293945
+                    "height": 9.420000076293945,
+                    "driveThrough": false,
+                    "shootThrough": false,
+                    "passable": false
                 },
                 {
                     "objectType": 1,
@@ -250,7 +287,10 @@
                     "rotation": 303.59302936114574,
                     "width": 30,
                     "breadth": 30,
-                    "height": 9.420000076293945
+                    "height": 9.420000076293945,
+                    "driveThrough": false,
+                    "shootThrough": false,
+                    "passable": false
                 },
                 {
                     "objectType": 1,
@@ -268,7 +308,10 @@
                     "rotation": 355.76572986461167,
                     "width": 30,
                     "breadth": 30,
-                    "height": 9.420000076293945
+                    "height": 9.420000076293945,
+                    "driveThrough": false,
+                    "shootThrough": false,
+                    "passable": false
                 },
                 {
                     "objectType": 1,
@@ -286,7 +329,10 @@
                     "rotation": 2.317023001389997,
                     "width": 30,
                     "breadth": 30,
-                    "height": 9.420000076293945
+                    "height": 9.420000076293945,
+                    "driveThrough": false,
+                    "shootThrough": false,
+                    "passable": false
                 },
                 {
                     "objectType": 1,
@@ -304,7 +350,10 @@
                     "rotation": 120.76185629970578,
                     "width": 30,
                     "breadth": 30,
-                    "height": 9.420000076293945
+                    "height": 9.420000076293945,
+                    "driveThrough": false,
+                    "shootThrough": false,
+                    "passable": false
                 }
             ],
             [
@@ -325,7 +374,10 @@
                     "rotation": 331.3723922628281,
                     "width": 8.199999809265137,
                     "breadth": 8.199999809265137,
-                    "height": 10.25
+                    "height": 10.25,
+                    "driveThrough": false,
+                    "shootThrough": false,
+                    "passable": false
                 },
                 {
                     "zFlip": false,
@@ -344,7 +396,10 @@
                     "rotation": 184.42007996806004,
                     "width": 8.199999809265137,
                     "breadth": 8.199999809265137,
-                    "height": 10.25
+                    "height": 10.25,
+                    "driveThrough": false,
+                    "shootThrough": false,
+                    "passable": false
                 },
                 {
                     "zFlip": false,
@@ -363,7 +418,10 @@
                     "rotation": 215.64292372093934,
                     "width": 8.199999809265137,
                     "breadth": 8.199999809265137,
-                    "height": 10.25
+                    "height": 10.25,
+                    "driveThrough": false,
+                    "shootThrough": false,
+                    "passable": false
                 },
                 {
                     "zFlip": false,
@@ -382,7 +440,10 @@
                     "rotation": 24.688161009759845,
                     "width": 8.199999809265137,
                     "breadth": 8.199999809265137,
-                    "height": 10.25
+                    "height": 10.25,
+                    "driveThrough": false,
+                    "shootThrough": false,
+                    "passable": false
                 },
                 {
                     "zFlip": false,
@@ -401,7 +462,10 @@
                     "rotation": 290.07810672968486,
                     "width": 8.199999809265137,
                     "breadth": 8.199999809265137,
-                    "height": 10.25
+                    "height": 10.25,
+                    "driveThrough": false,
+                    "shootThrough": false,
+                    "passable": false
                 },
                 {
                     "zFlip": false,
@@ -417,10 +481,13 @@
                         10.25
                     ],
                     "angle": 0.993082582950592,
-                    "rotation": 56.89944071101941,
+                    "rotation": 56.8994407110194,
                     "width": 8.199999809265137,
                     "breadth": 8.199999809265137,
-                    "height": 10.25
+                    "height": 10.25,
+                    "driveThrough": false,
+                    "shootThrough": false,
+                    "passable": false
                 },
                 {
                     "zFlip": false,
@@ -436,10 +503,13 @@
                         10.25
                     ],
                     "angle": 0.00859532505273819,
-                    "rotation": 0.49247584906496,
+                    "rotation": 0.49247584906496006,
                     "width": 8.199999809265137,
                     "breadth": 8.199999809265137,
-                    "height": 10.25
+                    "height": 10.25,
+                    "driveThrough": false,
+                    "shootThrough": false,
+                    "passable": false
                 },
                 {
                     "zFlip": false,
@@ -458,7 +528,10 @@
                     "rotation": 356.25821382452625,
                     "width": 8.199999809265137,
                     "breadth": 8.199999809265137,
-                    "height": 10.25
+                    "height": 10.25,
+                    "driveThrough": false,
+                    "shootThrough": false,
+                    "passable": false
                 },
                 {
                     "zFlip": false,
@@ -474,10 +547,13 @@
                         10.25
                     ],
                     "angle": 6.2583184242248535,
-                    "rotation": 358.575232557048,
+                    "rotation": 358.57523255704797,
                     "width": 8.199999809265137,
                     "breadth": 8.199999809265137,
-                    "height": 10.25
+                    "height": 10.25,
+                    "driveThrough": false,
+                    "shootThrough": false,
+                    "passable": false
                 },
                 {
                     "zFlip": false,
@@ -496,7 +572,10 @@
                     "rotation": 119.33707883884112,
                     "width": 8.199999809265137,
                     "breadth": 8.199999809265137,
-                    "height": 10.25
+                    "height": 10.25,
+                    "driveThrough": false,
+                    "shootThrough": false,
+                    "passable": false
                 },
                 {
                     "zFlip": false,
@@ -515,7 +594,10 @@
                     "rotation": 348.72921434015115,
                     "width": 8.199999809265137,
                     "breadth": 8.199999809265137,
-                    "height": 10.25
+                    "height": 10.25,
+                    "driveThrough": false,
+                    "shootThrough": false,
+                    "passable": false
                 },
                 {
                     "zFlip": false,
@@ -534,7 +616,10 @@
                     "rotation": 213.40923329629172,
                     "width": 8.199999809265137,
                     "breadth": 8.199999809265137,
-                    "height": 10.25
+                    "height": 10.25,
+                    "driveThrough": false,
+                    "shootThrough": false,
+                    "passable": false
                 },
                 {
                     "zFlip": false,
@@ -553,7 +638,10 @@
                     "rotation": 86.35809099751401,
                     "width": 8.199999809265137,
                     "breadth": 8.199999809265137,
-                    "height": 10.25
+                    "height": 10.25,
+                    "driveThrough": false,
+                    "shootThrough": false,
+                    "passable": false
                 },
                 {
                     "zFlip": false,
@@ -572,7 +660,10 @@
                     "rotation": 39.4301390784446,
                     "width": 8.199999809265137,
                     "breadth": 8.199999809265137,
-                    "height": 10.25
+                    "height": 10.25,
+                    "driveThrough": false,
+                    "shootThrough": false,
+                    "passable": false
                 },
                 {
                     "zFlip": false,
@@ -591,7 +682,10 @@
                     "rotation": 160.06408984065814,
                     "width": 8.199999809265137,
                     "breadth": 8.199999809265137,
-                    "height": 10.25
+                    "height": 10.25,
+                    "driveThrough": false,
+                    "shootThrough": false,
+                    "passable": false
                 },
                 {
                     "zFlip": false,
@@ -610,7 +704,10 @@
                     "rotation": 304.5308143341885,
                     "width": 8.199999809265137,
                     "breadth": 8.199999809265137,
-                    "height": 10.25
+                    "height": 10.25,
+                    "driveThrough": false,
+                    "shootThrough": false,
+                    "passable": false
                 },
                 {
                     "zFlip": false,
@@ -626,10 +723,13 @@
                         10.25
                     ],
                     "angle": 1.9716932773590088,
-                    "rotation": 112.96970328698843,
+                    "rotation": 112.96970328698845,
                     "width": 8.199999809265137,
                     "breadth": 8.199999809265137,
-                    "height": 10.25
+                    "height": 10.25,
+                    "driveThrough": false,
+                    "shootThrough": false,
+                    "passable": false
                 },
                 {
                     "zFlip": false,
@@ -645,10 +745,13 @@
                         10.25
                     ],
                     "angle": 2.7831332683563232,
-                    "rotation": 159.4617900992681,
+                    "rotation": 159.46179009926806,
                     "width": 8.199999809265137,
                     "breadth": 8.199999809265137,
-                    "height": 10.25
+                    "height": 10.25,
+                    "driveThrough": false,
+                    "shootThrough": false,
+                    "passable": false
                 },
                 {
                     "zFlip": false,
@@ -664,10 +767,13 @@
                         10.25
                     ],
                     "angle": 1.278656005859375,
-                    "rotation": 73.26159258479724,
+                    "rotation": 73.26159258479726,
                     "width": 8.199999809265137,
                     "breadth": 8.199999809265137,
-                    "height": 10.25
+                    "height": 10.25,
+                    "driveThrough": false,
+                    "shootThrough": false,
+                    "passable": false
                 },
                 {
                     "zFlip": false,
@@ -686,7 +792,10 @@
                     "rotation": 105.00857822439414,
                     "width": 8.199999809265137,
                     "breadth": 8.199999809265137,
-                    "height": 10.25
+                    "height": 10.25,
+                    "driveThrough": false,
+                    "shootThrough": false,
+                    "passable": false
                 },
                 {
                     "zFlip": false,
@@ -705,7 +814,10 @@
                     "rotation": 352.9737124564505,
                     "width": 8.199999809265137,
                     "breadth": 8.199999809265137,
-                    "height": 10.25
+                    "height": 10.25,
+                    "driveThrough": false,
+                    "shootThrough": false,
+                    "passable": false
                 },
                 {
                     "zFlip": false,
@@ -721,10 +833,13 @@
                         10.25
                     ],
                     "angle": 0.834089457988739,
-                    "rotation": 47.78980567910913,
+                    "rotation": 47.789805679109136,
                     "width": 8.199999809265137,
                     "breadth": 8.199999809265137,
-                    "height": 10.25
+                    "height": 10.25,
+                    "driveThrough": false,
+                    "shootThrough": false,
+                    "passable": false
                 },
                 {
                     "zFlip": false,
@@ -743,7 +858,10 @@
                     "rotation": 40.14291371456503,
                     "width": 8.199999809265137,
                     "breadth": 8.199999809265137,
-                    "height": 10.25
+                    "height": 10.25,
+                    "driveThrough": false,
+                    "shootThrough": false,
+                    "passable": false
                 }
             ],
             [],
@@ -754,8 +872,7 @@
             [],
             []
         ],
-        "groups": [],
-        "hash": "b75bb1ccd2532428d04f6dfb7afb6f4498096819"
+        "groups": []
     },
     "callsign": "012345678901234567890123456789#",
     "motto": "",
