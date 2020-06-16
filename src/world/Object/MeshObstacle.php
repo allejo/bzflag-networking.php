@@ -66,11 +66,20 @@ class MeshObstacle extends Obstacle
     {
         parent::__construct($database, ObstacleType::MESH_TYPE);
 
+        $this->checkCount = 0;
+        $this->checkTypes = [];
         $this->checkPoints = [];
+        $this->vertexCount = 0;
         $this->vertices = [];
+        $this->normalCount = 0;
         $this->normals = [];
+        $this->texCoordCount = 0;
         $this->texCoords = [];
+        $this->faceCount = 0;
         $this->faces = [];
+        $this->smoothBounce = false;
+        $this->noClusters = false;
+        $this->inverted = false;
         $this->drawInfo = new MeshDrawInfo();
     }
 
