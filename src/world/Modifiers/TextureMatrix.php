@@ -18,69 +18,69 @@ class TextureMatrix implements \JsonSerializable
     use JsonSerializePublicGetters;
 
     /** @var string */
-    private $name;
+    private $name = "";
 
     /** @var bool */
-    private $useStatic;
+    private $useStatic = false;
 
     /** @var bool */
-    private $useDynamic;
+    private $useDynamic = false;
 
     //
     // Static Properties
     //
 
     /** @var float */
-    private $rotation;
+    private $rotation = 0.0;
 
     /** @var float */
-    private $uFixedShift;
+    private $uFixedShift = 0.0;
 
     /** @var float */
-    private $vFixedShift;
+    private $vFixedShift = 0.0;
 
     /** @var float */
-    private $uFixedScale;
+    private $uFixedScale = 1.0;
 
     /** @var float */
-    private $vFixedScale;
+    private $vFixedScale = 1.0;
 
     /** @var float */
-    private $uFixedCenter;
+    private $uFixedCenter = 0.5;
 
     /** @var float */
-    private $vFixedCenter;
+    private $vFixedCenter = 0.5;
 
     //
     // Dynamic Properties
     //
 
     /** @var float */
-    private $spinFreq;
+    private $spinFreq = 0.0;
 
     /** @var float */
-    private $uShiftFreq;
+    private $uShiftFreq = 0.0;
 
     /** @var float */
-    private $vShiftFreq;
+    private $vShiftFreq = 0.0;
 
     /** @var float */
-    private $uScaleFreq;
+    private $uScaleFreq = 0.0;
 
     /** @var float */
-    private $vScaleFreq;
+    private $vScaleFreq = 0.0;
 
     /** @var float */
-    private $uScale;
+    private $uScale = 1.0;
 
     /** @var float */
-    private $vScale;
+    private $vScale = 1.0;
 
     /** @var float */
-    private $uCenter;
+    private $uCenter = 0.5;
 
     /** @var float */
-    private $vCenter;
+    private $vCenter = 0.5;
 
     public function getName(): string
     {
