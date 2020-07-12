@@ -39,7 +39,14 @@ trait JsonSerializePublicGetters
 
         foreach ($fxns as $fxn)
         {
-            $key = lcfirst(preg_replace('/^(get|is)/', '', $fxn));
+            $propertyName = preg_replace('/^(get|is)/', '', $fxn);
+
+            if ($propertyName === null)
+            {
+                continue;
+            }
+
+            $key = lcfirst($propertyName);
 
             if (in_array($key, $this->getJsonEncodeBlacklist(), true))
             {
