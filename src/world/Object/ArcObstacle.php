@@ -55,6 +55,10 @@ class ArcObstacle extends Obstacle
     public function __construct(WorldDatabase $database)
     {
         parent::__construct($database, ObstacleType::ARC_TYPE);
+
+        $this->transform = new MeshTransform();
+        $this->texSize = [0, 0, 0, 0];
+        $this->materials = [];
     }
 
     public function getTransform(): MeshTransform
@@ -234,7 +238,6 @@ class ArcObstacle extends Obstacle
      */
     public function unpack(&$resource): void
     {
-        $this->transform = new MeshTransform();
         $this->transform->unpack($resource);
 
         $this->pos = NetworkPacket::unpackVector($resource);
