@@ -18,7 +18,7 @@ class TextureMatrix implements \JsonSerializable
     use JsonSerializePublicGetters;
 
     /** @var string */
-    private $name = "";
+    private $name = '';
 
     /** @var bool */
     private $useStatic = false;
