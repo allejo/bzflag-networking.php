@@ -44,7 +44,7 @@ abstract class Obstacle implements \JsonSerializable, IWorldDatabaseAware
     /** @var bool */
     protected $ricochet;
 
-    /** @var array<ObstacleType::*, class-string> */
+    /** @var array<ObstacleType::*, class-string<\allejo\bzflag\world\Object\Obstacle>> */
     private static $mapping = [
         ObstacleType::WALL_TYPE => WallObstacle::class,
         ObstacleType::BOX_TYPE => BoxBuilding::class,

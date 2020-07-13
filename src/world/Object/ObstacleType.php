@@ -11,15 +11,15 @@ namespace allejo\bzflag\world\Object;
 
 abstract class ObstacleType
 {
-    const WALL_TYPE = 0;
-    const BOX_TYPE = 1;
-    const PYR_TYPE = 2;
-    const BASE_TYPE = 3;
-    const TELE_TYPE = 4;
-    const MESH_TYPE = 5;
-    const ARC_TYPE = 6;
-    const CONE_TYPE = 7;
-    const SPHERE_TYPE = 8;
-    const TETRA_TYPE = 9;
-    const OBSTACLE_TYPE_COUNT = 10;
+    public const WALL_TYPE = 0;
+    public const BOX_TYPE = 1;
+    public const PYR_TYPE = 2;
+    public const BASE_TYPE = 3;
+    public const TELE_TYPE = 4;
+    public const MESH_TYPE = 5;
+    public const ARC_TYPE = 6;
+    public const CONE_TYPE = 7;
+    public const SPHERE_TYPE = 8;
+    public const TETRA_TYPE = 9;
+    public const OBSTACLE_TYPE_COUNT = 10;
 }

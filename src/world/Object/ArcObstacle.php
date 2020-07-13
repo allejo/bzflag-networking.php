@@ -17,13 +17,13 @@ use allejo\bzflag\world\WorldDatabase;
 
 class ArcObstacle extends Obstacle
 {
-    const ENUM_TOP = 0;
-    const ENUM_BOTTOM = 1;
-    const ENUM_INSIDE = 2;
-    const ENUM_OUTSIDE = 3;
-    const ENUM_START_FACE = 4;
-    const ENUM_END_FACE = 5;
-    const MATERIAL_COUNT = 6;
+    public const ENUM_TOP = 0;
+    public const ENUM_BOTTOM = 1;
+    public const ENUM_INSIDE = 2;
+    public const ENUM_OUTSIDE = 3;
+    public const ENUM_START_FACE = 4;
+    public const ENUM_END_FACE = 5;
+    public const MATERIAL_COUNT = 6;
 
     /** @var MeshTransform */
     private $transform;
