@@ -33,7 +33,7 @@ jobs:
         run: composer install --prefer-dist --no-progress --no-suggest
 
       - name: Run php-cs-fixer
-        run: coverage fix | cs2pr
+        run: composer fix | cs2pr
 
       - name: Check differences
         run: git diff --exit-code
