@@ -13,6 +13,7 @@ use allejo\bzflag\networking\InaccessibleResourceException;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\world\Managers\DynamicColorManager;
 use allejo\bzflag\world\Managers\GroupDefinitionManager;
+use allejo\bzflag\world\Managers\LinkManager;
 use allejo\bzflag\world\Managers\MaterialManager;
 use allejo\bzflag\world\Managers\PhysicsDriverManager;
 use allejo\bzflag\world\Managers\TextureMatrixManager;
@@ -65,6 +66,9 @@ class WorldDatabase implements \JsonSerializable
     /** @var GroupDefinitionManager */
     private $obstacleManager;
 
+    /** @var LinkManager */
+    private $linkManager;
+
     /**
      * @param resource $resource
      *
@@ -115,6 +119,9 @@ class WorldDatabase implements \JsonSerializable
 
         $this->obstacleManager = new GroupDefinitionManager($this);
         $this->obstacleManager->unpack($this->database);
+
+        $this->linkManager = new LinkManager($this);
+        $this->linkManager->unpack($this->database);
     }
 
     /**
@@ -131,6 +138,7 @@ class WorldDatabase implements \JsonSerializable
             'transforms' => $this->transformManager->getMeshTransforms(),
             'obstacles' => $this->obstacleManager->getWorld()->getObstacles(),
             'groups' => $this->obstacleManager->getGroupDefinitions(),
+            'links' => $this->linkManager->getLinks(),
         ];
     }
 
@@ -202,5 +210,10 @@ class WorldDatabase implements \JsonSerializable
     public function getObstacleManager(): GroupDefinitionManager
     {
         return $this->obstacleManager;
+    }
+
+    public function getLinkManager(): LinkManager
+    {
+        return $this->linkManager;
     }
 }

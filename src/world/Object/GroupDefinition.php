@@ -14,9 +14,10 @@ use allejo\bzflag\generic\FrozenObstacleException;
 use allejo\bzflag\generic\JsonSerializePublicGetters;
 use allejo\bzflag\networking\InaccessibleResourceException;
 use allejo\bzflag\networking\Packets\NetworkPacket;
+use allejo\bzflag\world\NamedObstacleNotFoundException;
 use allejo\bzflag\world\WorldDatabase;
 
-class GroupDefinition implements \JsonSerializable, IWorldDatabaseAware
+class GroupDefinition implements \JsonSerializable, IWorldDatabaseAware, INameableObstacle
 {
     use FreezableClass;
     use JsonSerializePublicGetters;
@@ -33,6 +34,9 @@ class GroupDefinition implements \JsonSerializable, IWorldDatabaseAware
     /** @var array<ObstacleType::*, array<int, Obstacle>> */
     private $lists;
 
+    /** @var array<ObstacleType::*, array<string, Obstacle>> */
+    private $listsByName;
+
     /** @var array<int, GroupInstance> */
     private $groupInstances;
 
@@ -41,7 +45,7 @@ class GroupDefinition implements \JsonSerializable, IWorldDatabaseAware
         $this->worldDatabase = $database;
         $this->name = $name;
         $this->active = false;
-        $this->lists = [
+        $this->lists = $this->listsByName = [
             ObstacleType::WALL_TYPE => [],
             ObstacleType::BOX_TYPE => [],
             ObstacleType::PYR_TYPE => [],
@@ -168,6 +172,46 @@ class GroupDefinition implements \JsonSerializable, IWorldDatabaseAware
     }
 
     /**
+     * @param ObstacleType::* $type
+     *
+     * @throws NamedObstacleNotFoundException when the given name does not exist in this world or as the specified obstacle type
+     */
+    public function getNamedObstacle(int $type, string $name): Obstacle
+    {
+        $obstacle = $this->listsByName[$type][$name] ?? null;
+
+        if (!$obstacle)
+        {
+            throw new NamedObstacleNotFoundException("There is no obstacle with the name of '{$name}'");
+        }
+
+        return $obstacle;
+    }
+
+    /**
+     * @param INameableObstacle&Obstacle $obstacle
+     *
+     * @throws FrozenObstacleException
+     *
+     * @return $this
+     */
+    public function setNamedObstacle($obstacle): self
+    {
+        $this->frozenObstacleCheck();
+
+        $obstacleType = $obstacle->getObjectType();
+
+        if ($obstacleType === null)
+        {
+            throw new \InvalidArgumentException('The given $obstacle value does not have an Obstacle Type');
+        }
+
+        $this->listsByName[$obstacleType][$obstacle->getName()] = $obstacle;
+
+        return $this;
+    }
+
+    /**
      * @return array<int, GroupInstance>
      */
     public function getGroupInstances(): array
@@ -211,6 +255,11 @@ class GroupDefinition implements \JsonSerializable, IWorldDatabaseAware
                 if ($obstacle->isValid())
                 {
                     $this->lists[$type][] = $obstacle;
+
+                    if ($obstacle instanceof INameableObstacle && ($name = $obstacle->getName()))
+                    {
+                        $this->listsByName[$type][$name] = $obstacle;
+                    }
                 }
             }
         }

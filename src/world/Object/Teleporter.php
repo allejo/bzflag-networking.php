@@ -13,7 +13,7 @@ use allejo\bzflag\generic\FrozenObstacleException;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\world\WorldDatabase;
 
-class Teleporter extends Obstacle
+class Teleporter extends Obstacle implements INameableObstacle
 {
     /** @var string */
     private $name;
