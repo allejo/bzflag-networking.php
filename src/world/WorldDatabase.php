@@ -11,6 +11,7 @@ namespace allejo\bzflag\world;
 
 use allejo\bzflag\networking\InaccessibleResourceException;
 use allejo\bzflag\networking\Packets\NetworkPacket;
+use allejo\bzflag\world\Managers\BZDBManager;
 use allejo\bzflag\world\Managers\DynamicColorManager;
 use allejo\bzflag\world\Managers\GroupDefinitionManager;
 use allejo\bzflag\world\Managers\LinkManager;
@@ -69,6 +70,9 @@ class WorldDatabase implements \JsonSerializable
     /** @var LinkManager */
     private $linkManager;
 
+    /** @var BZDBManager */
+    private $bzdbManager;
+
     /**
      * @param resource $resource
      *
@@ -122,6 +126,8 @@ class WorldDatabase implements \JsonSerializable
 
         $this->linkManager = new LinkManager($this);
         $this->linkManager->unpack($this->database);
+
+        $this->bzdbManager = new BZDBManager($this);
     }
 
     /**
@@ -215,5 +221,10 @@ class WorldDatabase implements \JsonSerializable
     public function getLinkManager(): LinkManager
     {
         return $this->linkManager;
+    }
+
+    public function getBZDBManager(): BZDBManager
+    {
+        return $this->bzdbManager;
     }
 }

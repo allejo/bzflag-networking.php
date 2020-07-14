@@ -12,6 +12,7 @@ namespace allejo\bzflag\replays;
 use allejo\bzflag\networking\InaccessibleResourceException;
 use allejo\bzflag\networking\InvalidTimestampFormatException;
 use allejo\bzflag\networking\Packets\GamePacket;
+use allejo\bzflag\networking\Packets\MsgSetVar;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\networking\Packets\PacketInvalidException;
 use allejo\bzflag\networking\Packets\UnsupportedPacketException;
@@ -88,6 +89,7 @@ class Replay implements \JsonSerializable
         }
 
         $this->packetLocationStart = $startLocation;
+        $this->attachBZDB();
     }
 
     public function __destruct()
@@ -183,7 +185,7 @@ class Replay implements \JsonSerializable
     {
         if ($this->resourceClosed)
         {
-            fseek($this->resource, $this->packetLocationStart);
+            $this->resetPacketsIterator();
         }
 
         while (true)
@@ -224,6 +226,16 @@ class Replay implements \JsonSerializable
     }
 
     /**
+     * Reset the iterator used for `getPacketsIterable()`.
+     *
+     * @since 1.1.0
+     */
+    public function resetPacketsIterator(): void
+    {
+        fseek($this->resource, $this->packetLocationStart);
+    }
+
+    /**
      * @param resource $resource
      *
      * @throws InaccessibleResourceException
@@ -238,5 +250,33 @@ class Replay implements \JsonSerializable
 
         $replayDuration = sprintf('+%d seconds', $this->header->getFileTimeAsSeconds());
         $this->endTime = $packet->getTimestamp()->modify($replayDuration);
+    }
+
+    /**
+     * Attach only the *initial* BZDB settings to the WorldDatabase.
+     *
+     * @throws InaccessibleResourceException
+     * @throws InvalidTimestampFormatException
+     */
+    private function attachBZDB(): void
+    {
+        foreach ($this->getPacketsIterable() as $packet)
+        {
+            // In a replay, the MsgSetVar packets are sent first, so as soon as
+            // we hit a non-MsgSetVar packet that means we're done
+            if (!($packet instanceof MsgSetVar))
+            {
+                break;
+            }
+
+            $this
+                ->getHeader()
+                ->getWorldDatabase()
+                ->getBZDBManager()
+                ->unpackFromMsgSetVar($packet)
+            ;
+        }
+
+        $this->resetPacketsIterator();
     }
 }

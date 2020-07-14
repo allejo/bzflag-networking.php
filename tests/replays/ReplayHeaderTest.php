@@ -25,4 +25,20 @@ class ReplayHeaderTest extends TestCase
 
         self::assertJsonFixtureEqualsSerializable('replayHeader.expected.json', $header);
     }
+
+    public function testStaticBZDB(): void
+    {
+        $worldDB = $this->replay->getHeader()->getWorldDatabase();
+        $bzdb = $worldDB->getBZDBManager();
+
+        self::assertEquals('800.0', $bzdb->getBZDBVariable('_worldSize'));
+    }
+
+    public function testCalculatedBZDB(): void
+    {
+        $worldDB = $this->replay->getHeader()->getWorldDatabase();
+        $bzdb = $worldDB->getBZDBManager();
+
+        self::assertEquals(400.0, $bzdb->getBZDBVariable('_fogStart'));
+    }
 }
