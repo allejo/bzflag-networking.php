@@ -9,6 +9,7 @@
 
 namespace allejo\bzflag\world\Object;
 
+use allejo\bzflag\generic\FrozenObstacleException;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\world\WorldDatabase;
 
@@ -30,6 +31,72 @@ class ZoneObstacle extends Obstacle
         $this->flags = [];
         $this->teams = [];
         $this->safety = [];
+    }
+
+    /**
+     * @return FlagType[]
+     */
+    public function getFlags(): array
+    {
+        return $this->flags;
+    }
+
+    /**
+     * @param FlagType[] $flags
+     *
+     * @throws FrozenObstacleException
+     */
+    public function setFlags(array $flags): ZoneObstacle
+    {
+        $this->frozenObstacleCheck();
+
+        $this->flags = $flags;
+
+        return $this;
+    }
+
+    /**
+     * @return int[]
+     */
+    public function getTeams(): array
+    {
+        return $this->teams;
+    }
+
+    /**
+     * @param int[] $teams
+     *
+     * @throws FrozenObstacleException
+     */
+    public function setTeams(array $teams): ZoneObstacle
+    {
+        $this->frozenObstacleCheck();
+
+        $this->teams = $teams;
+
+        return $this;
+    }
+
+    /**
+     * @return int[]
+     */
+    public function getSafety(): array
+    {
+        return $this->safety;
+    }
+
+    /**
+     * @param int[] $safety
+     *
+     * @throws FrozenObstacleException
+     */
+    public function setSafety(array $safety): ZoneObstacle
+    {
+        $this->frozenObstacleCheck();
+
+        $this->safety = $safety;
+
+        return $this;
     }
 
     public function unpack(&$resource): void
@@ -56,5 +123,7 @@ class ZoneObstacle extends Obstacle
         {
             $this->safety[] = NetworkPacket::unpackUInt16($resource);
         }
+
+        $this->freeze();
     }
 }
