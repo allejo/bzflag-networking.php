@@ -20,6 +20,7 @@ use allejo\bzflag\world\Managers\PhysicsDriverManager;
 use allejo\bzflag\world\Managers\TextureMatrixManager;
 use allejo\bzflag\world\Managers\TransformManager;
 use allejo\bzflag\world\Managers\WorldWeaponManager;
+use allejo\bzflag\world\Managers\ZoneManager;
 use allejo\bzflag\world\Modifiers\Material;
 
 class WorldDatabase implements \JsonSerializable
@@ -77,6 +78,9 @@ class WorldDatabase implements \JsonSerializable
 
     /** @var WorldWeaponManager */
     private $worldWeaponManager;
+
+    /** @var ZoneManager */
+    private $zoneManager;
 
     /** @var float */
     private $waterLevel;
@@ -144,6 +148,9 @@ class WorldDatabase implements \JsonSerializable
 
         $this->worldWeaponManager = new WorldWeaponManager($this);
         $this->worldWeaponManager->unpack($this->database);
+
+        $this->zoneManager = new ZoneManager($this);
+        $this->zoneManager->unpack($this->database);
     }
 
     /**
@@ -247,6 +254,11 @@ class WorldDatabase implements \JsonSerializable
     public function getWorldWeaponManager(): WorldWeaponManager
     {
         return $this->worldWeaponManager;
+    }
+
+    public function getZoneManager(): ZoneManager
+    {
+        return $this->zoneManager;
     }
 
     /**
