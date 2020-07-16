@@ -9,12 +9,12 @@
 
 namespace allejo\bzflag\networking\Packets;
 
+use allejo\bzflag\networking\Exceptions\InaccessibleResourceException;
+use allejo\bzflag\networking\Exceptions\InvalidTimestampFormatException;
 use allejo\bzflag\networking\GameData\FiringInfoData;
 use allejo\bzflag\networking\GameData\FlagData;
 use allejo\bzflag\networking\GameData\PlayerState;
 use allejo\bzflag\networking\GameData\ShotData;
-use allejo\bzflag\networking\InaccessibleResourceException;
-use allejo\bzflag\networking\InvalidTimestampFormatException;
 use allejo\bzflag\world\Object\FlagType;
 
 /**

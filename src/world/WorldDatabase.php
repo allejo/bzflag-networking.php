@@ -9,8 +9,10 @@
 
 namespace allejo\bzflag\world;
 
-use allejo\bzflag\networking\InaccessibleResourceException;
+use allejo\bzflag\networking\Exceptions\InaccessibleResourceException;
 use allejo\bzflag\networking\Packets\NetworkPacket;
+use allejo\bzflag\world\Exceptions\InvalidWorldCompressionException;
+use allejo\bzflag\world\Exceptions\InvalidWorldDatabaseException;
 use allejo\bzflag\world\Managers\BZDBManager;
 use allejo\bzflag\world\Managers\DynamicColorManager;
 use allejo\bzflag\world\Managers\GroupDefinitionManager;
@@ -91,8 +93,8 @@ class WorldDatabase implements \JsonSerializable
     /**
      * @param resource $resource
      *
-     * @throws InvalidWorldCompression
-     * @throws InvalidWorldDatabase
+     * @throws InvalidWorldCompressionException
+     * @throws InvalidWorldDatabaseException
      * @throws InaccessibleResourceException
      */
     public function __construct(&$resource)
@@ -106,13 +108,13 @@ class WorldDatabase implements \JsonSerializable
         $worldDatabase = fread($resource, $this->databaseSize);
         if ($worldDatabase === false)
         {
-            throw new InvalidWorldDatabase('The world database could not be read from this resource.');
+            throw new InvalidWorldDatabaseException('The world database could not be read from this resource.');
         }
 
         $uncompressedWorld = zlib_decode($worldDatabase, $this->uncompressedSize);
         if ($uncompressedWorld === false)
         {
-            throw new InvalidWorldCompression('The compressed world database could not be expanded.');
+            throw new InvalidWorldCompressionException('The compressed world database could not be expanded.');
         }
 
         $this->database = $uncompressedWorld;

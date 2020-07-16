@@ -10,9 +10,9 @@
 namespace allejo\bzflag\world\Object;
 
 use allejo\bzflag\generic\JsonSerializePublicGetters;
-use allejo\bzflag\networking\InaccessibleResourceException;
+use allejo\bzflag\networking\Exceptions\InaccessibleResourceException;
 use allejo\bzflag\networking\Packets\NetworkPacket;
-use allejo\bzflag\world\NamedObstacleNotFoundException;
+use allejo\bzflag\world\Exceptions\NamedObstacleNotFoundException;
 use allejo\bzflag\world\WorldDatabase;
 
 class TeleporterLink implements IWorldDatabaseAware, \JsonSerializable

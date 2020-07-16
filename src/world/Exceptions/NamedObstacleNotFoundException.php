@@ -7,8 +7,8 @@
  * LICENSE.md file that was distributed with this source code.
  */
 
-namespace allejo\bzflag\replays;
+namespace allejo\bzflag\world\Exceptions;
 
-class InvalidReplayException extends \Exception
+class NamedObstacleNotFoundException extends \Exception
 {
 }

@@ -10,7 +10,7 @@
 namespace allejo\bzflag\world\Modifiers;
 
 use allejo\bzflag\generic\JsonSerializePublicGetters;
-use allejo\bzflag\networking\InaccessibleResourceException;
+use allejo\bzflag\networking\Exceptions\InaccessibleResourceException;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 
 class DynamicColor implements \JsonSerializable

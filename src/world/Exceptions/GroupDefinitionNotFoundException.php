@@ -7,8 +7,8 @@
  * LICENSE.md file that was distributed with this source code.
  */
 
-namespace allejo\bzflag\networking;
+namespace allejo\bzflag\world\Exceptions;
 
-class InvalidTimestampFormatException extends \UnexpectedValueException
+class GroupDefinitionNotFoundException extends \Exception
 {
 }

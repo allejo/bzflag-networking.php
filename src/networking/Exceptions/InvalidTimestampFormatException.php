@@ -7,8 +7,8 @@
  * LICENSE.md file that was distributed with this source code.
  */
 
-namespace allejo\bzflag\world;
+namespace allejo\bzflag\networking\Exceptions;
 
-class InvalidWorldCompression extends \Exception
+class InvalidTimestampFormatException extends \UnexpectedValueException
 {
 }

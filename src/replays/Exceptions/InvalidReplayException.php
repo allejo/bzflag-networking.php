@@ -7,8 +7,8 @@
  * LICENSE.md file that was distributed with this source code.
  */
 
-namespace allejo\bzflag\networking;
+namespace allejo\bzflag\replays\Exceptions;
 
-class InaccessibleResourceException extends \RuntimeException
+class InvalidReplayException extends \Exception
 {
 }

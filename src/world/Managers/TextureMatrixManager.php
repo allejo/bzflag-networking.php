@@ -9,7 +9,7 @@
 
 namespace allejo\bzflag\world\Managers;
 
-use allejo\bzflag\networking\InaccessibleResourceException;
+use allejo\bzflag\networking\Exceptions\InaccessibleResourceException;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\world\Modifiers\TextureMatrix;
 

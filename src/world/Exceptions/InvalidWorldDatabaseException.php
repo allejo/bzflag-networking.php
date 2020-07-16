@@ -7,8 +7,8 @@
  * LICENSE.md file that was distributed with this source code.
  */
 
-namespace allejo\bzflag\world;
+namespace allejo\bzflag\world\Exceptions;
 
-class GroupDefinitionNotFoundException extends \Exception
+class InvalidWorldDatabaseException extends \Exception
 {
 }

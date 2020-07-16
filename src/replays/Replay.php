@@ -9,15 +9,16 @@
 
 namespace allejo\bzflag\replays;
 
-use allejo\bzflag\networking\InaccessibleResourceException;
-use allejo\bzflag\networking\InvalidTimestampFormatException;
+use allejo\bzflag\networking\Exceptions\InaccessibleResourceException;
+use allejo\bzflag\networking\Exceptions\InvalidTimestampFormatException;
 use allejo\bzflag\networking\Packets\GamePacket;
 use allejo\bzflag\networking\Packets\MsgSetVar;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\networking\Packets\PacketInvalidException;
 use allejo\bzflag\networking\Packets\UnsupportedPacketException;
-use allejo\bzflag\world\InvalidWorldCompression;
-use allejo\bzflag\world\InvalidWorldDatabase;
+use allejo\bzflag\replays\Exceptions\InvalidReplayException;
+use allejo\bzflag\world\Exceptions\InvalidWorldCompressionException;
+use allejo\bzflag\world\Exceptions\InvalidWorldDatabaseException;
 
 class Replay implements \JsonSerializable
 {
@@ -49,8 +50,8 @@ class Replay implements \JsonSerializable
      * @throws InaccessibleResourceException
      * @throws InvalidReplayException
      * @throws InvalidTimestampFormatException
-     * @throws InvalidWorldCompression
-     * @throws InvalidWorldDatabase
+     * @throws InvalidWorldCompressionException
+     * @throws InvalidWorldDatabaseException
      * @throws PacketInvalidException
      */
     public function __construct(string $file)

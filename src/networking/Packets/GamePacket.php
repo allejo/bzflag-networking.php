@@ -10,8 +10,8 @@
 namespace allejo\bzflag\networking\Packets;
 
 use allejo\bzflag\generic\JsonSerializePublicGetters;
-use allejo\bzflag\networking\InaccessibleResourceException;
-use allejo\bzflag\networking\InvalidTimestampFormatException;
+use allejo\bzflag\networking\Exceptions\InaccessibleResourceException;
+use allejo\bzflag\networking\Exceptions\InvalidTimestampFormatException;
 
 /**
  * An abstraction on top of a NetworkPacket that contains actual data of packets
