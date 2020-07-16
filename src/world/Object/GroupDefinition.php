@@ -282,6 +282,7 @@ class GroupDefinition implements \JsonSerializable, IWorldDatabaseAware, INameab
     protected function getJsonEncodeBlacklist(): array
     {
         return [
+            'namedObstacle',
             'obstaclesByType',
             'worldDatabase',
         ];
