@@ -15,6 +15,7 @@ use allejo\bzflag\networking\GameData\PlayerState;
 use allejo\bzflag\networking\GameData\ShotData;
 use allejo\bzflag\networking\InaccessibleResourceException;
 use allejo\bzflag\networking\InvalidTimestampFormatException;
+use allejo\bzflag\world\Object\FlagType;
 
 /**
  * A raw network packet that was sent and contains data for game packets.
@@ -268,6 +269,25 @@ class NetworkPacket implements Unpackable
         $flag->initialVelocity = NetworkPacket::unpackFloat($buffer);
 
         return $flag;
+    }
+
+    /**
+     * @param resource|string $buffer
+     *
+     * @throws \InvalidArgumentException
+     * @throws InaccessibleResourceException
+     */
+    public static function unpackFlagType(&$buffer): FlagType
+    {
+        $flagType = new FlagType();
+
+        $abbv = [0, 0];
+        $abbv[0] = self::unpackUInt8($buffer);
+        $abbv[1] = self::unpackUInt8($buffer);
+
+        $flagType->abbv = implode('', $abbv);
+
+        return $flagType;
     }
 
     /**

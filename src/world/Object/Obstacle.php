@@ -19,12 +19,10 @@ abstract class Obstacle implements \JsonSerializable, IWorldDatabaseAware
 {
     use FreezableClass;
     use JsonSerializePublicGetters;
+    use WorldDatabaseAwareTrait;
 
     /** @var null|ObstacleType::* */
     protected $objectType;
-
-    /** @var WorldDatabase */
-    protected $worldDatabase;
 
     /** @var array{float, float, float} */
     protected $pos;
@@ -78,11 +76,6 @@ abstract class Obstacle implements \JsonSerializable, IWorldDatabaseAware
         }
 
         return new self::$mapping[$type]($database);
-    }
-
-    public function getWorldDatabase(): WorldDatabase
-    {
-        return $this->worldDatabase;
     }
 
     /**

@@ -19,6 +19,8 @@ use allejo\bzflag\world\Managers\MaterialManager;
 use allejo\bzflag\world\Managers\PhysicsDriverManager;
 use allejo\bzflag\world\Managers\TextureMatrixManager;
 use allejo\bzflag\world\Managers\TransformManager;
+use allejo\bzflag\world\Managers\WorldWeaponManager;
+use allejo\bzflag\world\Modifiers\Material;
 
 class WorldDatabase implements \JsonSerializable
 {
@@ -72,6 +74,15 @@ class WorldDatabase implements \JsonSerializable
 
     /** @var BZDBManager */
     private $bzdbManager;
+
+    /** @var WorldWeaponManager */
+    private $worldWeaponManager;
+
+    /** @var float */
+    private $waterLevel;
+
+    /** @var Material */
+    private $waterMaterial;
 
     /**
      * @param resource $resource
@@ -128,6 +139,11 @@ class WorldDatabase implements \JsonSerializable
         $this->linkManager->unpack($this->database);
 
         $this->bzdbManager = new BZDBManager($this);
+
+        $this->unpackWaterLevel();
+
+        $this->worldWeaponManager = new WorldWeaponManager($this);
+        $this->worldWeaponManager->unpack($this->database);
     }
 
     /**
@@ -226,5 +242,25 @@ class WorldDatabase implements \JsonSerializable
     public function getBZDBManager(): BZDBManager
     {
         return $this->bzdbManager;
+    }
+
+    public function getWorldWeaponManager(): WorldWeaponManager
+    {
+        return $this->worldWeaponManager;
+    }
+
+    /**
+     * @throws \InvalidArgumentException
+     * @throws InaccessibleResourceException
+     */
+    private function unpackWaterLevel(): void
+    {
+        $this->waterLevel = NetworkPacket::unpackFloat($this->database);
+
+        if ($this->waterLevel >= 0)
+        {
+            $matIndex = NetworkPacket::unpackInt32($this->database);
+            $this->waterMaterial = $this->getMaterialManager()->getMaterial($matIndex);
+        }
     }
 }
