@@ -10,6 +10,7 @@
 namespace allejo\bzflag\world\Managers;
 
 use allejo\bzflag\networking\Packets\MsgSetVar;
+use allejo\bzflag\world\WorldDatabase;
 use MathParser\Interpreting\Evaluator;
 use MathParser\StdMathParser;
 
@@ -20,24 +21,33 @@ class BZDBManager extends BaseManager
     /** @var array<string, mixed> $databaseCache */
     private $databaseCache;
 
-    /** @var array<string, mixed> $databaseRaw */
+    /** @var array<string, string> $databaseRaw */
     private $databaseRaw;
 
     /** @var array<string, bool> $calculatedFields */
     private $calculatedFields;
+
+    public function __construct(WorldDatabase $worldDatabase)
+    {
+        parent::__construct($worldDatabase);
+
+        $this->databaseCache = [];
+        $this->databaseRaw = [];
+        $this->calculatedFields = [];
+    }
 
     /**
      * @return mixed
      */
     public function getBZDBVariable(string $variable)
     {
-        if (array_key_exists($variable, $this->calculatedFields))
+        if (isset($this->databaseCache[$variable]))
         {
-            if (isset($this->databaseCache[$variable]))
-            {
-                return $this->databaseCache[$variable];
-            }
+            return $this->databaseCache[$variable];
+        }
 
+        if (isset($this->calculatedFields[$variable]))
+        {
             $equation = $this->databaseRaw[$variable];
 
             // Expand out BZDB variables recursively
@@ -51,7 +61,47 @@ class BZDBManager extends BaseManager
             return $this->databaseCache[$variable] = $ast->accept(new Evaluator());
         }
 
-        return $this->databaseRaw[$variable];
+        /** @var string $rawValue */
+        $rawValue = $this->databaseRaw[$variable];
+
+        if (is_numeric($rawValue))
+        {
+            // A nasty abuse of the PHP language to automatically convert this
+            // string into a float or an int
+            $this->databaseCache[$variable] = $rawValue + 0; // @phpstan-ignore-line
+        }
+        else
+        {
+            $this->databaseCache[$variable] = $rawValue;
+        }
+
+        return $this->databaseCache[$variable];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function getBZDBVariables(bool $evaluate = false): array
+    {
+        if (!$evaluate)
+        {
+            return $this->databaseRaw;
+        }
+
+        $cacheKeyCount = count(array_keys($this->databaseCache));
+        $rawKeyCount = count(array_keys($this->databaseRaw));
+
+        if ($cacheKeyCount === $rawKeyCount)
+        {
+            return $this->databaseCache;
+        }
+
+        foreach ($this->databaseRaw as $key => $_)
+        {
+            $this->getBZDBVariable($key);
+        }
+
+        return $this->databaseCache;
     }
 
     public function unpackFromMsgSetVar(MsgSetVar $message): void
