@@ -47,7 +47,7 @@ file_put_contents(__DIR__ . '/my-bz-replay.rec.json', $json);
 
 ## In Other Languages
 
-This is the third iteration of this library. It's available in other languages:
+This library was originally written a few times in other languages with less features. However, those other projects are now end-of-life and this project has taken their place.
 
 - [Go](https://github.com/allejo/bzflag-networking.go)
 - [Python](https://github.com/allejo/bzflag-networking.py)
