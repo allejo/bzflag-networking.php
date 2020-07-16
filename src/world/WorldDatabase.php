@@ -168,6 +168,12 @@ class WorldDatabase implements \JsonSerializable
             'obstacles' => $this->obstacleManager->getWorld()->getObstacles(),
             'groups' => $this->obstacleManager->getGroupDefinitions(),
             'links' => $this->linkManager->getLinks(),
+            'initialBZDB' => [
+                'evaluated' => $this->bzdbManager->getBZDBVariables(true),
+                'raw' => $this->bzdbManager->getBZDBVariables(),
+            ],
+            'worldWeapons' => $this->worldWeaponManager->getWorldWeapons(),
+            'zones' => $this->zoneManager->getZones(),
         ];
     }
 
