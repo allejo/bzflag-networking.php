@@ -75,7 +75,9 @@ abstract class Obstacle implements \JsonSerializable, IWorldDatabaseAware
             throw new \InvalidArgumentException("Unknown object type with type ID {$type}.");
         }
 
-        return new self::$mapping[$type]($database);
+        $objClass = self::$mapping[$type];
+
+        return new $objClass($database);
     }
 
     /**
