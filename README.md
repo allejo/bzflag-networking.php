@@ -7,7 +7,23 @@ A PHP 7.1+ library for reading and handling BZFlag network packets.
 
 BZFlag Replay files are simply the raw packets stored in a file together, so this library will let you read replay files and unpack them into PHP classes that can be serialized into JSON.
 
+## Installation
+
+This project is available via [Composer](https://getcomposer.org).
+
+```bash
+composer require allejo/bzflag-networking.php
+```
+
+### Related Libraries
+
+- [`allejo/bzflag-rendering.php`](https://github.com/allejo/bzflag-rendering.php): a library for drawing radar images of BZFlag worlds from the classes provided in this package
+
 ## Usage
+
+This library has all of the utilities for unpacking BZFlag network packets and world packets. However, the only convenience methods available in this library is reading those packets from replay files.
+
+### Analyzing Replay Packets
 
 The recommended use of this library is to "stream" the replays in your code with the `getPacketsIterable()` method, which reads and yields a packet at a time. This allows for you to iterate through a replay file once and not have to store the entire replay in memory as you're working with it.
 
@@ -28,6 +44,25 @@ use allejo\bzflag\networking\Packets\GamePacket;
 
 /** @var GamePacket[] $packets */
 $packets = $replay->getPacketsAsArray();
+```
+
+### Embedded Worlds in Replays
+
+As of version 1.1+, this library supports extracting the world data that's embedded inside of replay files. The BZFlag World Database is not an easy object to navigate and contains a lot of "managers" that have an inventory of textures, obstacles, world weapons, etc.
+
+Take a look at the [`allejo/bzflag-rendering.php`](https://github.com/allejo/bzflag-rendering.php) library for example usage of how to navigate the World Database.
+
+```php
+use allejo\bzflag\replays\Replay;
+use allejo\bzflag\world\WorldDatabase;
+
+$replay = new Replay(__DIR__ . '/my-bz-replay.rec');
+
+/** @var WorldDatabase $worldDB */
+$worldDB = $replay->getHeader()->getWorldDatabase();
+
+// or an convenience method exists too
+$worldDB = $replay->getWorldDatabase();
 ```
 
 ### Exporting to JSON
