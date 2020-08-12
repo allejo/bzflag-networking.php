@@ -9,6 +9,11 @@
 
 namespace allejo\bzflag\networking\Packets;
 
+/**
+ * @deprecated since 1.1, this interface no longer has a purpose and should not be relied upon outside of this library
+ *
+ * @todo Remove in 2.0
+ */
 interface Unpackable
 {
     /**
