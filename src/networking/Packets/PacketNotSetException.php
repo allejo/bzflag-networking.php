@@ -9,6 +9,9 @@
 
 namespace allejo\bzflag\networking\Packets;
 
+/**
+ * @since 1.0.0
+ */
 class PacketNotSetException extends \Exception
 {
 }

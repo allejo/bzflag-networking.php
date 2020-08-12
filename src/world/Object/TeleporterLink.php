@@ -15,6 +15,9 @@ use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\world\Exceptions\NamedObstacleNotFoundException;
 use allejo\bzflag\world\WorldDatabase;
 
+/**
+ * @since future
+ */
 class TeleporterLink implements IWorldDatabaseAware, \JsonSerializable
 {
     use JsonSerializePublicGetters;
@@ -28,22 +31,33 @@ class TeleporterLink implements IWorldDatabaseAware, \JsonSerializable
     /** @var WorldDatabase */
     private $worldDatabase;
 
+    /**
+     * @since future
+     */
     public function __construct(WorldDatabase $worldDatabase)
     {
         $this->worldDatabase = $worldDatabase;
     }
 
+    /**
+     * @since future
+     */
     public function getWorldDatabase(): WorldDatabase
     {
         return $this->worldDatabase;
     }
 
+    /**
+     * @since future
+     */
     public function getSource(): string
     {
         return $this->src;
     }
 
     /**
+     * @since future
+     *
      * @throws NamedObstacleNotFoundException
      *
      * @return array{Teleporter, TeleporterLinkLocation::*}
@@ -53,12 +67,17 @@ class TeleporterLink implements IWorldDatabaseAware, \JsonSerializable
         return $this->getTeleporterLinkTuple($this->src);
     }
 
+    /**
+     * @since future
+     */
     public function getDestination(): string
     {
         return $this->dst;
     }
 
     /**
+     * @since future
+     *
      * @throws NamedObstacleNotFoundException
      *
      * @return array{Teleporter, TeleporterLinkLocation::*}
@@ -69,6 +88,8 @@ class TeleporterLink implements IWorldDatabaseAware, \JsonSerializable
     }
 
     /**
+     * @since future
+     *
      * @param resource|string $resource
      *
      * @throws InaccessibleResourceException
@@ -80,6 +101,8 @@ class TeleporterLink implements IWorldDatabaseAware, \JsonSerializable
     }
 
     /**
+     * @since future
+     *
      * @return string[]
      */
     protected function getJsonEncodeBlacklist(): array
@@ -90,6 +113,8 @@ class TeleporterLink implements IWorldDatabaseAware, \JsonSerializable
     }
 
     /**
+     * @since future
+     *
      * @throws NamedObstacleNotFoundException
      *
      * @return array{Teleporter, TeleporterLinkLocation::*}

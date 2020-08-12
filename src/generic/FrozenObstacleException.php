@@ -9,6 +9,9 @@
 
 namespace allejo\bzflag\generic;
 
+/**
+ * @since future
+ */
 class FrozenObstacleException extends \Exception
 {
 }

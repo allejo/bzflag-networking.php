@@ -9,6 +9,9 @@
 
 namespace allejo\bzflag\world\Object;
 
+/**
+ * @since future
+ */
 class FlagType
 {
     /** @var string */
@@ -17,6 +20,9 @@ class FlagType
     /** @var FlagType */
     private static $flag;
 
+    /**
+     * @since future
+     */
     public static function NullFlag(): FlagType
     {
         if (self::$flag === null)

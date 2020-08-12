@@ -12,14 +12,22 @@ namespace allejo\bzflag\world\Object;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\world\WorldDatabase;
 
+/**
+ * @since future
+ */
 class BoxBuilding extends Obstacle
 {
+    /**
+     * @since future
+     */
     public function __construct(WorldDatabase $database)
     {
         parent::__construct($database, ObstacleType::BOX_TYPE);
     }
 
     /**
+     * @since future
+     *
      * @param resource|string $resource
      */
     public function unpack(&$resource): void

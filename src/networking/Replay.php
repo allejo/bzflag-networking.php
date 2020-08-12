@@ -13,7 +13,10 @@ use allejo\bzflag\replays\Replay as Base;
 
 @trigger_error('Using the "allejo\bzflag\networking\Replay" class is deprecated since version 1.1 and will be removed in version 2, use "allejo\bzflag\replays\Replay" instead.', E_USER_DEPRECATED);
 
-/** @deprecated since 1.1, use "allejo\bzflag\replays\Replay" instead */
+/**
+ * @deprecated since 1.1, use "allejo\bzflag\replays\Replay" instead
+ * @since      1.0.0
+ */
 class Replay extends Base
 {
 }

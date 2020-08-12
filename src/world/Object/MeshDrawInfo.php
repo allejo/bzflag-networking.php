@@ -11,6 +11,9 @@ namespace allejo\bzflag\world\Object;
 
 use allejo\bzflag\generic\JsonSerializePublicGetters;
 
+/**
+ * @since future
+ */
 class MeshDrawInfo implements \JsonSerializable
 {
     use JsonSerializePublicGetters;

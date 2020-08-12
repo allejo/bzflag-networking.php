@@ -13,12 +13,17 @@ use allejo\bzflag\networking\Exceptions\InaccessibleResourceException;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\world\Modifiers\TextureMatrix;
 
+/**
+ * @since future
+ */
 class TextureMatrixManager extends BaseManager
 {
     /** @var array<int, TextureMatrix> */
     private $textures = [];
 
     /**
+     * @since future
+     *
      * @return array<int, TextureMatrix>
      */
     public function getTextures(): array
@@ -27,6 +32,8 @@ class TextureMatrixManager extends BaseManager
     }
 
     /**
+     * @since future
+     *
      * @param resource|string $resource
      *
      * @throws InaccessibleResourceException

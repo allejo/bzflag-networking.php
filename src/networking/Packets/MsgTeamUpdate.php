@@ -11,6 +11,9 @@ namespace allejo\bzflag\networking\Packets;
 
 use allejo\bzflag\networking\GameData\TeamData;
 
+/**
+ * @since 1.0.0
+ */
 class MsgTeamUpdate extends GamePacket
 {
     public const PACKET_TYPE = 'MsgTeamUpdate';
@@ -19,6 +22,8 @@ class MsgTeamUpdate extends GamePacket
     private $teams;
 
     /**
+     * @since 1.0.0
+     *
      * @return TeamData[]
      */
     public function getTeams(): array
@@ -26,6 +31,9 @@ class MsgTeamUpdate extends GamePacket
         return $this->teams;
     }
 
+    /**
+     * @since 1.0.0
+     */
     protected function unpack(): void
     {
         $count = NetworkPacket::unpackUInt8($this->buffer);

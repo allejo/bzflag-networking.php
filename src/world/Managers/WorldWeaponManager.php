@@ -14,11 +14,17 @@ use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\world\Object\WorldWeapon;
 use allejo\bzflag\world\WorldDatabase;
 
+/**
+ * @since future
+ */
 class WorldWeaponManager extends BaseManager
 {
     /** @var WorldWeapon[] */
     private $worldWeapons;
 
+    /**
+     * @since future
+     */
     public function __construct(WorldDatabase $worldDatabase)
     {
         parent::__construct($worldDatabase);
@@ -27,6 +33,8 @@ class WorldWeaponManager extends BaseManager
     }
 
     /**
+     * @since future
+     *
      * @return WorldWeapon[]
      */
     public function getWorldWeapons(): array
@@ -35,10 +43,12 @@ class WorldWeaponManager extends BaseManager
     }
 
     /**
+     * @since future
+     *
      * @param resource|string $resource
      *
-     * @throws \InvalidArgumentException
      * @throws InaccessibleResourceException
+     * @throws \InvalidArgumentException
      */
     public function unpack(&$resource): void
     {

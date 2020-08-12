@@ -9,6 +9,9 @@
 
 namespace allejo\bzflag\networking\GameData;
 
+/**
+ * @since 1.0.0
+ */
 class PlayerData implements \JsonSerializable
 {
     const IS_REGISTERED = 1 << 0;
@@ -28,6 +31,8 @@ class PlayerData implements \JsonSerializable
     public $isAdmin;
 
     /**
+     * @since 1.0.0
+     *
      * @return array<string, mixed>
      */
     public function jsonSerialize(): array

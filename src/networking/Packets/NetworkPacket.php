@@ -20,7 +20,8 @@ use allejo\bzflag\world\Object\FlagType;
 /**
  * A raw network packet that was sent and contains data for game packets.
  *
- * @see https://www.php.net/manual/en/function.pack.php
+ * @see   https://www.php.net/manual/en/function.pack.php
+ * @since 1.0.0
  */
 class NetworkPacket implements Unpackable
 {
@@ -51,10 +52,12 @@ class NetworkPacket implements Unpackable
     private $data;
 
     /**
+     * @since 1.0.0
+     *
      * @param resource $resource
      *
-     * @throws \InvalidArgumentException
      * @throws InaccessibleResourceException
+     * @throws \InvalidArgumentException
      * @throws InvalidTimestampFormatException
      * @throws PacketInvalidException
      */
@@ -80,37 +83,57 @@ class NetworkPacket implements Unpackable
         }
     }
 
+    /**
+     * @since 1.0.0
+     */
     public function getMode(): int
     {
         return $this->mode;
     }
 
+    /**
+     * @since 1.0.0
+     */
     public function getCode(): int
     {
         return $this->code;
     }
 
+    /**
+     * @since 1.0.0
+     */
     public function getLength(): int
     {
         return $this->length;
     }
 
+    /**
+     * @since 1.0.0
+     */
     public function getNextFilePos(): int
     {
         return $this->nextFilePos;
     }
 
+    /**
+     * @since 1.0.0
+     */
     public function getPrevFilePos(): int
     {
         return $this->prevFilePos;
     }
 
+    /**
+     * @since 1.0.0
+     */
     public function getTimestamp(): \DateTime
     {
         return clone $this->timestamp;
     }
 
     /**
+     * @since 1.0.0
+     *
      * @return false|string
      */
     public function getData()
@@ -119,10 +142,12 @@ class NetworkPacket implements Unpackable
     }
 
     /**
+     * @since 1.0.0
+     *
      * @param resource|string $buffer
      *
-     * @throws \InvalidArgumentException
      * @throws InaccessibleResourceException
+     * @throws \InvalidArgumentException
      */
     public static function unpackInt8(&$buffer): int
     {
@@ -130,10 +155,12 @@ class NetworkPacket implements Unpackable
     }
 
     /**
+     * @since 1.0.0
+     *
      * @param resource|string $buffer
      *
-     * @throws \InvalidArgumentException
      * @throws InaccessibleResourceException
+     * @throws \InvalidArgumentException
      */
     public static function unpackUInt8(&$buffer): int
     {
@@ -141,10 +168,12 @@ class NetworkPacket implements Unpackable
     }
 
     /**
+     * @since 1.0.0
+     *
      * @param resource|string $buffer
      *
-     * @throws \InvalidArgumentException
      * @throws InaccessibleResourceException
+     * @throws \InvalidArgumentException
      */
     public static function unpackInt16(&$buffer): int
     {
@@ -164,10 +193,12 @@ class NetworkPacket implements Unpackable
     }
 
     /**
+     * @since 1.0.0
+     *
      * @param resource|string $buffer
      *
-     * @throws \InvalidArgumentException
      * @throws InaccessibleResourceException
+     * @throws \InvalidArgumentException
      */
     public static function unpackUInt16(&$buffer): int
     {
@@ -175,10 +206,12 @@ class NetworkPacket implements Unpackable
     }
 
     /**
+     * @since 1.0.0
+     *
      * @param resource|string $buffer
      *
-     * @throws \InvalidArgumentException
      * @throws InaccessibleResourceException
+     * @throws \InvalidArgumentException
      */
     public static function unpackInt32(&$buffer): int
     {
@@ -196,10 +229,12 @@ class NetworkPacket implements Unpackable
     }
 
     /**
+     * @since 1.0.0
+     *
      * @param resource|string $buffer
      *
-     * @throws \InvalidArgumentException
      * @throws InaccessibleResourceException
+     * @throws \InvalidArgumentException
      */
     public static function unpackUInt32(&$buffer): int
     {
@@ -207,10 +242,12 @@ class NetworkPacket implements Unpackable
     }
 
     /**
+     * @since 1.0.0
+     *
      * @param resource|string $buffer
      *
-     * @throws \InvalidArgumentException
      * @throws InaccessibleResourceException
+     * @throws \InvalidArgumentException
      */
     public static function unpackInt64(&$buffer): int
     {
@@ -218,10 +255,12 @@ class NetworkPacket implements Unpackable
     }
 
     /**
+     * @since 1.0.0
+     *
      * @param resource|string $buffer
      *
-     * @throws \InvalidArgumentException
      * @throws InaccessibleResourceException
+     * @throws \InvalidArgumentException
      */
     public static function unpackUInt64(&$buffer): int
     {
@@ -229,10 +268,12 @@ class NetworkPacket implements Unpackable
     }
 
     /**
+     * @since 1.0.0
+     *
      * @param resource|string $buffer
      *
-     * @throws \InvalidArgumentException
      * @throws InaccessibleResourceException
+     * @throws \InvalidArgumentException
      */
     public static function unpackFiringInfo(&$buffer): FiringInfoData
     {
@@ -247,10 +288,12 @@ class NetworkPacket implements Unpackable
     }
 
     /**
+     * @since 1.0.0
+     *
      * @param resource|string $buffer
      *
-     * @throws \InvalidArgumentException
      * @throws InaccessibleResourceException
+     * @throws \InvalidArgumentException
      */
     public static function unpackFlag(&$buffer): FlagData
     {
@@ -272,10 +315,12 @@ class NetworkPacket implements Unpackable
     }
 
     /**
+     * @since future
+     *
      * @param resource|string $buffer
      *
-     * @throws \InvalidArgumentException
      * @throws InaccessibleResourceException
+     * @throws \InvalidArgumentException
      */
     public static function unpackFlagType(&$buffer): FlagType
     {
@@ -291,10 +336,12 @@ class NetworkPacket implements Unpackable
     }
 
     /**
+     * @since 1.0.0
+     *
      * @param resource|string $buffer
      *
-     * @throws \InvalidArgumentException
      * @throws InaccessibleResourceException
+     * @throws \InvalidArgumentException
      */
     public static function unpackFloat(&$buffer): float
     {
@@ -304,10 +351,12 @@ class NetworkPacket implements Unpackable
     }
 
     /**
+     * @since future
+     *
      * @param resource|string $buffer
      *
-     * @throws \InvalidArgumentException
      * @throws InaccessibleResourceException
+     * @throws \InvalidArgumentException
      *
      * @return array{float, float, float, float}
      */
@@ -322,10 +371,12 @@ class NetworkPacket implements Unpackable
     }
 
     /**
+     * @since 1.0.0
+     *
      * @param resource|string $buffer
      *
-     * @throws \InvalidArgumentException
      * @throws InaccessibleResourceException
+     * @throws \InvalidArgumentException
      *
      * @return array{float, float, float}
      */
@@ -339,10 +390,12 @@ class NetworkPacket implements Unpackable
     }
 
     /**
+     * @since 1.0.0
+     *
      * @param resource|string $buffer
      *
-     * @throws \InvalidArgumentException
      * @throws InaccessibleResourceException
+     * @throws \InvalidArgumentException
      */
     public static function unpackIpAddress(&$buffer): string
     {
@@ -357,10 +410,12 @@ class NetworkPacket implements Unpackable
     }
 
     /**
+     * @since 1.0.0
+     *
      * @param resource|string $buffer
      *
-     * @throws \InvalidArgumentException
      * @throws InaccessibleResourceException
+     * @throws \InvalidArgumentException
      */
     public static function unpackPlayerState(&$buffer, int $code): PlayerState
     {
@@ -451,10 +506,12 @@ class NetworkPacket implements Unpackable
     }
 
     /**
+     * @since 1.0.0
+     *
      * @param resource|string $buffer
      *
-     * @throws \InvalidArgumentException
      * @throws InaccessibleResourceException
+     * @throws \InvalidArgumentException
      */
     public static function unpackShot(&$buffer): ShotData
     {
@@ -471,10 +528,12 @@ class NetworkPacket implements Unpackable
     }
 
     /**
+     * @since 1.0.0
+     *
      * @param resource|string $buffer
      *
-     * @throws \InvalidArgumentException
      * @throws InaccessibleResourceException
+     * @throws \InvalidArgumentException
      */
     public static function unpackString(&$buffer, int $size): string
     {
@@ -487,10 +546,12 @@ class NetworkPacket implements Unpackable
     }
 
     /**
+     * @since future
+     *
      * @param resource|string $buffer
      *
-     * @throws \InvalidArgumentException
      * @throws InaccessibleResourceException
+     * @throws \InvalidArgumentException
      */
     public static function unpackStdString(&$buffer): string
     {
@@ -500,10 +561,12 @@ class NetworkPacket implements Unpackable
     }
 
     /**
+     * @since future
+     *
      * @param resource|string $buffer
      *
-     * @throws \InvalidArgumentException
      * @throws InaccessibleResourceException
+     * @throws \InvalidArgumentException
      */
     public static function unpackStdStringRaw(&$buffer): string
     {
@@ -511,11 +574,13 @@ class NetworkPacket implements Unpackable
     }
 
     /**
+     * @since 1.0.0
+     *
      * @param resource|string $buffer
      *
-     * @throws \InvalidArgumentException
      * @throws InaccessibleResourceException
      * @throws InvalidTimestampFormatException
+     * @throws \InvalidArgumentException
      */
     public static function unpackTimestamp(&$buffer): \DateTime
     {
@@ -548,10 +613,12 @@ class NetworkPacket implements Unpackable
      * Safely read a resource or string buffer and return a string that can be
      * passed to `unpack()`.
      *
+     * @since 1.0.0
+     *
      * @param resource|string $buffer
      *
-     * @throws \InvalidArgumentException     when a non-string parameter is given
      * @throws InaccessibleResourceException when buffer could not be read as a resource
+     * @throws \InvalidArgumentException     when a non-string parameter is given
      *
      * @return string A string representation of the buffer that can be used in the
      *                `unpack()` function
@@ -602,10 +669,12 @@ class NetworkPacket implements Unpackable
     }
 
     /**
+     * @since 1.0.0
+     *
      * @param resource|string $buffer
      *
-     * @throws \InvalidArgumentException
      * @throws InaccessibleResourceException
+     * @throws \InvalidArgumentException
      */
     private static function unpackInt(&$buffer, int $size, string $symbol): int
     {

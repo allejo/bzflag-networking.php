@@ -14,11 +14,17 @@ use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\world\Object\ZoneObstacle;
 use allejo\bzflag\world\WorldDatabase;
 
+/**
+ * @since future
+ */
 class ZoneManager extends BaseManager
 {
     /** @var ZoneObstacle[] */
     private $zones;
 
+    /**
+     * @since future
+     */
     public function __construct(WorldDatabase $worldDatabase)
     {
         parent::__construct($worldDatabase);
@@ -28,6 +34,8 @@ class ZoneManager extends BaseManager
     }
 
     /**
+     * @since future
+     *
      * @return ZoneObstacle[]
      */
     public function getZones(): array
@@ -36,10 +44,12 @@ class ZoneManager extends BaseManager
     }
 
     /**
+     * @since future
+     *
      * @param resource|string $resource
      *
-     * @throws \InvalidArgumentException
      * @throws InaccessibleResourceException
+     * @throws \InvalidArgumentException
      */
     public function unpack(&$resource): void
     {

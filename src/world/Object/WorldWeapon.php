@@ -16,6 +16,9 @@ use allejo\bzflag\networking\Exceptions\InaccessibleResourceException;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\world\WorldDatabase;
 
+/**
+ * @since future
+ */
 class WorldWeapon implements IWorldDatabaseAware
 {
     use FreezableClass;
@@ -37,6 +40,9 @@ class WorldWeapon implements IWorldDatabaseAware
     /** @var float[] */
     private $delay;
 
+    /**
+     * @since future
+     */
     public function __construct(WorldDatabase $database)
     {
         $this->worldDatabase = $database;
@@ -47,24 +53,30 @@ class WorldWeapon implements IWorldDatabaseAware
         $this->delay = [];
     }
 
+    /**
+     * @since future
+     */
     public function getFlagType(): FlagType
     {
         return $this->flagType;
     }
 
     /**
+     * @since future
+     *
      * @throws FrozenObstacleException
      */
     public function setFlagType(FlagType $flagType): WorldWeapon
     {
         $this->frozenObstacleCheck();
-
         $this->flagType = $flagType;
 
         return $this;
     }
 
     /**
+     * @since future
+     *
      * @return array{float, float, float}
      */
     public function getPosition(): array
@@ -73,6 +85,8 @@ class WorldWeapon implements IWorldDatabaseAware
     }
 
     /**
+     * @since future
+     *
      * @param array{float, float, float} $position
      *
      * @throws FrozenObstacleException
@@ -80,47 +94,56 @@ class WorldWeapon implements IWorldDatabaseAware
     public function setPosition(array $position): WorldWeapon
     {
         $this->frozenObstacleCheck();
-
         $this->position = $position;
 
         return $this;
     }
 
+    /**
+     * @since future
+     */
     public function getDirection(): float
     {
         return $this->direction;
     }
 
     /**
+     * @since future
+     *
      * @throws FrozenObstacleException
      */
     public function setDirection(float $direction): WorldWeapon
     {
         $this->frozenObstacleCheck();
-
         $this->direction = $direction;
 
         return $this;
     }
 
+    /**
+     * @since future
+     */
     public function getInitDelay(): float
     {
         return $this->initDelay;
     }
 
     /**
+     * @since future
+     *
      * @throws FrozenObstacleException
      */
     public function setInitDelay(float $initDelay): WorldWeapon
     {
         $this->frozenObstacleCheck();
-
         $this->initDelay = $initDelay;
 
         return $this;
     }
 
     /**
+     * @since future
+     *
      * @return float[]
      */
     public function getDelay(): array
@@ -129,6 +152,8 @@ class WorldWeapon implements IWorldDatabaseAware
     }
 
     /**
+     * @since future
+     *
      * @param float[] $delay
      *
      * @throws FrozenObstacleException
@@ -136,17 +161,18 @@ class WorldWeapon implements IWorldDatabaseAware
     public function setDelay(array $delay): WorldWeapon
     {
         $this->frozenObstacleCheck();
-
         $this->delay = $delay;
 
         return $this;
     }
 
     /**
+     * @since future
+     *
      * @param resource|string $resource
      *
-     * @throws \InvalidArgumentException
      * @throws InaccessibleResourceException
+     * @throws \InvalidArgumentException
      */
     public function unpack(&$resource): void
     {

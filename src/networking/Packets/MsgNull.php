@@ -9,10 +9,16 @@
 
 namespace allejo\bzflag\networking\Packets;
 
+/**
+ * @since 1.0.0
+ */
 class MsgNull extends GamePacket
 {
     public const PACKET_TYPE = 'MsgNull';
 
+    /**
+     * @since 1.0.0
+     */
     protected function unpack(): void
     {
     }

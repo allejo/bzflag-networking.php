@@ -9,6 +9,9 @@
 
 namespace allejo\bzflag\networking\Packets;
 
+/**
+ * @since 1.0.0
+ */
 class MsgAlive extends GamePacket
 {
     public const PACKET_TYPE = 'MsgAlive';
@@ -22,12 +25,17 @@ class MsgAlive extends GamePacket
     /** @var float */
     private $azimuth;
 
+    /**
+     * @since 1.0.0
+     */
     public function getPlayerId(): int
     {
         return $this->playerId;
     }
 
     /**
+     * @since 1.0.0
+     *
      * @return float[]
      */
     public function getPosition(): array
@@ -35,16 +43,25 @@ class MsgAlive extends GamePacket
         return $this->position;
     }
 
+    /**
+     * @since 1.0.0
+     */
     public function getAzimuth(): float
     {
         return $this->azimuth;
     }
 
+    /**
+     * @since 1.0.0
+     */
     protected function defaultComplexVariables(): void
     {
         $this->position = [0, 0, 0];
     }
 
+    /**
+     * @since 1.0.0
+     */
     protected function unpack(): void
     {
         $this->playerId = NetworkPacket::unpackUInt8($this->buffer);

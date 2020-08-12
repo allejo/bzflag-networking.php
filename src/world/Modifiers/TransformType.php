@@ -9,6 +9,9 @@
 
 namespace allejo\bzflag\world\Modifiers;
 
+/**
+ * @since future
+ */
 abstract class TransformType
 {
     const SHIFT_TRANSFORM = 0;

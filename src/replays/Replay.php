@@ -20,6 +20,9 @@ use allejo\bzflag\replays\Exceptions\InvalidReplayException;
 use allejo\bzflag\world\Exceptions\InvalidWorldCompressionException;
 use allejo\bzflag\world\Exceptions\InvalidWorldDatabaseException;
 
+/**
+ * @since future
+ */
 class Replay implements \JsonSerializable
 {
     /** @var ReplayHeader */
@@ -47,6 +50,8 @@ class Replay implements \JsonSerializable
     private $packetLocationStart;
 
     /**
+     * @since future
+     *
      * @throws InaccessibleResourceException
      * @throws InvalidReplayException
      * @throws InvalidTimestampFormatException
@@ -93,12 +98,17 @@ class Replay implements \JsonSerializable
         $this->attachBZDB();
     }
 
+    /**
+     * @since future
+     */
     public function __destruct()
     {
         fclose($this->resource);
     }
 
     /**
+     * @since future
+     *
      * @return array<string, mixed>
      */
     public function jsonSerialize(): array
@@ -125,6 +135,9 @@ class Replay implements \JsonSerializable
         ];
     }
 
+    /**
+     * @since future
+     */
     public function getHeader(): ReplayHeader
     {
         return $this->header;
@@ -135,6 +148,8 @@ class Replay implements \JsonSerializable
      *
      * **Warning:** This requires a higher amount of memory since all of these
      * packets will be stored in an array.
+     *
+     * @since future
      *
      * @throws InaccessibleResourceException
      * @throws InvalidTimestampFormatException
@@ -162,6 +177,7 @@ class Replay implements \JsonSerializable
      * Get all of the packets in this Replay as an array.
      *
      * @deprecated use `Replay::getPacketsAsArray()` instead
+     * @since      future
      *
      * @throws InaccessibleResourceException
      * @throws InvalidTimestampFormatException
@@ -176,6 +192,8 @@ class Replay implements \JsonSerializable
     /**
      * Iterate through all of the packets in this Replay one at a time without
      * saving everything in memory.
+     *
+     * @since future
      *
      * @throws InaccessibleResourceException
      * @throws InvalidTimestampFormatException
@@ -209,6 +227,8 @@ class Replay implements \JsonSerializable
     }
 
     /**
+     * @since future
+     *
      * @return string[]
      */
     public function getErrors(): array
@@ -216,11 +236,17 @@ class Replay implements \JsonSerializable
         return $this->errors;
     }
 
+    /**
+     * @since future
+     */
     public function getStartTime(): \DateTime
     {
         return $this->startTime;
     }
 
+    /**
+     * @since future
+     */
     public function getEndTime(): \DateTime
     {
         return $this->endTime;
@@ -230,6 +256,7 @@ class Replay implements \JsonSerializable
      * Reset the iterator used for `getPacketsIterable()`.
      *
      * @since 1.1.0
+     * @since future
      */
     public function resetPacketsIterator(): void
     {
@@ -237,6 +264,8 @@ class Replay implements \JsonSerializable
     }
 
     /**
+     * @since future
+     *
      * @param resource $resource
      *
      * @throws InaccessibleResourceException
@@ -255,6 +284,8 @@ class Replay implements \JsonSerializable
 
     /**
      * Attach only the *initial* BZDB settings to the WorldDatabase.
+     *
+     * @since future
      *
      * @throws InaccessibleResourceException
      * @throws InvalidTimestampFormatException

@@ -16,6 +16,8 @@ use allejo\bzflag\networking\Exceptions\InvalidTimestampFormatException;
 /**
  * An abstraction on top of a NetworkPacket that contains actual data of packets
  * that occur in a game.
+ *
+ * @since 1.0.0
  */
 abstract class GamePacket implements \JsonSerializable
 {
@@ -67,10 +69,12 @@ abstract class GamePacket implements \JsonSerializable
     ];
 
     /**
-     * @throws \InvalidArgumentException
+     * @since 1.0.0
+     *
      * @throws InaccessibleResourceException
      * @throws InvalidTimestampFormatException
      * @throws PacketNotSetException
+     * @throws \InvalidArgumentException
      */
     final public function __construct(?NetworkPacket $packet)
     {
@@ -78,11 +82,9 @@ abstract class GamePacket implements \JsonSerializable
         {
             throw new PacketNotSetException('');
         }
-
         $this->packet = clone $packet;
         $this->buffer = $packet->getData();
         $this->timestamp = $packet->getTimestamp();
-
         $this->defaultComplexVariables();
         $this->unpack();
     }
@@ -99,16 +101,25 @@ abstract class GamePacket implements \JsonSerializable
         return clone $this->packet;
     }
 
+    /**
+     * @since 1.0.0
+     */
     public function getPacketType(): string
     {
         return static::PACKET_TYPE;
     }
 
+    /**
+     * @since 1.0.0
+     */
     public function getTimestamp(): string
     {
         return $this->timestamp->format(DATE_ATOM);
     }
 
+    /**
+     * @since 1.0.0
+     */
     public function getTimestampAsDateTime(): \DateTime
     {
         return $this->timestamp;
@@ -117,12 +128,14 @@ abstract class GamePacket implements \JsonSerializable
     /**
      * Create a GamePacket equivalent from a PHP resource.
      *
+     * @since 1.0.0
+     *
      * @param resource $resource
      *
-     * @throws InaccessibleResourceException
      * @throws InvalidTimestampFormatException
      * @throws PacketInvalidException
      * @throws UnsupportedPacketException
+     * @throws InaccessibleResourceException
      *
      * @return GamePacket
      */
@@ -130,20 +143,20 @@ abstract class GamePacket implements \JsonSerializable
     {
         $packet = new NetworkPacket($resource);
         $msgCode = $packet->getCode();
-
         if (!isset(self::$mapping[$msgCode]))
         {
             throw new UnsupportedPacketException(
                 sprintf('Unsupported game packet code: %s', NetworkMessage::charsFromCode($msgCode))
             );
         }
-
         $gamePacket = self::$mapping[$msgCode];
 
         return new $gamePacket($packet);
     }
 
     /**
+     * @since 1.0.0
+     *
      * @return array<int, string>
      */
     protected function getJsonEncodeBlacklist(): array
@@ -157,6 +170,8 @@ abstract class GamePacket implements \JsonSerializable
     /**
      * Initialize special instance variables without having to override the
      * constructor.
+     *
+     * @since 1.0.0
      */
     protected function defaultComplexVariables(): void
     {
@@ -165,9 +180,11 @@ abstract class GamePacket implements \JsonSerializable
     /**
      * Unpack the NetworkPacket buffer into a GamePacket's instance variables.
      *
-     * @throws \InvalidArgumentException
+     * @since 1.0.0
+     *
      * @throws InaccessibleResourceException
      * @throws InvalidTimestampFormatException when a timestamp cannot be unpacked correctly from the buffer
+     * @throws \InvalidArgumentException
      */
     abstract protected function unpack(): void;
 }

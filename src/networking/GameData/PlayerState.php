@@ -9,6 +9,9 @@
 
 namespace allejo\bzflag\networking\GameData;
 
+/**
+ * @since 1.0.0
+ */
 class PlayerState implements \JsonSerializable
 {
     const DEAD_STATUS = 0;        // not live, not paused, etc.
@@ -63,6 +66,8 @@ class PlayerState implements \JsonSerializable
     public $sounds;
 
     /**
+     * @since 1.0.0
+     *
      * @return array<string, mixed>
      */
     public function jsonSerialize(): array

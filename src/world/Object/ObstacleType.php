@@ -9,6 +9,9 @@
 
 namespace allejo\bzflag\world\Object;
 
+/**
+ * @since future
+ */
 abstract class ObstacleType
 {
     public const WALL_TYPE = 0;

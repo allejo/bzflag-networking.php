@@ -13,22 +13,33 @@ use allejo\bzflag\generic\FrozenObstacleException;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\world\WorldDatabase;
 
+/**
+ * @since future
+ */
 class PyramidBuilding extends Obstacle
 {
     /** @var bool */
     private $zFlip;
 
+    /**
+     * @since future
+     */
     public function __construct(WorldDatabase $database)
     {
         parent::__construct($database, ObstacleType::PYR_TYPE);
     }
 
+    /**
+     * @since future
+     */
     public function getZFlip(): bool
     {
         return $this->zFlip;
     }
 
     /**
+     * @since future
+     *
      * @throws FrozenObstacleException
      *
      * @return $this
@@ -41,6 +52,11 @@ class PyramidBuilding extends Obstacle
         return $this;
     }
 
+    /**
+     * @since future
+     *
+     * @param mixed $resource
+     */
     public function unpack(&$resource): void
     {
         $this->pos = NetworkPacket::unpackVector($resource);

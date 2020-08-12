@@ -9,6 +9,9 @@
 
 namespace allejo\bzflag\networking\Packets;
 
+/**
+ * @since 1.0.0
+ */
 abstract class NetworkProtocol
 {
     const CALLSIGN_LEN = 32;

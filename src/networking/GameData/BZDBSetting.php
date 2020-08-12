@@ -9,6 +9,9 @@
 
 namespace allejo\bzflag\networking\GameData;
 
+/**
+ * @since 1.0.0
+ */
 class BZDBSetting implements \JsonSerializable
 {
     /** @var string */
@@ -18,6 +21,8 @@ class BZDBSetting implements \JsonSerializable
     public $value;
 
     /**
+     * @since 1.0.0
+     *
      * @return array<string, mixed>
      */
     public function jsonSerialize(): array

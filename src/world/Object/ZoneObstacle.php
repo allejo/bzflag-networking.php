@@ -13,6 +13,9 @@ use allejo\bzflag\generic\FrozenObstacleException;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\world\WorldDatabase;
 
+/**
+ * @since future
+ */
 class ZoneObstacle extends Obstacle
 {
     /** @var FlagType[] */
@@ -24,6 +27,9 @@ class ZoneObstacle extends Obstacle
     /** @var int[] */
     private $safety;
 
+    /**
+     * @since future
+     */
     public function __construct(WorldDatabase $database)
     {
         parent::__construct($database, null);
@@ -34,6 +40,8 @@ class ZoneObstacle extends Obstacle
     }
 
     /**
+     * @since future
+     *
      * @return FlagType[]
      */
     public function getFlags(): array
@@ -42,6 +50,8 @@ class ZoneObstacle extends Obstacle
     }
 
     /**
+     * @since future
+     *
      * @param FlagType[] $flags
      *
      * @throws FrozenObstacleException
@@ -49,13 +59,14 @@ class ZoneObstacle extends Obstacle
     public function setFlags(array $flags): ZoneObstacle
     {
         $this->frozenObstacleCheck();
-
         $this->flags = $flags;
 
         return $this;
     }
 
     /**
+     * @since future
+     *
      * @return int[]
      */
     public function getTeams(): array
@@ -64,6 +75,8 @@ class ZoneObstacle extends Obstacle
     }
 
     /**
+     * @since future
+     *
      * @param int[] $teams
      *
      * @throws FrozenObstacleException
@@ -71,13 +84,14 @@ class ZoneObstacle extends Obstacle
     public function setTeams(array $teams): ZoneObstacle
     {
         $this->frozenObstacleCheck();
-
         $this->teams = $teams;
 
         return $this;
     }
 
     /**
+     * @since future
+     *
      * @return int[]
      */
     public function getSafety(): array
@@ -86,6 +100,8 @@ class ZoneObstacle extends Obstacle
     }
 
     /**
+     * @since future
+     *
      * @param int[] $safety
      *
      * @throws FrozenObstacleException
@@ -93,12 +109,16 @@ class ZoneObstacle extends Obstacle
     public function setSafety(array $safety): ZoneObstacle
     {
         $this->frozenObstacleCheck();
-
         $this->safety = $safety;
 
         return $this;
     }
 
+    /**
+     * @since future
+     *
+     * @param mixed $resource
+     */
     public function unpack(&$resource): void
     {
         $this->pos = NetworkPacket::unpackVector($resource);

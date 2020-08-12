@@ -10,7 +10,8 @@
 namespace allejo\bzflag\networking\Packets;
 
 /**
- * @see https://github.com/BZFlag-Dev/bzflag/blob/2.4/include/Protocol.h
+ * @see   https://github.com/BZFlag-Dev/bzflag/blob/2.4/include/Protocol.h
+ * @since 1.0.0
  */
 abstract class NetworkMessage
 {
@@ -67,6 +68,8 @@ abstract class NetworkMessage
     const PORTAL_UPDATE = 0x5075;      // 'Pu'
 
     /**
+     * @since 1.0.0
+     *
      * @return float|int
      */
     public static function codeFromChars(string $code)
@@ -75,6 +78,8 @@ abstract class NetworkMessage
     }
 
     /**
+     * @since 1.0.0
+     *
      * @return false|string
      */
     public static function charsFromCode(int $chars)

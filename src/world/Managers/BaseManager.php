@@ -12,6 +12,9 @@ namespace allejo\bzflag\world\Managers;
 use allejo\bzflag\generic\JsonSerializePublicGetters;
 use allejo\bzflag\world\WorldDatabase;
 
+/**
+ * @since future
+ */
 abstract class BaseManager implements \JsonSerializable
 {
     use JsonSerializePublicGetters;
@@ -19,6 +22,9 @@ abstract class BaseManager implements \JsonSerializable
     /** @var WorldDatabase */
     protected $worldDatabase;
 
+    /**
+     * @since future
+     */
     public function __construct(WorldDatabase $worldDatabase)
     {
         $this->worldDatabase = $worldDatabase;

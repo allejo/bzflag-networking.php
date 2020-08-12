@@ -11,6 +11,9 @@ namespace allejo\bzflag\networking\Packets;
 
 use allejo\bzflag\networking\GameData\PlayerState;
 
+/**
+ * @since 1.0.0
+ */
 class MsgPlayerUpdate extends GamePacket
 {
     public const PACKET_TYPE = 'MsgPlayerUpdate';
@@ -21,16 +24,25 @@ class MsgPlayerUpdate extends GamePacket
     /** @var PlayerState */
     private $state;
 
+    /**
+     * @since 1.0.0
+     */
     public function getPlayerId(): int
     {
         return $this->playerId;
     }
 
+    /**
+     * @since 1.0.0
+     */
     public function getState(): PlayerState
     {
         return $this->state;
     }
 
+    /**
+     * @since 1.0.0
+     */
     protected function unpack(): void
     {
         // Discard this value; I'm not sure why this value comes out to a weird

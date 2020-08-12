@@ -18,6 +18,9 @@ use allejo\bzflag\world\Modifiers\Material;
 use allejo\bzflag\world\Modifiers\MeshTransform;
 use allejo\bzflag\world\WorldDatabase;
 
+/**
+ * @since future
+ */
 class GroupInstance implements \JsonSerializable, IWorldDatabaseAware
 {
     use FreezableClass;
@@ -68,22 +71,33 @@ class GroupInstance implements \JsonSerializable, IWorldDatabaseAware
     /** @var Material */
     private $material;
 
+    /**
+     * @since future
+     */
     public function __construct(WorldDatabase $database)
     {
         $this->database = $database;
     }
 
+    /**
+     * @since future
+     */
     public function getWorldDatabase(): WorldDatabase
     {
         return $this->database;
     }
 
+    /**
+     * @since future
+     */
     public function getGroupDefinitionName(): string
     {
         return $this->groupDef;
     }
 
     /**
+     * @since future
+     *
      * @throws FrozenObstacleException
      *
      * @return $this
@@ -96,12 +110,17 @@ class GroupInstance implements \JsonSerializable, IWorldDatabaseAware
         return $this;
     }
 
+    /**
+     * @since future
+     */
     public function getName(): string
     {
         return $this->name;
     }
 
     /**
+     * @since future
+     *
      * @throws FrozenObstacleException
      *
      * @return $this
@@ -114,12 +133,17 @@ class GroupInstance implements \JsonSerializable, IWorldDatabaseAware
         return $this;
     }
 
+    /**
+     * @since future
+     */
     public function getTransform(): MeshTransform
     {
         return clone $this->transform;
     }
 
     /**
+     * @since future
+     *
      * @throws FrozenObstacleException
      *
      * @return $this
@@ -132,12 +156,17 @@ class GroupInstance implements \JsonSerializable, IWorldDatabaseAware
         return $this;
     }
 
+    /**
+     * @since future
+     */
     public function isModifyTeam(): bool
     {
         return $this->modifyTeam;
     }
 
     /**
+     * @since future
+     *
      * @throws FrozenObstacleException
      *
      * @return $this
@@ -150,12 +179,17 @@ class GroupInstance implements \JsonSerializable, IWorldDatabaseAware
         return $this;
     }
 
+    /**
+     * @since future
+     */
     public function isModifyColor(): bool
     {
         return $this->modifyColor;
     }
 
     /**
+     * @since future
+     *
      * @throws FrozenObstacleException
      *
      * @return $this
@@ -168,12 +202,17 @@ class GroupInstance implements \JsonSerializable, IWorldDatabaseAware
         return $this;
     }
 
+    /**
+     * @since future
+     */
     public function isModifyPhysicsDriver(): bool
     {
         return $this->modifyPhysicsDriver;
     }
 
     /**
+     * @since future
+     *
      * @throws FrozenObstacleException
      *
      * @return $this
@@ -186,12 +225,17 @@ class GroupInstance implements \JsonSerializable, IWorldDatabaseAware
         return $this;
     }
 
+    /**
+     * @since future
+     */
     public function isModifyMaterial(): bool
     {
         return $this->modifyMaterial;
     }
 
     /**
+     * @since future
+     *
      * @throws FrozenObstacleException
      *
      * @return $this
@@ -204,12 +248,17 @@ class GroupInstance implements \JsonSerializable, IWorldDatabaseAware
         return $this;
     }
 
+    /**
+     * @since future
+     */
     public function isDriveThrough(): bool
     {
         return $this->driveThrough;
     }
 
     /**
+     * @since future
+     *
      * @throws FrozenObstacleException
      *
      * @return $this
@@ -222,12 +271,17 @@ class GroupInstance implements \JsonSerializable, IWorldDatabaseAware
         return $this;
     }
 
+    /**
+     * @since future
+     */
     public function isShootThrough(): bool
     {
         return $this->shootThrough;
     }
 
     /**
+     * @since future
+     *
      * @throws FrozenObstacleException
      *
      * @return $this
@@ -240,12 +294,17 @@ class GroupInstance implements \JsonSerializable, IWorldDatabaseAware
         return $this;
     }
 
+    /**
+     * @since future
+     */
     public function isRicochet(): bool
     {
         return $this->ricochet;
     }
 
     /**
+     * @since future
+     *
      * @throws FrozenObstacleException
      *
      * @return $this
@@ -258,12 +317,17 @@ class GroupInstance implements \JsonSerializable, IWorldDatabaseAware
         return $this;
     }
 
+    /**
+     * @since future
+     */
     public function getTeam(): int
     {
         return $this->team;
     }
 
     /**
+     * @since future
+     *
      * @throws FrozenObstacleException
      *
      * @return $this
@@ -277,6 +341,8 @@ class GroupInstance implements \JsonSerializable, IWorldDatabaseAware
     }
 
     /**
+     * @since future
+     *
      * @return array{float, float, float, float}
      */
     public function getTint(): array
@@ -285,6 +351,8 @@ class GroupInstance implements \JsonSerializable, IWorldDatabaseAware
     }
 
     /**
+     * @since future
+     *
      * @param array{float, float, float, float} $tint
      *
      * @throws FrozenObstacleException
@@ -299,12 +367,17 @@ class GroupInstance implements \JsonSerializable, IWorldDatabaseAware
         return $this;
     }
 
+    /**
+     * @since future
+     */
     public function getPhyDrv(): int
     {
         return $this->phyDrv;
     }
 
     /**
+     * @since future
+     *
      * @throws FrozenObstacleException
      *
      * @return $this
@@ -317,12 +390,17 @@ class GroupInstance implements \JsonSerializable, IWorldDatabaseAware
         return $this;
     }
 
+    /**
+     * @since future
+     */
     public function getMaterial(): Material
     {
         return $this->material;
     }
 
     /**
+     * @since future
+     *
      * @throws FrozenObstacleException
      *
      * @return $this
@@ -336,6 +414,8 @@ class GroupInstance implements \JsonSerializable, IWorldDatabaseAware
     }
 
     /**
+     * @since future
+     *
      * @param resource|string $resource
      *
      * @throws InaccessibleResourceException
@@ -386,6 +466,8 @@ class GroupInstance implements \JsonSerializable, IWorldDatabaseAware
     }
 
     /**
+     * @since future
+     *
      * @return array<int, string>
      */
     protected function getJsonEncodeBlacklist(): array

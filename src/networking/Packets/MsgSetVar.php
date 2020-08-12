@@ -11,6 +11,9 @@ namespace allejo\bzflag\networking\Packets;
 
 use allejo\bzflag\networking\GameData\BZDBSetting;
 
+/**
+ * @since 1.0.0
+ */
 class MsgSetVar extends GamePacket
 {
     public const PACKET_TYPE = 'MsgSetVar';
@@ -19,6 +22,8 @@ class MsgSetVar extends GamePacket
     private $settings = [];
 
     /**
+     * @since 1.0.0
+     *
      * @return BZDBSetting[]
      */
     public function getSettings(): array
@@ -26,6 +31,9 @@ class MsgSetVar extends GamePacket
         return $this->settings;
     }
 
+    /**
+     * @since 1.0.0
+     */
     protected function unpack(): void
     {
         $count = NetworkPacket::unpackUInt16($this->buffer);

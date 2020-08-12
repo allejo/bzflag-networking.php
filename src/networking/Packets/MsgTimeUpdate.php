@@ -9,6 +9,9 @@
 
 namespace allejo\bzflag\networking\Packets;
 
+/**
+ * @since 1.0.0
+ */
 class MsgTimeUpdate extends GamePacket
 {
     public const PACKET_TYPE = 'MsgTimeUpdate';
@@ -16,11 +19,17 @@ class MsgTimeUpdate extends GamePacket
     /** @var int */
     private $timeLeft;
 
+    /**
+     * @since 1.0.0
+     */
     public function getTimeLeft(): int
     {
         return $this->timeLeft;
     }
 
+    /**
+     * @since 1.0.0
+     */
     protected function unpack(): void
     {
         // FIXME: Is there a more robust solution to this?

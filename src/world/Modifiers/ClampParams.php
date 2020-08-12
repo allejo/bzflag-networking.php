@@ -9,6 +9,9 @@
 
 namespace allejo\bzflag\world\Modifiers;
 
+/**
+ * @since future
+ */
 class ClampParams
 {
     /** @var float */

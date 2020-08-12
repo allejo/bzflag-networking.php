@@ -13,7 +13,10 @@ use allejo\bzflag\replays\Exceptions\InvalidReplayException as Base;
 
 @trigger_error('Using the "allejo\bzflag\networking\InvalidReplayException" class is deprecated since version 1.1 and will be removed in version 2, use "allejo\bzflag\replays\InvalidReplayException" instead.', E_USER_DEPRECATED);
 
-/** @deprecated since 1.1, use "allejo\bzflag\replays\InvalidReplayException" instead */
+/**
+ * @deprecated since 1.1, use "allejo\bzflag\replays\InvalidReplayException" instead
+ * @since      1.0.8
+ */
 class InvalidReplayException extends Base
 {
 }

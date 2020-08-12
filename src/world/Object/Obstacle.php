@@ -15,6 +15,9 @@ use allejo\bzflag\generic\JsonSerializePublicGetters;
 use allejo\bzflag\networking\Exceptions\InaccessibleResourceException;
 use allejo\bzflag\world\WorldDatabase;
 
+/**
+ * @since future
+ */
 abstract class Obstacle implements \JsonSerializable, IWorldDatabaseAware
 {
     use FreezableClass;
@@ -56,6 +59,9 @@ abstract class Obstacle implements \JsonSerializable, IWorldDatabaseAware
         ObstacleType::TETRA_TYPE => TetraBuilding::class,
     ];
 
+    /**
+     * @since future
+     */
     protected function __construct(WorldDatabase $database, ?int $obstacleType)
     {
         $this->worldDatabase = $database;
@@ -68,6 +74,9 @@ abstract class Obstacle implements \JsonSerializable, IWorldDatabaseAware
         $this->ricochet = false;
     }
 
+    /**
+     * @since future
+     */
     public static function new(int $type, WorldDatabase $database): Obstacle
     {
         if (!isset(self::$mapping[$type]))
@@ -75,10 +84,14 @@ abstract class Obstacle implements \JsonSerializable, IWorldDatabaseAware
             throw new \InvalidArgumentException("Unknown object type with type ID {$type}.");
         }
 
-        return new self::$mapping[$type]($database);
+        $objClass = self::$mapping[$type];
+
+        return new $objClass($database);
     }
 
     /**
+     * @since future
+     *
      * @param array{float, float, float} $pos
      *
      * @throws FrozenObstacleException
@@ -94,6 +107,8 @@ abstract class Obstacle implements \JsonSerializable, IWorldDatabaseAware
     }
 
     /**
+     * @since future
+     *
      * @return null|ObstacleType::*
      */
     public function getObjectType(): ?int
@@ -102,6 +117,8 @@ abstract class Obstacle implements \JsonSerializable, IWorldDatabaseAware
     }
 
     /**
+     * @since future
+     *
      * @return array{float, float, float}
      */
     public function getPosition(): array
@@ -110,6 +127,8 @@ abstract class Obstacle implements \JsonSerializable, IWorldDatabaseAware
     }
 
     /**
+     * @since future
+     *
      * @return array{float, float, float}
      */
     public function getSize(): array
@@ -118,6 +137,8 @@ abstract class Obstacle implements \JsonSerializable, IWorldDatabaseAware
     }
 
     /**
+     * @since future
+     *
      * @param array{float, float, float} $size
      *
      * @throws FrozenObstacleException
@@ -134,6 +155,8 @@ abstract class Obstacle implements \JsonSerializable, IWorldDatabaseAware
 
     /**
      * Get the angle (in radians) at which this obstacle is rotated.
+     *
+     * @since future
      */
     public function getAngle(): float
     {
@@ -141,6 +164,8 @@ abstract class Obstacle implements \JsonSerializable, IWorldDatabaseAware
     }
 
     /**
+     * @since future
+     *
      * @throws FrozenObstacleException
      *
      * @return $this
@@ -155,6 +180,8 @@ abstract class Obstacle implements \JsonSerializable, IWorldDatabaseAware
 
     /**
      * Get the angle (in degrees) at which this obstacle is rotated.
+     *
+     * @since future
      */
     public function getRotation(): float
     {
@@ -162,6 +189,8 @@ abstract class Obstacle implements \JsonSerializable, IWorldDatabaseAware
     }
 
     /**
+     * @since future
+     *
      * @throws FrozenObstacleException
      *
      * @return $this
@@ -173,12 +202,17 @@ abstract class Obstacle implements \JsonSerializable, IWorldDatabaseAware
         return $this;
     }
 
+    /**
+     * @since future
+     */
     public function getWidth(): float
     {
         return $this->size[0];
     }
 
     /**
+     * @since future
+     *
      * @throws FrozenObstacleException
      *
      * @return $this
@@ -191,12 +225,17 @@ abstract class Obstacle implements \JsonSerializable, IWorldDatabaseAware
         return $this;
     }
 
+    /**
+     * @since future
+     */
     public function getBreadth(): float
     {
         return $this->size[1];
     }
 
     /**
+     * @since future
+     *
      * @throws FrozenObstacleException
      *
      * @return $this
@@ -209,12 +248,17 @@ abstract class Obstacle implements \JsonSerializable, IWorldDatabaseAware
         return $this;
     }
 
+    /**
+     * @since future
+     */
     public function getHeight(): float
     {
         return $this->size[2];
     }
 
     /**
+     * @since future
+     *
      * @throws FrozenObstacleException
      *
      * @return $this
@@ -227,12 +271,17 @@ abstract class Obstacle implements \JsonSerializable, IWorldDatabaseAware
         return $this;
     }
 
+    /**
+     * @since future
+     */
     public function isDriveThrough(): bool
     {
         return $this->driveThrough;
     }
 
     /**
+     * @since future
+     *
      * @throws FrozenObstacleException
      *
      * @return $this
@@ -245,12 +294,17 @@ abstract class Obstacle implements \JsonSerializable, IWorldDatabaseAware
         return $this;
     }
 
+    /**
+     * @since future
+     */
     public function isShootThrough(): bool
     {
         return $this->shootThrough;
     }
 
     /**
+     * @since future
+     *
      * @throws FrozenObstacleException
      *
      * @return $this
@@ -263,12 +317,17 @@ abstract class Obstacle implements \JsonSerializable, IWorldDatabaseAware
         return $this;
     }
 
+    /**
+     * @since future
+     */
     public function isPassable(): bool
     {
         return $this->driveThrough && $this->shootThrough;
     }
 
     /**
+     * @since future
+     *
      * @throws FrozenObstacleException
      *
      * @return $this
@@ -282,12 +341,17 @@ abstract class Obstacle implements \JsonSerializable, IWorldDatabaseAware
         return $this;
     }
 
+    /**
+     * @since future
+     */
     public function canRicochet(): bool
     {
         return $this->ricochet;
     }
 
     /**
+     * @since future
+     *
      * @throws FrozenObstacleException
      *
      * @return $this
@@ -300,12 +364,17 @@ abstract class Obstacle implements \JsonSerializable, IWorldDatabaseAware
         return $this;
     }
 
+    /**
+     * @since future
+     */
     public function isValid(): bool
     {
         return true;
     }
 
     /**
+     * @since future
+     *
      * @param resource|string $resource
      *
      * @throws InaccessibleResourceException
@@ -313,6 +382,8 @@ abstract class Obstacle implements \JsonSerializable, IWorldDatabaseAware
     abstract public function unpack(&$resource): void;
 
     /**
+     * @since future
+     *
      * @return array<int, string>
      */
     protected function getJsonEncodeBlacklist(): array

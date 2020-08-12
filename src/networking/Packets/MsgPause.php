@@ -9,6 +9,9 @@
 
 namespace allejo\bzflag\networking\Packets;
 
+/**
+ * @since 1.0.0
+ */
 class MsgPause extends GamePacket
 {
     public const PACKET_TYPE = 'MsgPause';
@@ -19,16 +22,25 @@ class MsgPause extends GamePacket
     /** @var int */
     private $paused;
 
+    /**
+     * @since 1.0.0
+     */
     public function getPlayerId(): int
     {
         return $this->playerId;
     }
 
+    /**
+     * @since 1.0.0
+     */
     public function getPaused(): int
     {
         return $this->paused;
     }
 
+    /**
+     * @since 1.0.0
+     */
     protected function unpack(): void
     {
         $this->playerId = NetworkPacket::unpackUInt8($this->buffer);

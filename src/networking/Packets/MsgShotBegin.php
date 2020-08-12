@@ -11,6 +11,9 @@ namespace allejo\bzflag\networking\Packets;
 
 use allejo\bzflag\networking\GameData\FiringInfoData;
 
+/**
+ * @since 1.0.0
+ */
 class MsgShotBegin extends GamePacket
 {
     public const PACKET_TYPE = 'MsgShotBegin';
@@ -18,11 +21,17 @@ class MsgShotBegin extends GamePacket
     /** @var FiringInfoData */
     private $firingInfo;
 
+    /**
+     * @since 1.0.0
+     */
     public function getFiringInfo(): FiringInfoData
     {
         return $this->firingInfo;
     }
 
+    /**
+     * @since 1.0.0
+     */
     protected function unpack(): void
     {
         $this->firingInfo = NetworkPacket::unpackFiringInfo($this->buffer);

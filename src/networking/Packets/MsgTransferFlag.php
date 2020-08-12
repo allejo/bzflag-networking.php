@@ -11,6 +11,9 @@ namespace allejo\bzflag\networking\Packets;
 
 use allejo\bzflag\networking\GameData\FlagData;
 
+/**
+ * @since 1.0.0
+ */
 class MsgTransferFlag extends GamePacket
 {
     public const PACKET_TYPE = 'MsgTransferFlag';
@@ -24,21 +27,33 @@ class MsgTransferFlag extends GamePacket
     /** @var FlagData */
     private $flag;
 
+    /**
+     * @since 1.0.0
+     */
     public function getFrom(): int
     {
         return $this->from;
     }
 
+    /**
+     * @since 1.0.0
+     */
     public function getTo(): int
     {
         return $this->to;
     }
 
+    /**
+     * @since 1.0.0
+     */
     public function getFlag(): FlagData
     {
         return $this->flag;
     }
 
+    /**
+     * @since 1.0.0
+     */
     protected function unpack(): void
     {
         $this->from = NetworkPacket::unpackUInt8($this->buffer);
