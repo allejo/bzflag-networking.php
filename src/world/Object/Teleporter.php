@@ -13,6 +13,9 @@ use allejo\bzflag\generic\FrozenObstacleException;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\world\WorldDatabase;
 
+/**
+ * @since future
+ */
 class Teleporter extends Obstacle implements INameableObstacle
 {
     /** @var string */
@@ -24,27 +27,41 @@ class Teleporter extends Obstacle implements INameableObstacle
     /** @var bool */
     private $horizontal;
 
+    /**
+     * @since future
+     */
     public function __construct(WorldDatabase $database)
     {
         parent::__construct($database, ObstacleType::TELE_TYPE);
     }
 
+    /**
+     * @since future
+     */
     public function getName(): string
     {
         return $this->name;
     }
 
+    /**
+     * @since future
+     */
     public function getBorder(): float
     {
         return $this->border;
     }
 
+    /**
+     * @since future
+     */
     public function isHorizontal(): bool
     {
         return $this->horizontal;
     }
 
     /**
+     * @since future
+     *
      * @throws FrozenObstacleException
      *
      * @return Teleporter
@@ -58,6 +75,8 @@ class Teleporter extends Obstacle implements INameableObstacle
     }
 
     /**
+     * @since future
+     *
      * @throws FrozenObstacleException
      *
      * @return Teleporter
@@ -71,6 +90,8 @@ class Teleporter extends Obstacle implements INameableObstacle
     }
 
     /**
+     * @since future
+     *
      * @throws FrozenObstacleException
      *
      * @return Teleporter
@@ -83,6 +104,11 @@ class Teleporter extends Obstacle implements INameableObstacle
         return $this;
     }
 
+    /**
+     * @since future
+     *
+     * @param mixed $resource
+     */
     public function unpack(&$resource): void
     {
         $this->name = NetworkPacket::unpackStdString($resource);

@@ -10,7 +10,8 @@
 namespace allejo\bzflag\world;
 
 /**
- * @see https://github.com/BZFlag-Dev/bzflag/blob/2.4/include/Protocol.h
+ * @see   https://github.com/BZFlag-Dev/bzflag/blob/2.4/include/Protocol.h
+ * @since future
  */
 abstract class WorldCode
 {

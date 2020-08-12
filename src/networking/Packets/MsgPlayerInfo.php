@@ -11,6 +11,9 @@ namespace allejo\bzflag\networking\Packets;
 
 use allejo\bzflag\networking\GameData\PlayerData;
 
+/**
+ * @since 1.0.0
+ */
 class MsgPlayerInfo extends GamePacket
 {
     public const PACKET_TYPE = 'MsgPlayerInfo';
@@ -19,6 +22,8 @@ class MsgPlayerInfo extends GamePacket
     private $players;
 
     /**
+     * @since 1.0.0
+     *
      * @return PlayerData[]
      */
     public function getPlayers(): array
@@ -26,6 +31,9 @@ class MsgPlayerInfo extends GamePacket
         return $this->players;
     }
 
+    /**
+     * @since 1.0.0
+     */
     protected function unpack(): void
     {
         $count = NetworkPacket::unpackUInt8($this->buffer);

@@ -15,6 +15,9 @@ use allejo\bzflag\world\Modifiers\Material;
 use allejo\bzflag\world\Modifiers\MeshTransform;
 use allejo\bzflag\world\WorldDatabase;
 
+/**
+ * @since future
+ */
 class SphereObstacle extends Obstacle
 {
     const ENUM_EDGE = 1;
@@ -45,17 +48,25 @@ class SphereObstacle extends Obstacle
     /** @var array<int, Material> */
     private $materials = [];
 
+    /**
+     * @since future
+     */
     public function __construct(WorldDatabase $database)
     {
         parent::__construct($database, ObstacleType::SPHERE_TYPE);
     }
 
+    /**
+     * @since future
+     */
     public function getTransform(): MeshTransform
     {
         return clone $this->transform;
     }
 
     /**
+     * @since future
+     *
      * @throws FrozenObstacleException
      *
      * @return SphereObstacle
@@ -68,12 +79,17 @@ class SphereObstacle extends Obstacle
         return $this;
     }
 
+    /**
+     * @since future
+     */
     public function getDivisions(): int
     {
         return $this->divisions;
     }
 
     /**
+     * @since future
+     *
      * @throws FrozenObstacleException
      *
      * @return SphereObstacle
@@ -86,12 +102,17 @@ class SphereObstacle extends Obstacle
         return $this;
     }
 
+    /**
+     * @since future
+     */
     public function getPhyDrv(): int
     {
         return $this->phyDrv;
     }
 
     /**
+     * @since future
+     *
      * @throws FrozenObstacleException
      *
      * @return SphereObstacle
@@ -104,12 +125,17 @@ class SphereObstacle extends Obstacle
         return $this;
     }
 
+    /**
+     * @since future
+     */
     public function isSmoothBounce(): bool
     {
         return $this->smoothBounce;
     }
 
     /**
+     * @since future
+     *
      * @throws FrozenObstacleException
      *
      * @return SphereObstacle
@@ -122,12 +148,17 @@ class SphereObstacle extends Obstacle
         return $this;
     }
 
+    /**
+     * @since future
+     */
     public function isUseNormals(): bool
     {
         return $this->useNormals;
     }
 
     /**
+     * @since future
+     *
      * @throws FrozenObstacleException
      *
      * @return SphereObstacle
@@ -140,12 +171,17 @@ class SphereObstacle extends Obstacle
         return $this;
     }
 
+    /**
+     * @since future
+     */
     public function isHemisphere(): bool
     {
         return $this->hemisphere;
     }
 
     /**
+     * @since future
+     *
      * @throws FrozenObstacleException
      *
      * @return SphereObstacle
@@ -159,6 +195,8 @@ class SphereObstacle extends Obstacle
     }
 
     /**
+     * @since future
+     *
      * @return array{float, float}
      */
     public function getTexSize(): array
@@ -167,6 +205,8 @@ class SphereObstacle extends Obstacle
     }
 
     /**
+     * @since future
+     *
      * @param array{float, float} $texSize
      *
      * @throws FrozenObstacleException
@@ -182,6 +222,8 @@ class SphereObstacle extends Obstacle
     }
 
     /**
+     * @since future
+     *
      * @return array<int, Material>
      */
     public function getMaterials(): array
@@ -190,6 +232,8 @@ class SphereObstacle extends Obstacle
     }
 
     /**
+     * @since future
+     *
      * @param array<int, Material> $materials
      *
      * @throws FrozenObstacleException
@@ -205,6 +249,8 @@ class SphereObstacle extends Obstacle
     }
 
     /**
+     * @since future
+     *
      * @param resource|string $resource
      */
     public function unpack(&$resource): void
@@ -222,6 +268,7 @@ class SphereObstacle extends Obstacle
         {
             $this->texSize[$i] = NetworkPacket::unpackFloat($resource);
         }
+
         for ($i = 0; $i < self::MATERIAL_COUNT; ++$i)
         {
             $matIndex = NetworkPacket::unpackInt32($resource);

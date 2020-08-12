@@ -15,6 +15,9 @@ use allejo\bzflag\world\Modifiers\Material;
 use allejo\bzflag\world\Modifiers\MeshTransform;
 use allejo\bzflag\world\WorldDatabase;
 
+/**
+ * @since future
+ */
 class TetraBuilding extends Obstacle
 {
     /** @var MeshTransform */
@@ -38,17 +41,25 @@ class TetraBuilding extends Obstacle
     /** @var Material[] */
     private $materials = [];
 
+    /**
+     * @since future
+     */
     public function __construct(WorldDatabase $database)
     {
         parent::__construct($database, ObstacleType::TETRA_TYPE);
     }
 
+    /**
+     * @since future
+     */
     public function getTransform(): MeshTransform
     {
         return $this->transform;
     }
 
     /**
+     * @since future
+     *
      * @throws FrozenObstacleException
      *
      * @return TetraBuilding
@@ -62,6 +73,8 @@ class TetraBuilding extends Obstacle
     }
 
     /**
+     * @since future
+     *
      * @return float[][]
      */
     public function getVertices(): array
@@ -70,6 +83,8 @@ class TetraBuilding extends Obstacle
     }
 
     /**
+     * @since future
+     *
      * @param float[][] $vertices
      *
      * @throws FrozenObstacleException
@@ -85,6 +100,8 @@ class TetraBuilding extends Obstacle
     }
 
     /**
+     * @since future
+     *
      * @return float[][][]
      */
     public function getNormals(): array
@@ -93,6 +110,8 @@ class TetraBuilding extends Obstacle
     }
 
     /**
+     * @since future
+     *
      * @param float[][][] $normals
      *
      * @throws FrozenObstacleException
@@ -108,6 +127,8 @@ class TetraBuilding extends Obstacle
     }
 
     /**
+     * @since future
+     *
      * @return float[][][]
      */
     public function getTexCoords(): array
@@ -116,6 +137,8 @@ class TetraBuilding extends Obstacle
     }
 
     /**
+     * @since future
+     *
      * @param float[][][] $texCoords
      *
      * @throws FrozenObstacleException
@@ -131,6 +154,8 @@ class TetraBuilding extends Obstacle
     }
 
     /**
+     * @since future
+     *
      * @return bool[]
      */
     public function getUseNormals(): array
@@ -139,6 +164,8 @@ class TetraBuilding extends Obstacle
     }
 
     /**
+     * @since future
+     *
      * @param bool[] $useNormals
      *
      * @throws FrozenObstacleException
@@ -154,6 +181,8 @@ class TetraBuilding extends Obstacle
     }
 
     /**
+     * @since future
+     *
      * @return bool[]
      */
     public function getUseTexCoords(): array
@@ -162,6 +191,8 @@ class TetraBuilding extends Obstacle
     }
 
     /**
+     * @since future
+     *
      * @param bool[] $useTexCoords
      *
      * @throws FrozenObstacleException
@@ -177,6 +208,8 @@ class TetraBuilding extends Obstacle
     }
 
     /**
+     * @since future
+     *
      * @return Material[]
      */
     public function getMaterials(): array
@@ -185,6 +218,8 @@ class TetraBuilding extends Obstacle
     }
 
     /**
+     * @since future
+     *
      * @param Material[] $materials
      *
      * @throws FrozenObstacleException
@@ -199,6 +234,11 @@ class TetraBuilding extends Obstacle
         return $this;
     }
 
+    /**
+     * @since future
+     *
+     * @param mixed $resource
+     */
     public function unpack(&$resource): void
     {
         $stateByte = NetworkPacket::unpackUInt8($resource);
@@ -257,6 +297,8 @@ class TetraBuilding extends Obstacle
     }
 
     /**
+     * @since future
+     *
      * @return array{bool, bool, bool, bool}
      */
     private static function unpack4Bools(int $byte): array

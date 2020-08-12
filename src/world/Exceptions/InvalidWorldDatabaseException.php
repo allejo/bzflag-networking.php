@@ -9,6 +9,9 @@
 
 namespace allejo\bzflag\world\Exceptions;
 
+/**
+ * @since future
+ */
 class InvalidWorldDatabaseException extends \Exception
 {
 }

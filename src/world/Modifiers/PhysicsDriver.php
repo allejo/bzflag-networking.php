@@ -13,6 +13,9 @@ use allejo\bzflag\generic\JsonSerializePublicGetters;
 use allejo\bzflag\networking\Exceptions\InaccessibleResourceException;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 
+/**
+ * @since future
+ */
 class PhysicsDriver implements \JsonSerializable
 {
     use JsonSerializePublicGetters;
@@ -41,18 +44,26 @@ class PhysicsDriver implements \JsonSerializable
     /** @var string */
     private $deathMessage;
 
+    /**
+     * @since future
+     */
     public function __construct()
     {
         $this->angularPos = [];
         $this->radialPos = [];
     }
 
+    /**
+     * @since future
+     */
     public function getName(): string
     {
         return $this->name;
     }
 
     /**
+     * @since future
+     *
      * @return array<int, float>
      */
     public function getLinear(): array
@@ -60,12 +71,17 @@ class PhysicsDriver implements \JsonSerializable
         return $this->linear;
     }
 
+    /**
+     * @since future
+     */
     public function getAngularVel(): float
     {
         return $this->angularVel;
     }
 
     /**
+     * @since future
+     *
      * @return array<int, float>
      */
     public function getAngularPos(): array
@@ -73,12 +89,17 @@ class PhysicsDriver implements \JsonSerializable
         return $this->angularPos;
     }
 
+    /**
+     * @since future
+     */
     public function getRadialVel(): float
     {
         return $this->radialVel;
     }
 
     /**
+     * @since future
+     *
      * @return array<int, float>
      */
     public function getRadialPos(): array
@@ -86,17 +107,25 @@ class PhysicsDriver implements \JsonSerializable
         return $this->radialPos;
     }
 
+    /**
+     * @since future
+     */
     public function getSlideTime(): float
     {
         return $this->slideTime;
     }
 
+    /**
+     * @since future
+     */
     public function getDeathMessage(): string
     {
         return $this->deathMessage;
     }
 
     /**
+     * @since future
+     *
      * @param resource|string $resource
      *
      * @throws InaccessibleResourceException

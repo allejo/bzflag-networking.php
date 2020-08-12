@@ -11,6 +11,9 @@ namespace allejo\bzflag\networking\Packets;
 
 use allejo\bzflag\networking\GameData\PlayerScore;
 
+/**
+ * @since 1.0.0
+ */
 class MsgAddPlayer extends GamePacket
 {
     public const PACKET_TYPE = 'MsgAddPlayer';
@@ -33,41 +36,65 @@ class MsgAddPlayer extends GamePacket
     /** @var PlayerScore */
     private $score;
 
+    /**
+     * @since 1.0.0
+     */
     public function getPlayerIndex(): int
     {
         return $this->playerIndex;
     }
 
+    /**
+     * @since 1.0.0
+     */
     public function getPlayerType(): int
     {
         return $this->playerType;
     }
 
+    /**
+     * @since 1.0.0
+     */
     public function getTeamValue(): int
     {
         return $this->teamValue;
     }
 
+    /**
+     * @since 1.0.0
+     */
     public function getCallsign(): string
     {
         return $this->callsign;
     }
 
+    /**
+     * @since 1.0.0
+     */
     public function getMotto(): string
     {
         return $this->motto;
     }
 
+    /**
+     * @since 1.0.0
+     */
     public function getScore(): PlayerScore
     {
         return $this->score;
     }
 
+    /**
+     * @since 1.0.0
+     */
     protected function defaultComplexVariables(): void
     {
         $this->score = new PlayerScore();
     }
 
+    /**
+     * @since 1.0.0
+     */
     protected function unpack(): void
     {
         $this->playerIndex = NetworkPacket::unpackUInt8($this->buffer);

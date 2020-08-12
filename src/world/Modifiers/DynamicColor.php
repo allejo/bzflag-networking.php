@@ -13,6 +13,9 @@ use allejo\bzflag\generic\JsonSerializePublicGetters;
 use allejo\bzflag\networking\Exceptions\InaccessibleResourceException;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 
+/**
+ * @since future
+ */
 class DynamicColor implements \JsonSerializable
 {
     use JsonSerializePublicGetters;
@@ -23,12 +26,17 @@ class DynamicColor implements \JsonSerializable
     /** @var array<int, ChannelParams> */
     private $channels = [];
 
+    /**
+     * @since future
+     */
     public function getName(): string
     {
         return $this->name;
     }
 
     /**
+     * @since future
+     *
      * @return array<int, ChannelParams>
      */
     public function getChannels(): array
@@ -37,6 +45,8 @@ class DynamicColor implements \JsonSerializable
     }
 
     /**
+     * @since future
+     *
      * @param resource|string $resource
      *
      * @throws InaccessibleResourceException

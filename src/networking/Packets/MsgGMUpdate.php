@@ -11,6 +11,9 @@ namespace allejo\bzflag\networking\Packets;
 
 use allejo\bzflag\networking\GameData\ShotData;
 
+/**
+ * @since 1.0.0
+ */
 class MsgGMUpdate extends GamePacket
 {
     public const PACKET_TYPE = 'MsgGMUpdate';
@@ -21,16 +24,25 @@ class MsgGMUpdate extends GamePacket
     /** @var ShotData */
     private $shot;
 
+    /**
+     * @since 1.0.0
+     */
     public function getTarget(): int
     {
         return $this->target;
     }
 
+    /**
+     * @since 1.0.0
+     */
     public function getShot(): ShotData
     {
         return $this->shot;
     }
 
+    /**
+     * @since 1.0.0
+     */
     protected function unpack(): void
     {
         $this->shot = NetworkPacket::unpackShot($this->buffer);

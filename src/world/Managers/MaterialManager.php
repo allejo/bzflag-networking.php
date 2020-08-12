@@ -13,17 +13,25 @@ use allejo\bzflag\networking\Exceptions\InaccessibleResourceException;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\world\Modifiers\Material;
 
+/**
+ * @since future
+ */
 class MaterialManager extends BaseManager
 {
     /** @var array<int, Material> */
     private $materials = [];
 
+    /**
+     * @since future
+     */
     public function getMaterial(int $index): Material
     {
         return $this->materials[$index];
     }
 
     /**
+     * @since future
+     *
      * @return array<int, Material>
      */
     public function getMaterials(): array
@@ -32,6 +40,8 @@ class MaterialManager extends BaseManager
     }
 
     /**
+     * @since future
+     *
      * @param resource|string $resource
      *
      * @throws InaccessibleResourceException

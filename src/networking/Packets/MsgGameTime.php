@@ -9,6 +9,9 @@
 
 namespace allejo\bzflag\networking\Packets;
 
+/**
+ * @since 1.0.0
+ */
 class MsgGameTime extends GamePacket
 {
     public const PACKET_TYPE = 'MsgGameTime';
@@ -23,9 +26,10 @@ class MsgGameTime extends GamePacket
     private $value;
 
     /**
-     * @todo Remove in 2.0.0
-     *
      * @deprecated This value is only significant for calculating a timestamp. Use `getValue()` instead.
+     * @since      1.0.0
+     *
+     * @todo       Remove in 2.0.0
      */
     public function getMsb(): int
     {
@@ -33,20 +37,27 @@ class MsgGameTime extends GamePacket
     }
 
     /**
-     * @todo Remove in 2.0.0
-     *
      * @deprecated This value is only significant for calculating a timestamp. Use `getValue()` instead.
+     * @since      1.0.0
+     *
+     * @todo       Remove in 2.0.0
      */
     public function getLsb(): int
     {
         return $this->lsb;
     }
 
+    /**
+     * @since 1.0.4
+     */
     public function getValue(): \DateTime
     {
         return $this->value;
     }
 
+    /**
+     * @since 1.0.0
+     */
     protected function unpack(): void
     {
         // @TODO In 2.0.0, remove the BC code

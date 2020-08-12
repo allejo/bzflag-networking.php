@@ -25,6 +25,9 @@ use allejo\bzflag\world\Managers\WorldWeaponManager;
 use allejo\bzflag\world\Managers\ZoneManager;
 use allejo\bzflag\world\Modifiers\Material;
 
+/**
+ * @since future
+ */
 class WorldDatabase implements \JsonSerializable
 {
     /** @var int */
@@ -91,6 +94,8 @@ class WorldDatabase implements \JsonSerializable
     private $waterMaterial;
 
     /**
+     * @since future
+     *
      * @param resource $resource
      *
      * @throws InvalidWorldCompressionException
@@ -156,6 +161,8 @@ class WorldDatabase implements \JsonSerializable
     }
 
     /**
+     * @since future
+     *
      * @return array<string, mixed>
      */
     public function jsonSerialize(): array
@@ -179,99 +186,155 @@ class WorldDatabase implements \JsonSerializable
         ];
     }
 
+    /**
+     * @since future
+     */
     public function getHeaderSize(): int
     {
         return $this->headerSize;
     }
 
+    /**
+     * @since future
+     */
     public function getWorldCode(): int
     {
         return $this->worldCode;
     }
 
+    /**
+     * @since future
+     */
     public function getMapVersion(): int
     {
         return $this->mapVersion;
     }
 
+    /**
+     * @since future
+     */
     public function getUncompressedSize(): int
     {
         return $this->uncompressedSize;
     }
 
+    /**
+     * @since future
+     */
     public function getDatabaseSize(): int
     {
         return $this->databaseSize;
     }
 
+    /**
+     * @since future
+     */
     public function getWorldHash(): string
     {
         return $this->worldHash;
     }
 
+    /**
+     * @since future
+     */
     public function getWorldCodeEndSize(): int
     {
         return $this->worldCodeEndSize;
     }
 
+    /**
+     * @since future
+     */
     public function getWorldCodeEnd(): int
     {
         return $this->worldCodeEnd;
     }
 
+    /**
+     * @since future
+     */
     public function getDynamicColorManager(): DynamicColorManager
     {
         return $this->dynamicColorManager;
     }
 
+    /**
+     * @since future
+     */
     public function getTextureMatrixManager(): TextureMatrixManager
     {
         return $this->textureMatrixManager;
     }
 
+    /**
+     * @since future
+     */
     public function getMaterialManager(): MaterialManager
     {
         return $this->materialManager;
     }
 
+    /**
+     * @since future
+     */
     public function getPhysicsDriverManager(): PhysicsDriverManager
     {
         return $this->physicsDriverManager;
     }
 
+    /**
+     * @since future
+     */
     public function getTransformManager(): TransformManager
     {
         return $this->transformManager;
     }
 
+    /**
+     * @since future
+     */
     public function getObstacleManager(): GroupDefinitionManager
     {
         return $this->obstacleManager;
     }
 
+    /**
+     * @since future
+     */
     public function getLinkManager(): LinkManager
     {
         return $this->linkManager;
     }
 
+    /**
+     * @since future
+     */
     public function getBZDBManager(): BZDBManager
     {
         return $this->bzdbManager;
     }
 
+    /**
+     * @since future
+     */
     public function getWorldWeaponManager(): WorldWeaponManager
     {
         return $this->worldWeaponManager;
     }
 
+    /**
+     * @since future
+     */
     public function getZoneManager(): ZoneManager
     {
         return $this->zoneManager;
     }
 
     /**
-     * @throws \InvalidArgumentException
+     * @since future
+     *
      * @throws InaccessibleResourceException
+     * @throws \InvalidArgumentException
      */
     private function unpackWaterLevel(): void
     {

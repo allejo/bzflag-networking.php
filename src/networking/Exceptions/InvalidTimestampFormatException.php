@@ -9,6 +9,9 @@
 
 namespace allejo\bzflag\networking\Exceptions;
 
+/**
+ * @since future
+ */
 class InvalidTimestampFormatException extends \UnexpectedValueException
 {
 }

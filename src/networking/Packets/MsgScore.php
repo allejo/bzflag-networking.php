@@ -11,6 +11,9 @@ namespace allejo\bzflag\networking\Packets;
 
 use allejo\bzflag\networking\GameData\ScoreData;
 
+/**
+ * @since 1.0.0
+ */
 class MsgScore extends GamePacket
 {
     public const PACKET_TYPE = 'MsgScore';
@@ -19,6 +22,8 @@ class MsgScore extends GamePacket
     private $scores = [];
 
     /**
+     * @since 1.0.0
+     *
      * @return ScoreData[]
      */
     public function getScores(): array
@@ -26,6 +31,9 @@ class MsgScore extends GamePacket
         return $this->scores;
     }
 
+    /**
+     * @since 1.0.0
+     */
     protected function unpack(): void
     {
         $count = NetworkPacket::unpackUInt8($this->buffer);

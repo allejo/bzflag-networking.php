@@ -9,6 +9,9 @@
 
 namespace allejo\bzflag\replays\Exceptions;
 
+/**
+ * @since future
+ */
 class InvalidReplayException extends \Exception
 {
 }

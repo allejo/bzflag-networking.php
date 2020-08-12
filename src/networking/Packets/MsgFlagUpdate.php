@@ -11,6 +11,9 @@ namespace allejo\bzflag\networking\Packets;
 
 use allejo\bzflag\networking\GameData\FlagData;
 
+/**
+ * @since 1.0.0
+ */
 class MsgFlagUpdate extends GamePacket
 {
     public const PACKET_TYPE = 'MsgFlagUpdate';
@@ -19,6 +22,8 @@ class MsgFlagUpdate extends GamePacket
     private $flags;
 
     /**
+     * @since 1.0.0
+     *
      * @return FlagData[]
      */
     public function getFlags(): array
@@ -26,6 +31,9 @@ class MsgFlagUpdate extends GamePacket
         return $this->flags;
     }
 
+    /**
+     * @since 1.0.0
+     */
     protected function unpack(): void
     {
         $count = NetworkPacket::unpackUInt16($this->buffer);

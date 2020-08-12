@@ -11,6 +11,9 @@ namespace allejo\bzflag\replays;
 
 use allejo\bzflag\generic\JsonSerializePublicGetters;
 
+/**
+ * @since future
+ */
 class ReplayDuration implements \JsonSerializable
 {
     use JsonSerializePublicGetters;
@@ -33,6 +36,9 @@ class ReplayDuration implements \JsonSerializable
     /** @var int */
     private $usecs;
 
+    /**
+     * @since future
+     */
     public function __construct(int $timestamp)
     {
         $secs = $timestamp / 1000000;
@@ -61,31 +67,49 @@ class ReplayDuration implements \JsonSerializable
         ;
     }
 
+    /**
+     * @since future
+     */
     public function getAsSeconds(): int
     {
         return (int)$this->asSeconds;
     }
 
+    /**
+     * @since future
+     */
     public function getDays(): int
     {
         return $this->days;
     }
 
+    /**
+     * @since future
+     */
     public function getHours(): int
     {
         return $this->hours;
     }
 
+    /**
+     * @since future
+     */
     public function getMinutes(): int
     {
         return $this->minutes;
     }
 
+    /**
+     * @since future
+     */
     public function getSeconds(): int
     {
         return $this->seconds;
     }
 
+    /**
+     * @since future
+     */
     public function getUsecs(): int
     {
         return $this->usecs;

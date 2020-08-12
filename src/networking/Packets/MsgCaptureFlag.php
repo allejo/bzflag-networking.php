@@ -9,6 +9,9 @@
 
 namespace allejo\bzflag\networking\Packets;
 
+/**
+ * @since 1.0.0
+ */
 class MsgCaptureFlag extends GamePacket
 {
     public const PACKET_TYPE = 'MsgCaptureFlag';
@@ -22,21 +25,33 @@ class MsgCaptureFlag extends GamePacket
     /** @var int */
     private $team;
 
+    /**
+     * @since 1.0.0
+     */
     public function getPlayerId(): int
     {
         return $this->playerId;
     }
 
+    /**
+     * @since 1.0.0
+     */
     public function getFlagId(): int
     {
         return $this->flagId;
     }
 
+    /**
+     * @since 1.0.0
+     */
     public function getTeam(): int
     {
         return $this->team;
     }
 
+    /**
+     * @since 1.0.0
+     */
     protected function unpack(): void
     {
         $this->playerId = NetworkPacket::unpackUInt8($this->buffer);

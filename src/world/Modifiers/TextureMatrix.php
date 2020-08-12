@@ -13,6 +13,9 @@ use allejo\bzflag\generic\JsonSerializePublicGetters;
 use allejo\bzflag\networking\Exceptions\InaccessibleResourceException;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 
+/**
+ * @since future
+ */
 class TextureMatrix implements \JsonSerializable
 {
     use JsonSerializePublicGetters;
@@ -82,102 +85,161 @@ class TextureMatrix implements \JsonSerializable
     /** @var float */
     private $vCenter = 0.5;
 
+    /**
+     * @since future
+     */
     public function getName(): string
     {
         return $this->name;
     }
 
+    /**
+     * @since future
+     */
     public function isUseStatic(): bool
     {
         return $this->useStatic;
     }
 
+    /**
+     * @since future
+     */
     public function isUseDynamic(): bool
     {
         return $this->useDynamic;
     }
 
+    /**
+     * @since future
+     */
     public function getRotation(): float
     {
         return $this->rotation;
     }
 
+    /**
+     * @since future
+     */
     public function getUFixedShift(): float
     {
         return $this->uFixedShift;
     }
 
+    /**
+     * @since future
+     */
     public function getVFixedShift(): float
     {
         return $this->vFixedShift;
     }
 
+    /**
+     * @since future
+     */
     public function getUFixedScale(): float
     {
         return $this->uFixedScale;
     }
 
+    /**
+     * @since future
+     */
     public function getVFixedScale(): float
     {
         return $this->vFixedScale;
     }
 
+    /**
+     * @since future
+     */
     public function getUFixedCenter(): float
     {
         return $this->uFixedCenter;
     }
 
+    /**
+     * @since future
+     */
     public function getVFixedCenter(): float
     {
         return $this->vFixedCenter;
     }
 
+    /**
+     * @since future
+     */
     public function getSpinFreq(): float
     {
         return $this->spinFreq;
     }
 
+    /**
+     * @since future
+     */
     public function getUShiftFreq(): float
     {
         return $this->uShiftFreq;
     }
 
+    /**
+     * @since future
+     */
     public function getVShiftFreq(): float
     {
         return $this->vShiftFreq;
     }
 
+    /**
+     * @since future
+     */
     public function getUScaleFreq(): float
     {
         return $this->uScaleFreq;
     }
 
+    /**
+     * @since future
+     */
     public function getVScaleFreq(): float
     {
         return $this->vScaleFreq;
     }
 
+    /**
+     * @since future
+     */
     public function getUScale(): float
     {
         return $this->uScale;
     }
 
+    /**
+     * @since future
+     */
     public function getVScale(): float
     {
         return $this->vScale;
     }
 
+    /**
+     * @since future
+     */
     public function getUCenter(): float
     {
         return $this->uCenter;
     }
 
+    /**
+     * @since future
+     */
     public function getVCenter(): float
     {
         return $this->vCenter;
     }
 
     /**
+     * @since future
+     *
      * @param resource|string $resource
      *
      * @throws InaccessibleResourceException

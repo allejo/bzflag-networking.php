@@ -9,6 +9,9 @@
 
 namespace allejo\bzflag\networking\GameData;
 
+/**
+ * @since 1.0.9
+ */
 class FiringInfoData implements \JsonSerializable
 {
     /** @var float */
@@ -24,6 +27,8 @@ class FiringInfoData implements \JsonSerializable
     public $lifetime;
 
     /**
+     * @since future
+     *
      * @return array<string, mixed>
      */
     public function jsonSerialize(): array

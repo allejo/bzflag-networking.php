@@ -12,6 +12,9 @@ namespace allejo\bzflag\world\Object;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\world\WorldDatabase;
 
+/**
+ * @since future
+ */
 class MeshObstacle extends Obstacle
 {
     /** @var int */
@@ -62,6 +65,9 @@ class MeshObstacle extends Obstacle
     /** @var MeshDrawInfo */
     private $drawInfo;
 
+    /**
+     * @since future
+     */
     public function __construct(WorldDatabase $database)
     {
         parent::__construct($database, ObstacleType::MESH_TYPE);
@@ -83,12 +89,17 @@ class MeshObstacle extends Obstacle
         $this->drawInfo = new MeshDrawInfo();
     }
 
+    /**
+     * @since future
+     */
     public function getCheckCount(): int
     {
         return $this->checkCount;
     }
 
     /**
+     * @since future
+     *
      * @return string[]
      */
     public function getCheckTypes(): array
@@ -97,6 +108,8 @@ class MeshObstacle extends Obstacle
     }
 
     /**
+     * @since future
+     *
      * @return array<int, array{float, float, float}>
      */
     public function getCheckPoints(): array
@@ -104,12 +117,17 @@ class MeshObstacle extends Obstacle
         return $this->checkPoints;
     }
 
+    /**
+     * @since future
+     */
     public function getVertexCount(): int
     {
         return $this->vertexCount;
     }
 
     /**
+     * @since future
+     *
      * @return array<int, array{float, float, float}>
      */
     public function getVertices(): array
@@ -117,12 +135,17 @@ class MeshObstacle extends Obstacle
         return $this->vertices;
     }
 
+    /**
+     * @since future
+     */
     public function getNormalCount(): int
     {
         return $this->normalCount;
     }
 
     /**
+     * @since future
+     *
      * @return array<int, array{float, float, float}>
      */
     public function getNormals(): array
@@ -130,12 +153,17 @@ class MeshObstacle extends Obstacle
         return $this->normals;
     }
 
+    /**
+     * @since future
+     */
     public function getTexCoordCount(): int
     {
         return $this->texCoordCount;
     }
 
     /**
+     * @since future
+     *
      * @return array<int, array{float, float}>
      */
     public function getTexCoords(): array
@@ -143,17 +171,25 @@ class MeshObstacle extends Obstacle
         return $this->texCoords;
     }
 
+    /**
+     * @since future
+     */
     public function getFaceCount(): int
     {
         return $this->faceCount;
     }
 
+    /**
+     * @since future
+     */
     public function getFaceSize(): int
     {
         return $this->faceSize;
     }
 
     /**
+     * @since future
+     *
      * @return array<int, MeshFace>
      */
     public function getFaces(): array
@@ -161,27 +197,41 @@ class MeshObstacle extends Obstacle
         return $this->faces;
     }
 
+    /**
+     * @since future
+     */
     public function isSmoothBounce(): bool
     {
         return $this->smoothBounce;
     }
 
+    /**
+     * @since future
+     */
     public function isNoClusters(): bool
     {
         return $this->noClusters;
     }
 
+    /**
+     * @since future
+     */
     public function isInverted(): bool
     {
         return $this->inverted;
     }
 
+    /**
+     * @since future
+     */
     public function getDrawInfo(): MeshDrawInfo
     {
         return $this->drawInfo;
     }
 
     /**
+     * @since future
+     *
      * @param resource|string $resource
      */
     public function unpack(&$resource): void

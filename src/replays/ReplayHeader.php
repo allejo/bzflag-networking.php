@@ -18,6 +18,9 @@ use allejo\bzflag\world\Exceptions\InvalidWorldCompressionException;
 use allejo\bzflag\world\Exceptions\InvalidWorldDatabaseException;
 use allejo\bzflag\world\WorldDatabase;
 
+/**
+ * @since future
+ */
 class ReplayHeader implements Unpackable, \JsonSerializable
 {
     use JsonSerializePublicGetters;
@@ -65,6 +68,8 @@ class ReplayHeader implements Unpackable, \JsonSerializable
     private $worldDatabase;
 
     /**
+     * @since future
+     *
      * @param resource $resource
      *
      * @throws InvalidWorldCompressionException
@@ -101,22 +106,33 @@ class ReplayHeader implements Unpackable, \JsonSerializable
         $this->worldDatabase = new WorldDatabase($resource);
     }
 
+    /**
+     * @since future
+     */
     public function getMagicNumber(): int
     {
         return $this->magicNumber;
     }
 
+    /**
+     * @since future
+     */
     public function getVersion(): int
     {
         return $this->version;
     }
 
+    /**
+     * @since future
+     */
     public function getOffset(): int
     {
         return $this->offset;
     }
 
     /**
+     * @since future
+     *
      * @return int The duration of the replay in microseconds
      */
     public function getFileTimeAsMicroseconds(): int
@@ -124,61 +140,97 @@ class ReplayHeader implements Unpackable, \JsonSerializable
         return $this->fileTime;
     }
 
+    /**
+     * @since future
+     */
     public function getFileTimeAsSeconds(): int
     {
         return (int)round($this->fileTime / 1000000);
     }
 
+    /**
+     * @since future
+     */
     public function getFileTimeAsMinutes(): int
     {
         return (int)round($this->getFileTimeAsSeconds() / 60);
     }
 
+    /**
+     * @since future
+     */
     public function getPlayer(): int
     {
         return $this->player;
     }
 
+    /**
+     * @since future
+     */
     public function getFlagsSize(): int
     {
         return $this->flagsSize;
     }
 
+    /**
+     * @since future
+     */
     public function getWorldSize(): int
     {
         return $this->worldSize;
     }
 
+    /**
+     * @since future
+     */
     public function getWorldDatabase(): WorldDatabase
     {
         return $this->worldDatabase;
     }
 
+    /**
+     * @since future
+     */
     public function getCallsign(): string
     {
         return $this->callsign;
     }
 
+    /**
+     * @since future
+     */
     public function getMotto(): string
     {
         return $this->motto;
     }
 
+    /**
+     * @since future
+     */
     public function getServerVersion(): string
     {
         return $this->serverVersion;
     }
 
+    /**
+     * @since future
+     */
     public function getAppVersion(): string
     {
         return $this->appVersion;
     }
 
+    /**
+     * @since future
+     */
     public function getRealHash(): string
     {
         return $this->realHash;
     }
 
+    /**
+     * @since future
+     */
     public function getLength(): ?ReplayDuration
     {
         return $this->length;

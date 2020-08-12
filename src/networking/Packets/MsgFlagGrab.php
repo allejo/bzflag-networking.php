@@ -11,6 +11,9 @@ namespace allejo\bzflag\networking\Packets;
 
 use allejo\bzflag\networking\GameData\FlagData;
 
+/**
+ * @since 1.0.0
+ */
 class MsgFlagGrab extends GamePacket
 {
     public const PACKET_TYPE = 'MsgFlagGrab';
@@ -21,16 +24,25 @@ class MsgFlagGrab extends GamePacket
     /** @var FlagData */
     private $flag;
 
+    /**
+     * @since 1.0.0
+     */
     public function getPlayerId(): int
     {
         return $this->playerId;
     }
 
+    /**
+     * @since 1.0.0
+     */
     public function getFlag(): FlagData
     {
         return $this->flag;
     }
 
+    /**
+     * @since 1.0.0
+     */
     protected function unpack(): void
     {
         $this->playerId = NetworkPacket::unpackUInt8($this->buffer);

@@ -13,12 +13,17 @@ use allejo\bzflag\networking\Exceptions\InaccessibleResourceException;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\world\Modifiers\MeshTransform;
 
+/**
+ * @since future
+ */
 class TransformManager extends BaseManager
 {
     /** @var array<int, MeshTransform> */
     private $meshTransforms = [];
 
     /**
+     * @since future
+     *
      * @return array<int, MeshTransform>
      */
     public function getMeshTransforms(): array
@@ -27,6 +32,8 @@ class TransformManager extends BaseManager
     }
 
     /**
+     * @since future
+     *
      * @param resource|string $resource
      *
      * @throws InaccessibleResourceException

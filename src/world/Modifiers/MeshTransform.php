@@ -13,6 +13,9 @@ use allejo\bzflag\generic\JsonSerializePublicGetters;
 use allejo\bzflag\networking\Exceptions\InaccessibleResourceException;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 
+/**
+ * @since future
+ */
 class MeshTransform implements \JsonSerializable
 {
     use JsonSerializePublicGetters;
@@ -23,12 +26,17 @@ class MeshTransform implements \JsonSerializable
     /** @var array<int, TransformData> */
     private $transforms;
 
+    /**
+     * @since future
+     */
     public function getName(): string
     {
         return $this->name;
     }
 
     /**
+     * @since future
+     *
      * @return array<int, TransformData>
      */
     public function getTransforms(): array
@@ -37,6 +45,8 @@ class MeshTransform implements \JsonSerializable
     }
 
     /**
+     * @since future
+     *
      * @param resource|string $resource
      *
      * @throws InaccessibleResourceException

@@ -9,6 +9,9 @@
 
 namespace allejo\bzflag\world\Modifiers;
 
+/**
+ * @since future
+ */
 class ChannelParams
 {
     /** @var float */
@@ -32,6 +35,9 @@ class ChannelParams
     /** @var array<int, ClampParams> */
     public $clampDowns = [];
 
+    /**
+     * @since future
+     */
     public function __construct()
     {
         $this->sequence = new SequenceParams();

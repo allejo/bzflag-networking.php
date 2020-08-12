@@ -17,6 +17,9 @@ use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\world\Exceptions\NamedObstacleNotFoundException;
 use allejo\bzflag\world\WorldDatabase;
 
+/**
+ * @since future
+ */
 class GroupDefinition implements \JsonSerializable, IWorldDatabaseAware, INameableObstacle
 {
     use FreezableClass;
@@ -40,6 +43,9 @@ class GroupDefinition implements \JsonSerializable, IWorldDatabaseAware, INameab
     /** @var array<int, GroupInstance> */
     private $groupInstances;
 
+    /**
+     * @since future
+     */
     public function __construct(string $name, WorldDatabase $database)
     {
         $this->worldDatabase = $database;
@@ -60,17 +66,25 @@ class GroupDefinition implements \JsonSerializable, IWorldDatabaseAware, INameab
         $this->groupInstances = [];
     }
 
+    /**
+     * @since future
+     */
     public function getWorldDatabase(): WorldDatabase
     {
         return $this->worldDatabase;
     }
 
+    /**
+     * @since future
+     */
     public function getName(): string
     {
         return $this->name;
     }
 
     /**
+     * @since future
+     *
      * @throws FrozenObstacleException
      *
      * @return $this
@@ -83,12 +97,17 @@ class GroupDefinition implements \JsonSerializable, IWorldDatabaseAware, INameab
         return $this;
     }
 
+    /**
+     * @since future
+     */
     public function isActive(): bool
     {
         return $this->active;
     }
 
     /**
+     * @since future
+     *
      * @throws FrozenObstacleException
      *
      * @return $this
@@ -102,6 +121,8 @@ class GroupDefinition implements \JsonSerializable, IWorldDatabaseAware, INameab
     }
 
     /**
+     * @since future
+     *
      * @return array<ObstacleType::*, Obstacle[]>
      */
     public function getObstacles(): array
@@ -110,6 +131,8 @@ class GroupDefinition implements \JsonSerializable, IWorldDatabaseAware, INameab
     }
 
     /**
+     * @since future
+     *
      * @param array<ObstacleType::*, Obstacle[]> $obstacles
      *
      * @throws FrozenObstacleException
@@ -139,6 +162,8 @@ class GroupDefinition implements \JsonSerializable, IWorldDatabaseAware, INameab
     }
 
     /**
+     * @since future
+     *
      * @param ObstacleType::* $type
      *
      * @return Obstacle[]
@@ -149,37 +174,39 @@ class GroupDefinition implements \JsonSerializable, IWorldDatabaseAware, INameab
     }
 
     /**
-     * @param Obstacle[]      $obstacles
-     * @param ObstacleType::* $type
+     * @since future
      *
-     * @throws \InvalidArgumentException
+     * @param ObstacleType::* $type
+     * @param Obstacle[]      $obstacles
+     *
      * @throws FrozenObstacleException
+     * @throws \InvalidArgumentException
      *
      * @return $this
      */
     public function setObstaclesByType(array $obstacles, int $type): self
     {
         $this->frozenObstacleCheck();
-
         if (!isset($this->lists[$type]))
         {
             throw new \InvalidArgumentException("Invalid Obstacle Type value: {$type}.");
         }
-
         $this->lists[$type] = $obstacles;
 
         return $this;
     }
 
     /**
+     * @since future
+     *
      * @param ObstacleType::* $type
      *
-     * @throws NamedObstacleNotFoundException when the given name does not exist in this world or as the specified obstacle type
+     * @throws NamedObstacleNotFoundException when the given name does not exist in this world or as the specified
+     *                                        obstacle type
      */
     public function getNamedObstacle(int $type, string $name): Obstacle
     {
         $obstacle = $this->listsByName[$type][$name] ?? null;
-
         if (!$obstacle)
         {
             throw new NamedObstacleNotFoundException("There is no obstacle with the name of '{$name}'");
@@ -189,6 +216,8 @@ class GroupDefinition implements \JsonSerializable, IWorldDatabaseAware, INameab
     }
 
     /**
+     * @since future
+     *
      * @param INameableObstacle&Obstacle $obstacle
      *
      * @throws FrozenObstacleException
@@ -212,6 +241,8 @@ class GroupDefinition implements \JsonSerializable, IWorldDatabaseAware, INameab
     }
 
     /**
+     * @since future
+     *
      * @return array<int, GroupInstance>
      */
     public function getGroupInstances(): array
@@ -220,6 +251,8 @@ class GroupDefinition implements \JsonSerializable, IWorldDatabaseAware, INameab
     }
 
     /**
+     * @since future
+     *
      * @param array<int, GroupInstance> $groupInstances
      *
      * @throws FrozenObstacleException
@@ -235,6 +268,8 @@ class GroupDefinition implements \JsonSerializable, IWorldDatabaseAware, INameab
     }
 
     /**
+     * @since future
+     *
      * @param resource|string $resource
      *
      * @throws InaccessibleResourceException
@@ -277,6 +312,8 @@ class GroupDefinition implements \JsonSerializable, IWorldDatabaseAware, INameab
     }
 
     /**
+     * @since future
+     *
      * @return array<int, string>
      */
     protected function getJsonEncodeBlacklist(): array

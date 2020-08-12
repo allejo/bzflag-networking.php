@@ -13,12 +13,17 @@ use allejo\bzflag\networking\Exceptions\InaccessibleResourceException;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\world\Modifiers\DynamicColor;
 
+/**
+ * @since future
+ */
 class DynamicColorManager extends BaseManager
 {
     /** @var array<int, DynamicColor> */
     private $colors = [];
 
     /**
+     * @since future
+     *
      * @return array<int, DynamicColor>
      */
     public function getColors(): array
@@ -27,6 +32,8 @@ class DynamicColorManager extends BaseManager
     }
 
     /**
+     * @since future
+     *
      * @param resource|string $resource
      *
      * @throws InaccessibleResourceException

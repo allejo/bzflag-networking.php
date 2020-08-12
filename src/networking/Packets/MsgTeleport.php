@@ -9,6 +9,9 @@
 
 namespace allejo\bzflag\networking\Packets;
 
+/**
+ * @since 1.0.0
+ */
 class MsgTeleport extends GamePacket
 {
     public const PACKET_TYPE = 'MsgTeleport';
@@ -22,21 +25,33 @@ class MsgTeleport extends GamePacket
     /** @var int */
     private $to;
 
+    /**
+     * @since 1.0.0
+     */
     public function getPlayerId(): int
     {
         return $this->playerId;
     }
 
+    /**
+     * @since 1.0.0
+     */
     public function getFrom(): int
     {
         return $this->from;
     }
 
+    /**
+     * @since 1.0.0
+     */
     public function getTo(): int
     {
         return $this->to;
     }
 
+    /**
+     * @since 1.0.0
+     */
     protected function unpack(): void
     {
         $this->playerId = NetworkPacket::unpackUInt8($this->buffer);

@@ -13,22 +13,33 @@ use allejo\bzflag\generic\FrozenObstacleException;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\world\WorldDatabase;
 
+/**
+ * @since future
+ */
 class BaseBuilding extends Obstacle
 {
     /** @var int */
     private $team;
 
+    /**
+     * @since future
+     */
     public function __construct(WorldDatabase $database)
     {
         parent::__construct($database, ObstacleType::BASE_TYPE);
     }
 
+    /**
+     * @since future
+     */
     public function getTeam(): int
     {
         return $this->team;
     }
 
     /**
+     * @since future
+     *
      * @throws FrozenObstacleException
      *
      * @return $this
@@ -48,6 +59,8 @@ class BaseBuilding extends Obstacle
     }
 
     /**
+     * @since future
+     *
      * @param resource|string $resource
      */
     public function unpack(&$resource): void

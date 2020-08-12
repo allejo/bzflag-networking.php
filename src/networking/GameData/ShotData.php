@@ -9,6 +9,9 @@
 
 namespace allejo\bzflag\networking\GameData;
 
+/**
+ * @since 1.0.0
+ */
 class ShotData implements \JsonSerializable
 {
     /** @var int */
@@ -30,6 +33,8 @@ class ShotData implements \JsonSerializable
     public $team;
 
     /**
+     * @since 1.0.0
+     *
      * @return array<string, mixed>
      */
     public function jsonSerialize(): array

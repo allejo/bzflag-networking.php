@@ -13,6 +13,9 @@ use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\world\Modifiers\Material;
 use allejo\bzflag\world\WorldDatabase;
 
+/**
+ * @since future
+ */
 class MeshFace extends Obstacle
 {
     /** @var MeshObstacle */
@@ -51,6 +54,9 @@ class MeshFace extends Obstacle
     /** @var array<int, MeshFace> */
     private $edges;
 
+    /**
+     * @since future
+     */
     public function __construct(MeshObstacle $mesh, WorldDatabase $database)
     {
         parent::__construct($database, null);
@@ -61,17 +67,25 @@ class MeshFace extends Obstacle
         $this->texCoords = [];
     }
 
+    /**
+     * @since future
+     */
     public function getMesh(): MeshObstacle
     {
         return $this->mesh;
     }
 
+    /**
+     * @since future
+     */
     public function getVertexCount(): int
     {
         return $this->vertexCount;
     }
 
     /**
+     * @since future
+     *
      * @return array<int, array<int, float>>
      */
     public function getVertices(): array
@@ -80,6 +94,8 @@ class MeshFace extends Obstacle
     }
 
     /**
+     * @since future
+     *
      * @return array<int, array<int, float>>
      */
     public function getNormals(): array
@@ -88,6 +104,8 @@ class MeshFace extends Obstacle
     }
 
     /**
+     * @since future
+     *
      * @return array<int, array<int, float>>
      */
     public function getTexCoords(): array
@@ -95,27 +113,41 @@ class MeshFace extends Obstacle
         return $this->texCoords;
     }
 
+    /**
+     * @since future
+     */
     public function getMaterial(): Material
     {
         return $this->bzMaterial;
     }
 
+    /**
+     * @since future
+     */
     public function isSmoothBounce(): bool
     {
         return $this->smoothBounce;
     }
 
+    /**
+     * @since future
+     */
     public function isNoClusters(): bool
     {
         return $this->noClusters;
     }
 
+    /**
+     * @since future
+     */
     public function getPhyDrv(): int
     {
         return $this->phyDrv;
     }
 
     /**
+     * @since future
+     *
      * @param resource|string $resource
      */
     public function unpack(&$resource): void
@@ -163,6 +195,9 @@ class MeshFace extends Obstacle
         $this->phyDrv = NetworkPacket::unpackInt32($resource);
     }
 
+    /**
+     * @since future
+     */
     protected function getJsonEncodeBlacklist(): array
     {
         return array_merge(parent::getJsonEncodeBlacklist(), [

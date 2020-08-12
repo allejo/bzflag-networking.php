@@ -14,11 +14,17 @@ use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\world\Object\TeleporterLink;
 use allejo\bzflag\world\WorldDatabase;
 
+/**
+ * @since future
+ */
 class LinkManager extends BaseManager
 {
     /** @var TeleporterLink[] */
     private $links;
 
+    /**
+     * @since future
+     */
     public function __construct(WorldDatabase $worldDatabase)
     {
         parent::__construct($worldDatabase);
@@ -27,6 +33,8 @@ class LinkManager extends BaseManager
     }
 
     /**
+     * @since future
+     *
      * @return TeleporterLink[]
      */
     public function getLinks(): array
@@ -35,6 +43,8 @@ class LinkManager extends BaseManager
     }
 
     /**
+     * @since future
+     *
      * @param resource|string $resource
      *
      * @throws InaccessibleResourceException

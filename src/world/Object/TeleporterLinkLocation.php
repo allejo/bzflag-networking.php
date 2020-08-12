@@ -9,12 +9,17 @@
 
 namespace allejo\bzflag\world\Object;
 
+/**
+ * @since future
+ */
 abstract class TeleporterLinkLocation
 {
     public const FRONT = 0;
     public const BACK = 1;
 
     /**
+     * @since future
+     *
      * @throws \InvalidArgumentException when an invalid BZW teleporter location is given
      *
      * @return self::*

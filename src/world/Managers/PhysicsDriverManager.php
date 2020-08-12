@@ -13,12 +13,17 @@ use allejo\bzflag\networking\Exceptions\InaccessibleResourceException;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 use allejo\bzflag\world\Modifiers\PhysicsDriver;
 
+/**
+ * @since future
+ */
 class PhysicsDriverManager extends BaseManager
 {
     /** @var array<int, PhysicsDriver> */
     private $physicsDrivers = [];
 
     /**
+     * @since future
+     *
      * @return array<int, PhysicsDriver>
      */
     public function getPhysicsDrivers(): array
@@ -27,6 +32,8 @@ class PhysicsDriverManager extends BaseManager
     }
 
     /**
+     * @since future
+     *
      * @param resource|string $resource
      *
      * @throws InaccessibleResourceException

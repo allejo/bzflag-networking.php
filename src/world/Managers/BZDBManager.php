@@ -14,6 +14,9 @@ use allejo\bzflag\world\WorldDatabase;
 use MathParser\Interpreting\Evaluator;
 use MathParser\StdMathParser;
 
+/**
+ * @since future
+ */
 class BZDBManager extends BaseManager
 {
     private const BZDB_RE = '/(\b_[a-zA-Z]+\b)/m';
@@ -27,6 +30,9 @@ class BZDBManager extends BaseManager
     /** @var array<string, bool> $calculatedFields */
     private $calculatedFields;
 
+    /**
+     * @since future
+     */
     public function __construct(WorldDatabase $worldDatabase)
     {
         parent::__construct($worldDatabase);
@@ -37,6 +43,8 @@ class BZDBManager extends BaseManager
     }
 
     /**
+     * @since future
+     *
      * @return mixed
      */
     public function getBZDBVariable(string $variable)
@@ -79,6 +87,8 @@ class BZDBManager extends BaseManager
     }
 
     /**
+     * @since future
+     *
      * @return array<string, mixed>
      */
     public function getBZDBVariables(bool $evaluate = false): array
@@ -104,6 +114,9 @@ class BZDBManager extends BaseManager
         return $this->databaseCache;
     }
 
+    /**
+     * @since future
+     */
     public function unpackFromMsgSetVar(MsgSetVar $message): void
     {
         foreach ($message->getSettings() as $setting)
@@ -117,6 +130,9 @@ class BZDBManager extends BaseManager
         }
     }
 
+    /**
+     * @since future
+     */
     private function isCalculatedField(string $value): bool
     {
         return preg_match(self::BZDB_RE, $value) === 1;

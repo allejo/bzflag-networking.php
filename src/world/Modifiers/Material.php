@@ -13,6 +13,9 @@ use allejo\bzflag\generic\JsonSerializePublicGetters;
 use allejo\bzflag\networking\Exceptions\InaccessibleResourceException;
 use allejo\bzflag\networking\Packets\NetworkPacket;
 
+/**
+ * @since future
+ */
 class Material implements \JsonSerializable
 {
     use JsonSerializePublicGetters;
@@ -74,58 +77,90 @@ class Material implements \JsonSerializable
     /** @var array<int, ShaderInfo> */
     private $shaders;
 
+    /**
+     * @since future
+     */
     public function __construct()
     {
         $this->textures = [];
         $this->shaders = [];
     }
 
+    /**
+     * @since future
+     */
     public function getName(): string
     {
         return $this->name;
     }
 
+    /**
+     * @since future
+     */
     public function isNoCulling(): bool
     {
         return $this->noCulling;
     }
 
+    /**
+     * @since future
+     */
     public function isNoSorting(): bool
     {
         return $this->noSorting;
     }
 
+    /**
+     * @since future
+     */
     public function isNoRadar(): bool
     {
         return $this->noRadar;
     }
 
+    /**
+     * @since future
+     */
     public function isNoShadow(): bool
     {
         return $this->noShadow;
     }
 
+    /**
+     * @since future
+     */
     public function isOccluder(): bool
     {
         return $this->occluder;
     }
 
+    /**
+     * @since future
+     */
     public function isGroupAlpha(): bool
     {
         return $this->groupAlpha;
     }
 
+    /**
+     * @since future
+     */
     public function isNoLighting(): bool
     {
         return $this->noLighting;
     }
 
+    /**
+     * @since future
+     */
     public function getDynamicColor(): int
     {
         return $this->dynamicColor;
     }
 
     /**
+     * @since future
+     *
      * @return array{float, float, float, float}
      */
     public function getAmbient(): array
@@ -134,6 +169,8 @@ class Material implements \JsonSerializable
     }
 
     /**
+     * @since future
+     *
      * @return array{float, float, float, float}
      */
     public function getDiffuse(): array
@@ -142,6 +179,8 @@ class Material implements \JsonSerializable
     }
 
     /**
+     * @since future
+     *
      * @return array{float, float, float, float}
      */
     public function getSpecular(): array
@@ -150,6 +189,8 @@ class Material implements \JsonSerializable
     }
 
     /**
+     * @since future
+     *
      * @return array{float, float, float, float}
      */
     public function getEmission(): array
@@ -157,22 +198,33 @@ class Material implements \JsonSerializable
         return $this->emission;
     }
 
+    /**
+     * @since future
+     */
     public function getShininess(): float
     {
         return $this->shininess;
     }
 
+    /**
+     * @since future
+     */
     public function getAlphaThreshold(): float
     {
         return $this->alphaThreshold;
     }
 
+    /**
+     * @since future
+     */
     public function getTextureCount(): int
     {
         return $this->textureCount;
     }
 
     /**
+     * @since future
+     *
      * @return array<int, TextureInfo>
      */
     public function getTextures(): array
@@ -180,12 +232,17 @@ class Material implements \JsonSerializable
         return $this->textures;
     }
 
+    /**
+     * @since future
+     */
     public function getShaderCount(): int
     {
         return $this->shaderCount;
     }
 
     /**
+     * @since future
+     *
      * @return array<int, ShaderInfo>
      */
     public function getShaders(): array
@@ -194,6 +251,8 @@ class Material implements \JsonSerializable
     }
 
     /**
+     * @since future
+     *
      * @param resource|string $resource
      *
      * @throws InaccessibleResourceException
