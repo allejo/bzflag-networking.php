@@ -20,7 +20,7 @@ use allejo\bzflag\world\WorldDatabase;
 /**
  * @since future
  */
-class GroupDefinition implements \JsonSerializable, IWorldDatabaseAware, INameableObstacle
+class GroupDefinition implements \JsonSerializable, WorldDatabaseAwareInterface, NameableObstacleInterface
 {
     use FreezableClass;
     use JsonSerializePublicGetters;
@@ -218,7 +218,7 @@ class GroupDefinition implements \JsonSerializable, IWorldDatabaseAware, INameab
     /**
      * @since future
      *
-     * @param INameableObstacle&Obstacle $obstacle
+     * @param NameableObstacleInterface&Obstacle $obstacle
      *
      * @throws FrozenObstacleException
      *
@@ -291,7 +291,7 @@ class GroupDefinition implements \JsonSerializable, IWorldDatabaseAware, INameab
                 {
                     $this->lists[$type][] = $obstacle;
 
-                    if ($obstacle instanceof INameableObstacle && ($name = $obstacle->getName()))
+                    if ($obstacle instanceof NameableObstacleInterface && ($name = $obstacle->getName()))
                     {
                         $this->listsByName[$type][$name] = $obstacle;
                     }

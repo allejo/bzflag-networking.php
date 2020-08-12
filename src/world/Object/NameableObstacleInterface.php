@@ -9,7 +9,10 @@
 
 namespace allejo\bzflag\world\Object;
 
-interface INameableObstacle
+/**
+ * @since future
+ */
+interface NameableObstacleInterface
 {
     public function getName(): string;
 }

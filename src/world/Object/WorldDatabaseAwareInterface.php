@@ -11,7 +11,10 @@ namespace allejo\bzflag\world\Object;
 
 use allejo\bzflag\world\WorldDatabase;
 
-interface IWorldDatabaseAware
+/**
+ * @since future
+ */
+interface WorldDatabaseAwareInterface
 {
     public function getWorldDatabase(): WorldDatabase;
 }

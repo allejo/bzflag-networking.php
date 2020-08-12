@@ -18,7 +18,7 @@ use allejo\bzflag\world\WorldDatabase;
 /**
  * @since future
  */
-class TeleporterLink implements IWorldDatabaseAware, \JsonSerializable
+class TeleporterLink implements WorldDatabaseAwareInterface, \JsonSerializable
 {
     use JsonSerializePublicGetters;
 

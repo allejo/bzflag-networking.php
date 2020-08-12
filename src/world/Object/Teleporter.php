@@ -16,7 +16,7 @@ use allejo\bzflag\world\WorldDatabase;
 /**
  * @since future
  */
-class Teleporter extends Obstacle implements INameableObstacle
+class Teleporter extends Obstacle implements NameableObstacleInterface
 {
     /** @var string */
     private $name;

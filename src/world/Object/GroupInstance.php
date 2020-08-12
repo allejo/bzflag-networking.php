@@ -21,7 +21,7 @@ use allejo\bzflag\world\WorldDatabase;
 /**
  * @since future
  */
-class GroupInstance implements \JsonSerializable, IWorldDatabaseAware
+class GroupInstance implements \JsonSerializable, WorldDatabaseAwareInterface
 {
     use FreezableClass;
     use JsonSerializePublicGetters;

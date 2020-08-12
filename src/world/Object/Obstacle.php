@@ -18,7 +18,7 @@ use allejo\bzflag\world\WorldDatabase;
 /**
  * @since future
  */
-abstract class Obstacle implements \JsonSerializable, IWorldDatabaseAware
+abstract class Obstacle implements \JsonSerializable, WorldDatabaseAwareInterface
 {
     use FreezableClass;
     use JsonSerializePublicGetters;

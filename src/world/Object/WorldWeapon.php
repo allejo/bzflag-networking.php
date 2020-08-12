@@ -19,7 +19,7 @@ use allejo\bzflag\world\WorldDatabase;
 /**
  * @since future
  */
-class WorldWeapon implements IWorldDatabaseAware
+class WorldWeapon implements WorldDatabaseAwareInterface
 {
     use FreezableClass;
     use JsonSerializePublicGetters;
