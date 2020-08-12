@@ -19,6 +19,7 @@ use allejo\bzflag\networking\Packets\UnsupportedPacketException;
 use allejo\bzflag\replays\Exceptions\InvalidReplayException;
 use allejo\bzflag\world\Exceptions\InvalidWorldCompressionException;
 use allejo\bzflag\world\Exceptions\InvalidWorldDatabaseException;
+use allejo\bzflag\world\WorldDatabase;
 
 /**
  * @since future
@@ -141,6 +142,14 @@ class Replay implements \JsonSerializable
     public function getHeader(): ReplayHeader
     {
         return $this->header;
+    }
+
+    /**
+     * @since future
+     */
+    public function getWorldDatabase(): WorldDatabase
+    {
+        return $this->header->getWorldDatabase();
     }
 
     /**
