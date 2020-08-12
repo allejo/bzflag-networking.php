@@ -10,7 +10,8 @@
 namespace allejo\bzflag\replays\Exceptions;
 
 /**
- * @since future
+ * @since 1.1.0 This class moved namespaces to `allejo\bzflag\replays\Exceptions`
+ * @since 1.0.8
  */
 class InvalidReplayException extends \Exception
 {

@@ -19,47 +19,48 @@ use allejo\bzflag\world\Exceptions\InvalidWorldDatabaseException;
 use allejo\bzflag\world\WorldDatabase;
 
 /**
- * @since future
+ * @since 1.1.0 This class moved namespaces to `allejo\bzflag\replays`
+ * @since 1.0.0
  */
 class ReplayHeader implements Unpackable, \JsonSerializable
 {
     use JsonSerializePublicGetters;
 
     /** @var int */
-    private $magicNumber = -1;
+    private $magicNumber;
 
     /** @var int */
-    private $version = -1;
+    private $version;
 
     /** @var int */
-    private $offset = 0;
+    private $offset;
 
     /** @var int */
-    private $fileTime = 0;
+    private $fileTime;
 
     /** @var int */
-    private $player = -1;
+    private $player;
 
     /** @var int */
-    private $flagsSize = 0;
+    private $flagsSize;
 
     /** @var int */
-    private $worldSize = 0;
+    private $worldSize;
 
     /** @var string */
-    private $callsign = '';
+    private $callsign;
 
     /** @var string */
-    private $motto = '';
+    private $motto;
 
     /** @var string */
-    private $serverVersion = '';
+    private $serverVersion;
 
     /** @var string */
-    private $appVersion = '';
+    private $appVersion;
 
     /** @var string */
-    private $realHash = '';
+    private $realHash;
 
     /** @var null|ReplayDuration */
     private $length;
@@ -68,7 +69,7 @@ class ReplayHeader implements Unpackable, \JsonSerializable
     private $worldDatabase;
 
     /**
-     * @since future
+     * @since 1.0.0
      *
      * @param resource $resource
      *
@@ -107,7 +108,7 @@ class ReplayHeader implements Unpackable, \JsonSerializable
     }
 
     /**
-     * @since future
+     * @since 1.0.0
      */
     public function getMagicNumber(): int
     {
@@ -115,7 +116,7 @@ class ReplayHeader implements Unpackable, \JsonSerializable
     }
 
     /**
-     * @since future
+     * @since 1.0.0
      */
     public function getVersion(): int
     {
@@ -123,7 +124,7 @@ class ReplayHeader implements Unpackable, \JsonSerializable
     }
 
     /**
-     * @since future
+     * @since 1.0.0
      */
     public function getOffset(): int
     {
@@ -131,7 +132,7 @@ class ReplayHeader implements Unpackable, \JsonSerializable
     }
 
     /**
-     * @since future
+     * @since 1.0.0
      *
      * @return int The duration of the replay in microseconds
      */
@@ -141,7 +142,7 @@ class ReplayHeader implements Unpackable, \JsonSerializable
     }
 
     /**
-     * @since future
+     * @since 1.0.0
      */
     public function getFileTimeAsSeconds(): int
     {
@@ -149,7 +150,7 @@ class ReplayHeader implements Unpackable, \JsonSerializable
     }
 
     /**
-     * @since future
+     * @since 1.0.0
      */
     public function getFileTimeAsMinutes(): int
     {
@@ -157,7 +158,7 @@ class ReplayHeader implements Unpackable, \JsonSerializable
     }
 
     /**
-     * @since future
+     * @since 1.0.0
      */
     public function getPlayer(): int
     {
@@ -165,7 +166,7 @@ class ReplayHeader implements Unpackable, \JsonSerializable
     }
 
     /**
-     * @since future
+     * @since 1.0.0
      */
     public function getFlagsSize(): int
     {
@@ -173,7 +174,7 @@ class ReplayHeader implements Unpackable, \JsonSerializable
     }
 
     /**
-     * @since future
+     * @since 1.0.0
      */
     public function getWorldSize(): int
     {
@@ -189,7 +190,7 @@ class ReplayHeader implements Unpackable, \JsonSerializable
     }
 
     /**
-     * @since future
+     * @since 1.0.0
      */
     public function getCallsign(): string
     {
@@ -197,7 +198,7 @@ class ReplayHeader implements Unpackable, \JsonSerializable
     }
 
     /**
-     * @since future
+     * @since 1.0.0
      */
     public function getMotto(): string
     {
@@ -205,7 +206,7 @@ class ReplayHeader implements Unpackable, \JsonSerializable
     }
 
     /**
-     * @since future
+     * @since 1.0.0
      */
     public function getServerVersion(): string
     {
@@ -213,7 +214,7 @@ class ReplayHeader implements Unpackable, \JsonSerializable
     }
 
     /**
-     * @since future
+     * @since 1.0.0
      */
     public function getAppVersion(): string
     {
@@ -221,7 +222,7 @@ class ReplayHeader implements Unpackable, \JsonSerializable
     }
 
     /**
-     * @since future
+     * @since 1.0.0
      */
     public function getRealHash(): string
     {
@@ -229,7 +230,7 @@ class ReplayHeader implements Unpackable, \JsonSerializable
     }
 
     /**
-     * @since future
+     * @since 1.0.0
      */
     public function getLength(): ?ReplayDuration
     {

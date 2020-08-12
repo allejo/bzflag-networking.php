@@ -11,7 +11,13 @@ namespace allejo\bzflag\networking;
 
 use allejo\bzflag\replays\Replay as Base;
 
-@trigger_error('Using the "allejo\bzflag\networking\Replay" class is deprecated since version 1.1 and will be removed in version 2, use "allejo\bzflag\replays\Replay" instead.', E_USER_DEPRECATED);
+trigger_deprecation(
+    'allejo/bzflag-networking.php',
+    '1.1',
+    'Using the "%s" class is deprecated, use "%s" instead.',
+    Replay::class,
+    Base::class
+);
 
 /**
  * @deprecated since 1.1, use "allejo\bzflag\replays\Replay" instead

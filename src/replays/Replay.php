@@ -22,7 +22,8 @@ use allejo\bzflag\world\Exceptions\InvalidWorldDatabaseException;
 use allejo\bzflag\world\WorldDatabase;
 
 /**
- * @since future
+ * @since 1.1.0 This class moved namespaces to `allejo\bzflag\replays`
+ * @since 1.0.0
  */
 class Replay implements \JsonSerializable
 {
@@ -51,7 +52,7 @@ class Replay implements \JsonSerializable
     private $packetLocationStart;
 
     /**
-     * @since future
+     * @since 1.0.0
      *
      * @throws InaccessibleResourceException
      * @throws InvalidReplayException
@@ -100,7 +101,7 @@ class Replay implements \JsonSerializable
     }
 
     /**
-     * @since future
+     * @since 1.0.1
      */
     public function __destruct()
     {
@@ -108,7 +109,7 @@ class Replay implements \JsonSerializable
     }
 
     /**
-     * @since future
+     * @since 1.0.0
      *
      * @return array<string, mixed>
      */
@@ -137,7 +138,7 @@ class Replay implements \JsonSerializable
     }
 
     /**
-     * @since future
+     * @since 1.0.0
      */
     public function getHeader(): ReplayHeader
     {
@@ -158,7 +159,7 @@ class Replay implements \JsonSerializable
      * **Warning:** This requires a higher amount of memory since all of these
      * packets will be stored in an array.
      *
-     * @since future
+     * @since 1.0.1
      *
      * @throws InaccessibleResourceException
      * @throws InvalidTimestampFormatException
@@ -185,16 +186,20 @@ class Replay implements \JsonSerializable
     /**
      * Get all of the packets in this Replay as an array.
      *
-     * @deprecated use `Replay::getPacketsAsArray()` instead
-     * @since      future
+     * @deprecated 1.0.1 use `Replay::getPacketsAsArray()` instead
+     * @since      1.0.0
      *
      * @throws InaccessibleResourceException
      * @throws InvalidTimestampFormatException
      *
      * @return GamePacket[]
+     *
+     * @since future
      */
     public function getPackets(): array
     {
+        trigger_deprecation('allejo/bzflag-networking.php', '1.0.1', 'Using "%s" is deprecated, use "%s" instead.', 'getPackets', 'getPacketsAsArray');
+
         return $this->getPacketsAsArray();
     }
 
@@ -202,7 +207,7 @@ class Replay implements \JsonSerializable
      * Iterate through all of the packets in this Replay one at a time without
      * saving everything in memory.
      *
-     * @since future
+     * @since 1.0.1
      *
      * @throws InaccessibleResourceException
      * @throws InvalidTimestampFormatException
@@ -236,7 +241,7 @@ class Replay implements \JsonSerializable
     }
 
     /**
-     * @since future
+     * @since 1.0.0
      *
      * @return string[]
      */
@@ -246,7 +251,7 @@ class Replay implements \JsonSerializable
     }
 
     /**
-     * @since future
+     * @since 1.0.0
      */
     public function getStartTime(): \DateTime
     {
@@ -254,7 +259,7 @@ class Replay implements \JsonSerializable
     }
 
     /**
-     * @since future
+     * @since 1.0.0
      */
     public function getEndTime(): \DateTime
     {
@@ -265,7 +270,6 @@ class Replay implements \JsonSerializable
      * Reset the iterator used for `getPacketsIterable()`.
      *
      * @since 1.1.0
-     * @since future
      */
     public function resetPacketsIterator(): void
     {
@@ -273,7 +277,7 @@ class Replay implements \JsonSerializable
     }
 
     /**
-     * @since future
+     * @since 1.0.0
      *
      * @param resource $resource
      *
@@ -294,7 +298,7 @@ class Replay implements \JsonSerializable
     /**
      * Attach only the *initial* BZDB settings to the WorldDatabase.
      *
-     * @since future
+     * @since 1.1.0
      *
      * @throws InaccessibleResourceException
      * @throws InvalidTimestampFormatException
