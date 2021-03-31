@@ -19,7 +19,7 @@ class MsgAddPlayer extends GamePacket
     public const PACKET_TYPE = 'MsgAddPlayer';
 
     /** @var int */
-    private $playerIndex;
+    private $playerId;
 
     /** @var int */
     private $playerType;
@@ -38,10 +38,21 @@ class MsgAddPlayer extends GamePacket
 
     /**
      * @since 1.0.0
+     * @deprecated 1.1 use `MsgAddPlayer::getPlayerId()` instead
      */
     public function getPlayerIndex(): int
     {
-        return $this->playerIndex;
+        trigger_deprecation('allejo/bzflag-networking.php', '1.1.0', 'Using "%s" is deprecated, use "%s" instead.', 'getPlayerIndex', 'getPlayerId');
+
+        return $this->getPlayerId();
+    }
+
+    /**
+     * @since 1.1
+     */
+    public function getPlayerId(): int
+    {
+        return $this->playerId;
     }
 
     /**

@@ -20,7 +20,7 @@ trigger_deprecation(
 );
 
 /**
- * @deprecated since 1.1, use "allejo\bzflag\replays\Replay" instead
+ * @deprecated 1.1 use "allejo\bzflag\replays\Replay" instead
  * @since      1.0.0
  */
 class Replay extends Base
