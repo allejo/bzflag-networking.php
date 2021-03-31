@@ -20,7 +20,7 @@ trigger_deprecation(
 );
 
 /**
- * @deprecated since 1.1, use "allejo\bzflag\replays\Exceptions\InvalidReplayException" instead
+ * @deprecated 1.1 use "allejo\bzflag\replays\Exceptions\InvalidReplayException" instead
  * @since      1.0.8
  */
 class InvalidReplayException extends Base

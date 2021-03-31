@@ -38,10 +38,13 @@ class MsgAddPlayer extends GamePacket
 
     /**
      * @since 1.0.0
-     * @deprecated since 1.1, use getPlayerId instead
+     * @deprecated 1.1 use `MsgAddPlayer::getPlayerId()` instead
      */
     public function getPlayerIndex(): int
     {
+        trigger_deprecation('allejo/bzflag-networking.php', '1.1.0', 'Using "%s" is
+         deprecated, use "%s" instead.', 'getPlayerIndex', 'getPlayerId');
+
         return $this->getPlayerId();
     }
 
