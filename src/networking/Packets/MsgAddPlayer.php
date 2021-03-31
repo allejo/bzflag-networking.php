@@ -19,7 +19,7 @@ class MsgAddPlayer extends GamePacket
     public const PACKET_TYPE = 'MsgAddPlayer';
 
     /** @var int */
-    private $playerIndex;
+    private $playerId;
 
     /** @var int */
     private $playerType;
@@ -38,10 +38,19 @@ class MsgAddPlayer extends GamePacket
 
     /**
      * @since 1.0.0
+     * @deprecated since 1.1, use getPlayerId instead
      */
     public function getPlayerIndex(): int
     {
-        return $this->playerIndex;
+        return $this->getPlayerId();
+    }
+
+    /**
+     * @since 1.1
+     */
+    public function getPlayerId(): int
+    {
+        return $this->playerId;
     }
 
     /**
