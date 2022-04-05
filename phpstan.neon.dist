@@ -4,10 +4,7 @@ parameters:
     level: 8
     paths:
         - src
-    ignoreErrors:
-        # Skip looping errors in array shapes
-        #   https://github.com/phpstan/phpstan/issues/3339
-        - '#Array \(array<int, float>\) does not accept key int<min, \d>.#'
+    ignoreErrors: []
     exceptionRules:
         reportUnusedCatchesOfUncheckedExceptions: false
         reportUnusedCheckedThrowsInSubtypes: false

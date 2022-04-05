@@ -60,9 +60,11 @@ abstract class Obstacle implements \JsonSerializable, WorldDatabaseAwareInterfac
     ];
 
     /**
+     * @param null|ObstacleType::* $obstacleType
+     *
      * @since future
      */
-    protected function __construct(WorldDatabase $database, ?int $obstacleType)
+    protected function __construct(WorldDatabase $database, $obstacleType)
     {
         $this->worldDatabase = $database;
         $this->objectType = $obstacleType;

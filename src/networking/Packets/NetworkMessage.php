@@ -9,6 +9,8 @@
 
 namespace allejo\bzflag\networking\Packets;
 
+use allejo\bzflag\networking\Exceptions\UnableToUnpackNetworkCodeException;
+
 /**
  * @see   https://github.com/BZFlag-Dev/bzflag/blob/2.4/include/Protocol.h
  * @since 1.0.0
@@ -68,13 +70,16 @@ abstract class NetworkMessage
     const PORTAL_UPDATE = 0x5075;      // 'Pu'
 
     /**
+     * @since 1.1.1 Can now throw `UnableToUnpackNetworkCodeException`
      * @since 1.0.0
+     *
+     * @throws UnableToUnpackNetworkCodeException
      *
      * @return float|int
      */
     public static function codeFromChars(string $code)
     {
-        return hexdec(unpack('H*', $code)[1]);
+        return hexdec((string)NetworkPacket::safeUnpack('H*', $code)[1]);
     }
 
     /**

@@ -76,7 +76,7 @@ class BZDBManager extends BaseManager
         {
             // A nasty abuse of the PHP language to automatically convert this
             // string into a float or an int
-            $this->databaseCache[$variable] = $rawValue + 0; // @phpstan-ignore-line
+            $this->databaseCache[$variable] = $rawValue + 0;
         }
         else
         {

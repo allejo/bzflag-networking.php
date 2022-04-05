@@ -110,6 +110,11 @@ class WorldDatabase implements \JsonSerializable
         $this->uncompressedSize = NetworkPacket::unpackUInt32($resource);
         $this->databaseSize = NetworkPacket::unpackUInt32($resource);
 
+        if ($this->databaseSize < 0)
+        {
+            throw new InvalidWorldDatabaseException('The specified world database size cannot be less than 0.');
+        }
+
         $worldDatabase = fread($resource, $this->databaseSize);
         if ($worldDatabase === false)
         {
@@ -312,6 +317,22 @@ class WorldDatabase implements \JsonSerializable
     public function getBZDBManager(): BZDBManager
     {
         return $this->bzdbManager;
+    }
+
+    /**
+     * @since future
+     */
+    public function getWaterLevel(): float
+    {
+        return $this->waterLevel;
+    }
+
+    /**
+     * @since future
+     */
+    public function getWaterMaterial(): Material
+    {
+        return $this->waterMaterial;
     }
 
     /**

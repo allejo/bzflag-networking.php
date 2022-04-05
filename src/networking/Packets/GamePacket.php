@@ -37,7 +37,7 @@ abstract class GamePacket implements \JsonSerializable
     /** @var \DateTime */
     protected $timestampOffset;
 
-    /** @var array<NetworkMessage::*, class-string> */
+    /** @var array<NetworkMessage::*, class-string<GamePacket>> */
     private static $mapping = [
         NetworkMessage::ADD_PLAYER => MsgAddPlayer::class,
         NetworkMessage::ADMIN_INFO => MsgAdminInfo::class,

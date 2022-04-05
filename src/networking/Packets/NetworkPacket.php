@@ -10,7 +10,9 @@
 namespace allejo\bzflag\networking\Packets;
 
 use allejo\bzflag\networking\Exceptions\InaccessibleResourceException;
+use allejo\bzflag\networking\Exceptions\InvalidIpAddressException;
 use allejo\bzflag\networking\Exceptions\InvalidTimestampFormatException;
+use allejo\bzflag\networking\Exceptions\UnableToUnpackNetworkCodeException;
 use allejo\bzflag\networking\GameData\FiringInfoData;
 use allejo\bzflag\networking\GameData\FlagData;
 use allejo\bzflag\networking\GameData\PlayerState;
@@ -347,7 +349,7 @@ class NetworkPacket implements Unpackable
     {
         $binary = self::safeReadResource($buffer, 4);
 
-        return (float)unpack('G', $binary)[1];
+        return (float)self::safeUnpack('G', $binary)[1];
     }
 
     /**
@@ -390,12 +392,14 @@ class NetworkPacket implements Unpackable
     }
 
     /**
+     * @since 1.1.1 Can now throw `InvalidIpAddressException`
      * @since 1.0.0
      *
      * @param resource|string $buffer
      *
      * @throws InaccessibleResourceException
      * @throws \InvalidArgumentException
+     * @throws InvalidIpAddressException     When an IP address translation fails
      */
     public static function unpackIpAddress(&$buffer): string
     {
@@ -404,9 +408,15 @@ class NetworkPacket implements Unpackable
         // skipped.
         self::safeReadResource($buffer, 1);
 
-        $ipAsInt = NetworkPacket::unpackUInt32($buffer);
+        $ipAsInt = self::unpackUInt32($buffer);
+        $result = long2ip($ipAsInt);
 
-        return long2ip($ipAsInt);
+        if ($result === false)
+        {
+            throw new InvalidIpAddressException('IP Address could not be calculated correctly');
+        }
+
+        return $result;
     }
 
     /**
@@ -534,11 +544,12 @@ class NetworkPacket implements Unpackable
      *
      * @throws InaccessibleResourceException
      * @throws \InvalidArgumentException
+     * @throws UnableToUnpackNetworkCodeException
      */
     public static function unpackString(&$buffer, int $size): string
     {
         $binary = self::safeReadResource($buffer, $size);
-        $unpacked = unpack('A*', $binary);
+        $unpacked = self::safeUnpack('A*', $binary);
         /** @var string $string */
         $string = $unpacked[1] ?? '';
 
@@ -636,6 +647,7 @@ class NetworkPacket implements Unpackable
                     throw new InaccessibleResourceException('Could not fstat() this resource');
                 }
 
+                /** @var int<0, max> $size */
                 $size = $stats['size'];
             }
 
@@ -669,17 +681,35 @@ class NetworkPacket implements Unpackable
     }
 
     /**
+     * @throws UnableToUnpackNetworkCodeException when a given character code from a network message could not be unpacked
+     *
+     * @return array<int|string>
+     */
+    public static function safeUnpack(string $format, string $string): array
+    {
+        $unpacked = unpack($format, $string);
+
+        if ($unpacked === false)
+        {
+            throw new UnableToUnpackNetworkCodeException("Could not unpack a character from given string: {$string}");
+        }
+
+        return $unpacked;
+    }
+
+    /**
      * @since 1.0.0
      *
      * @param resource|string $buffer
      *
      * @throws InaccessibleResourceException
      * @throws \InvalidArgumentException
+     * @throws UnableToUnpackNetworkCodeException
      */
     private static function unpackInt(&$buffer, int $size, string $symbol): int
     {
         $binary = self::safeReadResource($buffer, $size);
 
-        return unpack($symbol, $binary)[1];
+        return (int)self::safeUnpack($symbol, $binary)[1];
     }
 }

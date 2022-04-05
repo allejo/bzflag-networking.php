@@ -289,11 +289,11 @@ class GroupDefinition implements \JsonSerializable, WorldDatabaseAwareInterface,
 
                 if ($obstacle->isValid())
                 {
-                    $this->lists[$type][] = $obstacle;
+                    $this->lists[$type][] = $obstacle; // @phpstan-ignore-line (https://github.com/phpstan/phpstan/issues/6356)
 
                     if ($obstacle instanceof NameableObstacleInterface && ($name = $obstacle->getName()))
                     {
-                        $this->listsByName[$type][$name] = $obstacle;
+                        $this->listsByName[$type][$name] = $obstacle; // @phpstan-ignore-line (https://github.com/phpstan/phpstan/issues/6356)
                     }
                 }
             }

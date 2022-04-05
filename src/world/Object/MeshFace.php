@@ -46,13 +46,13 @@ class MeshFace extends Obstacle
     private $phyDrv;
 
     /** @var array{float, float, float, float} */
-    private $plane;
+    private $plane; // @phpstan-ignore-line (TODO: Can't remember if we still need these variables)
 
     /** @var array<int, array{float, float, float, float}> */
-    private $edgePlanes;
+    private $edgePlanes; // @phpstan-ignore-line (TODO: Can't remember if we still need these variables)
 
     /** @var array<int, MeshFace> */
-    private $edges;
+    private $edges; // @phpstan-ignore-line (TODO: Can't remember if we still need these variables)
 
     /**
      * @since future
