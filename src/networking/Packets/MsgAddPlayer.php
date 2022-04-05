@@ -108,7 +108,7 @@ class MsgAddPlayer extends GamePacket
      */
     protected function unpack(): void
     {
-        $this->playerIndex = NetworkPacket::unpackUInt8($this->buffer);
+        $this->playerId = NetworkPacket::unpackUInt8($this->buffer);
         $this->playerType = NetworkPacket::unpackUInt16($this->buffer);
         $this->teamValue = NetworkPacket::unpackUInt16($this->buffer);
         $this->score->wins = NetworkPacket::unpackUInt16($this->buffer);
