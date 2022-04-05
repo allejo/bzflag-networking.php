@@ -1,8 +1,8 @@
-.php_cs.cache
-composer.lock
+.php_cs.cache # Legacy so that no one adds this on accident
+.php-cs-fixer.cache
 *.rec
 *.rec.json
 
+.idea/
+.vscode/
 vendor/
-
-.idea

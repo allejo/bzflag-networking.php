@@ -14,23 +14,23 @@ namespace allejo\bzflag\networking\GameData;
  */
 class PlayerState implements \JsonSerializable
 {
-    const DEAD_STATUS = 0;        // not live, not paused, etc.
-    const ALIVE = 1 << 0;         // player is alive
-    const PAUSED = 1 << 1;        // player is paused
-    const EXPLODING = 1 << 2;     // currently blowing up
-    const TELEPORTING = 1 << 3;   // teleported recently
-    const FLAG_ACTIVE = 1 << 4;   // flag special powers active
-    const CROSSING_WALL = 1 << 5; // tank crossing building wall
-    const FALLING = 1 << 6;       // tank accel'd by gravity
-    const ON_DRIVER = 1 << 7;     // tank is on a physics driver
-    const USER_INPUTS = 1 << 8;   // user speed and angvel are sent
-    const JUMP_JETS = 1 << 9;     // tank has jump jets on
-    const PLAY_SOUND = 1 << 10;   // play one or more sounds
+    public const DEAD_STATUS = 0;        // not live, not paused, etc.
+    public const ALIVE = 1 << 0;         // player is alive
+    public const PAUSED = 1 << 1;        // player is paused
+    public const EXPLODING = 1 << 2;     // currently blowing up
+    public const TELEPORTING = 1 << 3;   // teleported recently
+    public const FLAG_ACTIVE = 1 << 4;   // flag special powers active
+    public const CROSSING_WALL = 1 << 5; // tank crossing building wall
+    public const FALLING = 1 << 6;       // tank accel'd by gravity
+    public const ON_DRIVER = 1 << 7;     // tank is on a physics driver
+    public const USER_INPUTS = 1 << 8;   // user speed and angvel are sent
+    public const JUMP_JETS = 1 << 9;     // tank has jump jets on
+    public const PLAY_SOUND = 1 << 10;   // play one or more sounds
 
-    const NO_SOUNDS = 0;
-    const JUMP_SOUNDS = 1 << 0;
-    const WINGS_SOUND = 1 << 1;
-    const BOUNCE_SOUND = 1 << 2;
+    public const NO_SOUNDS = 0;
+    public const JUMP_SOUNDS = 1 << 0;
+    public const WINGS_SOUND = 1 << 1;
+    public const BOUNCE_SOUND = 1 << 2;
 
     /** @var int */
     public $status;

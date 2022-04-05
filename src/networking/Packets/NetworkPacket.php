@@ -27,10 +27,10 @@ use allejo\bzflag\world\Object\FlagType;
  */
 class NetworkPacket implements Unpackable
 {
-    const SMALL_SCALE = 32766.0;
-    const SMALL_MAX_DIST = 0.02 * NetworkPacket::SMALL_SCALE;
-    const SMALL_MAX_VEL = 0.01 * NetworkPacket::SMALL_SCALE;
-    const SMALL_MAX_ANG_VEL = 0.001 * NetworkPacket::SMALL_SCALE;
+    public const SMALL_SCALE = 32766.0;
+    public const SMALL_MAX_DIST = 0.02 * NetworkPacket::SMALL_SCALE;
+    public const SMALL_MAX_VEL = 0.01 * NetworkPacket::SMALL_SCALE;
+    public const SMALL_MAX_ANG_VEL = 0.001 * NetworkPacket::SMALL_SCALE;
 
     /** @var int */
     private $mode;
@@ -550,6 +550,7 @@ class NetworkPacket implements Unpackable
     {
         $binary = self::safeReadResource($buffer, $size);
         $unpacked = self::safeUnpack('A*', $binary);
+
         /** @var string $string */
         $string = $unpacked[1] ?? '';
 

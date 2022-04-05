@@ -14,9 +14,9 @@ namespace allejo\bzflag\networking\GameData;
  */
 class PlayerData implements \JsonSerializable
 {
-    const IS_REGISTERED = 1 << 0;
-    const IS_VERIFIED = 1 << 1;
-    const IS_ADMIN = 1 << 2;
+    public const IS_REGISTERED = 1 << 0;
+    public const IS_VERIFIED = 1 << 1;
+    public const IS_ADMIN = 1 << 2;
 
     /** @var int */
     public $playerId;

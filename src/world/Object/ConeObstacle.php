@@ -20,11 +20,11 @@ use allejo\bzflag\world\WorldDatabase;
  */
 class ConeObstacle extends Obstacle
 {
-    const ENUM_EDGE = 0;
-    const ENUM_BOTTOM = 1;
-    const ENUM_START_FACE = 2;
-    const ENUM_END_FACE = 3;
-    const MATERIAL_COUNT = 4;
+    public const ENUM_EDGE = 0;
+    public const ENUM_BOTTOM = 1;
+    public const ENUM_START_FACE = 2;
+    public const ENUM_END_FACE = 3;
+    public const MATERIAL_COUNT = 4;
 
     /** @var MeshTransform */
     private $transform;

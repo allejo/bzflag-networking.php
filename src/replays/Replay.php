@@ -119,7 +119,7 @@ class Replay implements \JsonSerializable
         {
             $packets = $this->getPacketsIterable();
         }
-        catch (InaccessibleResourceException | InvalidTimestampFormatException $e)
+        catch (InaccessibleResourceException|InvalidTimestampFormatException $e)
         {
             $packets = [
                 '_error' => [

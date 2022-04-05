@@ -12,7 +12,8 @@ For the full copyright and license information, please view the
 LICENSE.md file that was distributed with this source code.
 HEADER;
 
-return PhpCsFixer\Config::create()
+$config = new PhpCsFixer\Config();
+$config
     ->registerCustomFixers(new PhpCsFixerCustomFixers\Fixers())
     ->setRiskyAllowed(true)
     ->setRules([
@@ -37,14 +38,13 @@ return PhpCsFixer\Config::create()
         'multiline_whitespace_before_semicolons' => [
             'strategy' => 'new_line_for_chained_calls',
         ],
-        'no_short_echo_tag' => true,
         'no_unused_imports' => true,
         'no_useless_else' => true,
         'no_useless_return' => true,
         'no_whitespace_in_blank_line' => true,
         'ordered_imports' => [
-            'sortAlgorithm' => 'alpha',
-            'importsOrder' => [
+            'sort_algorithm' => 'alpha',
+            'imports_order' => [
                 'const',
                 'class',
                 'function',
@@ -66,9 +66,12 @@ return PhpCsFixer\Config::create()
             'prefix' => 'dataProvider_test',
             'suffix' => '',
         ],
+        PhpCsFixerCustomFixers\Fixer\DeclareAfterOpeningTagFixer::name() => true,
         PhpCsFixerCustomFixers\Fixer\NoImportFromGlobalNamespaceFixer::name() => true,
         PhpCsFixerCustomFixers\Fixer\PhpdocSingleLineVarFixer::name() => true,
         PhpCsFixerCustomFixers\Fixer\PhpdocTypesTrimFixer::name() => true,
     ])
     ->setFinder($finder)
 ;
+
+return $config;

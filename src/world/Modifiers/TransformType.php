@@ -14,9 +14,9 @@ namespace allejo\bzflag\world\Modifiers;
  */
 abstract class TransformType
 {
-    const SHIFT_TRANSFORM = 0;
-    const SCALE_TRANSFORM = 1;
-    const SHEAR_TRANSFORM = 2;
-    const SPIN_TRANSFORM = 3;
-    const INDEX_TRANSFORM = 4;
+    public const SHIFT_TRANSFORM = 0;
+    public const SCALE_TRANSFORM = 1;
+    public const SHEAR_TRANSFORM = 2;
+    public const SPIN_TRANSFORM = 3;
+    public const INDEX_TRANSFORM = 4;
 }

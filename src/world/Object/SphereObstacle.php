@@ -20,9 +20,9 @@ use allejo\bzflag\world\WorldDatabase;
  */
 class SphereObstacle extends Obstacle
 {
-    const ENUM_EDGE = 1;
-    const ENUM_BOTTOM = 1;
-    const MATERIAL_COUNT = 1;
+    public const ENUM_EDGE = 1;
+    public const ENUM_BOTTOM = 1;
+    public const MATERIAL_COUNT = 1;
 
     /** @var MeshTransform */
     private $transform;
