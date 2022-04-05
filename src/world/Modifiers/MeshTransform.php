@@ -24,7 +24,7 @@ class MeshTransform implements \JsonSerializable
     private $name;
 
     /** @var array<int, TransformData> */
-    private $transforms;
+    private $transforms = [];
 
     /**
      * @since future
