@@ -43,11 +43,16 @@ class BZDBManager extends BaseManager
     }
 
     /**
-     * @since future
+     * @template T
      *
-     * @return mixed
+     * @param null|T $default
+     *
+     * @since 1.1.2 Introduce `$default` parameter
+     * @since 1.1.0
+     *
+     * @return null|mixed|T
      */
-    public function getBZDBVariable(string $variable)
+    public function getBZDBVariable(string $variable, $default = null)
     {
         if (isset($this->databaseCache[$variable]))
         {
@@ -67,6 +72,11 @@ class BZDBManager extends BaseManager
             $ast = (new StdMathParser())->parse($equation);
 
             return $this->databaseCache[$variable] = $ast->accept(new Evaluator());
+        }
+
+        if (!isset($this->databaseRaw[$variable]))
+        {
+            return $default;
         }
 
         /** @var string $rawValue */
