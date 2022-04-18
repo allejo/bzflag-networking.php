@@ -44,7 +44,6 @@
         }
     },
     "scripts": {
-        "coverage": "phpunit --coverage-clover coverage.clover",
         "fix": "php-cs-fixer fix $(if [ ! -z $CI ]; then echo \"--format=checkstyle\"; fi)",
         "stan": "phpstan analyse -c phpstan.neon.dist $(if [ ! -z $CI ]; then echo \"--error-format=checkstyle\"; fi)",
         "test": "phpunit"

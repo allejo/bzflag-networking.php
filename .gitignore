@@ -1,5 +1,6 @@
 .php_cs.cache # Legacy so that no one adds this on accident
 .php-cs-fixer.cache
+coverage.xml
 *.rec
 *.rec.json
 
