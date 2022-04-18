@@ -118,7 +118,7 @@ jobs:
       - name: Run test suite
         run: composer test
 
-      - name: Push to Scrutinizer
+      - name: Push to Codecov
         if: matrix.php-versions == '7.4' && runner.os == 'Linux' && matrix.dependencies == 'install'
         uses: codecov/codecov-action@v2
         with:

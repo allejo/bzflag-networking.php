@@ -1,6 +1,7 @@
 # BZFlag Networking
 
 [![Packagist](https://img.shields.io/packagist/v/allejo/bzflag-networking.php.svg)](https://packagist.org/packages/allejo/bzflag-networking.php)
+[![Code coverage](https://codecov.io/gh/allejo/bzflag-networking.php/branch/master/graph/badge.svg?token=GGN323B1KG)](https://codecov.io/gh/allejo/bzflag-networking.php)
 [![License](https://img.shields.io/github/license/allejo/bzflag-networking.php.svg)](https://github.com/allejo/bzflag-networking.php/blob/master/LICENSE.md)
 
 A PHP 7.1+ library for reading and handling BZFlag network packets.
