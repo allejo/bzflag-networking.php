@@ -241,6 +241,65 @@ class Replay implements \JsonSerializable
     }
 
     /**
+     * Write this replay to a new file, keeping only the packets for which
+     * `$filter` returns true. Packet file positions are recalculated; all other
+     * bytes are copied as-is.
+     *
+     * Note: every raw packet is given to `$filter`, including state/update
+     * packets (see `NetworkPacket::getMode()`) and packets this library cannot
+     * unpack into a GamePacket.
+     *
+     * @since future
+     *
+     * @param callable(NetworkPacket): bool $filter
+     *
+     * @throws InaccessibleResourceException
+     * @throws InvalidTimestampFormatException
+     */
+    public function write(string $file, callable $filter): void
+    {
+        $output = fopen($file, 'wb');
+
+        if ($output === false)
+        {
+            throw new InaccessibleResourceException("The replay file ({$file}) could not be written.");
+        }
+
+        $header = $this->header->pack();
+        $filePos = strlen($header);
+        $prevFilePos = 0;
+
+        fwrite($output, $header);
+        fseek($this->resource, $filePos);
+        $this->resourceClosed = true;
+
+        while (true)
+        {
+            try
+            {
+                $packet = new NetworkPacket($this->resource);
+            }
+            catch (PacketInvalidException $e)
+            {
+                break;
+            }
+
+            if (!$filter($packet))
+            {
+                continue;
+            }
+
+            $packed = $packet->pack($filePos + 32 + $packet->getLength(), $prevFilePos);
+            fwrite($output, $packed);
+
+            $prevFilePos = $filePos;
+            $filePos += strlen($packed);
+        }
+
+        fclose($output);
+    }
+
+    /**
      * @since 1.0.0
      *
      * @return string[]
