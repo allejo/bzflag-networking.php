@@ -39,6 +39,14 @@ class MsgScoreOver extends GamePacket
     }
 
     /**
+     * @since future
+     */
+    public function pack(): string
+    {
+        return NetworkPacket::packUInt8($this->playerId) . NetworkPacket::packUInt16($this->team);
+    }
+
+    /**
      * @since 1.0.0
      */
     protected function unpack(): void

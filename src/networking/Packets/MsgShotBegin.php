@@ -30,6 +30,14 @@ class MsgShotBegin extends GamePacket
     }
 
     /**
+     * @since future
+     */
+    public function pack(): string
+    {
+        return NetworkPacket::packFiringInfo($this->firingInfo);
+    }
+
+    /**
      * @since 1.0.0
      */
     protected function unpack(): void

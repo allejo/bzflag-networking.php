@@ -32,6 +32,24 @@ class MsgScore extends GamePacket
     }
 
     /**
+     * @since future
+     */
+    public function pack(): string
+    {
+        $packed = NetworkPacket::packUInt8(count($this->scores));
+
+        foreach ($this->scores as $score)
+        {
+            $packed .= NetworkPacket::packUInt8($score->playerId)
+                . NetworkPacket::packUInt16($score->wins)
+                . NetworkPacket::packUInt16($score->losses)
+                . NetworkPacket::packUInt16($score->teamKills);
+        }
+
+        return $packed;
+    }
+
+    /**
      * @since 1.0.0
      */
     protected function unpack(): void

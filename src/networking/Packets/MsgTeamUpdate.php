@@ -32,6 +32,24 @@ class MsgTeamUpdate extends GamePacket
     }
 
     /**
+     * @since future
+     */
+    public function pack(): string
+    {
+        $packed = NetworkPacket::packUInt8(count($this->teams));
+
+        foreach ($this->teams as $data)
+        {
+            $packed .= NetworkPacket::packUInt16($data->team)
+                . NetworkPacket::packUInt16($data->size)
+                . NetworkPacket::packUInt16($data->wins)
+                . NetworkPacket::packUInt16($data->losses);
+        }
+
+        return $packed;
+    }
+
+    /**
      * @since 1.0.0
      */
     protected function unpack(): void

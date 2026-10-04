@@ -32,6 +32,22 @@ class MsgSetVar extends GamePacket
     }
 
     /**
+     * @since future
+     */
+    public function pack(): string
+    {
+        $packed = NetworkPacket::packUInt16(count($this->settings));
+
+        foreach ($this->settings as $setting)
+        {
+            $packed .= NetworkPacket::packUInt8(strlen($setting->name)) . $setting->name
+                . NetworkPacket::packUInt8(strlen($setting->value)) . $setting->value;
+        }
+
+        return $packed;
+    }
+
+    /**
      * @since 1.0.0
      */
     protected function unpack(): void

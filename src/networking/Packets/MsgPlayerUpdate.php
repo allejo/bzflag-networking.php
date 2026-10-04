@@ -24,6 +24,9 @@ class MsgPlayerUpdate extends GamePacket
     /** @var PlayerState */
     private $state;
 
+    /** @var float Kept only so `pack()` can write it back */
+    private $playerTimestamp;
+
     /**
      * @since 1.0.0
      */
@@ -41,13 +44,23 @@ class MsgPlayerUpdate extends GamePacket
     }
 
     /**
+     * @since future
+     */
+    public function pack(): string
+    {
+        return NetworkPacket::packFloat($this->playerTimestamp)
+            . NetworkPacket::packUInt8($this->playerId)
+            . NetworkPacket::packPlayerState($this->state, $this->packet->getCode());
+    }
+
+    /**
      * @since 1.0.0
      */
     protected function unpack(): void
     {
         // Discard this value; I'm not sure why this value comes out to a weird
         // float. We have the timestamp of the raw packet, so just that instead
-        $_ = NetworkPacket::unpackFloat($this->buffer);
+        $this->playerTimestamp = NetworkPacket::unpackFloat($this->buffer);
 
         $this->playerId = NetworkPacket::unpackUInt8($this->buffer);
         $this->state = NetworkPacket::unpackPlayerState($this->buffer, $this->packet->getCode());

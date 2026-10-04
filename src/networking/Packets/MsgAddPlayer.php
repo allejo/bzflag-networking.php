@@ -96,6 +96,21 @@ class MsgAddPlayer extends GamePacket
     }
 
     /**
+     * @since future
+     */
+    public function pack(): string
+    {
+        return NetworkPacket::packUInt8($this->playerId)
+            . NetworkPacket::packUInt16($this->playerType)
+            . NetworkPacket::packUInt16($this->teamValue)
+            . NetworkPacket::packUInt16($this->score->wins)
+            . NetworkPacket::packUInt16($this->score->losses)
+            . NetworkPacket::packUInt16($this->score->teamKills)
+            . NetworkPacket::packString($this->callsign, NetworkProtocol::CALLSIGN_LEN)
+            . NetworkPacket::packString($this->motto, NetworkProtocol::MOTTO_LEN);
+    }
+
+    /**
      * @since 1.0.0
      */
     protected function defaultComplexVariables(): void

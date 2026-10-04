@@ -50,6 +50,16 @@ class MsgShotEnd extends GamePacket
     }
 
     /**
+     * @since future
+     */
+    public function pack(): string
+    {
+        return NetworkPacket::packUInt8($this->playerId)
+            . NetworkPacket::packUInt16($this->shotId)
+            . NetworkPacket::packInt16($this->reason);
+    }
+
+    /**
      * @since 1.0.0
      */
     protected function unpack(): void
