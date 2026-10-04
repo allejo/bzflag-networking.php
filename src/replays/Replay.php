@@ -34,7 +34,7 @@ class Replay implements \JsonSerializable
     private $packets;
 
     /** @var string[] */
-    private $errors;
+    private $errors = [];
 
     /** @var \DateTime */
     private $startTime;
