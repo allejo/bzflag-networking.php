@@ -65,6 +65,9 @@ class ReplayHeader implements Unpackable, \JsonSerializable
     /** @var null|ReplayDuration */
     private $length;
 
+    /** @var string Raw world settings, flags, and world bytes */
+    private $worldData;
+
     /** @var WorldDatabase */
     private $worldDatabase;
 
@@ -94,6 +97,8 @@ class ReplayHeader implements Unpackable, \JsonSerializable
 
         $this->length = new ReplayDuration($this->fileTime);
 
+        $worldDataStart = (int)ftell($resource);
+
         // Skip the appropriate number of bytes since we're not making use of this
         // data yet
 
@@ -105,6 +110,10 @@ class ReplayHeader implements Unpackable, \JsonSerializable
         }
 
         $this->worldDatabase = new WorldDatabase($resource);
+
+        // Keep the raw bytes so `pack()` can write them back as-is
+        $worldDataEnd = (int)ftell($resource);
+        $this->worldData = (string)stream_get_contents($resource, $worldDataEnd - $worldDataStart, $worldDataStart);
     }
 
     /**
@@ -235,5 +244,27 @@ class ReplayHeader implements Unpackable, \JsonSerializable
     public function getLength(): ?ReplayDuration
     {
         return $this->length;
+    }
+
+    /**
+     * Pack this header, including the world, back into replay file bytes.
+     *
+     * @since future
+     */
+    public function pack(): string
+    {
+        return NetworkPacket::packUInt32($this->magicNumber)
+            . NetworkPacket::packUInt32($this->version)
+            . NetworkPacket::packUInt32($this->offset)
+            . NetworkPacket::packInt64($this->fileTime)
+            . NetworkPacket::packUInt32($this->player)
+            . NetworkPacket::packUInt32($this->flagsSize)
+            . NetworkPacket::packUInt32($this->worldSize)
+            . NetworkPacket::packString($this->callsign, NetworkProtocol::CALLSIGN_LEN)
+            . NetworkPacket::packString($this->motto, NetworkProtocol::MOTTO_LEN)
+            . NetworkPacket::packString($this->serverVersion, NetworkProtocol::SERVER_LEN)
+            . NetworkPacket::packString($this->appVersion, NetworkProtocol::MESSAGE_LEN)
+            . NetworkPacket::packString($this->realHash, NetworkProtocol::HASH_LEN)
+            . $this->worldData;
     }
 }

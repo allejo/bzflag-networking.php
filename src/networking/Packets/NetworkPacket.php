@@ -50,6 +50,12 @@ class NetworkPacket implements Unpackable
     /** @var \DateTime */
     private $timestamp;
 
+    /** @var int Raw microsecond timestamp, kept so `pack()` is lossless */
+    private $rawTimestamp;
+
+    /** @var string Unused trailing bytes of the 32-byte header, kept so `pack()` is lossless */
+    private $headerPadding;
+
     /** @var false|string */
     private $data;
 
@@ -77,7 +83,10 @@ class NetworkPacket implements Unpackable
         $this->length = self::unpackUInt32($buffer);
         $this->nextFilePos = self::unpackUInt32($buffer);
         $this->prevFilePos = self::unpackUInt32($buffer);
+        $rawTimestamp = substr($buffer, 0, 8);
+        $this->rawTimestamp = self::unpackInt($rawTimestamp, 8, 'J');
         $this->timestamp = self::unpackTimestamp($buffer);
+        $this->headerPadding = $buffer;
 
         if ($this->length > 0)
         {
@@ -141,6 +150,261 @@ class NetworkPacket implements Unpackable
     public function getData()
     {
         return $this->data;
+    }
+
+    /**
+     * Re-pack this packet (header and data) into the same bytes it was read from.
+     * The file positions can be overridden for when packets are moved around in
+     * a replay file.
+     *
+     * @since future
+     */
+    public function pack(?int $nextFilePos = null, ?int $prevFilePos = null): string
+    {
+        return self::packUInt16($this->mode)
+            . self::packUInt16($this->code)
+            . self::packUInt32($this->length)
+            . self::packUInt32($nextFilePos ?? $this->nextFilePos)
+            . self::packUInt32($prevFilePos ?? $this->prevFilePos)
+            . self::packUInt64($this->rawTimestamp)
+            . $this->headerPadding
+            . (string)$this->data;
+    }
+
+    /**
+     * @since future
+     */
+    public static function packInt8(int $value): string
+    {
+        return pack('c', $value);
+    }
+
+    /**
+     * @since future
+     */
+    public static function packUInt8(int $value): string
+    {
+        return pack('C', $value);
+    }
+
+    /**
+     * @since future
+     */
+    public static function packInt16(int $value): string
+    {
+        return pack('n', $value & 0xFFFF);
+    }
+
+    /**
+     * @since future
+     */
+    public static function packUInt16(int $value): string
+    {
+        return pack('n', $value);
+    }
+
+    /**
+     * @since future
+     */
+    public static function packInt32(int $value): string
+    {
+        return pack('N', $value & 0xFFFFFFFF);
+    }
+
+    /**
+     * @since future
+     */
+    public static function packUInt32(int $value): string
+    {
+        return pack('N', $value);
+    }
+
+    /**
+     * @since future
+     */
+    public static function packInt64(int $value): string
+    {
+        return pack('J', $value);
+    }
+
+    /**
+     * @since future
+     */
+    public static function packUInt64(int $value): string
+    {
+        return pack('J', $value);
+    }
+
+    /**
+     * @since future
+     */
+    public static function packFloat(float $value): string
+    {
+        return pack('G', $value);
+    }
+
+    /**
+     * @since future
+     *
+     * @param float[] $value
+     */
+    public static function pack4Float(array $value): string
+    {
+        return pack('G4', ...$value);
+    }
+
+    /**
+     * @since future
+     *
+     * @param float[] $value
+     */
+    public static function packVector(array $value): string
+    {
+        return pack('G3', ...$value);
+    }
+
+    /**
+     * Pack a string into a fixed-size, NUL-padded (and truncated) field.
+     *
+     * @since future
+     */
+    public static function packString(string $value, int $size): string
+    {
+        return pack("a{$size}", $value);
+    }
+
+    /**
+     * @since future
+     */
+    public static function packStdString(string $value): string
+    {
+        return self::packUInt32(strlen($value)) . $value;
+    }
+
+    /**
+     * @since future
+     *
+     * @throws InvalidIpAddressException
+     */
+    public static function packIpAddress(string $ipAddress): string
+    {
+        $ipAsInt = ip2long($ipAddress);
+
+        if ($ipAsInt === false)
+        {
+            throw new InvalidIpAddressException("Invalid IPv4 address: {$ipAddress}");
+        }
+
+        // BZFlag prefixes the address with its size (4 for IPv4)
+        return self::packUInt8(4) . self::packUInt32($ipAsInt);
+    }
+
+    /**
+     * @since future
+     */
+    public static function packTimestamp(\DateTimeInterface $timestamp): string
+    {
+        return self::packUInt64((int)$timestamp->format('U') * 1000000 + (int)$timestamp->format('u'));
+    }
+
+    /**
+     * @since future
+     */
+    public static function packFiringInfo(FiringInfoData $data): string
+    {
+        return self::packFloat($data->timeSent)
+            . self::packShot($data->shot)
+            . self::packString($data->flag, 2)
+            . self::packFloat($data->lifetime);
+    }
+
+    /**
+     * @since future
+     */
+    public static function packFlag(FlagData $flag): string
+    {
+        return self::packUInt16($flag->index)
+            . self::packString($flag->abbv, 2)
+            . self::packUInt16($flag->status)
+            . self::packUInt16($flag->endurance)
+            . self::packUInt8($flag->owner)
+            . self::packVector($flag->position)
+            . self::packVector($flag->launchPos)
+            . self::packVector($flag->landingPos)
+            . self::packFloat($flag->flightTime)
+            . self::packFloat($flag->flightEnd)
+            . self::packFloat($flag->initialVelocity);
+    }
+
+    /**
+     * Inverse of `unpackPlayerState()`. Small updates are quantized, so values
+     * are rounded to the nearest representable step and clamped like BZFlag does.
+     *
+     * @since future
+     */
+    public static function packPlayerState(PlayerState $state, int $code): string
+    {
+        $packed = self::packInt32($state->order) . self::packInt16($state->status);
+
+        if ($code === NetworkMessage::PLAYER_UPDATE)
+        {
+            $packed .= self::packVector($state->position)
+                . self::packVector($state->velocity)
+                . self::packFloat($state->azimuth)
+                . self::packFloat($state->angularVelocity);
+        }
+        else
+        {
+            foreach ($state->position as $pos)
+            {
+                $packed .= self::packSmall($pos, self::SMALL_MAX_DIST);
+            }
+
+            foreach ($state->velocity as $vel)
+            {
+                $packed .= self::packSmall($vel, self::SMALL_MAX_VEL);
+            }
+
+            $packed .= self::packSmall($state->azimuth, M_PI);
+            $packed .= self::packSmall($state->angularVelocity, self::SMALL_MAX_ANG_VEL);
+        }
+
+        if (($state->status & PlayerState::JUMP_JETS) !== 0)
+        {
+            $packed .= self::packUInt16((int)round($state->jumpJetsScale * self::SMALL_SCALE));
+        }
+
+        if (($state->status & PlayerState::ON_DRIVER) !== 0)
+        {
+            $packed .= self::packInt32($state->physicsDriver);
+        }
+
+        if (($state->status & PlayerState::USER_INPUTS) !== 0)
+        {
+            // Not clamped since `unpackPlayerState()` reads these as unsigned
+            $packed .= self::packUInt16((int)round(($state->userSpeed * self::SMALL_SCALE) / self::SMALL_MAX_VEL) & 0xFFFF);
+            $packed .= self::packUInt16((int)round(($state->userAngVel * self::SMALL_SCALE) / self::SMALL_MAX_ANG_VEL) & 0xFFFF);
+        }
+
+        if (($state->status & PlayerState::PLAY_SOUND) !== 0)
+        {
+            $packed .= self::packUInt8($state->sounds);
+        }
+
+        return $packed;
+    }
+
+    /**
+     * @since future
+     */
+    public static function packShot(ShotData $shot): string
+    {
+        return self::packUInt8($shot->playerId)
+            . self::packUInt16($shot->shotId)
+            . self::packVector($shot->position)
+            . self::packVector($shot->velocity)
+            . self::packFloat($shot->deltaTime)
+            . self::packUInt16($shot->team);
     }
 
     /**
@@ -712,5 +976,15 @@ class NetworkPacket implements Unpackable
         $binary = self::safeReadResource($buffer, $size);
 
         return (int)self::safeUnpack($symbol, $binary)[1];
+    }
+
+    /**
+     * Quantize a float into BZFlag's signed 16-bit "small" encoding.
+     */
+    private static function packSmall(float $value, float $max): string
+    {
+        $value = max(-$max, min($max, $value));
+
+        return self::packInt16((int)round(($value * self::SMALL_SCALE) / $max));
     }
 }

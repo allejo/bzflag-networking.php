@@ -41,6 +41,14 @@ class MsgFlagDrop extends GamePacket
     }
 
     /**
+     * @since future
+     */
+    public function pack(): string
+    {
+        return NetworkPacket::packUInt8($this->playerId) . NetworkPacket::packFlag($this->flag);
+    }
+
+    /**
      * @since 1.0.0
      */
     protected function unpack(): void

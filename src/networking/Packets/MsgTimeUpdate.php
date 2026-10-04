@@ -28,6 +28,14 @@ class MsgTimeUpdate extends GamePacket
     }
 
     /**
+     * @since future
+     */
+    public function pack(): string
+    {
+        return NetworkPacket::packInt32($this->timeLeft);
+    }
+
+    /**
      * @since 1.0.0
      */
     protected function unpack(): void

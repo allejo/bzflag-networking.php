@@ -52,6 +52,16 @@ class MsgTransferFlag extends GamePacket
     }
 
     /**
+     * @since future
+     */
+    public function pack(): string
+    {
+        return NetworkPacket::packUInt8($this->from)
+            . NetworkPacket::packUInt8($this->to)
+            . NetworkPacket::packFlag($this->flag);
+    }
+
+    /**
      * @since 1.0.0
      */
     protected function unpack(): void

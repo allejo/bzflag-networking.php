@@ -52,6 +52,16 @@ class MsgAlive extends GamePacket
     }
 
     /**
+     * @since future
+     */
+    public function pack(): string
+    {
+        return NetworkPacket::packUInt8($this->playerId)
+            . NetworkPacket::packVector($this->position)
+            . NetworkPacket::packFloat($this->azimuth);
+    }
+
+    /**
      * @since 1.0.0
      */
     protected function defaultComplexVariables(): void

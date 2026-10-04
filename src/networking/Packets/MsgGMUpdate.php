@@ -41,6 +41,14 @@ class MsgGMUpdate extends GamePacket
     }
 
     /**
+     * @since future
+     */
+    public function pack(): string
+    {
+        return NetworkPacket::packShot($this->shot) . NetworkPacket::packUInt8($this->target);
+    }
+
+    /**
      * @since 1.0.0
      */
     protected function unpack(): void

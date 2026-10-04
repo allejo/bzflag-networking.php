@@ -32,6 +32,25 @@ class MsgPlayerInfo extends GamePacket
     }
 
     /**
+     * @since future
+     */
+    public function pack(): string
+    {
+        $packed = NetworkPacket::packUInt8(count($this->players));
+
+        foreach ($this->players as $player)
+        {
+            $properties = ($player->isRegistered ? PlayerData::IS_REGISTERED : 0)
+                | ($player->isVerified ? PlayerData::IS_VERIFIED : 0)
+                | ($player->isAdmin ? PlayerData::IS_ADMIN : 0);
+
+            $packed .= NetworkPacket::packUInt8($player->playerId) . NetworkPacket::packUInt8($properties);
+        }
+
+        return $packed;
+    }
+
+    /**
      * @since 1.0.0
      */
     protected function unpack(): void

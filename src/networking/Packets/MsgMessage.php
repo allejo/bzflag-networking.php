@@ -25,6 +25,9 @@ class MsgMessage extends GamePacket
     /** @var string */
     private $message;
 
+    /** @var int Chat (0) or action (1) message; kept so `pack()` can write it back */
+    private $messageType;
+
     /**
      * @since 1.0.0
      */
@@ -50,12 +53,24 @@ class MsgMessage extends GamePacket
     }
 
     /**
+     * @since future
+     */
+    public function pack(): string
+    {
+        return NetworkPacket::packUInt8($this->playerFromId)
+            . NetworkPacket::packUInt8($this->playerToId)
+            . NetworkPacket::packUInt8($this->messageType)
+            . NetworkPacket::packString($this->message, strlen($this->message) + 1);
+    }
+
+    /**
      * @since 1.0.0
      */
     protected function unpack(): void
     {
         $this->playerFromId = NetworkPacket::unpackUInt8($this->buffer);
         $this->playerToId = NetworkPacket::unpackUInt8($this->buffer);
+        $this->messageType = NetworkPacket::unpackUInt8($this->buffer);
         $this->message = NetworkPacket::unpackString($this->buffer, -1);
     }
 }

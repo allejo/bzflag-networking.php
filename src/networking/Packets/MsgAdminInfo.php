@@ -32,6 +32,24 @@ class MsgAdminInfo extends GamePacket
     }
 
     /**
+     * @since future
+     */
+    public function pack(): string
+    {
+        $packed = NetworkPacket::packUInt8(count($this->players));
+
+        foreach ($this->players as $playerInfo)
+        {
+            // Size of this player's entry, as BZFS sends it
+            $packed .= NetworkPacket::packUInt8(5)
+                . NetworkPacket::packUInt8($playerInfo->playerIndex)
+                . NetworkPacket::packIpAddress($playerInfo->ipAddress);
+        }
+
+        return $packed;
+    }
+
+    /**
      * @since 1.0.0
      */
     protected function unpack(): void

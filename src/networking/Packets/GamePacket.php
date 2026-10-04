@@ -155,6 +155,13 @@ abstract class GamePacket implements \JsonSerializable
     }
 
     /**
+     * Pack this GamePacket's instance variables back into a NetworkPacket buffer.
+     *
+     * @since future
+     */
+    abstract public function pack(): string;
+
+    /**
      * @since 1.0.0
      *
      * @return array<int, string>

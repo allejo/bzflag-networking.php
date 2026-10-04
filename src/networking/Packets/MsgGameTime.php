@@ -56,6 +56,15 @@ class MsgGameTime extends GamePacket
     }
 
     /**
+     * @since future
+     */
+    public function pack(): string
+    {
+        // Use the raw values since `$this->value` loses microsecond precision
+        return NetworkPacket::packUInt32($this->msb) . NetworkPacket::packUInt32($this->lsb);
+    }
+
+    /**
      * @since 1.0.0
      */
     protected function unpack(): void

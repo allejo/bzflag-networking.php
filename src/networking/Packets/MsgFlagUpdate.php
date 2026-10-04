@@ -32,6 +32,21 @@ class MsgFlagUpdate extends GamePacket
     }
 
     /**
+     * @since future
+     */
+    public function pack(): string
+    {
+        $packed = NetworkPacket::packUInt16(count($this->flags));
+
+        foreach ($this->flags as $flag)
+        {
+            $packed .= NetworkPacket::packFlag($flag);
+        }
+
+        return $packed;
+    }
+
+    /**
      * @since 1.0.0
      */
     protected function unpack(): void

@@ -50,6 +50,16 @@ class MsgTeleport extends GamePacket
     }
 
     /**
+     * @since future
+     */
+    public function pack(): string
+    {
+        return NetworkPacket::packUInt8($this->playerId)
+            . NetworkPacket::packUInt16($this->from)
+            . NetworkPacket::packUInt16($this->to);
+    }
+
+    /**
      * @since 1.0.0
      */
     protected function unpack(): void

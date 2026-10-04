@@ -83,6 +83,25 @@ class MsgKilled extends GamePacket
     }
 
     /**
+     * @since future
+     */
+    public function pack(): string
+    {
+        $packed = NetworkPacket::packUInt8($this->victimId)
+            . NetworkPacket::packUInt8($this->killerId)
+            . NetworkPacket::packInt16($this->reason)
+            . NetworkPacket::packInt16($this->shotId)
+            . NetworkPacket::packString($this->flag, 2);
+
+        if ($this->reason === NetworkMessage::codeFromChars('pd'))
+        {
+            $packed .= NetworkPacket::packInt32($this->physicsDriverId);
+        }
+
+        return $packed;
+    }
+
+    /**
      * @since 1.0.0
      */
     protected function unpack(): void
